@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/*
+ * Detecção de classes: por padrão o Tailwind v4 varre o projeto inteiro
+ * automaticamente, mas como este arquivo vive dentro de wp-content/themes/
+ * (com o resto do WordPress ao redor), listamos explicitamente só as
+ * pastas do próprio tema — mais rápido e sem risco de escanear node_modules
+ * ou o core do WP por engano.
+ */
+@source "../../*.php";
+@source "../../inc/**/*.php";
+@source "../../blocks/**/*.php";
+@source "../../template-parts/**/*.php";
+@source "../js/**/*.js";
+
+/*
+ * Design tokens do tema (mesmos valores de ../../style.css) expostos como
+ * variáveis de tema do Tailwind — geram utilitários (bg-primary,
+ * text-primary, font-base...) e continuam disponíveis como var(--color-*)
+ * para o CSS escrito à mão em assets/css/*.css.
+ */
+@theme {
+	--color-primary: #0d6efd;
+	--color-primary-dark: #0b5ed7;
+	--color-secondary: #6c757d;
+	--color-text: #1a1a1a;
+	--color-text-light: #595959;
+	--color-bg: #ffffff;
+	--color-bg-alt: #f6f7f9;
+	--color-border: #e2e4e8;
+	--color-success: #198754;
+	--color-danger: #dc3545;
+	--color-whatsapp: #26ad57;
+	--color-cta: #049da5;
+	--color-cta-dark: #037880;
+	--color-accent: #f69630;
+
+	--font-base: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--font-heading: "Coolvetica", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+	--radius-proodonto: 8px;
+
+	/*
+	 * Os breakpoints padrão do Tailwind (sm/md/lg/xl/2xl) foram mantidos
+	 * de propósito — o código já existente no tema (ex.: page-home.php)
+	 * usa `lg:` esperando o padrão de 1024px. O CSS escrito à mão em
+	 * assets/css/*.css usa seus próprios min-width (600/900/1200px) e
+	 * continua funcionando em paralelo, sem conflito.
+	 */
+}

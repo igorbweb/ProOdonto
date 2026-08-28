@@ -1,0 +1,97 @@
+{
+    "key": "group_home_steps",
+    "title": "Home — Passo a passo",
+    "fields": [
+        {
+            "key": "field_home_steps_eyebrow",
+            "label": "Texto acima do título",
+            "name": "steps_eyebrow",
+            "type": "text",
+            "default_value": "Passo a passo",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_steps_titulo",
+            "label": "Título",
+            "name": "steps_titulo",
+            "type": "text",
+            "default_value": "Como é o seu tratamento",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_steps_itens",
+            "label": "Etapas",
+            "name": "steps_itens",
+            "type": "repeater",
+            "instructions": "A numeração \"ETAPA 01, 02...\" é automática, na ordem das linhas abaixo.",
+            "layout": "block",
+            "button_label": "Adicionar etapa",
+            "sub_fields": [
+                {
+                    "key": "field_home_steps_label_item",
+                    "label": "Nome da etapa",
+                    "name": "label",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_home_steps_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "textarea",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "45"
+                    }
+                },
+                {
+                    "key": "field_home_steps_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "15"
+                    }
+                },
+                {
+                    "key": "field_home_steps_sucesso_item",
+                    "label": "Etapa final (estilo de destaque)",
+                    "name": "sucesso",
+                    "type": "true_false",
+                    "ui": 1,
+                    "default_value": 0,
+                    "wrapper": {
+                        "width": "10"
+                    }
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 6,
+    "description": "Cabeçalho e etapas da seção \"Passo a passo\" da Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

@@ -1,0 +1,72 @@
+{
+    "key": "group_vendas_units",
+    "title": "Página de Vendas — Unidades (cabeçalho)",
+    "fields": [
+        {
+            "key": "field_vendas_units_aviso",
+            "label": "",
+            "name": "aviso_unidades",
+            "type": "message",
+            "message": "A lista de unidades (endereços, links do Maps/WhatsApp) é editada em código, em <code>inc/units-map.php</code>. Nesta página de vendas, a seção \"Unidades\" mostra só o mapa (sem os cards) — ver page-vendas.php."
+        },
+        {
+            "key": "field_vendas_units_eyebrow",
+            "label": "Texto acima do título",
+            "name": "units_eyebrow",
+            "type": "text",
+            "default_value": "Unidades",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_units_titulo",
+            "label": "Título",
+            "name": "units_titulo",
+            "type": "text",
+            "default_value": "Uma ProOdonto perto de você",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_units_cta_label",
+            "label": "Texto do botão (CTA da seção)",
+            "name": "units_cta_label",
+            "type": "text",
+            "default_value": "FALAR COM UNIDADE",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_units_texto",
+            "label": "Texto",
+            "name": "units_texto",
+            "type": "text",
+            "default_value": "Escolha a unidade mais próxima e fale direto com a nossa equipe para agendar sua avaliação gratuita.",
+            "wrapper": {
+                "width": "25"
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 9,
+    "description": "Cabeçalho da seção \"Unidades\" da Página de Vendas.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

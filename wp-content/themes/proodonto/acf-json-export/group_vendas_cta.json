@@ -1,0 +1,33 @@
+{
+    "key": "group_vendas_cta",
+    "title": "Página de Vendas — CTA",
+    "fields": [
+        {
+            "key": "field_vendas_cta_url",
+            "label": "URL dos CTAs da página",
+            "name": "cta_url",
+            "type": "url",
+            "instructions": "Usada em todos os botões de CTA da página (Resultados, Sobre, Tratamentos, Passo a passo, Avaliações, Unidades e o CTA final) — pode ser um link wa.me/, um link de rastreio (ex.: api.upviewcrm.com) ou qualquer outra URL de destino da campanha. O banner (hero) tem seus próprios links, definidos slide a slide, e não é afetado por este campo. Se deixado em branco, usa o WhatsApp padrão do tema.",
+            "placeholder": "https://wa.me/5511999999999?text=..."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "description": "URL de destino dos CTAs em qualquer página que use o template \"Página de Vendas\".",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

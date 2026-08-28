@@ -1,0 +1,93 @@
+{
+    "key": "group_sobre_historia",
+    "title": "Sobre — Nossa História",
+    "fields": [
+        {
+            "key": "field_sobre_historia_eyebrow",
+            "label": "Texto acima do título",
+            "name": "historia_eyebrow",
+            "type": "text",
+            "default_value": "Nossa história",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_sobre_historia_titulo",
+            "label": "Título",
+            "name": "historia_titulo",
+            "type": "text",
+            "default_value": "Uma trajetória construída sorriso a sorriso",
+            "wrapper": {
+                "width": "67"
+            }
+        },
+        {
+            "key": "field_sobre_historia_texto",
+            "label": "Texto",
+            "name": "historia_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Começamos com o compromisso de oferecer uma odontologia acessível, humana e tecnicamente atualizada — e crescemos junto com a confiança de cada paciente e cada indicação."
+        },
+        {
+            "key": "field_sobre_historia_itens",
+            "label": "Marcos da história",
+            "name": "historia_itens",
+            "type": "repeater",
+            "instructions": "Use marcos reais (evite datas/fatos inventados). Ex.: \"Origem\", \"Expansão\", \"Hoje\".",
+            "layout": "block",
+            "button_label": "Adicionar marco",
+            "sub_fields": [
+                {
+                    "key": "field_sobre_historia_ano",
+                    "label": "Marco / período",
+                    "name": "ano",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "20"
+                    },
+                    "placeholder": "Origem"
+                },
+                {
+                    "key": "field_sobre_historia_titulo_item",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_sobre_historia_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "textarea",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "50"
+                    }
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "description": "Linha do tempo da seção \"Nossa História\" da página Sobre.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

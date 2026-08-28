@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/testimonials",
+	"title": "Depoimentos",
+	"category": "proodonto",
+	"icon": "groups",
+	"description": "Grade de depoimentos. Adicione quantos blocos \"Depoimento\" quiser dentro dele.",
+	"textdomain": "proodonto",
+	"attributes": {
+		"heading": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

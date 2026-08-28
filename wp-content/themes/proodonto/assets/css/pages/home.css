@@ -1,0 +1,1426 @@
+/*
+ * CSS da página "Home" (slug: home).
+ * Gerado automaticamente em 2026-07-28 12:38 — mobile-first, edite à vontade.
+ * Carregado apenas nesta página via inc/enqueue.php.
+ */
+
+.page-home {
+}
+
+.hero {
+  position: relative;
+  /* height: 80svh; */
+  height: auto;
+  max-height: 550px;
+
+  picture,
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+	max-height: 550px;
+  }
+
+  /* Entre a imagem e o texto: escuro (#049da5) à esquerda, claro (#f69630) à direita. */
+  .gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to right, #171b31d9 55%, #ffffff00);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    h2,
+    span,
+    p {
+      color: var(--color-white);
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Letreiro (marquee) de diferenciais, abaixo do hero.
+   Track duplicado 2x no PHP (page-home.php) + translateX(-50%) = loop
+   contínuo sem salto. Pausa no hover e respeita prefers-reduced-motion.
+   ------------------------------------------------------------------ */
+.marquee {
+  background: var(--color-cta);
+  border-top: 3px solid var(--color-cta-dark);
+  overflow: hidden;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  padding-block: 15px;
+  animation: proodonto-marquee 28s linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-inline: 34px;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.marquee__icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+@keyframes proodonto-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Sobre" — imagem + texto/estatísticas.
+   Mobile-first: empilhado (1 coluna); vira grade 0.9fr/1.1fr no desktop
+   (ver breakpoint 900px abaixo).
+   ------------------------------------------------------------------ */
+.about {
+  background: #fff;
+}
+
+.about__grid {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.about__media {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px rgba(4, 110, 116, 0.14);
+}
+
+.about__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Carrossel da galeria "Sobre" (custom field "galeria_sobre") — só existe
+   quando há 1+ fotos cadastradas; sem galeria, o template cai no <img>
+   único acima. Mesmo componente/classes já usados na galeria "Sobre" da
+   Página de Vendas (ver assets/css/pages/vendas.css). */
+.about-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.about-swiper .swiper-pagination {
+  bottom: 14px;
+}
+
+.about-swiper .swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.6;
+}
+
+.about-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--color-cta);
+}
+
+.about__media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: var(--color-bg-alt);
+  color: var(--color-text-light);
+  border: 1.5px dashed var(--color-border);
+  box-sizing: border-box;
+}
+
+.about__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.about__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 18px;
+  color: #063e42;
+}
+
+.about__text {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #4a5a6e;
+  margin: 0 0 30px;
+  max-width: 520px;
+}
+
+.about__stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px 44px;
+}
+
+.about__stat {
+  flex: 1 1 38%;
+}
+
+.about__stat-value {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--color-cta-dark);
+  line-height: 1;
+}
+
+.about__stat-label {
+  font-size: 14px;
+  color: #5c6b7d;
+  margin-top: 4px;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Antes e Depois" — prova social via resultados.
+   Mobile-first: 1 coluna; 2 a partir de 900px (cada card já mostra 2
+   fotos lado a lado, então não convém ir além de 2 colunas mesmo no
+   desktop grande — ficaria pequeno demais pra avaliar o resultado).
+   ------------------------------------------------------------------ */
+.results {
+  background: #fff;
+}
+
+.results__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.results__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.results__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.results__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.results__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+/*
+ * Carrossel (Swiper — ver assets/js/pages/home.js e assets/vendor/swiper).
+ * .results-carousel só existe pra posicionar as setas ao lado do swiper;
+ * o swiper em si controla a largura/posição de cada slide via JS.
+ */
+.results-carousel {
+  position: relative;
+}
+
+.results-swiper {
+  overflow: hidden;
+}
+
+/* Cada slide com a altura do próprio conteúdo, em vez do Swiper esticar
+   todos pra igualar o mais alto (comportamento padrão da lib). */
+.results-swiper .swiper-wrapper {
+  align-items: flex-start;
+}
+
+/* Fora do fluxo absoluto padrão do Swiper (que sobrepõe os cards) — flui
+   abaixo do carrossel, com espaço próprio (margin-top). */
+.results-swiper .swiper-pagination {
+  position: static;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.results-swiper .swiper-pagination-bullet {
+  background: #9aa7b6; /* mais contraste que var(--color-border) sobre fundo branco */
+  opacity: 1;
+}
+
+.results-swiper .swiper-pagination-bullet-active {
+  background: var(--color-cta);
+}
+
+.results-swiper-prev,
+.results-swiper-next {
+  display: none; /* só aparecem a partir do breakpoint onde há espaço nas laterais (ver Desktop) */
+  position: absolute;
+  top: 40%;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: #123436;
+  box-shadow: 0 6px 16px rgba(4, 110, 116, 0.18);
+  transition: background var(--transition), color var(--transition);
+}
+
+.results-swiper-prev:hover,
+.results-swiper-next:hover {
+  background: var(--color-cta);
+  color: #fff;
+}
+
+.results-swiper-prev.swiper-button-disabled,
+.results-swiper-next.swiper-button-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.results-swiper-prev {
+  left: -8px;
+}
+
+.results-swiper-next {
+  right: -8px;
+}
+
+.results__cta {
+  text-align: center;
+  margin-top: 24px;
+}
+
+/*
+ * Card "antes/depois": as fotos reais em assets/images/resultado-*.jpg já
+ * vêm com antes+depois compostos numa imagem só (não são 2 arquivos
+ * separados) — por isso o card é só uma foto, sem recortes sobrepostos.
+ */
+.result-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.result-card__photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: #222;
+}
+
+.result-card__photo > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Tratamentos" — grade de cards.
+   Mobile-first: 1 coluna; 2 em ~600px; 4 em 1200px (ver breakpoints abaixo).
+   ------------------------------------------------------------------ */
+.treatments {
+  background: #faf7f2;
+}
+
+.treatments__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.treatments__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.treatments__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.treatments__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.treatments__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.treatments__grid {
+  display: grid;
+  gap: 22px;
+}
+
+.treatment-card {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 18px;
+  padding: 28px 24px;
+  display: block;
+}
+
+.treatment-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #e3f5f6;
+  color: var(--color-cta);
+  margin-bottom: 18px;
+}
+
+.treatment-card__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 21px;
+  margin: 0 0 8px;
+  color: #123436;
+}
+
+.treatment-card__text {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Shorts" (YouTube) — carrossel de vídeos curtos, entre
+   "Tratamentos" e "Passo a passo". Cards em formato retrato (9/16, igual
+   a um Short) com miniatura + ícone de play central; clique abre o
+   player num modal (.video-modal, mais abaixo).
+   ------------------------------------------------------------------ */
+.shorts {
+  background: #fff;
+}
+
+.shorts__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.shorts__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.shorts__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.shorts__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.shorts__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.shorts-carousel {
+  position: relative;
+}
+
+.shorts-swiper {
+  overflow: hidden;
+}
+
+.shorts-swiper .swiper-wrapper {
+  align-items: flex-start;
+}
+
+/* Fora do fluxo absoluto padrão do Swiper (que sobrepõe os cards) — flui
+   abaixo do carrossel, com espaço próprio (margin-top). */
+.shorts-swiper .swiper-pagination {
+  position: static;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.shorts-swiper .swiper-pagination-bullet {
+  background: #9aa7b6; /* mais contraste que var(--color-border) sobre fundo branco */
+  opacity: 1;
+}
+
+.shorts-swiper .swiper-pagination-bullet-active {
+  background: var(--color-cta);
+}
+
+.shorts-swiper-prev,
+.shorts-swiper-next {
+  display: none; /* só aparecem a partir do breakpoint onde há espaço nas laterais (ver Desktop) */
+  position: absolute;
+  top: 40%;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: #123436;
+  box-shadow: 0 6px 16px rgba(4, 110, 116, 0.18);
+  transition: background var(--transition), color var(--transition);
+}
+
+.shorts-swiper-prev:hover,
+.shorts-swiper-next:hover {
+  background: var(--color-cta);
+  color: #fff;
+}
+
+.shorts-swiper-prev.swiper-button-disabled,
+.shorts-swiper-next.swiper-button-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.shorts-swiper-prev {
+  left: -8px;
+}
+
+.shorts-swiper-next {
+  right: -8px;
+}
+
+.short-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: none;
+  padding: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0d2224;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(4, 110, 116, 0.16);
+}
+
+.short-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.short-card:hover img,
+.short-card:focus-visible img {
+  transform: scale(1.05);
+}
+
+.short-card:focus-visible {
+  outline: 3px solid var(--color-cta);
+  outline-offset: 2px;
+}
+
+.short-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--color-cta-dark);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.short-card:hover .short-card__play,
+.short-card:focus-visible .short-card__play {
+  background: #fff;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.short-card__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 14px 12px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+}
+
+/* ---------------------------------------------------------------------
+   Modal de vídeo — <dialog> nativo (compartilhado por todos os cards da
+   seção "Shorts"). ::backdrop é pseudo-elemento do próprio <dialog>,
+   criado automaticamente pelo navegador só enquanto ele estiver aberto
+   via showModal() — não precisa de nenhuma div extra.
+   ------------------------------------------------------------------ */
+/* Centralização explícita (não depende do centering nativo do <dialog>,
+   que varia entre navegadores quando o conteúdo tem altura variável) —
+   fixed + inset 50%/50% + translate(-50%, -50%) sempre centra na
+   viewport, tanto na horizontal quanto na vertical. */
+.video-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 18px;
+  background: transparent;
+  max-width: min(92vw, 380px);
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.video-modal::backdrop {
+  background: rgba(6, 20, 22, 0.78);
+}
+
+.video-modal__inner {
+  position: relative;
+}
+
+.video-modal__close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.video-modal__close:hover,
+.video-modal__close:focus-visible {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.video-modal__player {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.video-modal__player iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Passo a passo" — timeline das etapas do tratamento.
+   A linha conectora só aparece no desktop grande (1200px), quando a
+   grade vira 4 colunas lado a lado de verdade; no mobile/tablet, com os
+   passos empilhados/em 2 colunas, ela não faria sentido visualmente.
+   ------------------------------------------------------------------ */
+.steps {
+  background: var(--color-cta-dark);
+  color: #fff;
+}
+
+.steps__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.steps__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.steps__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8ad7db;
+  margin: 0 0 14px;
+}
+
+.steps__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0;
+  color: #fff;
+}
+
+.steps__grid {
+  display: grid;
+  gap: 40px;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+}
+
+.step__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--color-cta);
+  color: #fff;
+  box-shadow: 0 0 0 8px var(--color-cta-dark);
+  margin-bottom: 20px;
+}
+
+.step--success .step__badge {
+  background: #1faa53;
+}
+
+.step__label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #8ad7db;
+  margin: 0 0 6px;
+}
+
+.step--success .step__label {
+  color: #8fe0af;
+}
+
+.step__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.step__text {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #cfeaec;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Avaliações" — widget de reviews do Google via TrustIndex
+   ([trustindex no-registration=google]). O plugin já entrega o markup e
+   o CSS/JS do widget em si; aqui só cuidamos do enquadramento (mesmo
+   header eyebrow/título/texto das demais seções) e do fundo branco.
+   ------------------------------------------------------------------ */
+.reviews {
+  background: #fff;
+}
+
+.reviews__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.reviews__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.reviews__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.reviews__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.reviews__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.reviews__widget {
+  margin-inline: auto;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Unidades" — mapa + lista de endereços.
+   Mobile-first: mapa e lista empilhados (1 coluna); vira grade 1.15fr/0.85fr
+   no desktop (900px). Cada card empilha info+WhatsApp no mobile e vira
+   linha (space-between) a partir de 600px.
+   ------------------------------------------------------------------ */
+.units {
+  background: #faf7f2;
+}
+
+.units__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.units__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.units__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.units__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.units__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.units__grid {
+  display: grid;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.units__map {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 44px rgba(4, 110, 116, 0.12);
+}
+
+.units__map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.units__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.unit-card {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.unit-card__heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 6px;
+}
+
+.unit-card__name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0;
+  color: #123436;
+}
+
+.unit-card__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-cta);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.unit-card__detail {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  color: #5c6b7d;
+  margin-bottom: 5px;
+}
+
+.unit-card__detail:last-of-type {
+  margin-bottom: 0;
+}
+
+.unit-card__detail svg {
+  flex-shrink: 0;
+  color: #9aa7b6;
+}
+
+.unit-card__detail--link {
+  color: var(--color-cta-dark);
+  font-weight: 600;
+}
+
+.unit-card__detail--link svg {
+  color: var(--color-cta-dark);
+}
+
+.unit-card__detail--link:hover {
+  text-decoration: none;
+  color: var(--color-cta);
+}
+
+/* Ícone-botão isolado (sem texto) — verde no tom do WhatsApp, mas mais
+   claro que var(--color-whatsapp), pra não competir tanto visualmente
+   com o resto do card. Só a partir do tablet: no mobile vira um botão
+   de texto (.unit-card__whatsapp-cta), mais fácil de tocar. */
+.unit-card__whatsapp {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  align-self: flex-start;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #67c689;
+  color: #fff;
+  transition: opacity var(--transition);
+}
+
+.unit-card__whatsapp:hover {
+  opacity: 0.85;
+}
+
+.unit-card__whatsapp-cta {
+  margin-top: 12px;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Blog" — grade de posts.
+   Mobile-first: 1 coluna; 2 em ~600px; 3 em 900px.
+   ------------------------------------------------------------------ */
+.blog {
+  background: #faf7f2;
+}
+
+.blog__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.blog__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.blog__heading {
+  max-width: 560px;
+}
+
+.blog__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.blog__title {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0;
+  color: #063e42;
+}
+
+.blog__link {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-cta);
+  white-space: nowrap;
+}
+
+/*
+ * Carrossel (Swiper — ver assets/js/pages/home.js) — mesmo padrão do
+ * carrossel de "Resultados" acima. .blog-carousel só existe pra
+ * posicionar as setas ao lado do swiper.
+ */
+.blog-carousel {
+  position: relative;
+}
+
+.blog-swiper {
+  overflow: hidden;
+}
+
+.blog-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+/* Fora do fluxo absoluto padrão do Swiper (que sobrepõe os cards) — flui
+   abaixo do carrossel, com espaço próprio (margin-top). */
+.blog-swiper .swiper-pagination {
+  position: static;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.blog-swiper .swiper-slide {
+  height: auto;
+}
+
+.blog-swiper .swiper-slide .blog-card {
+  height: 100%;
+}
+
+.blog-swiper .swiper-pagination-bullet {
+  background: #9aa7b6; /* mais contraste que var(--color-border) sobre fundo branco */
+  opacity: 1;
+}
+
+.blog-swiper .swiper-pagination-bullet-active {
+  background: var(--color-cta);
+}
+
+.blog-swiper-prev,
+.blog-swiper-next {
+  display: none; /* só aparecem a partir do breakpoint onde há espaço nas laterais (ver Desktop) */
+  position: absolute;
+  top: 36%;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: #123436;
+  box-shadow: 0 6px 16px rgba(4, 110, 116, 0.18);
+  transition: background var(--transition), color var(--transition);
+}
+
+.blog-swiper-prev:hover,
+.blog-swiper-next:hover {
+  background: var(--color-cta);
+  color: #fff;
+}
+
+.blog-swiper-prev.swiper-button-disabled,
+.blog-swiper-next.swiper-button-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.blog-swiper-prev {
+  left: -8px;
+}
+
+.blog-swiper-next {
+  right: -8px;
+}
+
+.blog-card {
+  display: block;
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.blog-card:hover {
+  text-decoration: none;
+}
+
+.blog-card__media {
+  position: relative;
+  width: 100%;
+  height: 180px;
+}
+
+.blog-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-card__body {
+  padding: 22px 24px 26px;
+}
+
+.blog-card__category {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 10px;
+}
+
+.blog-card__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.25;
+  margin: 0 0 12px;
+  color: #123436;
+}
+
+.blog-card__meta {
+  font-size: 13.5px;
+  color: #8a97a6;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   CTA final — fechamento da Home, convite direto pro WhatsApp.
+   ------------------------------------------------------------------ */
+.closing-cta {
+  background: #2e324b;
+}
+
+.closing-cta__inner {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 56px 20px;
+  text-align: center;
+}
+
+.closing-cta__title {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0 0 18px;
+  color: #fff;
+}
+
+.closing-cta__text {
+  font-size: 17px;
+  line-height: 1.55;
+  color: #aebccd;
+  margin: 0 auto 30px;
+  max-width: 560px;
+}
+
+/* Fundo/cor vêm de .cta/.cta--whatsapp — aqui só o tamanho maior,
+   de propósito, já que este é o CTA de fechamento da página. */
+.closing-cta__button {
+  gap: 11px;
+  font-weight: 700;
+  font-size: 17px;
+  padding: 16px 28px;
+  border-radius: 34px;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+  .page-home {
+  }
+
+  .about__media {
+    height: 340px;
+  }
+
+  .treatments__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .units__map {
+    min-height: 320px;
+  }
+
+  .unit-card {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .unit-card__whatsapp {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-self: auto;
+  }
+
+  .unit-card__whatsapp-cta.cta {
+    display: none;
+  }
+
+  .about__stats {
+    justify-content: flex-start;
+  }
+
+  .about__stat {
+    flex: 1 1 38%;
+  }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+  .page-home {
+  }
+
+  .about__grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 60px;
+    padding: 84px 24px;
+  }
+
+  .about__media {
+    height: 100%;
+    max-height: 600px;
+  }
+
+  .about__title {
+    font-size: 42px;
+  }
+
+  .results__inner {
+    padding: 84px 24px;
+  }
+
+  .results__title {
+    font-size: 42px;
+  }
+
+  .results-swiper-prev,
+  .results-swiper-next {
+    display: flex;
+  }
+
+  .treatments__inner {
+    padding: 84px 24px;
+  }
+
+  .treatments__title {
+    font-size: 42px;
+  }
+
+  .shorts__inner {
+    padding: 84px 24px;
+  }
+
+  .shorts__title {
+    font-size: 42px;
+  }
+
+  .shorts-swiper-prev,
+  .shorts-swiper-next {
+    display: flex;
+  }
+
+  .steps__inner {
+    padding: 84px 24px;
+  }
+
+  .steps__title {
+    font-size: 42px;
+  }
+
+  .units__inner {
+    padding: 84px 24px;
+  }
+
+  .units__title {
+    font-size: 42px;
+  }
+
+  .units__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .units__map {
+    min-height: 440px;
+  }
+
+  .blog__inner {
+    padding: 84px 24px;
+  }
+
+  .blog__title {
+    font-size: 42px;
+  }
+
+  .blog-swiper-prev,
+  .blog-swiper-next {
+    display: flex;
+  }
+
+  .closing-cta__inner {
+    padding: 88px 24px;
+  }
+
+  .closing-cta__title {
+    font-size: 46px;
+  }
+
+  .closing-cta__text {
+    font-size: 19px;
+  }
+
+  .closing-cta__button {
+    font-size: 19px;
+    padding: 18px 34px;
+  }
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+  .page-home {
+  }
+
+  .treatments__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .steps__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+}

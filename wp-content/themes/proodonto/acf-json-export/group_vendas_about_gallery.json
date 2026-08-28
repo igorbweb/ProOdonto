@@ -1,0 +1,35 @@
+{
+    "key": "group_vendas_about_gallery",
+    "title": "Página de Vendas — Galeria \"Sobre\"",
+    "fields": [
+        {
+            "key": "field_vendas_about_galeria",
+            "label": "Galeria de fotos",
+            "name": "galeria_sobre",
+            "type": "gallery",
+            "instructions": "Fotos exibidas em carrossel na seção \"Sobre\". Sem nenhuma foto cadastrada, a seção usa uma imagem de espaço reservado.",
+            "return_format": "array",
+            "insert": "append",
+            "preview_size": "medium"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 3,
+    "description": "Fotos da seção \"Sobre\" na Página de Vendas.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

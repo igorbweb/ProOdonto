@@ -1,0 +1,823 @@
+[
+    {
+        "key": "group_vendas_about",
+        "title": "Página de Vendas — Sobre (texto)",
+        "fields": [
+            {
+                "key": "field_vendas_about_eyebrow",
+                "label": "Texto acima do título",
+                "name": "eyebrow",
+                "type": "text",
+                "default_value": "Sobre a ProOdonto",
+                "wrapper": {
+                    "width": "50"
+                }
+            },
+            {
+                "key": "field_vendas_about_cta_label",
+                "label": "Texto do botão (CTA da seção)",
+                "name": "about_cta_label",
+                "type": "text",
+                "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+                "default_value": "AGENDAR AVALIAÇÃO GRATUITA",
+                "wrapper": {
+                    "width": "50"
+                }
+            },
+            {
+                "key": "field_vendas_about_titulo",
+                "label": "Título",
+                "name": "titulo",
+                "type": "textarea",
+                "instructions": "Use uma quebra de linha onde quiser que o título quebre visualmente.",
+                "rows": 3,
+                "default_value": "Devolvemos muito mais que dentes.\nDevolvemos qualidade de vida."
+            },
+            {
+                "key": "field_vendas_about_texto",
+                "label": "Texto",
+                "name": "texto",
+                "type": "textarea",
+                "rows": 4,
+                "default_value": "Na ProOdonto, cada tratamento começa ouvindo a sua história — e só termina quando você volta a sorrir, comer e viver com confiança. Somos referência em odontologia em Sergipe porque cuidamos de pessoas, não apenas de procedimentos."
+            },
+            {
+                "key": "field_vendas_about_estatisticas",
+                "label": "Estatísticas",
+                "name": "estatisticas",
+                "type": "repeater",
+                "layout": "table",
+                "button_label": "Adicionar estatística",
+                "sub_fields": [
+                    {
+                        "key": "field_vendas_about_stat_valor",
+                        "label": "Valor",
+                        "name": "valor",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "30"
+                        },
+                        "placeholder": "+15 mil"
+                    },
+                    {
+                        "key": "field_vendas_about_stat_legenda",
+                        "label": "Legenda",
+                        "name": "legenda",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "70"
+                        },
+                        "placeholder": "sorrisos transformados"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 2,
+        "description": "Copy e estatísticas da seção \"Sobre\" da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_about_gallery",
+        "title": "Página de Vendas — Galeria \"Sobre\"",
+        "fields": [
+            {
+                "key": "field_vendas_about_galeria",
+                "label": "Galeria de fotos",
+                "name": "galeria_sobre",
+                "type": "gallery",
+                "instructions": "Fotos exibidas em carrossel na seção \"Sobre\". Sem nenhuma foto cadastrada, a seção usa uma imagem de espaço reservado.",
+                "return_format": "array",
+                "insert": "append",
+                "preview_size": "medium"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 3,
+        "description": "Fotos da seção \"Sobre\" na Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_closing_cta",
+        "title": "Página de Vendas — CTA final",
+        "fields": [
+            {
+                "key": "field_vendas_closing_titulo",
+                "label": "Título",
+                "name": "closing_titulo",
+                "type": "text",
+                "default_value": "Pronto para voltar a sorrir com confiança?"
+            },
+            {
+                "key": "field_vendas_closing_texto",
+                "label": "Texto",
+                "name": "closing_texto",
+                "type": "textarea",
+                "rows": 2,
+                "default_value": "Fale agora com a nossa equipe pelo WhatsApp e agende sua avaliação gratuita — é rápido, sem burocracia e sem compromisso."
+            },
+            {
+                "key": "field_vendas_closing_botao_label",
+                "label": "Texto do botão",
+                "name": "closing_botao_label",
+                "type": "text",
+                "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+                "default_value": "CHAMAR NO WHATSAPP"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 10,
+        "description": "Título, texto e botão do CTA final da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_cta",
+        "title": "Página de Vendas — CTA",
+        "fields": [
+            {
+                "key": "field_vendas_cta_url",
+                "label": "URL dos CTAs da página",
+                "name": "cta_url",
+                "type": "url",
+                "instructions": "Usada em todos os botões de CTA da página (Resultados, Sobre, Tratamentos, Passo a passo, Avaliações, Unidades e o CTA final) — pode ser um link wa.me/, um link de rastreio (ex.: api.upviewcrm.com) ou qualquer outra URL de destino da campanha. O banner (hero) tem seus próprios links, definidos slide a slide, e não é afetado por este campo. Se deixado em branco, usa o WhatsApp padrão do tema.",
+                "placeholder": "https://wa.me/5511999999999?text=..."
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "description": "URL de destino dos CTAs em qualquer página que use o template \"Página de Vendas\".",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_marquee",
+        "title": "Página de Vendas — Letreiro de diferenciais",
+        "fields": [
+            {
+                "key": "field_vendas_marquee_itens",
+                "label": "Itens",
+                "name": "marquee_itens",
+                "type": "repeater",
+                "instructions": "Diferenciais exibidos em loop no letreiro (marquee) abaixo do banner.",
+                "layout": "table",
+                "button_label": "Adicionar item",
+                "sub_fields": [
+                    {
+                        "key": "field_vendas_marquee_label",
+                        "label": "Texto",
+                        "name": "label",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "60"
+                        },
+                        "placeholder": "Atendimento humanizado"
+                    },
+                    {
+                        "key": "field_vendas_marquee_icone",
+                        "label": "Ícone (SVG)",
+                        "name": "icone_svg",
+                        "type": "textarea",
+                        "instructions": "Conteúdo interno do &lt;svg&gt; (ex.: &lt;path d=\"...\"/&gt;), sem a tag &lt;svg&gt; em volta. ViewBox fixo em 0 0 24 24.",
+                        "wrapper": {
+                            "width": "40"
+                        },
+                        "rows": 2
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 1,
+        "description": "Itens do letreiro de diferenciais da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_results",
+        "title": "Página de Vendas — Resultados (Antes e Depois)",
+        "fields": [
+            {
+                "key": "field_vendas_results_eyebrow",
+                "label": "Texto acima do título",
+                "name": "results_eyebrow",
+                "type": "text",
+                "default_value": "Resultados reais",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_results_titulo",
+                "label": "Título",
+                "name": "results_titulo",
+                "type": "text",
+                "default_value": "Sorrisos transformados",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_results_cta_label",
+                "label": "Texto do botão (CTA)",
+                "name": "results_cta_label",
+                "type": "text",
+                "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+                "default_value": "QUERO MEU SORRISO",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_results_texto",
+                "label": "Texto",
+                "name": "results_texto",
+                "type": "textarea",
+                "rows": 2,
+                "default_value": "Pacientes reais da ProOdonto que recuperaram a saúde bucal e a confiança para sorrir. O próximo resultado pode ser o seu.",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_results_itens",
+                "label": "Pacientes",
+                "name": "results_itens",
+                "type": "repeater",
+                "instructions": "Foto real do paciente (composição única antes/depois). Sem informação de tratamento de propósito — ver comentário original em page-vendas.php.",
+                "layout": "table",
+                "button_label": "Adicionar paciente",
+                "sub_fields": [
+                    {
+                        "key": "field_vendas_results_nome",
+                        "label": "Nome",
+                        "name": "nome",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "30"
+                        }
+                    },
+                    {
+                        "key": "field_vendas_results_foto",
+                        "label": "Foto",
+                        "name": "foto",
+                        "type": "image",
+                        "return_format": "array",
+                        "preview_size": "medium",
+                        "wrapper": {
+                            "width": "70"
+                        }
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 4,
+        "description": "Cabeçalho e pacientes da seção \"Resultados\" (antes e depois) da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_reviews",
+        "title": "Página de Vendas — Avaliações",
+        "fields": [
+            {
+                "key": "field_vendas_reviews_eyebrow",
+                "label": "Texto acima do título",
+                "name": "reviews_eyebrow",
+                "type": "text",
+                "default_value": "Avaliações",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_reviews_titulo",
+                "label": "Título",
+                "name": "reviews_titulo",
+                "type": "text",
+                "default_value": "Quem já passou pela ProOdonto recomenda",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_reviews_cta_label",
+                "label": "Texto do botão (CTA da seção)",
+                "name": "reviews_cta_label",
+                "type": "text",
+                "default_value": "QUERO ESSE RESULTADO",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_reviews_texto",
+                "label": "Texto",
+                "name": "reviews_texto",
+                "type": "textarea",
+                "rows": 2,
+                "default_value": "Depoimentos reais de pacientes que recuperaram a saúde e a autoestima do sorriso com a gente.",
+                "wrapper": {
+                    "width": "25"
+                }
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 8,
+        "description": "Cabeçalho da seção \"Avaliações\" da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_shorts",
+        "title": "Página de Vendas — Shorts (YouTube)",
+        "fields": [
+            {
+                "key": "field_vendas_shorts_aviso",
+                "label": "",
+                "name": "shorts_aviso",
+                "type": "message",
+                "message": "Adicione o link de cada vídeo do YouTube abaixo (Shorts, \"watch?v=\" ou \"youtu.be\" — qualquer um funciona). A miniatura e o player são gerados automaticamente a partir do link, sem precisar enviar nenhuma imagem. <strong>Sem nenhum vídeo cadastrado, esta seção não aparece no site.</strong>"
+            },
+            {
+                "key": "field_vendas_shorts_eyebrow",
+                "label": "Texto acima do título",
+                "name": "shorts_eyebrow",
+                "type": "text",
+                "default_value": "Vídeos",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_shorts_titulo",
+                "label": "Título",
+                "name": "shorts_titulo",
+                "type": "text",
+                "default_value": "Veja de perto o nosso atendimento",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_shorts_cta_label",
+                "label": "Texto do botão (CTA da seção)",
+                "name": "shorts_cta_label",
+                "type": "text",
+                "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+                "default_value": "QUERO AGENDAR AGORA",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_shorts_texto",
+                "label": "Texto",
+                "name": "shorts_texto",
+                "type": "textarea",
+                "rows": 2,
+                "default_value": "Bastidores, depoimentos e dicas rápidas — direto do nosso canal no YouTube.",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_shorts_itens",
+                "label": "Vídeos",
+                "name": "shorts_itens",
+                "type": "repeater",
+                "layout": "block",
+                "button_label": "Adicionar vídeo",
+                "sub_fields": [
+                    {
+                        "key": "field_vendas_shorts_url",
+                        "label": "Link do YouTube",
+                        "name": "url",
+                        "type": "url",
+                        "instructions": "Aceita link de Shorts, vídeo normal (watch?v=) ou youtu.be — o ID é extraído automaticamente.",
+                        "placeholder": "https://www.youtube.com/shorts/XXXXXXXXXXX"
+                    },
+                    {
+                        "key": "field_vendas_shorts_titulo_item",
+                        "label": "Título / legenda (opcional)",
+                        "name": "titulo",
+                        "type": "text",
+                        "instructions": "Exibido como legenda sobre a miniatura, se preenchido."
+                    },
+                    {
+                        "key": "field_vendas_shorts_capa",
+                        "label": "Capa personalizada (opcional)",
+                        "name": "capa_personalizada",
+                        "type": "image",
+                        "instructions": "Sem capa própria, usamos a miniatura automática do vídeo no YouTube.",
+                        "return_format": "array",
+                        "preview_size": "medium"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 6,
+        "description": "Carrossel de vídeos (YouTube Shorts) entre \"Tratamentos\" e \"Passo a passo\" da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_steps",
+        "title": "Página de Vendas — Passo a passo",
+        "fields": [
+            {
+                "key": "field_vendas_steps_eyebrow",
+                "label": "Texto acima do título",
+                "name": "steps_eyebrow",
+                "type": "text",
+                "default_value": "Passo a passo",
+                "wrapper": {
+                    "width": "33"
+                }
+            },
+            {
+                "key": "field_vendas_steps_titulo",
+                "label": "Título",
+                "name": "steps_titulo",
+                "type": "text",
+                "default_value": "O caminho para você voltar a sorrir",
+                "wrapper": {
+                    "width": "33"
+                }
+            },
+            {
+                "key": "field_vendas_steps_cta_label",
+                "label": "Texto do botão (CTA da seção)",
+                "name": "steps_cta_label",
+                "type": "text",
+                "default_value": "QUERO COMEÇAR AGORA",
+                "wrapper": {
+                    "width": "34"
+                }
+            },
+            {
+                "key": "field_vendas_steps_itens",
+                "label": "Etapas",
+                "name": "steps_itens",
+                "type": "repeater",
+                "instructions": "A numeração \"ETAPA 01, 02...\" é automática, na ordem das linhas abaixo.",
+                "layout": "block",
+                "button_label": "Adicionar etapa",
+                "sub_fields": [
+                    {
+                        "key": "field_vendas_steps_label_item",
+                        "label": "Nome da etapa",
+                        "name": "label",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "30"
+                        }
+                    },
+                    {
+                        "key": "field_vendas_steps_texto_item",
+                        "label": "Texto",
+                        "name": "texto",
+                        "type": "textarea",
+                        "rows": 2,
+                        "wrapper": {
+                            "width": "45"
+                        }
+                    },
+                    {
+                        "key": "field_vendas_steps_icone_item",
+                        "label": "Ícone (SVG)",
+                        "name": "icone_svg",
+                        "type": "textarea",
+                        "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                        "rows": 2,
+                        "wrapper": {
+                            "width": "15"
+                        }
+                    },
+                    {
+                        "key": "field_vendas_steps_sucesso_item",
+                        "label": "Etapa final (estilo de destaque)",
+                        "name": "sucesso",
+                        "type": "true_false",
+                        "ui": 1,
+                        "default_value": 0,
+                        "wrapper": {
+                            "width": "10"
+                        }
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 7,
+        "description": "Cabeçalho e etapas da seção \"Passo a passo\" da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_treatments",
+        "title": "Página de Vendas — Tratamentos",
+        "fields": [
+            {
+                "key": "field_vendas_treatments_eyebrow",
+                "label": "Texto acima do título",
+                "name": "treatments_eyebrow",
+                "type": "text",
+                "default_value": "Tratamentos",
+                "wrapper": {
+                    "width": "33"
+                }
+            },
+            {
+                "key": "field_vendas_treatments_titulo",
+                "label": "Título",
+                "name": "treatments_titulo",
+                "type": "text",
+                "default_value": "Encontre o tratamento certo para o seu sorriso",
+                "wrapper": {
+                    "width": "33"
+                }
+            },
+            {
+                "key": "field_vendas_treatments_cta_label",
+                "label": "Texto do botão (CTA da seção)",
+                "name": "treatments_cta_label",
+                "type": "text",
+                "default_value": "QUERO MEU TRATAMENTO",
+                "wrapper": {
+                    "width": "34"
+                }
+            },
+            {
+                "key": "field_vendas_treatments_texto",
+                "label": "Texto",
+                "name": "treatments_texto",
+                "type": "textarea",
+                "rows": 2,
+                "default_value": "Reunimos todas as especialidades em um só lugar, com profissionais dedicados a cuidar de cada etapa — do diagnóstico ao resultado final."
+            },
+            {
+                "key": "field_vendas_treatments_itens",
+                "label": "Tratamentos",
+                "name": "treatments_itens",
+                "type": "repeater",
+                "instructions": "No mobile (<600px) estes cards viram um carrossel automático (ver assets/js/pages/home.js) — não é preciso configurar nada aqui pra isso.",
+                "layout": "block",
+                "button_label": "Adicionar tratamento",
+                "sub_fields": [
+                    {
+                        "key": "field_vendas_treatments_titulo_item",
+                        "label": "Título",
+                        "name": "titulo",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "30"
+                        }
+                    },
+                    {
+                        "key": "field_vendas_treatments_texto_item",
+                        "label": "Texto",
+                        "name": "texto",
+                        "type": "textarea",
+                        "rows": 2,
+                        "wrapper": {
+                            "width": "45"
+                        }
+                    },
+                    {
+                        "key": "field_vendas_treatments_icone_item",
+                        "label": "Ícone (SVG)",
+                        "name": "icone_svg",
+                        "type": "textarea",
+                        "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                        "rows": 2,
+                        "wrapper": {
+                            "width": "25"
+                        }
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 5,
+        "description": "Cabeçalho e cards da seção \"Tratamentos\" da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    },
+    {
+        "key": "group_vendas_units",
+        "title": "Página de Vendas — Unidades (cabeçalho)",
+        "fields": [
+            {
+                "key": "field_vendas_units_aviso",
+                "label": "",
+                "name": "aviso_unidades",
+                "type": "message",
+                "message": "A lista de unidades (endereços, links do Maps/WhatsApp) é editada em código, em <code>inc/units-map.php</code>. Nesta página de vendas, a seção \"Unidades\" mostra só o mapa (sem os cards) — ver page-vendas.php."
+            },
+            {
+                "key": "field_vendas_units_eyebrow",
+                "label": "Texto acima do título",
+                "name": "units_eyebrow",
+                "type": "text",
+                "default_value": "Unidades",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_units_titulo",
+                "label": "Título",
+                "name": "units_titulo",
+                "type": "text",
+                "default_value": "Uma ProOdonto perto de você",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_units_cta_label",
+                "label": "Texto do botão (CTA da seção)",
+                "name": "units_cta_label",
+                "type": "text",
+                "default_value": "FALAR COM UNIDADE",
+                "wrapper": {
+                    "width": "25"
+                }
+            },
+            {
+                "key": "field_vendas_units_texto",
+                "label": "Texto",
+                "name": "units_texto",
+                "type": "text",
+                "default_value": "Escolha a unidade mais próxima e fale direto com a nossa equipe para agendar sua avaliação gratuita.",
+                "wrapper": {
+                    "width": "25"
+                }
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "menu_order": 9,
+        "description": "Cabeçalho da seção \"Unidades\" da Página de Vendas.",
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "show_in_rest": 0,
+        "modified": 1754251200
+    }
+]

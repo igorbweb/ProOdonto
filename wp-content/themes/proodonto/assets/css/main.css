@@ -1,0 +1,826 @@
+/*
+ * Layout e componentes globais (header, footer, nav, cards, botões, CTA).
+ * Mobile-first: estilos base valem para telas pequenas; media queries
+ * min-width adicionam/ajustam para tablet e desktop.
+ * Usa os design tokens definidos em style.css (custom properties).
+ */
+
+/* ---------------------------------------------------------------------
+   Layout utilitário
+   ------------------------------------------------------------------ */
+.container {
+	width: 100%;
+	max-width: var(--container-width);
+	margin-inline: auto;
+	padding-inline: var(--container-padding);
+}
+
+.button {
+	display: inline-block;
+	width: 100%;
+	padding: var(--space-2) var(--space-4);
+	background: var(--color-primary);
+	color: #fff;
+	border: none;
+	border-radius: var(--radius);
+	font-weight: 600;
+	text-align: center;
+	transition: background var(--transition);
+}
+
+.button:hover {
+	background: var(--color-primary-dark);
+	color: #fff;
+	text-decoration: none;
+}
+
+/*
+ * Âncora/botão padrão "cta" (ex.: banners, links manuais no conteúdo).
+ * Qualificado como `a.cta` de propósito: não colide com `.cta`, a
+ * <section> wrapper do bloco proodonto/cta (ver assets/css/blocks/cta.css)
+ * — aquele estiliza uma seção inteira, este estiliza um link/botão.
+ */
+a.cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	width: 100%;
+	padding: var(--space-2) var(--space-4);
+	background: var(--color-cta);
+	color: #fff;
+	border-radius: var(--radius);
+	font-weight: 600;
+	transition: background var(--transition);
+	text-transform: uppercase;
+}
+
+a.cta:hover {
+	background: var(--color-cta-dark);
+	color: #fff;
+	text-decoration: none;
+}
+
+/*
+ * Modificador para CTAs que apontam pro WhatsApp especificamente (ícone
+ * e ação já são de WhatsApp, então a cor de marca faz mais sentido que o
+ * teal genérico do .cta). Usar sempre junto de `.cta`, nunca sozinho:
+ * `class="cta cta--whatsapp"`.
+ */
+a.cta.cta--whatsapp {
+	background: var(--color-whatsapp);
+}
+
+a.cta.cta--whatsapp:hover {
+	background: var(--color-whatsapp);
+	opacity: 0.9;
+}
+
+/*
+ * CTA do header some no mobile (só o botão de hambúrguer fica). As
+ * utilities `hidden`/`md:inline-flex` do Tailwind (header.php) não
+ * bastam aqui: elas vivem em `@layer utilities`, e CSS sem @layer (este
+ * arquivo, incluindo `a.cta` acima) sempre vence CSS em @layer, não
+ * importa a especificidade — mesmo problema documentado mais abaixo
+ * pro logo do header. Por isso o show/hide é feito aqui, fora de layer.
+ */
+.site-header .cta {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	.site-header .cta {
+		display: inline-flex;
+	}
+}
+
+/* .button/a.cta ocupam 100% da largura no mobile (alvo de toque maior,
+   mais fácil de tocar) e voltam ao tamanho natural (do conteúdo) a
+   partir do tablet — mesmo breakpoint (--bp-tablet, ver style.css) usado
+   em todo o resto do tema. */
+@media (min-width: 600px) {
+	.button,
+	a.cta {
+		width: auto;
+	}
+}
+
+/* ---------------------------------------------------------------------
+   Header: fixed, com Tailwind — ver classes direto em header.php.
+   O toggle do menu mobile também usa classes Tailwind (hidden/flex),
+   alternadas via assets/js/main.js.
+
+   Exceção: o tamanho do logo é controlado aqui (CSS simples), não por
+   classe Tailwind. O Tailwind v4 embrulha utilitários em `@layer
+   utilities`, e CSS sem @layer (como este arquivo) sempre vence CSS
+   em @layer, não importa a especificidade — então o reset global
+   `img { height: auto; }` (style.css) estava batendo a classe
+   `h-[28px]` do Tailwind e deixando o logo no tamanho intrínseco
+   (597px de largura). Resolvido controlando o tamanho por max-width
+   aqui, no mesmo "andar" (sem @layer) do reset que estava competindo.
+   ------------------------------------------------------------------ */
+.site-branding img {
+	max-width: 160px;
+	width: auto;
+	height: auto;
+}
+
+@media (min-width: 640px) {
+	.site-branding img {
+		max-width: 190px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.site-branding img {
+		max-width: 220px;
+	}
+}
+
+/* ---------------------------------------------------------------------
+   Breadcrumbs
+   ------------------------------------------------------------------ */
+.breadcrumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1);
+	font-size: var(--fs-sm);
+	color: var(--color-text-light);
+	margin-block: var(--space-3);
+}
+
+.breadcrumbs li:not(:last-child)::after {
+	content: "/";
+	margin-inline-start: var(--space-1);
+}
+
+/* ---------------------------------------------------------------------
+   Cards de conteúdo (blog / arquivos / busca)
+   ------------------------------------------------------------------ */
+.entry-card {
+	margin-bottom: var(--space-5);
+	padding-bottom: var(--space-5);
+	border-bottom: 1px solid var(--color-border);
+}
+
+.entry-card__thumb img {
+	border-radius: var(--radius);
+	margin-bottom: var(--space-3);
+}
+
+.entry-card__meta {
+	color: var(--color-text-light);
+	font-size: var(--fs-sm);
+	margin-bottom: var(--space-2);
+}
+
+@media (min-width: 900px) {
+	.entry-card {
+		display: grid;
+		grid-template-columns: 280px 1fr;
+		gap: var(--space-4);
+		align-items: start;
+	}
+
+	.entry-card__thumb img {
+		margin-bottom: 0;
+	}
+}
+
+/* ---------------------------------------------------------------------
+   Página (single/page)
+   ------------------------------------------------------------------ */
+.entry {
+	padding-block: var(--space-5);
+}
+
+.entry-thumb {
+	margin-bottom: var(--space-4);
+}
+
+.entry-thumb img {
+	border-radius: var(--radius);
+}
+
+.entry-content {
+	max-width: 72ch;
+}
+
+/* ---------------------------------------------------------------------
+   Post singular (single.php) — hierarquia de leitura.
+   Escopado em `.single-post` de propósito: essas regras são mais
+   opinativas (cabeçalho centralizado, coluna mais estreita) do que o
+   `.entry`/`.entry-content` genérico usado também por Páginas — não
+   queremos mudar o layout de Páginas ao ajustar isso.
+   ------------------------------------------------------------------ */
+.single-post .entry-header {
+	max-width: 1024px;
+	margin-inline: auto;
+	margin-bottom: var(--space-4);
+	text-align: center;
+}
+
+.single-post .entry-header .breadcrumbs ol {
+	justify-content: center;
+}
+
+.entry-categories {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	margin-bottom: var(--space-3);
+}
+
+.entry-category-pill {
+	display: inline-block;
+	padding: 0.3em 0.9em;
+	border-radius: 999px;
+	background: #e3f5f6;
+	color: var(--color-cta-dark);
+	font-size: var(--fs-sm);
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+}
+
+.entry-category-pill:hover {
+	background: #c9edf0;
+	text-decoration: none;
+}
+
+.single-post .entry-title {
+	margin-bottom: var(--space-3);
+}
+
+.entry-meta {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: var(--space-1) var(--space-2);
+	color: var(--color-text-light);
+	font-size: var(--fs-sm);
+}
+
+.entry-meta__dot {
+	opacity: 0.6;
+}
+
+/*
+ * Resumo (TL;DR) — só aparece quando o autor escreveu um excerpt manual
+ * no post. Dá uma resposta direta e citável logo no topo: bom pra quem
+ * só quer o essencial e pra IAs que resumem/citam o conteúdo.
+ */
+.entry-summary {
+	max-width: 1024px;
+	margin: 0 auto var(--space-5);
+	padding: var(--space-3) var(--space-4);
+	background: var(--color-bg-alt);
+	border-left: 4px solid var(--color-cta);
+	border-radius: 0 var(--radius) var(--radius) 0;
+	font-size: 1.1rem;
+	line-height: 1.55;
+	color: var(--color-text);
+}
+
+.single-post .entry-thumb {
+	max-width: 1024px;
+	margin-inline: auto;
+	margin-bottom: var(--space-5);
+}
+
+.single-post .entry-thumb img {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	border-radius: var(--radius);
+}
+
+.single-post .entry-content {
+	max-width: 1024px;
+	margin-inline: auto;
+	font-size: 1.05rem;
+}
+
+/* Tipografia rica dentro do conteúdo do post */
+.single-post .entry-content h2 {
+	margin-top: var(--space-5);
+	font-size: 1.75rem;
+}
+
+.single-post .entry-content h3 {
+	margin-top: var(--space-4);
+	font-size: var(--fs-h3);
+}
+
+.single-post .entry-content ul,
+.single-post .entry-content ol {
+	margin: 0 0 var(--space-3);
+	padding-left: 1.25em;
+}
+
+.single-post .entry-content ul {
+	list-style: disc;
+}
+
+.single-post .entry-content ol {
+	list-style: decimal;
+}
+
+.single-post .entry-content li {
+	margin-bottom: var(--space-2);
+}
+
+.single-post .entry-content a {
+	color: var(--color-cta-dark);
+	text-decoration: underline;
+	text-decoration-color: var(--color-border);
+	text-underline-offset: 3px;
+}
+
+.single-post .entry-content a:hover {
+	text-decoration-color: currentColor;
+}
+
+.single-post .entry-content img {
+	border-radius: var(--radius);
+	margin-block: var(--space-4);
+}
+
+.single-post .entry-content blockquote {
+	margin: var(--space-4) 0;
+	padding: var(--space-3) var(--space-4);
+	border-left: 4px solid var(--color-cta);
+	background: var(--color-bg-alt);
+	border-radius: 0 var(--radius) var(--radius) 0;
+	font-style: italic;
+}
+
+.single-post .entry-content blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+.single-post .entry-content hr {
+	border: none;
+	border-top: 1px solid var(--color-border);
+	margin-block: var(--space-5);
+}
+
+.single-post .entry-content code {
+	background: var(--color-bg-alt);
+	padding: 0.15em 0.4em;
+	border-radius: 4px;
+	font-size: 0.9em;
+}
+
+/*
+ * Tabelas comparativas (ex.: cirurgia guiada x convencional). Exigência da
+ * pauta de SEO/GEO: tabela precisa ser HTML real, nunca imagem — o wrapper
+ * com overflow-x cobre telas estreitas sem quebrar o layout da página.
+ */
+.single-post .entry-content table {
+	width: 100%;
+	margin: var(--space-4) 0;
+	border-collapse: collapse;
+	font-size: 0.95em;
+}
+
+.single-post .entry-content table th,
+.single-post .entry-content table td {
+	padding: var(--space-2) var(--space-3);
+	border: 1px solid var(--color-border);
+	text-align: left;
+	vertical-align: top;
+}
+
+.single-post .entry-content table th {
+	background: var(--color-bg-alt);
+	font-weight: 700;
+}
+
+.single-post .entry-content table tbody tr:nth-child(even) {
+	background: var(--color-bg-alt);
+}
+
+.single-post .entry-content .table-scroll {
+	overflow-x: auto;
+}
+
+.page-links {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	margin-top: var(--space-4);
+	font-weight: 600;
+}
+
+.entry-tags {
+	max-width: 1024px;
+	margin: var(--space-5) auto 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+}
+
+.entry-tag {
+	font-size: var(--fs-sm);
+	color: var(--color-text-light);
+	background: var(--color-bg-alt);
+	padding: 0.3em 0.8em;
+	border-radius: 999px;
+}
+
+.entry-tag:hover {
+	background: var(--color-border);
+	text-decoration: none;
+}
+
+.entry-cta {
+	max-width: 1024px;
+	margin: var(--space-6) auto 0;
+	padding: var(--space-4);
+	background: var(--color-cta-dark);
+	border-radius: var(--radius);
+	text-align: center;
+	color: #fff;
+}
+
+.entry-cta__title {
+	color: #fff;
+	margin-bottom: var(--space-2);
+	font-size: var(--fs-h3);
+}
+
+.entry-cta__text {
+	color: #cfeaec;
+	margin-bottom: var(--space-3);
+}
+
+.entry-author {
+	max-width: 1024px;
+	margin: var(--space-5) auto 0;
+	display: flex;
+	gap: var(--space-3);
+	align-items: flex-start;
+	padding-top: var(--space-4);
+	border-top: 1px solid var(--color-border);
+	font-style: normal; /* <address> é itálico por padrão no navegador */
+}
+
+.entry-author__avatar img {
+	border-radius: 50%;
+	display: block;
+}
+
+.entry-author__name {
+	font-weight: 700;
+	margin: 0 0 var(--space-1);
+}
+
+.entry-author__credentials {
+	color: var(--color-cta-dark);
+	font-size: var(--fs-sm);
+	font-weight: 600;
+	margin: 0 0 var(--space-1);
+}
+
+.entry-author__bio {
+	color: var(--color-text-light);
+	font-size: var(--fs-sm);
+	margin: 0;
+}
+
+/*
+ * Aviso de conformidade (CFO): toda página de saúde precisa expor
+ * responsável técnico + CRO, aviso de conteúdo informativo e data da
+ * última revisão. Fica visualmente discreto — não é mais um CTA.
+ */
+.entry-disclaimer {
+	max-width: 1024px;
+	margin: var(--space-4) auto 0;
+	padding-top: var(--space-3);
+	color: var(--color-text-light);
+	font-size: var(--fs-sm);
+	line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------------
+   Posts relacionados — incentivam o leitor a continuar navegando em vez
+   de sair da página assim que termina de ler (single.php).
+   ------------------------------------------------------------------ */
+.related-posts {
+	background: var(--color-bg-alt);
+	margin-top: var(--space-6);
+	padding-block: var(--space-6);
+}
+
+.related-posts__title {
+	text-align: center;
+	margin-bottom: var(--space-4);
+}
+
+.related-posts__grid {
+	display: grid;
+	gap: var(--space-4);
+}
+
+.related-card {
+	display: block;
+	background: var(--color-bg);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	overflow: hidden;
+}
+
+.related-card:hover {
+	text-decoration: none;
+}
+
+.related-card__media img {
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+}
+
+.related-card__body {
+	padding: var(--space-3);
+}
+
+.related-card__meta {
+	font-size: var(--fs-sm);
+	color: var(--color-text-light);
+	margin: 0 0 var(--space-1);
+}
+
+.related-card__title {
+	font-size: 1.1rem;
+	margin: 0;
+}
+
+@media (min-width: 900px) {
+	.related-posts__grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* ---------------------------------------------------------------------
+   Footer
+   Mobile-first: marca + colunas empilhadas em 1 coluna; vira grade
+   1.4fr/1fr/1fr/1fr a partir de 900px (ver media query no fim do arquivo).
+   ------------------------------------------------------------------ */
+.site-footer {
+	background: #171b31;
+	color: #93a2b5;
+}
+
+.site-footer__top {
+	display: grid;
+	gap: var(--space-4);
+	padding: var(--space-5) 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-footer__brand {
+	max-width: 320px;
+}
+
+.site-footer__logo {
+	margin-bottom: var(--space-3);
+}
+
+.site-footer__logo .custom-logo {
+	height: 64px;
+	width: auto;
+	margin-left: -6px;
+}
+
+.site-footer__logo-img {
+	height: 40px;
+	width: auto;
+}
+
+.site-footer__logo-text {
+	margin: 0;
+	font-family: var(--font-heading);
+	font-size: var(--fs-h3);
+	font-weight: 700;
+	color: #fff;
+}
+
+.site-footer__text {
+	font-size: 14.5px;
+	line-height: 1.6;
+	color: #8798ab;
+	margin: 0 0 var(--space-3);
+	max-width: 280px;
+}
+
+.site-footer__social {
+	display: flex;
+	gap: 10px;
+}
+
+.site-footer__social-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.07);
+	color: #cdd8e4;
+}
+
+.site-footer__social-link:hover {
+	background: rgba(255, 255, 255, 0.14);
+	text-decoration: none;
+}
+
+.site-footer__heading {
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #fff;
+	margin: 0 0 var(--space-3);
+}
+
+.site-footer__links {
+	display: flex;
+	flex-direction: column;
+	gap: 11px;
+	font-size: 14.5px;
+}
+
+.site-footer__links a {
+	color: #93a2b5;
+}
+
+.site-footer__links a:hover {
+	color: #fff;
+}
+
+.site-footer__links-item--static {
+	color: #93a2b5;
+	cursor: default;
+}
+
+.site-footer__bottom {
+	padding-block: var(--space-4);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-3);
+	flex-wrap: wrap;
+	font-size: 13px;
+	color: #6b7c90;
+}
+
+.site-footer__bottom a {
+	color: #6b7c90;
+}
+
+.site-footer__bottom a:hover {
+	color: #93a2b5;
+}
+
+@media (min-width: 900px) {
+	.site-footer__top {
+		grid-template-columns: 1.4fr 1fr 1fr 1fr;
+		gap: 40px;
+		padding: 64px 0 44px;
+	}
+
+	.site-footer__logo-img {
+		height: 56px;
+	}
+}
+
+/* ---------------------------------------------------------------------
+   404 / sem resultados
+   ------------------------------------------------------------------ */
+.error-404,
+.no-results {
+	padding-block: var(--space-6);
+	text-align: center;
+}
+
+/* ---------------------------------------------------------------------
+   Agregador de Links de Contato — <dialog> nativo, global (renderizado
+   em footer.php, uma vez por página). Aberto pelo clique em qualquer
+   `a.cta` (ver assets/js/main.js), exceto na Página de Vendas (onde o
+   próprio footer.php nem chega a imprimir esta marcação). Mesmo padrão
+   visual do .video-modal (assets/css/pages/home.css), mas em CSS global
+   por precisar existir em toda página, não só Home/Vendas.
+   ------------------------------------------------------------------ */
+/* Centralização explícita (não depende do centering nativo do <dialog>,
+   que varia entre navegadores quando o conteúdo tem altura variável) —
+   fixed + inset 50%/50% + translate(-50%, -50%) sempre centra na
+   viewport, tanto na horizontal quanto na vertical. */
+.link-aggregator-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: var(--radius);
+	background: transparent;
+	max-width: min(92vw, 420px);
+	width: 100%;
+	max-height: 90vh;
+	overflow: auto;
+}
+
+.link-aggregator-modal::backdrop {
+	background: rgba(6, 20, 22, 0.78);
+}
+
+.link-aggregator-modal__inner {
+	position: relative;
+	background: var(--color-bg);
+	border-radius: var(--radius);
+	padding: var(--space-5) var(--space-4) var(--space-4);
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.link-aggregator-modal__close {
+	position: absolute;
+	top: var(--space-2);
+	right: var(--space-2);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: none;
+	border-radius: 50%;
+	background: var(--color-bg-alt);
+	color: var(--color-text-light);
+	cursor: pointer;
+	transition: background var(--transition), color var(--transition);
+}
+
+.link-aggregator-modal__close:hover,
+.link-aggregator-modal__close:focus-visible {
+	background: var(--color-border);
+	color: var(--color-text);
+}
+
+.link-aggregator-modal__title {
+	font-size: var(--fs-h3);
+	margin: 0 0 var(--space-1);
+	padding-right: var(--space-5); /* não passa por baixo do botão de fechar */
+}
+
+.link-aggregator-modal__text {
+	color: var(--color-text-light);
+	margin: 0 0 var(--space-4);
+}
+
+.link-aggregator-modal__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+}
+
+.link-aggregator-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-3);
+	padding: var(--space-3);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	color: var(--color-text);
+	transition: border-color var(--transition), background var(--transition);
+}
+
+.link-aggregator-item:hover {
+	border-color: var(--color-cta);
+	background: var(--color-bg-alt);
+	text-decoration: none;
+}
+
+.link-aggregator-item__text {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.link-aggregator-item__label {
+	font-weight: 600;
+}
+
+.link-aggregator-item__desc {
+	font-size: var(--fs-sm);
+	color: var(--color-text-light);
+}
+
+.link-aggregator-item__arrow {
+	flex-shrink: 0;
+	color: var(--color-cta);
+}

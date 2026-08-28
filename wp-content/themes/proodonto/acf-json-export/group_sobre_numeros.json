@@ -1,0 +1,75 @@
+{
+    "key": "group_sobre_numeros",
+    "title": "Sobre — Números",
+    "fields": [
+        {
+            "key": "field_sobre_numeros_eyebrow",
+            "label": "Texto acima do título",
+            "name": "numeros_eyebrow",
+            "type": "text",
+            "default_value": "PRÓ-ODONTO em números",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_numeros_titulo",
+            "label": "Título",
+            "name": "numeros_titulo",
+            "type": "text",
+            "default_value": "Resultados que contam nossa história",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_numeros_itens",
+            "label": "Estatísticas",
+            "name": "numeros_itens",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar estatística",
+            "sub_fields": [
+                {
+                    "key": "field_sobre_numeros_valor",
+                    "label": "Valor",
+                    "name": "valor",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    },
+                    "placeholder": "+15 mil"
+                },
+                {
+                    "key": "field_sobre_numeros_legenda",
+                    "label": "Legenda",
+                    "name": "legenda",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "70"
+                    },
+                    "placeholder": "sorrisos transformados"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 3,
+    "description": "Estatísticas da página Sobre.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

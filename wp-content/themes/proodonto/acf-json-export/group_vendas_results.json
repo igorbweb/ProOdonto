@@ -1,0 +1,98 @@
+{
+    "key": "group_vendas_results",
+    "title": "Página de Vendas — Resultados (Antes e Depois)",
+    "fields": [
+        {
+            "key": "field_vendas_results_eyebrow",
+            "label": "Texto acima do título",
+            "name": "results_eyebrow",
+            "type": "text",
+            "default_value": "Resultados reais",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_results_titulo",
+            "label": "Título",
+            "name": "results_titulo",
+            "type": "text",
+            "default_value": "Sorrisos transformados",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_results_cta_label",
+            "label": "Texto do botão (CTA)",
+            "name": "results_cta_label",
+            "type": "text",
+            "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+            "default_value": "QUERO MEU SORRISO",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_results_texto",
+            "label": "Texto",
+            "name": "results_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Pacientes reais da ProOdonto que recuperaram a saúde bucal e a confiança para sorrir. O próximo resultado pode ser o seu.",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_results_itens",
+            "label": "Pacientes",
+            "name": "results_itens",
+            "type": "repeater",
+            "instructions": "Foto real do paciente (composição única antes/depois). Sem informação de tratamento de propósito — ver comentário original em page-vendas.php.",
+            "layout": "table",
+            "button_label": "Adicionar paciente",
+            "sub_fields": [
+                {
+                    "key": "field_vendas_results_nome",
+                    "label": "Nome",
+                    "name": "nome",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_vendas_results_foto",
+                    "label": "Foto",
+                    "name": "foto",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "wrapper": {
+                        "width": "70"
+                    }
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 4,
+    "description": "Cabeçalho e pacientes da seção \"Resultados\" (antes e depois) da Página de Vendas.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

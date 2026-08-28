@@ -1,0 +1,182 @@
+/*
+Theme Name: ProOdonto
+Theme URI: 
+Author: Igor Bomdim
+Author URI: 
+Description: Tema WordPress mobile-first orientado a performance e conversão, pronto para desenvolvimento manual com custom fields. Inclui limpeza agressiva do head, CSS/JS carregados sob demanda por página, SEO básico embutido (Open Graph, Twitter Card, JSON-LD, meta description) e geração automática de template + CSS para cada nova página criada no admin.
+Version: 1.0.3
+Requires at least: 6.4
+Tested up to: 6.6
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: proodonto
+Tags: mobile-first, performance, seo, custom-fields, blocks
+
+Este arquivo contém apenas o cabeçalho exigido pelo WordPress, o reset base
+e os design tokens (custom properties). Todo o restante do CSS é carregado
+via wp_enqueue_style() em inc/enqueue.php para permitir versionamento por
+filemtime() e CSS específico por página (ver assets/css/pages/).
+*/
+
+/* ---------------------------------------------------------------------
+   1. Reset mínimo (mobile-first)
+   ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+}
+
+ul[class],
+ol[class] {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* ---------------------------------------------------------------------
+   2. Design tokens
+   ------------------------------------------------------------------ */
+:root {
+	/* Cores */
+	--color-primary: #0d6efd;
+	--color-primary-dark: #0b5ed7;
+	--color-secondary: #6c757d;
+	--color-text: #1a1a1a;
+	--color-text-light: #595959;
+	--color-bg: #ffffff;
+	--color-bg-alt: #f6f7f9;
+	--color-border: #e2e4e8;
+	--color-success: #198754;
+	--color-danger: #dc3545;
+	--color-whatsapp: #26ad57;
+	--color-cta: #049da5;
+	--color-cta-dark: #037880;
+	--color-accent: #f69630;
+
+	/* Tipografia fluida (mobile-first, escala com clamp) */
+	--font-base: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--font-heading: "Coolvetica", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--fs-base: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+	--fs-sm: clamp(0.85rem, 0.82rem + 0.15vw, 0.9rem);
+	--fs-h1: clamp(1.9rem, 1.5rem + 2vw, 3rem);
+	--fs-h2: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+	--fs-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.6rem);
+	--lh-base: 1.6;
+	--lh-heading: 1.2;
+
+	/* Espaçamento */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 1rem;
+	--space-4: 1.5rem;
+	--space-5: 2.5rem;
+	--space-6: 4rem;
+
+	/* Layout */
+	--container-width: 1200px;
+	--container-padding: var(--space-3);
+	--radius: 8px;
+	--transition: 150ms ease;
+
+	/* Breakpoints de referência (documental, usados nas media queries) */
+	--bp-tablet: 600px;
+	--bp-desktop: 900px;
+	--bp-desktop-lg: 1200px;
+}
+
+/* ---------------------------------------------------------------------
+   3. Base tipográfica
+   ------------------------------------------------------------------ */
+body {
+	font-family: var(--font-base);
+	font-size: var(--fs-base);
+	line-height: var(--lh-base);
+	color: var(--color-text);
+	background-color: var(--color-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-heading);
+	line-height: var(--lh-heading);
+	margin: 0 0 var(--space-3);
+	font-weight: 700;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+p {
+	margin: 0 0 var(--space-3);
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* Acessibilidade: link "pular para o conteúdo" */
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	z-index: 999999;
+	background: var(--color-bg);
+	color: var(--color-text);
+	padding: var(--space-2) var(--space-3);
+	border-radius: 0 0 var(--radius) 0;
+}
+
+.skip-link:focus {
+	left: 0;
+}
+
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	position: absolute !important;
+	word-wrap: normal !important;
+}

@@ -1,0 +1,120 @@
+{
+    "key": "group_sobre_equipe",
+    "title": "Sobre — Corpo Clínico / Equipe",
+    "fields": [
+        {
+            "key": "field_sobre_equipe_aviso",
+            "label": "",
+            "name": "equipe_aviso",
+            "type": "message",
+            "message": "<strong>Antes de publicar:</strong> substitua os profissionais de exemplo abaixo pelos dados reais da sua equipe (nome, especialidade, número de CRO e foto). A credencial (CRO) exibida precisa corresponder ao profissional real."
+        },
+        {
+            "key": "field_sobre_equipe_eyebrow",
+            "label": "Texto acima do título",
+            "name": "equipe_eyebrow",
+            "type": "text",
+            "default_value": "Corpo clínico",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_sobre_equipe_titulo",
+            "label": "Título",
+            "name": "equipe_titulo",
+            "type": "text",
+            "default_value": "Profissionais que cuidam do seu sorriso",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_sobre_equipe_texto",
+            "label": "Texto",
+            "name": "equipe_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Nossa equipe reúne cirurgiões-dentistas especialistas em diferentes áreas, todos registrados no Conselho Regional de Odontologia (CRO).",
+            "wrapper": {
+                "width": "34"
+            }
+        },
+        {
+            "key": "field_sobre_equipe_itens",
+            "label": "Profissionais",
+            "name": "equipe_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar profissional",
+            "sub_fields": [
+                {
+                    "key": "field_sobre_equipe_foto",
+                    "label": "Foto",
+                    "name": "foto",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "wrapper": {
+                        "width": "20"
+                    }
+                },
+                {
+                    "key": "field_sobre_equipe_nome",
+                    "label": "Nome",
+                    "name": "nome",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_sobre_equipe_cargo",
+                    "label": "Cargo / especialidade",
+                    "name": "cargo",
+                    "type": "text",
+                    "placeholder": "Cirurgiã(o)-Dentista — Implantodontia",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_sobre_equipe_cro",
+                    "label": "CRO",
+                    "name": "cro",
+                    "type": "text",
+                    "placeholder": "CRO-SE 12345",
+                    "wrapper": {
+                        "width": "20"
+                    }
+                },
+                {
+                    "key": "field_sobre_equipe_bio",
+                    "label": "Mini-bio",
+                    "name": "bio",
+                    "type": "textarea",
+                    "rows": 2
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 4,
+    "description": "Profissionais exibidos na seção \"Corpo clínico\" da página Sobre — também alimenta o JSON-LD (schema.org) da página, ver inc/page-sobre-schema.php.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

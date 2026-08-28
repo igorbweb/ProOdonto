@@ -1,0 +1,14 @@
+{
+	"name": "proodonto-theme",
+	"private": true,
+	"version": "1.0.0",
+	"description": "Build de CSS (Tailwind CSS) do tema WordPress Proodonto.",
+	"scripts": {
+		"dev": "tailwindcss -i ./assets/tailwind/input.css -o ./assets/css/tailwind.css --watch",
+		"build": "tailwindcss -i ./assets/tailwind/input.css -o ./assets/css/tailwind.css --minify"
+	},
+	"devDependencies": {
+		"@tailwindcss/cli": "^4.1.0",
+		"tailwindcss": "^4.1.0"
+	}
+}

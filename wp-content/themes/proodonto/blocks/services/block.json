@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/services",
+	"title": "Serviços / Especialidades",
+	"category": "proodonto",
+	"icon": "layout",
+	"description": "Grade de serviços ou especialidades. Adicione quantos blocos \"Serviço\" quiser dentro dele.",
+	"textdomain": "proodonto",
+	"attributes": {
+		"heading": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

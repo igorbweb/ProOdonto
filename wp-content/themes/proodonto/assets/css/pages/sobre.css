@@ -1,0 +1,1010 @@
+/*
+ * CSS da página "Sobre / Quem Somos" (page-sobre.php).
+ * Mobile-first: estilos base valem para telas pequenas; media queries
+ * min-width (600/900/1200px, mesmo padrão de home.css) adicionam/ajustam
+ * para tablet e desktop. Usa os design tokens de style.css.
+ *
+ * As seções "Unidades" e "CTA final" reaproveitam a MESMA marcação (classes)
+ * de assets/css/pages/home.css — o CSS delas foi replicado aqui de
+ * propósito (não importado), porque esta página carrega só o próprio CSS
+ * (ver inc/enqueue.php: CSS por página é isolado, exceto o caso especial
+ * já existente da Página de Vendas, que reaproveita home.css).
+ */
+
+/* ---------------------------------------------------------------------
+   Hero — sem carrossel: eyebrow + H1 + texto + CTA, foto ao lado.
+   ------------------------------------------------------------------ */
+.sobre-hero {
+  background: linear-gradient(160deg, #eef9fa 0%, #fdfaf5 60%, #ffffff 100%);
+}
+
+.sobre-hero__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 20px 20px 0;
+}
+
+.sobre-hero__inner .breadcrumbs ol {
+  margin-block: 0 8px;
+}
+
+.sobre-hero__grid {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+  padding-block: 28px 48px;
+}
+
+.sobre-hero__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.sobre-hero__title {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.12;
+  letter-spacing: -0.5px;
+  margin: 0 0 16px;
+  color: #063e42;
+}
+
+.sobre-hero__text {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #4a5a6e;
+  margin: 0 0 26px;
+  max-width: 520px;
+}
+
+.sobre-hero__media {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px rgba(4, 110, 116, 0.16);
+}
+
+.sobre-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Nossa História" — linha do tempo vertical (mobile) que vira
+   horizontal a partir do desktop grande (1200px).
+   ------------------------------------------------------------------ */
+.historia {
+  background: #fff;
+}
+
+.historia__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.historia__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+
+.historia__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.historia__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.historia__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-left: 28px;
+  border-left: 2px solid #d9eef0;
+}
+
+.timeline__item {
+  position: relative;
+}
+
+.timeline__dot {
+  position: absolute;
+  left: -34px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-cta);
+  box-shadow: 0 0 0 4px #e3f5f6;
+}
+
+.timeline__period {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-cta-dark);
+  margin-bottom: 4px;
+}
+
+.timeline__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 19px;
+  margin: 0 0 6px;
+  color: #123436;
+}
+
+.timeline__text {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #5c6b7d;
+  margin: 0;
+  max-width: 640px;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Missão, Visão e Valores".
+   ------------------------------------------------------------------ */
+.valores {
+  background: #faf7f2;
+}
+
+.valores__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.valores__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+
+.valores__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.valores__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0;
+  color: #063e42;
+}
+
+.valores__mv {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.valores__mv-card {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 18px;
+  padding: 26px 24px;
+}
+
+.valores__mv-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 19px;
+  margin: 0 0 8px;
+  color: var(--color-cta-dark);
+}
+
+.valores__mv-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a5a6e;
+  margin: 0;
+}
+
+.valores__grid {
+  display: grid;
+  gap: 18px;
+}
+
+.value-card {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 18px;
+  padding: 24px 22px;
+}
+
+.value-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #e3f5f6;
+  color: var(--color-cta);
+  margin-bottom: 16px;
+}
+
+.value-card__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 0 6px;
+  color: #123436;
+}
+
+.value-card__text {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Números" — faixa de estatísticas em destaque (fundo escuro,
+   mesmo tom de .steps da Home).
+   ------------------------------------------------------------------ */
+.numeros {
+  background: var(--color-cta-dark);
+}
+
+.numeros__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 44px 20px;
+}
+
+.numeros__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 32px;
+}
+
+.numeros__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8ad7db;
+  margin: 0 0 12px;
+}
+
+.numeros__title {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.15;
+  margin: 0;
+  color: #fff;
+}
+
+.numeros__grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px 20px;
+  text-align: center;
+}
+
+.numeros__item {
+  flex: 1 1 38%;
+}
+
+.numeros__value {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 32px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.numeros__label {
+  font-size: 13.5px;
+  color: #cfeaec;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Corpo Clínico / Equipe" — cards de profissional.
+   ------------------------------------------------------------------ */
+.equipe {
+  background: #fff;
+}
+
+.equipe__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.equipe__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 36px;
+}
+
+.equipe__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.equipe__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.equipe__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.equipe__grid {
+  display: grid;
+  gap: 22px;
+}
+
+.team-card {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 18px;
+  padding: 26px 22px;
+  text-align: center;
+}
+
+.team-card__photo {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(4, 110, 116, 0.16);
+}
+
+.team-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-card__name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 0 4px;
+  color: #123436;
+}
+
+.team-card__role {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-cta-dark);
+  margin: 0 0 4px;
+}
+
+.team-card__cro {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #5c6b7d;
+  background: #f1f3f6;
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin: 0 0 12px;
+}
+
+.team-card__bio {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Biossegurança" — lista de protocolos com ícone.
+   ------------------------------------------------------------------ */
+.seguranca {
+  background: #faf7f2;
+}
+
+.seguranca__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.seguranca__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+
+.seguranca__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.seguranca__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.seguranca__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.seguranca__grid {
+  display: grid;
+  gap: 16px;
+}
+
+.safety-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 16px;
+  padding: 20px 20px;
+}
+
+.safety-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #e3f5f6;
+  color: var(--color-cta);
+}
+
+.safety-card__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16.5px;
+  margin: 0 0 4px;
+  color: #123436;
+}
+
+.safety-card__text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Unidades" — mesma marcação/estilo de assets/css/pages/home.css
+   (replicado aqui, ver nota no topo do arquivo).
+   ------------------------------------------------------------------ */
+.units {
+  background: #fff;
+}
+
+.units__inner {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.units__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.units__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.units__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+  color: #063e42;
+}
+
+.units__text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0;
+}
+
+.units__grid {
+  display: grid;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.units__map {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 44px rgba(4, 110, 116, 0.12);
+}
+
+.units__map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.units__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.unit-card {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.unit-card__heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 6px;
+}
+
+.unit-card__name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0;
+  color: #123436;
+}
+
+.unit-card__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-cta);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.unit-card__detail {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  color: #5c6b7d;
+  margin-bottom: 5px;
+}
+
+.unit-card__detail:last-of-type {
+  margin-bottom: 0;
+}
+
+.unit-card__detail svg {
+  flex-shrink: 0;
+  color: #9aa7b6;
+}
+
+.unit-card__detail--link {
+  color: var(--color-cta-dark);
+  font-weight: 600;
+}
+
+.unit-card__detail--link svg {
+  color: var(--color-cta-dark);
+}
+
+.unit-card__detail--link:hover {
+  text-decoration: none;
+  color: var(--color-cta);
+}
+
+.unit-card__whatsapp {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  align-self: flex-start;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #67c689;
+  color: #fff;
+  transition: opacity var(--transition);
+}
+
+.unit-card__whatsapp:hover {
+  opacity: 0.85;
+}
+
+.unit-card__whatsapp-cta {
+  margin-top: 12px;
+}
+
+/* ---------------------------------------------------------------------
+   Seção "Perguntas Frequentes" — accordion nativo (details/summary).
+   ------------------------------------------------------------------ */
+.faq {
+  background: #faf7f2;
+}
+
+.faq__inner {
+  max-width: 820px;
+  margin-inline: auto;
+  padding: 48px 20px;
+}
+
+.faq__header {
+  text-align: center;
+  margin: 0 auto 32px;
+}
+
+.faq__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cta);
+  margin: 0 0 14px;
+}
+
+.faq__title {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+  margin: 0;
+  color: #063e42;
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 14px;
+  padding: 4px 20px;
+}
+
+.faq-item__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15.5px;
+  color: #123436;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.faq-item__toggle::before,
+.faq-item__toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--color-cta);
+  transform: translate(-50%, -50%);
+  transition: transform var(--transition);
+}
+
+.faq-item__toggle::before {
+  width: 12px;
+  height: 2px;
+}
+
+.faq-item__toggle::after {
+  width: 2px;
+  height: 12px;
+}
+
+.faq-item[open] .faq-item__toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg) scale(0);
+}
+
+.faq-item__answer {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #5c6b7d;
+  margin: 0 0 18px;
+}
+
+/* ---------------------------------------------------------------------
+   CTA final — mesma marcação/estilo de assets/css/pages/home.css
+   (replicado aqui, ver nota no topo do arquivo).
+   ------------------------------------------------------------------ */
+.closing-cta {
+  background: #2e324b;
+}
+
+.closing-cta__inner {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 56px 20px;
+  text-align: center;
+}
+
+.closing-cta__title {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0 0 18px;
+  color: #fff;
+}
+
+.closing-cta__text {
+  font-size: 17px;
+  line-height: 1.55;
+  color: #aebccd;
+  margin: 0 auto 30px;
+  max-width: 560px;
+}
+
+.closing-cta__button {
+  gap: 11px;
+  font-weight: 700;
+  font-size: 17px;
+  padding: 16px 28px;
+  border-radius: 34px;
+}
+
+/* =======================================================================
+   Tablet (600px)
+   ==================================================================== */
+@media (min-width: 600px) {
+  .sobre-hero__media {
+    height: 320px;
+  }
+
+  .valores__mv {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .valores__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .equipe__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .seguranca__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .units__map {
+    min-height: 320px;
+  }
+
+  .unit-card {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .unit-card__whatsapp {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-self: auto;
+  }
+
+  .unit-card__whatsapp-cta.cta {
+    display: none;
+  }
+}
+
+/* =======================================================================
+   Desktop (900px)
+   ==================================================================== */
+@media (min-width: 900px) {
+  .sobre-hero__inner {
+    padding: 28px 24px 0;
+  }
+
+  .sobre-hero__grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    padding-block: 40px 72px;
+  }
+
+  .sobre-hero__title {
+    font-size: 44px;
+  }
+
+  .sobre-hero__media {
+    height: 420px;
+  }
+
+  .historia__inner,
+  .valores__inner,
+  .equipe__inner,
+  .seguranca__inner,
+  .units__inner,
+  .faq__inner {
+    padding: 84px 24px;
+  }
+
+  .historia__title,
+  .valores__title,
+  .equipe__title,
+  .seguranca__title,
+  .units__title {
+    font-size: 42px;
+  }
+
+  .timeline {
+    padding-left: 0;
+    border-left: none;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .timeline__item {
+    flex: 1;
+    padding-inline-start: 24px;
+    border-left: 2px solid #d9eef0;
+  }
+
+  .timeline__dot {
+    left: -7px;
+    top: 0;
+  }
+  
+  .numeros__item {
+    flex: 1 1 auto;
+  }
+
+  .numeros__inner {
+    padding: 64px 24px;
+  }
+
+  .numeros__title {
+    font-size: 32px;
+  }
+
+  .equipe__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .units__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .units__map {
+    min-height: 440px;
+  }
+
+  .faq__title {
+    font-size: 34px;
+  }
+
+  .closing-cta__inner {
+    padding: 88px 24px;
+  }
+
+  .closing-cta__title {
+    font-size: 46px;
+  }
+
+  .closing-cta__text {
+    font-size: 19px;
+  }
+
+  .closing-cta__button {
+    font-size: 19px;
+    padding: 18px 34px;
+  }
+}
+
+/* =======================================================================
+   Desktop grande (1200px)
+   ==================================================================== */
+@media (min-width: 1200px) {
+  .valores__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .equipe__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .seguranca__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

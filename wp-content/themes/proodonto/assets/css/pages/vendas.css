@@ -1,0 +1,67 @@
+/*
+ * Página de Vendas — carrega DEPOIS de assets/css/pages/home.css (ver
+ * inc/enqueue.php: a "Página de Vendas" usa o template page-vendas.php e
+ * reaproveita o CSS/JS da Home pelo template, não pelo slug). Aqui só as
+ * diferenças:
+ *   - .section-cta: wrapper do CTA centralizado que esta página acrescenta
+ *     ao final de cada seção de conteúdo (Sobre, Tratamentos, Passo a
+ *     passo, Avaliações, Unidades) — mesmo espaçamento do .results__cta
+ *     já usado na seção "Resultados".
+ *   - .units__grid: sem a lista de unidades (removida do markup), o mapa
+ *     ocupa a coluna inteira a partir do breakpoint em que home.css vira
+ *     grade de 2 colunas.
+ *   - .treatments-swiper: no mobile, os cards de tratamento viram um
+ *     swiper (ver assets/js/pages/home.js); a partir de 600px o JS
+ *     destrói o carrossel e o .treatments__grid volta a ser a grade
+ *     normal — mas o CSS do Swiper (carregado antes deste arquivo, ver
+ *     inc/enqueue.php) força `display: flex` em QUALQUER .swiper-wrapper,
+ *     então precisa deste override pra restaurar a grade também no CSS,
+ *     não só via JS.
+ *   - .about-swiper: carrossel da galeria "Sobre" (custom field
+ *     "galeria_sobre") — só existe nesta página; sem foto cadastrada, o
+ *     template cai no <img> de placeholder e este bloco não se aplica.
+ */
+
+.section-cta {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.about-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.about-swiper .swiper-pagination {
+  bottom: 14px;
+}
+
+.about-swiper .swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.6;
+}
+
+.about-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--color-cta);
+}
+
+@media (min-width: 900px) {
+  .units__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.treatments-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+.treatments-swiper .swiper-slide {
+  height: auto;
+}
+
+@media (min-width: 600px) {
+  .treatments-swiper .treatments__grid {
+    display: grid;
+  }
+}

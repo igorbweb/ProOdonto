@@ -1,0 +1,100 @@
+{
+    "key": "group_home_about",
+    "title": "Home — Sobre",
+    "fields": [
+        {
+            "key": "field_home_about_imagem",
+            "label": "Imagem",
+            "name": "imagem",
+            "type": "image",
+            "instructions": "Foto usada na seção \"Sobre\" (ex.: dentista atendendo) quando a galeria abaixo estiver vazia.",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_home_about_galeria",
+            "label": "Galeria de fotos",
+            "name": "galeria_sobre",
+            "type": "gallery",
+            "instructions": "Com 1 ou mais fotos aqui, a seção \"Sobre\" exibe um carrossel em vez da imagem única acima. Vazia, usa o campo \"Imagem\" (ou o espaço reservado padrão, se nenhum dos dois estiver definido).",
+            "return_format": "array",
+            "insert": "append",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_home_about_eyebrow",
+            "label": "Texto acima do título",
+            "name": "eyebrow",
+            "type": "text",
+            "default_value": "Sobre a PRÓ-ODONTO"
+        },
+        {
+            "key": "field_home_about_titulo",
+            "label": "Título",
+            "name": "titulo",
+            "type": "textarea",
+            "instructions": "Use uma quebra de linha onde quiser que o título quebre visualmente.",
+            "placeholder": "Cuidado de verdade,\ndo primeiro sorriso ao último",
+            "default_value": "Cuidado de verdade,\ndo primeiro sorriso ao último",
+            "rows": 3
+        },
+        {
+            "key": "field_home_about_texto",
+            "label": "Texto",
+            "name": "texto",
+            "type": "textarea",
+            "rows": 4,
+            "default_value": "Há mais de 20 anos ajudamos famílias a recuperar a saúde e a confiança do sorriso. Cada tratamento começa por ouvir você — e segue com transparência, tecnologia e o carinho que você merece."
+        },
+        {
+            "key": "field_home_about_estatisticas",
+            "label": "Estatísticas",
+            "name": "estatisticas",
+            "type": "repeater",
+            "instructions": "Ex.: \"+15 mil\" / \"sorrisos transformados\".",
+            "layout": "table",
+            "button_label": "Adicionar estatística",
+            "sub_fields": [
+                {
+                    "key": "field_home_about_stat_valor",
+                    "label": "Valor",
+                    "name": "valor",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    },
+                    "placeholder": "+15 mil"
+                },
+                {
+                    "key": "field_home_about_stat_legenda",
+                    "label": "Legenda",
+                    "name": "legenda",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "70"
+                    },
+                    "placeholder": "sorrisos transformados"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "description": "Campos da seção \"Sobre\" da página Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

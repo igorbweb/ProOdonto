@@ -1,0 +1,95 @@
+{
+    "key": "group_home_results",
+    "title": "Home — Resultados (Antes e Depois)",
+    "fields": [
+        {
+            "key": "field_home_results_eyebrow",
+            "label": "Texto acima do título",
+            "name": "results_eyebrow",
+            "type": "text",
+            "default_value": "Resultados reais",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_results_titulo",
+            "label": "Título",
+            "name": "results_titulo",
+            "type": "text",
+            "default_value": "Sorrisos transformados",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_results_cta_label",
+            "label": "Texto do botão (CTA)",
+            "name": "results_cta_label",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "default_value": "Quero um sorriso assim",
+            "wrapper": {
+                "width": "34"
+            }
+        },
+        {
+            "key": "field_home_results_texto",
+            "label": "Texto",
+            "name": "results_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Veja alguns dos resultados que conquistamos com nossos pacientes."
+        },
+        {
+            "key": "field_home_results_itens",
+            "label": "Pacientes",
+            "name": "results_itens",
+            "type": "repeater",
+            "instructions": "Foto real do paciente (composição única antes/depois). Sem informação de tratamento de propósito — ver comentário original em page-home.php.",
+            "layout": "table",
+            "button_label": "Adicionar paciente",
+            "sub_fields": [
+                {
+                    "key": "field_home_results_nome",
+                    "label": "Nome",
+                    "name": "nome",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_home_results_foto",
+                    "label": "Foto",
+                    "name": "foto",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "wrapper": {
+                        "width": "70"
+                    }
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 3,
+    "description": "Cabeçalho e pacientes da seção \"Resultados\" (antes e depois) da Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

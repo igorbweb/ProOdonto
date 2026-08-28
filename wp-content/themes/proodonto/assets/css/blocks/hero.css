@@ -1,0 +1,32 @@
+/*
+ * CSS do bloco proodonto/hero.
+ * Carregado só nas páginas que usam o bloco (ver inc/enqueue.php).
+ */
+
+.hero {
+	position: relative;
+}
+
+.hero__image {
+	width: 100%;
+	max-height: 480px;
+	object-fit: cover;
+}
+
+.hero__content {
+	text-align: center;
+	padding-block: var(--space-5);
+}
+
+.hero__subtitle {
+	color: var(--color-text-light);
+	max-width: 60ch;
+	margin-inline: auto;
+	margin-bottom: var(--space-4);
+}
+
+@media (min-width: 900px) {
+	.hero__content {
+		padding-block: var(--space-6);
+	}
+}

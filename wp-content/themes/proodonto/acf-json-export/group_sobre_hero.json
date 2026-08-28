@@ -1,0 +1,72 @@
+{
+    "key": "group_sobre_hero",
+    "title": "Sobre — Hero (topo)",
+    "fields": [
+        {
+            "key": "field_sobre_hero_eyebrow",
+            "label": "Texto acima do título",
+            "name": "hero_eyebrow",
+            "type": "text",
+            "default_value": "Quem somos",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_hero_cta_label",
+            "label": "Texto do botão (CTA)",
+            "name": "hero_cta_label",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "default_value": "Agendar avaliação gratuita",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_hero_titulo",
+            "label": "Título (H1 da página)",
+            "name": "hero_titulo",
+            "type": "textarea",
+            "instructions": "Este é o único H1 visível da página — capriche.",
+            "rows": 2,
+            "default_value": "Cuidado odontológico com propósito, há anos ao lado de Sergipe"
+        },
+        {
+            "key": "field_sobre_hero_texto",
+            "label": "Texto",
+            "name": "hero_texto",
+            "type": "textarea",
+            "rows": 3,
+            "default_value": "Somos a PRÓ-ODONTO: uma equipe de cirurgiões-dentistas e especialistas dedicados a devolver saúde bucal, autoestima e qualidade de vida para cada paciente que passa pelas nossas unidades."
+        },
+        {
+            "key": "field_sobre_hero_imagem",
+            "label": "Imagem",
+            "name": "hero_imagem",
+            "type": "image",
+            "instructions": "Foto da equipe, recepção ou fachada de uma unidade. Sem imagem cadastrada, usa um espaço reservado.",
+            "return_format": "array",
+            "preview_size": "medium"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "description": "Hero (topo) da página Sobre / Quem Somos.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

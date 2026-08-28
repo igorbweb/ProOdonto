@@ -1,0 +1,26 @@
+/*
+ * CSS da página "Blog" (slug: blog).
+ * Gerado automaticamente em 2026-08-12 18:14 — mobile-first, edite à vontade.
+ * Carregado apenas nesta página via inc/enqueue.php.
+ */
+
+.page-blog {
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+	.page-blog {
+	}
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+	.page-blog {
+	}
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+	.page-blog {
+	}
+}

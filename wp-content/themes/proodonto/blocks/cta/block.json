@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/cta",
+	"title": "CTA de Conversão",
+	"category": "proodonto",
+	"icon": "megaphone",
+	"description": "Bloco de chamada para ação: título, texto de apoio e botão.",
+	"textdomain": "proodonto",
+	"attributes": {
+		"title": { "type": "string", "default": "" },
+		"text": { "type": "string", "default": "" },
+		"buttonLabel": { "type": "string", "default": "" },
+		"buttonUrl": { "type": "string", "default": "" },
+		"buttonBlank": { "type": "boolean", "default": false }
+	},
+	"supports": { "html": false }
+}

@@ -1,0 +1,108 @@
+{
+    "key": "group_vendas_shorts",
+    "title": "Página de Vendas — Shorts (YouTube)",
+    "fields": [
+        {
+            "key": "field_vendas_shorts_aviso",
+            "label": "",
+            "name": "shorts_aviso",
+            "type": "message",
+            "message": "Adicione o link de cada vídeo do YouTube abaixo (Shorts, \"watch?v=\" ou \"youtu.be\" — qualquer um funciona). A miniatura e o player são gerados automaticamente a partir do link, sem precisar enviar nenhuma imagem. <strong>Sem nenhum vídeo cadastrado, esta seção não aparece no site.</strong>"
+        },
+        {
+            "key": "field_vendas_shorts_eyebrow",
+            "label": "Texto acima do título",
+            "name": "shorts_eyebrow",
+            "type": "text",
+            "default_value": "Vídeos",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_shorts_titulo",
+            "label": "Título",
+            "name": "shorts_titulo",
+            "type": "text",
+            "default_value": "Veja de perto o nosso atendimento",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_shorts_cta_label",
+            "label": "Texto do botão (CTA da seção)",
+            "name": "shorts_cta_label",
+            "type": "text",
+            "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+            "default_value": "QUERO AGENDAR AGORA",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_shorts_texto",
+            "label": "Texto",
+            "name": "shorts_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Bastidores, depoimentos e dicas rápidas — direto do nosso canal no YouTube.",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_shorts_itens",
+            "label": "Vídeos",
+            "name": "shorts_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar vídeo",
+            "sub_fields": [
+                {
+                    "key": "field_vendas_shorts_url",
+                    "label": "Link do YouTube",
+                    "name": "url",
+                    "type": "url",
+                    "instructions": "Aceita link de Shorts, vídeo normal (watch?v=) ou youtu.be — o ID é extraído automaticamente.",
+                    "placeholder": "https://www.youtube.com/shorts/XXXXXXXXXXX"
+                },
+                {
+                    "key": "field_vendas_shorts_titulo_item",
+                    "label": "Título / legenda (opcional)",
+                    "name": "titulo",
+                    "type": "text",
+                    "instructions": "Exibido como legenda sobre a miniatura, se preenchido."
+                },
+                {
+                    "key": "field_vendas_shorts_capa",
+                    "label": "Capa personalizada (opcional)",
+                    "name": "capa_personalizada",
+                    "type": "image",
+                    "instructions": "Sem capa própria, usamos a miniatura automática do vídeo no YouTube.",
+                    "return_format": "array",
+                    "preview_size": "medium"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 6,
+    "description": "Carrossel de vídeos (YouTube Shorts) entre \"Tratamentos\" e \"Passo a passo\" da Página de Vendas.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

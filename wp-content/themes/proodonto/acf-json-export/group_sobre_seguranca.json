@@ -1,0 +1,96 @@
+{
+    "key": "group_sobre_seguranca",
+    "title": "Sobre — Biossegurança",
+    "fields": [
+        {
+            "key": "field_sobre_seguranca_eyebrow",
+            "label": "Texto acima do título",
+            "name": "seguranca_eyebrow",
+            "type": "text",
+            "default_value": "Segurança em primeiro lugar",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_sobre_seguranca_titulo",
+            "label": "Título",
+            "name": "seguranca_titulo",
+            "type": "text",
+            "default_value": "Protocolos que protegem você",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_sobre_seguranca_texto",
+            "label": "Texto",
+            "name": "seguranca_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Seguimos boas práticas de biossegurança e investimos em equipamentos atualizados em todas as unidades.",
+            "wrapper": {
+                "width": "34"
+            }
+        },
+        {
+            "key": "field_sobre_seguranca_itens",
+            "label": "Itens",
+            "name": "seguranca_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar item",
+            "sub_fields": [
+                {
+                    "key": "field_sobre_seguranca_titulo_item",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_sobre_seguranca_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "textarea",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "45"
+                    }
+                },
+                {
+                    "key": "field_sobre_seguranca_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "25"
+                    }
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 5,
+    "description": "Protocolos de biossegurança exibidos na página Sobre.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

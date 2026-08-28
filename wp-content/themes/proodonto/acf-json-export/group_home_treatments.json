@@ -1,0 +1,93 @@
+{
+    "key": "group_home_treatments",
+    "title": "Home — Tratamentos",
+    "fields": [
+        {
+            "key": "field_home_treatments_eyebrow",
+            "label": "Texto acima do título",
+            "name": "treatments_eyebrow",
+            "type": "text",
+            "default_value": "Tratamentos",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_treatments_titulo",
+            "label": "Título",
+            "name": "treatments_titulo",
+            "type": "text",
+            "default_value": "Como podemos ajudar você",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_treatments_texto",
+            "label": "Texto",
+            "name": "treatments_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Todas as especialidades em um só lugar, com profissionais dedicados a cada tipo de cuidado."
+        },
+        {
+            "key": "field_home_treatments_itens",
+            "label": "Tratamentos",
+            "name": "treatments_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar tratamento",
+            "sub_fields": [
+                {
+                    "key": "field_home_treatments_titulo_item",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_home_treatments_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "textarea",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "45"
+                    }
+                },
+                {
+                    "key": "field_home_treatments_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "25"
+                    }
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 4,
+    "description": "Cabeçalho e cards da seção \"Tratamentos\" da Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

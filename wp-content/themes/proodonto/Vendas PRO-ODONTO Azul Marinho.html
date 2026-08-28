@@ -1,0 +1,675 @@
+<!--
+  Export estático da Página de Vendas (page-vendas.php), variação "azul marinho":
+  - Seções que eram brancas (.about, .results, .reviews) passam a usar
+    background: var(--color-primary), ajustado para #2e314a — o mesmo azul
+    marinho dessaturado já usado no overlay do hero, pra combinar com o
+    resto da página — em vez de #fff.
+  - Textos e elementos dessas 3 seções foram trocados para branco/tons claros
+    de branco, mantendo contraste. As demais seções (marquee, tratamentos,
+    passo a passo, unidades, CTA final) não eram brancas e continuam iguais.
+  - Footer e os CTAs centralizados (.section-cta) foram ajustados pra
+    combinar com o novo tom: footer em #1e2030 (mesma família de azul,
+    mais escuro) e os botões desses CTAs em laranja (--color-accent),
+    que já é a cor de destaque do tema e contrasta melhor com o azul do
+    que o teal usado nos outros CTAs da página.
+  - Sem PHP/WordPress: dados dinâmicos (ACF, Trustindex, mapa de unidades)
+    foram substituídos por conteúdo estático equivalente ao "estado padrão"
+    do template (sem custom fields preenchidos). Carrosséis (Swiper) foram
+    simplificados para grades estáticas — mesmo conteúdo, sem dependência de JS.
+  - Este arquivo é só uma prévia visual; não altera o tema/CSS do site.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ProOdonto — Página de Vendas (Azul Marinho)</title>
+<style>
+
+/* ---------------------------------------------------------------------
+   Fontes (self-hosted, mesmos arquivos do tema)
+   ------------------------------------------------------------------ */
+@font-face {
+	font-family: "Poppins";
+	src: url("assets/fonts/poppins/poppins-400.woff2") format("woff2");
+	font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+	font-family: "Poppins";
+	src: url("assets/fonts/poppins/poppins-500.woff2") format("woff2");
+	font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+	font-family: "Poppins";
+	src: url("assets/fonts/poppins/poppins-600.woff2") format("woff2");
+	font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+	font-family: "Poppins";
+	src: url("assets/fonts/poppins/poppins-700.woff2") format("woff2");
+	font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+	font-family: "Coolvetica";
+	src: url("assets/fonts/coolvetica/coolvetica.woff2") format("woff2");
+	font-weight: 400; font-style: normal; font-display: swap;
+}
+
+/* ---------------------------------------------------------------------
+   Reset + tokens (iguais a style.css)
+   ------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+button { cursor: pointer; font: inherit; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+:root {
+	--color-primary: #2e314a;
+	--color-primary-dark: #20223a;
+	--color-text: #1a1a1a;
+	--color-text-light: #595959;
+	--color-bg: #ffffff;
+	--color-bg-alt: #f6f7f9;
+	--color-border: #e2e4e8;
+	--color-whatsapp: #26ad57;
+	--color-cta: #049da5;
+	--color-cta-dark: #037880;
+	--color-accent: #f69630;
+
+	--font-base: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--font-heading: "Coolvetica", "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+	--space-3: 1rem;
+	--space-4: 1.5rem;
+	--space-5: 2.5rem;
+	--radius: 8px;
+	--transition: 150ms ease;
+	--container-width: 1200px;
+}
+
+body {
+	font-family: var(--font-base);
+	font-size: 1.0625rem;
+	line-height: 1.6;
+	color: var(--color-text);
+	background: var(--color-bg);
+}
+
+h1, h2, h3 { font-family: var(--font-heading); line-height: 1.2; margin: 0; font-weight: 700; }
+p { margin: 0; }
+
+.container { width: 100%; max-width: var(--container-width); margin-inline: auto; padding-inline: var(--space-3); }
+
+/* Botões / CTA — iguais a main.css, funcionam em qualquer fundo */
+a.cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 24px;
+	background: var(--color-cta);
+	color: #fff;
+	border-radius: var(--radius);
+	font-weight: 600;
+	transition: background var(--transition);
+}
+a.cta:hover { background: var(--color-cta-dark); color: #fff; text-decoration: none; }
+
+.section-cta { text-align: center; margin-top: 24px; }
+.section-cta .cta { background: var(--color-accent); }
+.section-cta .cta:hover { background: #dd7f1f; }
+
+/* ---------------------------------------------------------------------
+   Header
+   ------------------------------------------------------------------ */
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: rgba(255,255,255,.92);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid #e6eaf1;
+}
+.site-header__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 12px 16px;
+}
+.site-branding img { max-width: 160px; width: auto; height: auto; }
+@media (min-width: 640px) { .site-branding img { max-width: 190px; } }
+@media (min-width: 1024px) { .site-branding img { max-width: 220px; } }
+
+.site-nav {
+	display: none;
+	align-items: center;
+	gap: 28px;
+	font-size: 15px;
+	font-weight: 500;
+	color: #3a4a5e;
+}
+.site-nav a:hover { color: var(--color-cta-dark); text-decoration: none; }
+@media (min-width: 900px) { .site-nav { display: flex; } }
+
+.header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.header-phone {
+	display: none;
+	align-items: center;
+	gap: 8px;
+	white-space: nowrap;
+	font-size: 14px;
+	font-weight: 600;
+	color: #123436;
+}
+.header-phone svg { color: var(--color-cta); }
+.header-phone:hover { color: var(--color-cta-dark); text-decoration: none; }
+@media (min-width: 1024px) { .header-phone { display: inline-flex; } }
+
+.header-whatsapp {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	white-space: nowrap;
+	border-radius: 999px;
+	background: var(--color-whatsapp);
+	color: #fff;
+	padding: 10px 16px;
+	font-size: 15px;
+	font-weight: 600;
+}
+.header-whatsapp:hover { opacity: .9; text-decoration: none; }
+.header-whatsapp span { display: none; }
+@media (min-width: 480px) { .header-whatsapp span { display: inline; } }
+
+.menu-toggle { display: flex; flex-direction: column; gap: 5px; padding: 8px; background: none; border: none; }
+.menu-toggle span { display: block; width: 22px; height: 2px; background: #1a1a1a; }
+@media (min-width: 900px) { .menu-toggle { display: none; } }
+
+/* ---------------------------------------------------------------------
+   Hero — sem banner cadastrado (ACF), então visual genérico de fallback
+   ------------------------------------------------------------------ */
+.hero {
+	position: relative;
+	height: auto;
+	max-height: 550px;
+	background: #2e314a;
+}
+.hero img { width: 100%; height: 100%; object-fit: cover; max-height: 550px; }
+.hero .gradient {
+	position: absolute; inset: 0; z-index: 1;
+	background: linear-gradient(to right, #2e314ad6 45%, #ffffff00);
+}
+.hero-content { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; }
+.hero-content .slide-text { color: #fff; max-width: 560px; }
+.hero-content h2 { color: #fff; font-size: clamp(1.9rem, 1.5rem + 2vw, 3rem); margin-bottom: 14px; }
+.hero-content p { color: #fff; margin-bottom: 20px; font-size: 17px; }
+.hero-content a.cta { margin-top: 10px; }
+
+/* ---------------------------------------------------------------------
+   Marquee — já era colorido (teal), sem alteração
+   ------------------------------------------------------------------ */
+.marquee { background: var(--color-cta); border-top: 3px solid var(--color-cta-dark); overflow: hidden; }
+.marquee__track { display: flex; width: max-content; padding-block: 15px; animation: proodonto-marquee 28s linear infinite; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__item { display: flex; align-items: center; gap: 11px; padding-inline: 34px; white-space: nowrap; color: #fff; font-size: 16px; font-weight: 600; }
+.marquee__icon { flex-shrink: 0; color: var(--color-accent); }
+@keyframes proodonto-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------------------------------------------------------------------
+   Sobre — ERA BRANCA → agora azul marinho (--color-primary), texto branco
+   ------------------------------------------------------------------ */
+.about { background: var(--color-primary); }
+.about__grid { max-width: 1180px; margin-inline: auto; padding: 48px 20px; display: grid; gap: 40px; align-items: center; }
+.about__media { position: relative; width: 100%; height: 280px; border-radius: 22px; overflow: hidden; box-shadow: 0 24px 50px rgba(0,0,0,.25); }
+.about__media img { width: 100%; height: 100%; object-fit: cover; }
+.about__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #bfdcff; margin: 0 0 14px; }
+.about__title { font-weight: 500; font-size: 30px; line-height: 1.1; letter-spacing: -.4px; margin: 0 0 18px; color: #fff; }
+.about__text { font-size: 17px; line-height: 1.65; color: rgba(255,255,255,.88); margin: 0 0 30px; max-width: 520px; }
+.about__stats { display: flex; flex-wrap: wrap; gap: 32px 44px; }
+.about__stat-value { font-family: var(--font-heading); font-size: 30px; font-weight: 600; color: #fff; line-height: 1; }
+.about__stat-label { font-size: 14px; color: rgba(255,255,255,.75); margin-top: 4px; }
+
+/* ---------------------------------------------------------------------
+   Resultados — ERA BRANCA → agora azul marinho, texto branco
+   (fotos e botões do carrossel continuam com o próprio fundo/cor)
+   ------------------------------------------------------------------ */
+.results { background: var(--color-primary); }
+.results__inner { max-width: 1180px; margin-inline: auto; padding: 48px 20px; }
+.results__header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+.results__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #bfdcff; margin: 0 0 14px; }
+.results__title { font-weight: 500; font-size: 30px; line-height: 1.1; letter-spacing: -.4px; margin: 0 0 14px; color: #fff; }
+.results__text { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.85); margin: 0; }
+
+.results-carousel { position: relative; }
+.results__grid { display: grid; gap: 22px; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 600px) { .results__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .results__grid { grid-template-columns: repeat(6, 1fr); } }
+
+.result-card {
+	border-radius: 18px;
+	overflow: hidden;
+	background: #fff;
+	box-shadow: 0 20px 40px rgba(0,0,0,.22);
+	border: 2px solid rgba(255,255,255,.18);
+}
+.result-card__photo { position: relative; aspect-ratio: 3/4; background: #222; }
+.result-card__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.results__cta { text-align: center; margin-top: 24px; }
+
+/* ---------------------------------------------------------------------
+   Tratamentos — já não era branca (#faf7f2, creme), sem alteração
+   ------------------------------------------------------------------ */
+.treatments { background: #faf7f2; }
+.treatments__inner { max-width: 1180px; margin-inline: auto; padding: 48px 20px; }
+.treatments__header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+.treatments__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-cta); margin: 0 0 14px; }
+.treatments__title { font-weight: 500; font-size: 30px; line-height: 1.1; letter-spacing: -.4px; margin: 0 0 14px; color: #063e42; }
+.treatments__text { font-size: 17px; line-height: 1.6; color: #5c6b7d; margin: 0; }
+.treatments__grid { display: grid; gap: 22px; grid-template-columns: 1fr; }
+@media (min-width: 600px) { .treatments__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px) { .treatments__grid { grid-template-columns: repeat(4, 1fr); } }
+
+.treatment-card { background: #fff; border: 1px solid #eceff4; border-radius: 18px; padding: 28px 24px; display: block; transition: box-shadow .2s; }
+.treatment-card:hover { box-shadow: 0 12px 30px rgba(4,110,116,.12); text-decoration: none; }
+.treatment-card__icon { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 14px; background: #e3f5f6; color: var(--color-cta); margin-bottom: 18px; }
+.treatment-card__title { font-family: var(--font-heading); font-weight: 600; font-size: 21px; margin: 0 0 8px; color: #123436; }
+.treatment-card__text { font-size: 14.5px; line-height: 1.55; color: #5c6b7d; margin: 0; }
+
+/* ---------------------------------------------------------------------
+   Passo a passo — já era escura (teal), sem alteração
+   ------------------------------------------------------------------ */
+.steps { background: var(--color-cta-dark); color: #fff; }
+.steps__inner { max-width: 1180px; margin-inline: auto; padding: 48px 20px; }
+.steps__header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+.steps__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8ad7db; margin: 0 0 14px; }
+.steps__title { font-weight: 500; font-size: 30px; line-height: 1.1; letter-spacing: -.4px; margin: 0; color: #fff; }
+.steps__grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
+@media (min-width: 600px) { .steps__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px) { .steps__grid { grid-template-columns: repeat(3, 1fr); gap: 26px; } }
+.step { text-align: center; position: relative; }
+.step__badge { display: inline-flex; align-items: center; justify-content: center; width: 68px; height: 68px; border-radius: 50%; background: var(--color-cta); color: #fff; box-shadow: 0 0 0 8px var(--color-cta-dark); margin-bottom: 20px; }
+.step--success .step__badge { background: #1faa53; }
+.step__label { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #8ad7db; margin: 0 0 6px; }
+.step--success .step__label { color: #8fe0af; }
+.step__title { font-family: var(--font-heading); font-weight: 600; font-size: 20px; margin: 0 0 8px; color: #fff; }
+.step__text { font-size: 14.5px; line-height: 1.55; color: #cfeaec; margin: 0; }
+
+/* ---------------------------------------------------------------------
+   Avaliações — ERA BRANCA → agora azul marinho, texto branco
+   (os cards de avaliação em si continuam brancos, como "janelas" sobre o
+   fundo azul — mesmo padrão visual usado nas fotos de "Resultados")
+   ------------------------------------------------------------------ */
+.reviews { background: var(--color-primary); }
+.reviews__inner { max-width: 1180px; margin-inline: auto; padding: 48px 20px; }
+.reviews__header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+.reviews__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #bfdcff; margin: 0 0 14px; }
+.reviews__title { font-weight: 500; font-size: 30px; line-height: 1.1; letter-spacing: -.4px; margin: 0 0 14px; color: #fff; }
+.reviews__text { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.85); margin: 0; }
+
+.reviews__widget { margin-inline: auto; }
+.reviews__grid { display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 8px; }
+@media (min-width: 700px) { .reviews__grid { grid-template-columns: repeat(3, 1fr); } }
+.review-card { background: #fff; border-radius: 16px; padding: 22px 24px; box-shadow: 0 16px 34px rgba(0,0,0,.2); }
+.review-card__stars { color: var(--color-accent); font-size: 15px; margin-bottom: 10px; letter-spacing: 2px; }
+.review-card__quote { font-size: 14.5px; line-height: 1.55; color: #33414f; margin: 0 0 14px; }
+.review-card__name { font-family: var(--font-heading); font-weight: 600; font-size: 14.5px; color: #123436; margin: 0; }
+.reviews__note { text-align: center; font-size: 13px; color: rgba(255,255,255,.65); margin-top: 20px; }
+
+/* ---------------------------------------------------------------------
+   Unidades — já não era branca (#faf7f2, creme), sem alteração
+   ------------------------------------------------------------------ */
+.units { background: #faf7f2; }
+.units__inner { max-width: 1180px; margin-inline: auto; padding: 48px 20px; }
+.units__header { text-align: center; max-width: 600px; margin: 0 auto 40px; }
+.units__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-cta); margin: 0 0 14px; }
+.units__title { font-weight: 500; font-size: 30px; line-height: 1.1; letter-spacing: -.4px; margin: 0 0 14px; color: #063e42; }
+.units__text { font-size: 17px; line-height: 1.6; color: #5c6b7d; margin: 0; }
+.units__map { position: relative; width: 100%; min-height: 260px; border-radius: 22px; overflow: hidden; box-shadow: 0 20px 44px rgba(4,110,116,.12); }
+.units__map img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 600px) { .units__map { min-height: 320px; } }
+@media (min-width: 900px) { .units__map { min-height: 440px; } }
+
+/* ---------------------------------------------------------------------
+   CTA final — já era escura (teal), sem alteração
+   ------------------------------------------------------------------ */
+.closing-cta { background: #063e42; }
+.closing-cta__inner { max-width: 960px; margin-inline: auto; padding: 56px 20px; text-align: center; }
+.closing-cta__title { font-weight: 500; font-size: 32px; line-height: 1.1; letter-spacing: -.5px; margin: 0 0 18px; color: #fff; }
+.closing-cta__text { font-size: 17px; line-height: 1.55; color: #aebccd; margin: 0 auto 30px; max-width: 560px; }
+.closing-cta__button { gap: 11px; font-weight: 700; font-size: 17px; padding: 16px 28px; border-radius: 34px; }
+@media (min-width: 900px) {
+	.closing-cta__inner { padding: 88px 24px; }
+	.closing-cta__title { font-size: 46px; }
+	.closing-cta__text { font-size: 19px; }
+	.closing-cta__button { font-size: 19px; padding: 18px 34px; }
+}
+
+/* ---------------------------------------------------------------------
+   Footer — já era escuro, sem alteração
+   ------------------------------------------------------------------ */
+.site-footer { background: #1e2030; color: #9aa3bd; }
+.site-footer__top { display: grid; gap: 1.5rem; padding: 2.5rem 0; grid-template-columns: 1fr; }
+.site-footer__brand { max-width: 320px; }
+.site-footer__logo { margin-bottom: 1rem; }
+.site-footer__logo-img { height: 40px; width: auto; }
+.site-footer__text { font-size: 14.5px; line-height: 1.6; color: #8798ab; margin: 0 0 16px; }
+.site-footer__social { display: flex; gap: 10px; }
+.site-footer__social-link { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.06); color: #fff; }
+.site-footer__social-link:hover { background: rgba(255,255,255,.14); text-decoration: none; }
+.site-footer__heading { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin: 0 0 16px; }
+.site-footer__links { display: flex; flex-direction: column; gap: 11px; }
+.site-footer__links a { color: #93a2b5; }
+.site-footer__links a:hover { color: #fff; }
+.site-footer__bottom { padding-block: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 13px; border-top: 1px solid rgba(255,255,255,.08); }
+.site-footer__bottom a { color: #6b7c90; }
+.site-footer__bottom a:hover { color: #93a2b5; }
+@media (min-width: 900px) { .site-footer__top { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding: 64px 0 44px; } .site-footer__logo-img { height: 56px; } }
+
+/* Desktop — espaçamentos maiores (igual home.css) */
+@media (min-width: 900px) {
+	.about__grid { grid-template-columns: .9fr 1.1fr; gap: 60px; padding: 84px 24px; }
+	.about__media { height: 400px; }
+	.about__title { font-size: 42px; }
+	.results__inner { padding: 84px 24px; }
+	.results__title { font-size: 42px; }
+	.treatments__inner { padding: 84px 24px; }
+	.treatments__title { font-size: 42px; }
+	.steps__inner { padding: 84px 24px; }
+	.steps__title { font-size: 42px; }
+	.reviews__inner { padding: 84px 24px; }
+	.reviews__title { font-size: 42px; }
+	.units__inner { padding: 84px 24px; }
+	.units__title { font-size: 42px; }
+}
+@media (min-width: 600px) { .about__media { height: 340px; } }
+
+</style>
+</head>
+<body>
+
+<a href="#primary" class="section-cta" style="position:absolute;left:-9999px;">Pular para o conteúdo</a>
+
+<header class="site-header">
+	<div class="site-header__inner container">
+		<a href="#" class="site-branding">
+			<img src="assets/images/logo-horizontal.png" alt="ProOdonto" width="597" height="92" />
+		</a>
+		<nav class="site-nav" aria-label="Menu principal">
+			<a href="#">Tratamentos</a>
+			<a href="#unidades">Unidades</a>
+			<a href="#">Sobre nós</a>
+			<a href="#">Blog</a>
+		</nav>
+		<div class="header-actions">
+			<a href="tel:1130000000" class="header-phone">
+				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5c1 0 1.9.7 2.2 1.6l.8 2.2c.3.8 0 1.7-.6 2.2l-1 .9c1 2.3 2.9 4.2 5.2 5.2l.9-1c.5-.6 1.4-.9 2.2-.6l2.2.8c.9.3 1.6 1.2 1.6 2.2v2c0 1.3-1.1 2.3-2.4 2.1-8-.9-14.3-7.2-15.2-15.2C2.2 4.6 3.2 3.5 4.5 3.5h2Z"/></svg>
+				(11) 3000-0000
+			</a>
+			<a href="https://wa.me/5511300000000" target="_blank" rel="noopener noreferrer" class="header-whatsapp">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .105 5.36.102 11.943c0 2.105.549 4.16 1.595 5.976L0 24l6.335-1.652a11.882 11.882 0 0 0 5.71 1.447h.006c6.585 0 11.941-5.36 11.944-11.943a11.87 11.87 0 0 0-3.475-8.403"/></svg>
+				<span>WhatsApp</span>
+			</a>
+			<button type="button" class="menu-toggle" aria-label="Abrir menu">
+				<span></span><span></span><span></span>
+			</button>
+		</div>
+	</div>
+</header>
+
+<main id="primary">
+
+	<section class="hero">
+		<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'%3E%3Crect width='100%25' height='100%25' fill='%232e314a'/%3E%3C/svg%3E" alt="Banner" />
+		<div class="gradient"></div>
+		<div class="hero-content">
+			<div class="container">
+				<div class="slide-text">
+					<h2>Volte a sorrir com confiança</h2>
+					<p>Avaliação gratuita e plano de tratamento sob medida para o seu sorriso.</p>
+				</div>
+				<a href="#" class="cta">AGENDE AGORA</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="marquee">
+		<div class="marquee__track">
+			<!-- repetido 2x, mesmo padrão do template (loop contínuo sem salto) -->
+			<!--items-->
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.25c-.3 0-.6-.1-.8-.3C6.5 16.4 3 13.3 3 9.5 3 6.9 5.1 5 7.5 5c1.5 0 2.9.7 3.8 1.9.1.1.2.1.3 0C12.6 5.7 14 5 15.5 5 17.9 5 20 6.9 20 9.5c0 3.8-3.5 6.9-8.2 10.45-.2.2-.5.3-.8.3Z"/></svg><span>Atendimento humanizado</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><line x1="2.5" y1="10" x2="21.5" y2="10"/></svg><span>Pagamento parcelado</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 6.5V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5"/><rect x="2.5" y="6.5" width="19" height="13" rx="2"/><path d="M12 10v6M9 13h6"/></svg><span>Especialistas em cada área</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>Horários flexíveis</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg><span>Atendimento sem dor</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5Z"/></svg><span>5.0 ★ no Google</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.6 7-11.5A7 7 0 0 0 5 9.5C5 14.4 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg><span>3 unidades perto de você</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.25c-.3 0-.6-.1-.8-.3C6.5 16.4 3 13.3 3 9.5 3 6.9 5.1 5 7.5 5c1.5 0 2.9.7 3.8 1.9.1.1.2.1.3 0C12.6 5.7 14 5 15.5 5 17.9 5 20 6.9 20 9.5c0 3.8-3.5 6.9-8.2 10.45-.2.2-.5.3-.8.3Z"/></svg><span>Atendimento humanizado</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><line x1="2.5" y1="10" x2="21.5" y2="10"/></svg><span>Pagamento parcelado</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 6.5V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5"/><rect x="2.5" y="6.5" width="19" height="13" rx="2"/><path d="M12 10v6M9 13h6"/></svg><span>Especialistas em cada área</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>Horários flexíveis</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg><span>Atendimento sem dor</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5Z"/></svg><span>5.0 ★ no Google</span></div>
+			<div class="marquee__item"><svg class="marquee__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.6 7-11.5A7 7 0 0 0 5 9.5C5 14.4 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg><span>3 unidades perto de você</span></div>
+		</div>
+	</section>
+
+	<!-- SOBRE — era branca, agora azul marinho -->
+	<section class="about">
+		<div class="about__grid">
+			<div class="about__media">
+				<img src="assets/images/resultado-manoel.jpg" alt="Foto — dentista atendendo com cuidado" loading="lazy" />
+			</div>
+			<div class="about__content">
+				<p class="about__eyebrow">Sobre a ProOdonto</p>
+				<h2 class="about__title">Devolvemos muito mais que dentes.<br>Devolvemos qualidade de vida.</h2>
+				<p class="about__text">Na ProOdonto, cada tratamento começa ouvindo a sua história — e só termina quando você volta a sorrir, comer e viver com confiança. Somos referência em odontologia em Sergipe porque cuidamos de pessoas, não apenas de procedimentos.</p>
+				<div class="about__stats">
+					<div class="about__stat"><div class="about__stat-value">+22 mil</div><div class="about__stat-label">sorrisos transformados</div></div>
+					<div class="about__stat"><div class="about__stat-value">+7</div><div class="about__stat-label">anos de mercado</div></div>
+					<div class="about__stat"><div class="about__stat-value">+13</div><div class="about__stat-label">profissionais dedicados</div></div>
+					<div class="about__stat"><div class="about__stat-value">5.0★</div><div class="about__stat-label">avaliação no Google</div></div>
+				</div>
+			</div>
+		</div>
+		<div class="section-cta"><a href="#" class="cta">AGENDAR AVALIAÇÃO GRATUITA</a></div>
+	</section>
+
+	<!-- RESULTADOS — era branca, agora azul marinho (carrossel simplificado em grade) -->
+	<section class="results">
+		<div class="results__inner">
+			<div class="results__header">
+				<p class="results__eyebrow">Resultados reais</p>
+				<h2 class="results__title">Sorrisos transformados</h2>
+				<p class="results__text">Pacientes reais da ProOdonto que recuperaram a saúde bucal e a confiança para sorrir. O próximo resultado pode ser o seu.</p>
+			</div>
+			<div class="results-carousel">
+				<div class="results__grid">
+					<div class="result-card"><div class="result-card__photo"><img src="assets/images/resultado-manoel.jpg" alt="Manoel, paciente ProOdonto — antes e depois do tratamento" loading="lazy" /></div></div>
+					<div class="result-card"><div class="result-card__photo"><img src="assets/images/resultado-cesar.jpg" alt="Cesar, paciente ProOdonto — antes e depois do tratamento" loading="lazy" /></div></div>
+					<div class="result-card"><div class="result-card__photo"><img src="assets/images/resultado-valdinete.jpg" alt="Dona Valdinete, paciente ProOdonto — antes e depois do tratamento" loading="lazy" /></div></div>
+					<div class="result-card"><div class="result-card__photo"><img src="assets/images/resultado-eduardo.jpg" alt="Eduardo, paciente ProOdonto — antes e depois do tratamento" loading="lazy" /></div></div>
+					<div class="result-card"><div class="result-card__photo"><img src="assets/images/resultado-joa-ramailho.jpg" alt="Joa Ramailho, paciente ProOdonto — antes e depois do tratamento" loading="lazy" /></div></div>
+					<div class="result-card"><div class="result-card__photo"><img src="assets/images/resultado-josefa-marlene.jpg" alt="Josefa Marlene, paciente ProOdonto — antes e depois do tratamento" loading="lazy" /></div></div>
+				</div>
+			</div>
+			<div class="results__cta"><a href="#" class="cta">QUERO MEU SORRISO</a></div>
+		</div>
+	</section>
+
+	<!-- TRATAMENTOS — já não era branca (creme), sem alteração -->
+	<section class="treatments">
+		<div class="treatments__inner">
+			<div class="treatments__header">
+				<p class="treatments__eyebrow">Tratamentos</p>
+				<h2 class="treatments__title">Encontre o tratamento certo para o seu sorriso</h2>
+				<p class="treatments__text">Reunimos todas as especialidades em um só lugar, com profissionais dedicados a cuidar de cada etapa — do diagnóstico ao resultado final.</p>
+			</div>
+			<div class="treatments__grid">
+				<a href="#" class="treatment-card">
+					<span class="treatment-card__icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-1.8 0-2.8.9-3.5.9S7.1 3 5.8 3C4 3 3 4.6 3 6.8c0 2.5.7 4.3 1.3 6C5 14.8 5.3 17 5.8 19c.3 1.3 1 2 1.8 2 1.1 0 1.2-2.4 1.6-4.1.3-1.3.6-2.4 1.3-2.4s1 1.1 1.3 2.4c.4 1.7.5 4.1 1.6 4.1.8 0 1.5-.7 1.8-2 .5-2 .8-4.2 1.5-6.2.6-1.7 1.3-3.5 1.3-6C20 4.6 19 3 17.2 3c-1.3 0-1.9.9-2.7.9S13.8 3 12 3Z"/></svg></span>
+					<h3 class="treatment-card__title">Implantes</h3>
+					<p class="treatment-card__text">Dentes fixos e definitivos, sem o desconforto de próteses móveis, para voltar a mastigar, falar e sorrir com naturalidade.</p>
+				</a>
+				<a href="#" class="treatment-card">
+					<span class="treatment-card__icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 10.5h.01M15.5 10.5h.01"/><path d="M8 14.5c1 1.3 2.4 2 4 2s3-.7 4-2"/></svg></span>
+					<h3 class="treatment-card__title">Próteses</h3>
+					<p class="treatment-card__text">Próteses fixas e removíveis com encaixe perfeito e aparência natural, feitas sob medida para o seu sorriso.</p>
+				</a>
+				<a href="#" class="treatment-card">
+					<span class="treatment-card__icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><rect x="4" y="9" width="5" height="6" rx="1"/><rect x="15" y="9" width="5" height="6" rx="1"/></svg></span>
+					<h3 class="treatment-card__title">Ortodontia</h3>
+					<p class="treatment-card__text">Aparelhos e alinhadores para corrigir o alinhamento dos dentes com conforto, em qualquer fase da vida.</p>
+				</a>
+				<a href="#" class="treatment-card">
+					<span class="treatment-card__icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7.7-2Z"/></svg></span>
+					<h3 class="treatment-card__title">Estética</h3>
+					<p class="treatment-card__text">Clareamento, facetas e harmonização para um sorriso mais bonito, natural e cheio de autoestima.</p>
+				</a>
+			</div>
+			<div class="section-cta"><a href="#" class="cta">QUERO MEU TRATAMENTO</a></div>
+		</div>
+	</section>
+
+	<!-- PASSO A PASSO — já era escura (teal), sem alteração -->
+	<section class="steps">
+		<div class="steps__inner">
+			<div class="steps__header">
+				<p class="steps__eyebrow">Passo a passo</p>
+				<h2 class="steps__title">O caminho para você voltar a sorrir</h2>
+			</div>
+			<div class="steps__grid">
+				<div class="step">
+					<span class="step__badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+					<p class="step__label">ETAPA 01</p><h3 class="step__title">Agendamento</h3>
+					<p class="step__text">Marque o melhor horário pelo WhatsApp ou telefone — sem burocracia e sem enrolação.</p>
+				</div>
+				<div class="step">
+					<span class="step__badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M20 8V5a1 1 0 0 0-1-1h-3M4 16v3a1 1 0 0 0 1 1h3M20 16v3a1 1 0 0 1-1 1h-3"/><path d="M9 12h6"/></svg></span>
+					<p class="step__label">ETAPA 02</p><h3 class="step__title">Exames</h3>
+					<p class="step__text">Radiografias e imagens completas para entender exatamente o que o seu sorriso precisa.</p>
+				</div>
+				<div class="step">
+					<span class="step__badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.35-4.35"/></svg></span>
+					<p class="step__label">ETAPA 03</p><h3 class="step__title">Avaliação</h3>
+					<p class="step__text">Exame completo e uma conversa franca sobre suas expectativas — sem custo e sem compromisso.</p>
+				</div>
+				<div class="step">
+					<span class="step__badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3.5h6a1 1 0 0 1 1 1V6H8V4.5a1 1 0 0 1 1-1Z"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></svg></span>
+					<p class="step__label">ETAPA 04</p><h3 class="step__title">Plano de tratamento</h3>
+					<p class="step__text">Você recebe um plano claro, com etapas, prazos e valores transparentes — sem letras pequenas.</p>
+				</div>
+				<div class="step">
+					<span class="step__badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M12 11v6M9 14h6"/><path d="M9 7V5.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V7"/></svg></span>
+					<p class="step__label">ETAPA 05</p><h3 class="step__title">Procedimento</h3>
+					<p class="step__text">Cada sessão é feita com conforto, segurança e tecnologia, pensada para o seu bem-estar.</p>
+				</div>
+				<div class="step step--success">
+					<span class="step__badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 10.5h.01M15.5 10.5h.01"/><path d="M8 14.5c1 1.3 2.4 2 4 2s3-.7 4-2"/></svg></span>
+					<p class="step__label">ETAPA 06</p><h3 class="step__title">Sorriso transformado</h3>
+					<p class="step__text">Acompanhamento contínuo para garantir que o seu novo sorriso dure por muitos anos.</p>
+				</div>
+			</div>
+			<div class="section-cta"><a href="#" class="cta">QUERO COMEÇAR AGORA</a></div>
+		</div>
+	</section>
+
+	<!-- AVALIAÇÕES — era branca, agora azul marinho (widget Trustindex real substituído por amostra estática) -->
+	<section class="reviews" id="avaliacoes">
+		<div class="reviews__inner">
+			<div class="reviews__header">
+				<p class="reviews__eyebrow">Avaliações</p>
+				<h2 class="reviews__title">Quem já passou pela ProOdonto recomenda</h2>
+				<p class="reviews__text">Depoimentos reais de pacientes que recuperaram a saúde e a autoestima do sorriso com a gente.</p>
+			</div>
+			<div class="reviews__widget">
+				<!-- Amostra estática no lugar do widget [trustindex no-registration=google] (carregado via shortcode no site real) -->
+				<div class="reviews__grid">
+					<div class="review-card">
+						<div class="review-card__stars">★★★★★</div>
+						<p class="review-card__quote">"Atendimento excelente do início ao fim, equipe muito atenciosa e o resultado ficou perfeito."</p>
+						<p class="review-card__name">Paciente ProOdonto — Google</p>
+					</div>
+					<div class="review-card">
+						<div class="review-card__stars">★★★★★</div>
+						<p class="review-card__quote">"Fiz o tratamento de implante e não sinto mais nenhum desconforto. Recomendo demais."</p>
+						<p class="review-card__name">Paciente ProOdonto — Google</p>
+					</div>
+					<div class="review-card">
+						<div class="review-card__stars">★★★★★</div>
+						<p class="review-card__quote">"Equipe explicou cada etapa do tratamento, me senti segura durante todo o processo."</p>
+						<p class="review-card__name">Paciente ProOdonto — Google</p>
+					</div>
+				</div>
+				<p class="reviews__note">Amostra ilustrativa — no site real, esta área exibe o widget de avaliações do Google.</p>
+			</div>
+			<div class="section-cta"><a href="#" class="cta">QUERO ESSE RESULTADO</a></div>
+		</div>
+	</section>
+
+	<!-- UNIDADES — já não era branca (creme), sem alteração; só o mapa, sem lista de cards (igual à página de vendas real) -->
+	<section class="units" id="unidades">
+		<div class="units__inner">
+			<div class="units__header">
+				<p class="units__eyebrow">Unidades</p>
+				<h2 class="units__title">Uma ProOdonto perto de você</h2>
+				<p class="units__text">Escolha a unidade mais próxima e fale direto com a nossa equipe para agendar sua avaliação gratuita.</p>
+			</div>
+			<div class="units__map">
+				<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'%3E%3Crect width='100%25' height='100%25' fill='%23e2e4e8'/%3E%3C/svg%3E" alt="Mapa com os pins das unidades ProOdonto em Aracaju, Lagarto e Simão Dias" loading="lazy" />
+			</div>
+			<div class="section-cta"><a href="#" class="cta">FALAR COM UNIDADE</a></div>
+		</div>
+	</section>
+
+	<!-- CTA FINAL — já era escura (teal), sem alteração -->
+	<section class="closing-cta">
+		<div class="closing-cta__inner">
+			<h2 class="closing-cta__title">Pronto para voltar a sorrir com confiança?</h2>
+			<p class="closing-cta__text">Fale agora com a nossa equipe pelo WhatsApp e agende sua avaliação gratuita — é rápido, sem burocracia e sem compromisso.</p>
+			<a href="https://wa.me/5511300000000" target="_blank" rel="noopener noreferrer" class="closing-cta__button cta">CHAMAR NO WHATSAPP</a>
+		</div>
+	</section>
+
+</main>
+
+<footer class="site-footer" id="colophon">
+	<div class="container">
+		<div class="site-footer__top">
+			<div class="site-footer__brand">
+				<div class="site-footer__logo">
+					<img src="assets/images/logo-white.png" alt="ProOdonto" width="364" height="148" loading="lazy" class="site-footer__logo-img" />
+				</div>
+				<p class="site-footer__text">Rede de clínicas odontológicas especializada em implantes e próteses, com atendimento acolhedor há mais de 20 anos.</p>
+				<div class="site-footer__social">
+					<a href="#" class="site-footer__social-link" aria-label="Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+					<a href="#" class="site-footer__social-link" aria-label="Facebook"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M13.5 21v-6.5h2l.3-2.5h-2.3v-1.6c0-.7.2-1.2 1.2-1.2h1.3V6.9c-.2 0-1-.1-1.9-.1-1.9 0-3.1 1.1-3.1 3.2v1.9H9v2.5h1.9V21"/></svg></a>
+					<a href="https://wa.me/5511300000000" class="site-footer__social-link" aria-label="WhatsApp"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .105 5.36.102 11.943c0 2.105.549 4.16 1.595 5.976L0 24l6.335-1.652a11.882 11.882 0 0 0 5.71 1.447h.006c6.585 0 11.941-5.36 11.944-11.943a11.87 11.87 0 0 0-3.475-8.403"/></svg></a>
+				</div>
+			</div>
+			<div class="site-footer__column">
+				<p class="site-footer__heading">Tratamentos</p>
+				<div class="site-footer__links"><a href="#">Implantes</a><a href="#">Próteses</a><a href="#">Ortodontia</a><a href="#">Estética</a></div>
+			</div>
+			<div class="site-footer__column">
+				<p class="site-footer__heading">Unidades</p>
+				<div class="site-footer__links"><a href="#">Aracaju</a><a href="#">Lagarto</a><a href="#">Simão Dias</a></div>
+			</div>
+			<div class="site-footer__column">
+				<p class="site-footer__heading">Contato</p>
+				<div class="site-footer__links"><a href="https://wa.me/5511300000000">WhatsApp</a></div>
+			</div>
+		</div>
+		<div class="site-footer__bottom">
+			<span>&copy; 2026 ProOdonto. Todos os direitos reservados.</span>
+			<span>CRO responsável · <a href="#">Política de privacidade</a></span>
+		</div>
+	</div>
+</footer>
+
+</body>
+</html>

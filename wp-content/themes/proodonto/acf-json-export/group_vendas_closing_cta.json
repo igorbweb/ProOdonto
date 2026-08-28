@@ -1,0 +1,48 @@
+{
+    "key": "group_vendas_closing_cta",
+    "title": "Página de Vendas — CTA final",
+    "fields": [
+        {
+            "key": "field_vendas_closing_titulo",
+            "label": "Título",
+            "name": "closing_titulo",
+            "type": "text",
+            "default_value": "Pronto para voltar a sorrir com confiança?"
+        },
+        {
+            "key": "field_vendas_closing_texto",
+            "label": "Texto",
+            "name": "closing_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Fale agora com a nossa equipe pelo WhatsApp e agende sua avaliação gratuita — é rápido, sem burocracia e sem compromisso."
+        },
+        {
+            "key": "field_vendas_closing_botao_label",
+            "label": "Texto do botão",
+            "name": "closing_botao_label",
+            "type": "text",
+            "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+            "default_value": "CHAMAR NO WHATSAPP"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "description": "Título, texto e botão do CTA final da Página de Vendas.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

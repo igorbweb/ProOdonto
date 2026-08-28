@@ -1,0 +1,66 @@
+{
+    "key": "group_vendas_reviews",
+    "title": "Página de Vendas — Avaliações",
+    "fields": [
+        {
+            "key": "field_vendas_reviews_eyebrow",
+            "label": "Texto acima do título",
+            "name": "reviews_eyebrow",
+            "type": "text",
+            "default_value": "Avaliações",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_reviews_titulo",
+            "label": "Título",
+            "name": "reviews_titulo",
+            "type": "text",
+            "default_value": "Quem já passou pela ProOdonto recomenda",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_reviews_cta_label",
+            "label": "Texto do botão (CTA da seção)",
+            "name": "reviews_cta_label",
+            "type": "text",
+            "default_value": "QUERO ESSE RESULTADO",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_vendas_reviews_texto",
+            "label": "Texto",
+            "name": "reviews_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Depoimentos reais de pacientes que recuperaram a saúde e a autoestima do sorriso com a gente.",
+            "wrapper": {
+                "width": "25"
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 8,
+    "description": "Cabeçalho da seção \"Avaliações\" da Página de Vendas.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

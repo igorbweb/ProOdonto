@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/faq-item",
+	"title": "Pergunta",
+	"category": "proodonto",
+	"icon": "editor-help",
+	"description": "Uma pergunta e resposta dentro do bloco Perguntas Frequentes.",
+	"textdomain": "proodonto",
+	"parent": [ "proodonto/faq" ],
+	"attributes": {
+		"question": { "type": "string", "default": "" },
+		"answer": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

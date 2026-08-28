@@ -1,0 +1,79 @@
+{
+    "key": "group_home_blog",
+    "title": "Home — Blog",
+    "fields": [
+        {
+            "key": "field_home_blog_eyebrow",
+            "label": "Texto acima do título",
+            "name": "blog_eyebrow",
+            "type": "text",
+            "default_value": "Blog",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_home_blog_titulo",
+            "label": "Título",
+            "name": "blog_titulo",
+            "type": "text",
+            "default_value": "Dicas para o seu sorriso",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_home_blog_quantidade",
+            "label": "Quantidade de posts",
+            "name": "blog_quantidade",
+            "type": "number",
+            "instructions": "Quantos dos últimos posts publicados exibir no carrossel.",
+            "default_value": 6,
+            "min": 3,
+            "max": 12,
+            "step": 1,
+            "wrapper": {
+                "width": "15"
+            }
+        },
+        {
+            "key": "field_home_blog_link_label",
+            "label": "Texto do link \"ver todos\"",
+            "name": "blog_link_label",
+            "type": "text",
+            "default_value": "Ver todos os artigos →",
+            "wrapper": {
+                "width": "17.5"
+            }
+        },
+        {
+            "key": "field_home_blog_link_url",
+            "label": "URL do link \"ver todos\"",
+            "name": "blog_link_url",
+            "type": "url",
+            "instructions": "Em branco, usa automaticamente a página de posts do site (Configurações → Leitura).",
+            "wrapper": {
+                "width": "17.5"
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 9,
+    "description": "Cabeçalho e posts em destaque da seção \"Blog\" da Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

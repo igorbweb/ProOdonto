@@ -1,0 +1,117 @@
+{
+    "key": "group_theme_options_agregador",
+    "title": "Opções do Tema — Agregador de Links de Contato",
+    "fields": [
+        {
+            "key": "field_agregador_ativo",
+            "label": "Ativar agregador de links",
+            "name": "agregador_ativo",
+            "type": "true_false",
+            "instructions": "Com o agregador ativo, clicar em qualquer botão de CTA do site (exceto na Página de Vendas) abre este modal em vez de ir direto para um único link.",
+            "ui": 1,
+            "default_value": 1
+        },
+        {
+            "key": "field_agregador_titulo",
+            "label": "Título do modal",
+            "name": "agregador_titulo",
+            "type": "text",
+            "default_value": "Fale com a unidade mais próxima",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_agregador_ativo",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ]
+        },
+        {
+            "key": "field_agregador_texto",
+            "label": "Texto do modal",
+            "name": "agregador_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Escolha abaixo a unidade mais próxima de você para falar direto com a nossa equipe pelo WhatsApp.",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_agregador_ativo",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ]
+        },
+        {
+            "key": "field_agregador_itens",
+            "label": "Links do modal",
+            "name": "agregador_itens",
+            "type": "repeater",
+            "instructions": "Um link por unidade (ou qualquer outro contato que queira oferecer). Linhas sem link ficam de fora do modal.",
+            "layout": "table",
+            "button_label": "Adicionar link",
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_agregador_ativo",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "sub_fields": [
+                {
+                    "key": "field_agregador_item_label",
+                    "label": "Nome",
+                    "name": "label",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    },
+                    "placeholder": "Unidade Aracaju"
+                },
+                {
+                    "key": "field_agregador_item_descricao",
+                    "label": "Descrição (opcional)",
+                    "name": "descricao",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    },
+                    "placeholder": "Av. Pres. Tancredo Neves, 1028"
+                },
+                {
+                    "key": "field_agregador_item_url",
+                    "label": "Link",
+                    "name": "url",
+                    "type": "url",
+                    "wrapper": {
+                        "width": "40"
+                    },
+                    "placeholder": "https://wa.me/5511999999999?text=..."
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "proodonto-options"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "description": "Modal com links de contato por unidade, disparado por qualquer CTA do site (exceto na Página de Vendas).",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

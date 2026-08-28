@@ -1,0 +1,26 @@
+/*
+ * CSS da página "Simão Dias" (slug: simao-dias).
+ * Gerado automaticamente em 2026-08-03 16:36 — mobile-first, edite à vontade.
+ * Carregado apenas nesta página via inc/enqueue.php.
+ */
+
+.page-simao-dias {
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+	.page-simao-dias {
+	}
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+	.page-simao-dias {
+	}
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+	.page-simao-dias {
+	}
+}

@@ -1,0 +1,26 @@
+/*
+ * CSS da página "Sobre Nós" (slug: sobre-nos).
+ * Gerado automaticamente em 2026-08-11 09:07 — mobile-first, edite à vontade.
+ * Carregado apenas nesta página via inc/enqueue.php.
+ */
+
+.page-sobre-nos {
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+	.page-sobre-nos {
+	}
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+	.page-sobre-nos {
+	}
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+	.page-sobre-nos {
+	}
+}

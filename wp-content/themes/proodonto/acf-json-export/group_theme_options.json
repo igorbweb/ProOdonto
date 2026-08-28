@@ -1,0 +1,78 @@
+{
+    "key": "group_theme_options",
+    "title": "Opções do Tema",
+    "fields": [
+        {
+            "key": "field_theme_options_telefone",
+            "label": "Telefone",
+            "name": "telefone",
+            "type": "text",
+            "instructions": "Exibido no header (link tel:). Formate como quer que apareça, ex.: (11) 4000-0000.",
+            "wrapper": {
+                "width": "50"
+            },
+            "placeholder": "(11) 4000-0000"
+        },
+        {
+            "key": "field_theme_options_whatsapp",
+            "label": "WhatsApp",
+            "name": "whatsapp",
+            "type": "text",
+            "instructions": "Só números, com DDI e DDD (ex.: 5511999999999). Usado para montar o link wa.me/.",
+            "wrapper": {
+                "width": "50"
+            },
+            "placeholder": "5511999999999"
+        },
+        {
+            "key": "field_theme_options_google_maps_api_key",
+            "label": "Google Maps API Key",
+            "name": "google_maps_api_key",
+            "type": "text",
+            "instructions": "Precisa ter a \"Maps Static API\" habilitada no Google Cloud Console. Usada só para gerar o mapa das unidades (ver seção Unidades da Home) — o resultado fica em cache permanente (wp-content/uploads/proodonto/), então a API só é chamada de novo se os endereços mudarem, não a cada acesso ao site.",
+            "placeholder": "AIza..."
+        },
+        {
+            "key": "field_theme_options_header_cta_label",
+            "label": "CTA do header — Texto do botão",
+            "name": "header_cta_label",
+            "type": "text",
+            "instructions": "Texto do único botão de destaque exibido no header, em todas as páginas.",
+            "wrapper": {
+                "width": "50"
+            },
+            "default_value": "Agendar avaliação",
+            "placeholder": "Agendar avaliação"
+        },
+        {
+            "key": "field_theme_options_header_cta_url",
+            "label": "CTA do header — URL",
+            "name": "header_cta_url",
+            "type": "url",
+            "instructions": "Link do botão do header. Pode ser wa.me/, link de rastreio (ex.: api.upviewcrm.com) ou qualquer outra URL. Se vazio, usa o WhatsApp cadastrado no campo acima.",
+            "wrapper": {
+                "width": "50"
+            },
+            "placeholder": "https://wa.me/5511999999999?text=..."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "proodonto-options"
+            }
+        ]
+    ],
+    "description": "Dados globais do site: telefone/WhatsApp (usados no rodapé e nas páginas) e o botão de CTA exibido no header.",
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

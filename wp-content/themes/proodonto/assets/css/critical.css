@@ -1,0 +1,40 @@
+/*
+ * CSS crítico (above-the-fold): injetado inline no <head> por
+ * inc/enqueue.php (proodonto_inline_critical_css) para eliminar
+ * render-blocking na primeira pintura.
+ *
+ * Regra de ouro: só o que aparece SEM rolar a página no mobile.
+ * Mantenha este arquivo pequeno — copie aqui apenas o essencial de
+ * style.css/main.css que afeta o header e o hero.
+ */
+
+:root {
+	--color-primary: #0d6efd;
+	--color-text: #1a1a1a;
+	--color-bg: #ffffff;
+	--font-base: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-base);
+	color: var(--color-text);
+	background: var(--color-bg);
+}
+
+/*
+ * Header sticky: reproduz aqui o essencial das classes Tailwind usadas em
+ * header.php (sticky top-0 bg-white/92 backdrop-blur), para que a
+ * estrutura já exista assim que o HTML chega, independentemente de quando
+ * o restante do CSS termina de carregar. Sticky não precisa de altura
+ * fixa nem de padding-top compensando no <body> — reserva o próprio
+ * espaço no fluxo normal.
+ */
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: rgba(255, 255, 255, 0.92);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid #e6eaf1;
+}

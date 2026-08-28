@@ -1,0 +1,54 @@
+/*
+ * Fontes do tema, self-hosted (sem CDN do Google/terceiros — nenhuma
+ * requisição externa, sem custo de privacidade/latência).
+ *
+ * Poppins: Google Fonts (SIL Open Font License), arquivos em
+ * assets/fonts/poppins/, extraídos do pacote oficial @fontsource/poppins
+ * (licença OFL, redistribuição livre).
+ *
+ * Coolvetica: fonte comercial (Typodermic Fonts) — NÃO incluída aqui.
+ * Adicione o arquivo licenciado em assets/fonts/coolvetica/coolvetica.woff2
+ * (ver instruções no README) para o @font-face abaixo passar a valer;
+ * até lá, os elementos que usam --font-heading caem no fallback
+ * (Poppins/sans-serif) sem erro nenhum.
+ */
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-400.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-500.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-600.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-700.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Coolvetica";
+	src: url("../fonts/coolvetica/coolvetica.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}

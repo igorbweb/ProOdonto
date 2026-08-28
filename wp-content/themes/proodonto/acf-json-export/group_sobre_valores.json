@@ -1,0 +1,127 @@
+{
+    "key": "group_sobre_valores",
+    "title": "Sobre — Missão, Visão e Valores",
+    "fields": [
+        {
+            "key": "field_sobre_valores_eyebrow",
+            "label": "Texto acima do título",
+            "name": "valores_eyebrow",
+            "type": "text",
+            "default_value": "Missão, visão e valores",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_valores_titulo",
+            "label": "Título",
+            "name": "valores_titulo",
+            "type": "text",
+            "default_value": "O que nos guia todos os dias",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_missao_titulo",
+            "label": "Missão — título",
+            "name": "missao_titulo",
+            "type": "text",
+            "default_value": "Missão",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_visao_titulo",
+            "label": "Visão — título",
+            "name": "visao_titulo",
+            "type": "text",
+            "default_value": "Visão",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_missao_texto",
+            "label": "Missão — texto",
+            "name": "missao_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Oferecer odontologia de qualidade, acessível e humanizada, devolvendo saúde bucal e autoestima para cada paciente.",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_visao_texto",
+            "label": "Visão — texto",
+            "name": "visao_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Ser a referência em cuidado odontológico em Sergipe, reconhecida pela excelência clínica e pelo acolhimento em cada atendimento.",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_valores_itens",
+            "label": "Valores",
+            "name": "valores_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar valor",
+            "sub_fields": [
+                {
+                    "key": "field_sobre_valores_titulo_item",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_sobre_valores_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "textarea",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "45"
+                    }
+                },
+                {
+                    "key": "field_sobre_valores_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "25"
+                    }
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "description": "Missão, visão e cards de valores da página Sobre.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

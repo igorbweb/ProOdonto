@@ -1,0 +1,55 @@
+{
+    "key": "group_home_reviews",
+    "title": "Home — Avaliações",
+    "fields": [
+        {
+            "key": "field_home_reviews_eyebrow",
+            "label": "Texto acima do título",
+            "name": "reviews_eyebrow",
+            "type": "text",
+            "default_value": "Avaliações",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_reviews_titulo",
+            "label": "Título",
+            "name": "reviews_titulo",
+            "type": "text",
+            "default_value": "O que dizem sobre nós",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_reviews_texto",
+            "label": "Texto",
+            "name": "reviews_texto",
+            "type": "text",
+            "default_value": "Depoimentos reais de quem já passou pela PRÓ-ODONTO.",
+            "wrapper": {
+                "width": "34"
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 7,
+    "description": "Cabeçalho da seção \"Avaliações\" da Home (o widget de avaliações em si vem do plugin, via shortcode).",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

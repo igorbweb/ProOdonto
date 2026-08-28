@@ -1,0 +1,48 @@
+{
+    "key": "group_home_closing_cta",
+    "title": "Home — CTA final",
+    "fields": [
+        {
+            "key": "field_home_closing_titulo",
+            "label": "Título",
+            "name": "closing_titulo",
+            "type": "text",
+            "default_value": "Vamos cuidar do seu sorriso?"
+        },
+        {
+            "key": "field_home_closing_texto",
+            "label": "Texto",
+            "name": "closing_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Fale agora com a nossa equipe pelo WhatsApp e agende sua avaliação — é rápido, gratuito e sem compromisso."
+        },
+        {
+            "key": "field_home_closing_botao_label",
+            "label": "Texto do botão",
+            "name": "closing_botao_label",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "default_value": "Chamar no WhatsApp"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 9,
+    "description": "Título, texto e botão do CTA final da Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

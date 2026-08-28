@@ -1,0 +1,57 @@
+{
+    "key": "group_home_marquee",
+    "title": "Home — Letreiro de diferenciais",
+    "fields": [
+        {
+            "key": "field_home_marquee_itens",
+            "label": "Itens",
+            "name": "marquee_itens",
+            "type": "repeater",
+            "instructions": "Diferenciais exibidos em loop no letreiro (marquee) abaixo do banner.",
+            "layout": "table",
+            "button_label": "Adicionar item",
+            "sub_fields": [
+                {
+                    "key": "field_home_marquee_label",
+                    "label": "Texto",
+                    "name": "label",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "60"
+                    },
+                    "placeholder": "Atendimento humanizado"
+                },
+                {
+                    "key": "field_home_marquee_icone",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt; (ex.: &lt;path d=\"...\"/&gt;), sem a tag &lt;svg&gt; em volta. ViewBox fixo em 0 0 24 24.",
+                    "wrapper": {
+                        "width": "40"
+                    },
+                    "rows": 2
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "description": "Itens do letreiro de diferenciais da Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

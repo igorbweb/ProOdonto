@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/hero",
+	"title": "Hero",
+	"category": "proodonto",
+	"icon": "cover-image",
+	"description": "Seção de destaque com imagem, título, subtítulo e botão.",
+	"textdomain": "proodonto",
+	"attributes": {
+		"title": { "type": "string", "default": "" },
+		"subtitle": { "type": "string", "default": "" },
+		"buttonLabel": { "type": "string", "default": "" },
+		"buttonUrl": { "type": "string", "default": "" },
+		"buttonBlank": { "type": "boolean", "default": false },
+		"imageId": { "type": "number", "default": 0 },
+		"imageUrl": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

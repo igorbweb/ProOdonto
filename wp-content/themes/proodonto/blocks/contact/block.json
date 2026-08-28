@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/contact",
+	"title": "Contato / Agendamento",
+	"category": "proodonto",
+	"icon": "email-alt",
+	"description": "Informações de contato + formulário nativo (sem plugin), envia por e-mail via wp_mail().",
+	"textdomain": "proodonto",
+	"attributes": {
+		"heading": { "type": "string", "default": "" },
+		"intro": { "type": "string", "default": "" },
+		"phone": { "type": "string", "default": "" },
+		"whatsapp": { "type": "string", "default": "" },
+		"email": { "type": "string", "default": "" },
+		"address": { "type": "string", "default": "" },
+		"hours": { "type": "string", "default": "" },
+		"mapUrl": { "type": "string", "default": "" },
+		"recipientEmail": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

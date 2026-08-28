@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/service-item",
+	"title": "Serviço",
+	"category": "proodonto",
+	"icon": "admin-page",
+	"description": "Um serviço/especialidade individual (ícone, título, descrição, link opcional).",
+	"textdomain": "proodonto",
+	"parent": [ "proodonto/services" ],
+	"attributes": {
+		"title": { "type": "string", "default": "" },
+		"description": { "type": "string", "default": "" },
+		"linkLabel": { "type": "string", "default": "" },
+		"linkUrl": { "type": "string", "default": "" },
+		"iconId": { "type": "number", "default": 0 },
+		"iconUrl": { "type": "string", "default": "" },
+		"iconAlt": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

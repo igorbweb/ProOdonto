@@ -1,0 +1,62 @@
+{
+    "key": "group_sobre_units",
+    "title": "Sobre — Unidades (cabeçalho)",
+    "fields": [
+        {
+            "key": "field_sobre_units_aviso",
+            "label": "",
+            "name": "units_aviso",
+            "type": "message",
+            "message": "A lista de unidades (endereços, links do Maps/WhatsApp) é editada em código, em <code>inc/units-map.php</code>. Aqui você edita só os textos de cabeçalho abaixo."
+        },
+        {
+            "key": "field_sobre_units_eyebrow",
+            "label": "Texto acima do título",
+            "name": "units_eyebrow",
+            "type": "text",
+            "default_value": "Onde estamos",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_sobre_units_titulo",
+            "label": "Título",
+            "name": "units_titulo",
+            "type": "text",
+            "default_value": "Três unidades para ficar perto de você",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_sobre_units_texto",
+            "label": "Texto",
+            "name": "units_texto",
+            "type": "text",
+            "default_value": "Aracaju, Lagarto e Simão Dias — escolha a unidade mais próxima e venha conhecer a nossa equipe.",
+            "wrapper": {
+                "width": "34"
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 6,
+    "description": "Cabeçalho da seção \"Unidades\" da página Sobre.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

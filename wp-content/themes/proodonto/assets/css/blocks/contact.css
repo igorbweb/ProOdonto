@@ -1,0 +1,92 @@
+/*
+ * CSS do bloco proodonto/contact.
+ * Carregado só nas páginas que usam o bloco (ver inc/enqueue.php).
+ */
+
+.contact {
+	padding-block: var(--space-6);
+}
+
+.contact__inner {
+	display: grid;
+	gap: var(--space-5);
+}
+
+.contact__heading {
+	margin-bottom: var(--space-2);
+}
+
+.contact__intro {
+	color: var(--color-text-light);
+	margin-bottom: var(--space-4);
+}
+
+.contact__details {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+	margin-bottom: var(--space-4);
+}
+
+.contact__map iframe {
+	width: 100%;
+	height: 300px;
+	border: 0;
+	border-radius: var(--radius);
+}
+
+.contact__editor-note {
+	font-size: var(--fs-sm);
+	color: var(--color-text-light);
+	font-style: italic;
+}
+
+.contact__notice {
+	padding: var(--space-2) var(--space-3);
+	border-radius: var(--radius);
+	margin-bottom: var(--space-3);
+}
+
+.contact__notice--success {
+	background: #d1e7dd;
+	color: #0a3622;
+}
+
+.contact__notice--error {
+	background: #f8d7da;
+	color: #58151c;
+}
+
+.contact__field {
+	margin-bottom: var(--space-3);
+}
+
+.contact__field label {
+	display: block;
+	margin-bottom: var(--space-1);
+	font-weight: 600;
+}
+
+.contact__field input,
+.contact__field textarea {
+	width: 100%;
+	padding: var(--space-2);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+}
+
+.contact__honeypot {
+	position: absolute;
+	left: -9999px;
+}
+
+.contact__submit {
+	border: none;
+}
+
+@media (min-width: 900px) {
+	.contact__inner {
+		grid-template-columns: 1fr 1fr;
+		align-items: start;
+	}
+}

@@ -1,0 +1,48 @@
+{
+    "key": "group_sobre_cta",
+    "title": "Sobre — CTA final",
+    "fields": [
+        {
+            "key": "field_sobre_cta_titulo",
+            "label": "Título",
+            "name": "cta_titulo",
+            "type": "text",
+            "default_value": "Vamos cuidar do seu sorriso também?"
+        },
+        {
+            "key": "field_sobre_cta_texto",
+            "label": "Texto",
+            "name": "cta_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Fale agora com a nossa equipe pelo WhatsApp e agende sua avaliação gratuita — é rápido, sem burocracia e sem compromisso."
+        },
+        {
+            "key": "field_sobre_cta_botao_label",
+            "label": "Texto do botão",
+            "name": "cta_botao_label",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "default_value": "Chamar no WhatsApp"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 8,
+    "description": "Título, texto e botão do CTA final da página Sobre.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

@@ -1,0 +1,68 @@
+{
+    "key": "group_sobre_faq",
+    "title": "Sobre — Perguntas Frequentes",
+    "fields": [
+        {
+            "key": "field_sobre_faq_eyebrow",
+            "label": "Texto acima do título",
+            "name": "faq_eyebrow",
+            "type": "text",
+            "default_value": "Perguntas frequentes",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_faq_titulo",
+            "label": "Título",
+            "name": "faq_titulo",
+            "type": "text",
+            "default_value": "Ainda tem dúvidas sobre a PRÓ-ODONTO?",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_sobre_faq_itens",
+            "label": "Perguntas",
+            "name": "faq_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar pergunta",
+            "sub_fields": [
+                {
+                    "key": "field_sobre_faq_pergunta",
+                    "label": "Pergunta",
+                    "name": "pergunta",
+                    "type": "text"
+                },
+                {
+                    "key": "field_sobre_faq_resposta",
+                    "label": "Resposta",
+                    "name": "resposta",
+                    "type": "textarea",
+                    "rows": 3
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-sobre.php"
+            }
+        ]
+    ],
+    "menu_order": 7,
+    "description": "Perguntas frequentes da página Sobre (gera JSON-LD FAQPage automaticamente).",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

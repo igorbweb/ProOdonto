@@ -1,0 +1,54 @@
+/*
+ * CSS dos blocos proodonto/faq e proodonto/faq-item.
+ * Carregado só nas páginas que usam o bloco (ver inc/enqueue.php).
+ * O accordion usa <details>/<summary> nativos — nenhum JS é necessário.
+ */
+
+.faq {
+	padding-block: var(--space-6);
+}
+
+.faq__heading {
+	text-align: center;
+	margin-bottom: var(--space-4);
+}
+
+.faq__list {
+	max-width: 72ch;
+	margin-inline: auto;
+}
+
+.faq-item {
+	border-bottom: 1px solid var(--color-border);
+	padding-block: var(--space-3);
+}
+
+.faq-item__question {
+	cursor: pointer;
+	font-weight: 600;
+	margin: 0;
+	list-style: none;
+}
+
+.faq-item__question::-webkit-details-marker {
+	display: none;
+}
+
+.faq-item:not( [open] ) .faq-item__question::after {
+	content: "+";
+	float: right;
+}
+
+.faq-item[open] .faq-item__question::after {
+	content: "\2013";
+	float: right;
+}
+
+.faq-item__answer {
+	padding-top: var(--space-2);
+	color: var(--color-text-light);
+}
+
+.faq-item__answer p:last-child {
+	margin-bottom: 0;
+}

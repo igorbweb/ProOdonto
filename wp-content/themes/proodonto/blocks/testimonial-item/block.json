@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/testimonial-item",
+	"title": "Depoimento",
+	"category": "proodonto",
+	"icon": "admin-comments",
+	"description": "Um depoimento individual (foto, texto, nome, cargo).",
+	"textdomain": "proodonto",
+	"parent": [ "proodonto/testimonials" ],
+	"attributes": {
+		"quote": { "type": "string", "default": "" },
+		"name": { "type": "string", "default": "" },
+		"role": { "type": "string", "default": "" },
+		"avatarId": { "type": "number", "default": 0 },
+		"avatarUrl": { "type": "string", "default": "" },
+		"avatarAlt": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

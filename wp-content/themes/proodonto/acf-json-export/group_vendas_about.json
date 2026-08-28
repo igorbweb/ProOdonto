@@ -1,0 +1,93 @@
+{
+    "key": "group_vendas_about",
+    "title": "Página de Vendas — Sobre (texto)",
+    "fields": [
+        {
+            "key": "field_vendas_about_eyebrow",
+            "label": "Texto acima do título",
+            "name": "eyebrow",
+            "type": "text",
+            "default_value": "Sobre a ProOdonto",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_vendas_about_cta_label",
+            "label": "Texto do botão (CTA da seção)",
+            "name": "about_cta_label",
+            "type": "text",
+            "instructions": "O link usa a \"URL dos CTAs da página\" definida no grupo \"Página de Vendas — CTA\".",
+            "default_value": "AGENDAR AVALIAÇÃO GRATUITA",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_vendas_about_titulo",
+            "label": "Título",
+            "name": "titulo",
+            "type": "textarea",
+            "instructions": "Use uma quebra de linha onde quiser que o título quebre visualmente.",
+            "rows": 3,
+            "default_value": "Devolvemos muito mais que dentes.\nDevolvemos qualidade de vida."
+        },
+        {
+            "key": "field_vendas_about_texto",
+            "label": "Texto",
+            "name": "texto",
+            "type": "textarea",
+            "rows": 4,
+            "default_value": "Na ProOdonto, cada tratamento começa ouvindo a sua história — e só termina quando você volta a sorrir, comer e viver com confiança. Somos referência em odontologia em Sergipe porque cuidamos de pessoas, não apenas de procedimentos."
+        },
+        {
+            "key": "field_vendas_about_estatisticas",
+            "label": "Estatísticas",
+            "name": "estatisticas",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Adicionar estatística",
+            "sub_fields": [
+                {
+                    "key": "field_vendas_about_stat_valor",
+                    "label": "Valor",
+                    "name": "valor",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    },
+                    "placeholder": "+15 mil"
+                },
+                {
+                    "key": "field_vendas_about_stat_legenda",
+                    "label": "Legenda",
+                    "name": "legenda",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "70"
+                    },
+                    "placeholder": "sorrisos transformados"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-vendas.php"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "description": "Copy e estatísticas da seção \"Sobre\" da Página de Vendas.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

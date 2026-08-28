@@ -46,3 +46,9 @@ wp-config.php
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
+/wp-content/plugins
+local-xdebuginfo.php
+/wp-content/updraft/plugins-old
+/wp-content/updraft/themes-old
+/wp-content/updraft/uploads-old
+/wp-content/updraft

@@ -1,0 +1,62 @@
+{
+    "key": "group_home_units",
+    "title": "Home — Unidades (cabeçalho)",
+    "fields": [
+        {
+            "key": "field_home_units_aviso",
+            "label": "",
+            "name": "aviso_unidades",
+            "type": "message",
+            "message": "A lista de unidades (endereços, links do Maps/WhatsApp) é editada em código, em <code>inc/units-map.php</code> — é a mesma fonte usada para gerar o mapa estático da seção. Aqui você edita só os textos de cabeçalho abaixo."
+        },
+        {
+            "key": "field_home_units_eyebrow",
+            "label": "Texto acima do título",
+            "name": "units_eyebrow",
+            "type": "text",
+            "default_value": "Unidades",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_units_titulo",
+            "label": "Título",
+            "name": "units_titulo",
+            "type": "text",
+            "default_value": "Uma PRÓ-ODONTO perto de você",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_units_texto",
+            "label": "Texto",
+            "name": "units_texto",
+            "type": "text",
+            "default_value": "Escolha a unidade mais próxima e fale direto com a nossa equipe.",
+            "wrapper": {
+                "width": "34"
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 8,
+    "description": "Cabeçalho da seção \"Unidades\" da Home.",
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "show_in_rest": 0,
+    "modified": 1754251200
+}

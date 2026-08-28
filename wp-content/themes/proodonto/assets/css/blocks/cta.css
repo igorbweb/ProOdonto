@@ -1,0 +1,23 @@
+/*
+ * CSS do bloco proodonto/cta.
+ * Carregado só nas páginas que usam o bloco (ver inc/enqueue.php).
+ */
+
+.cta {
+	background: var(--color-bg-alt);
+	border-radius: var(--radius);
+	padding: var(--space-5) var(--container-padding);
+	margin-block: var(--space-5);
+	text-align: center;
+}
+
+.cta__title {
+	margin-bottom: var(--space-2);
+}
+
+.cta__text {
+	color: var(--color-text-light);
+	max-width: 60ch;
+	margin-inline: auto;
+	margin-bottom: var(--space-4);
+}
