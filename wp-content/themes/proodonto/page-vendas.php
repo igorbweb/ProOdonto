@@ -543,10 +543,31 @@ get_header();
 
 	<?php
 	// Seção "Unidades" — só o mapa, sem a lista de cards (ver comentário
-	// no topo do arquivo). O mapa em si é gerado pela Static Maps API e
-	// cacheado em disco — ver inc/units-map.php. Só o cabeçalho vem do
-	// custom field (grupo "Página de Vendas — Unidades (cabeçalho)").
-	$proodonto_units_map = function_exists( 'proodonto_get_units_map_url' ) ? proodonto_get_units_map_url() : '';
+	// no topo do arquivo). Quando esta página é a landing de uma unidade
+	// específica (slug aracaju/lagarto/simao-dias — ver
+	// proodonto_get_current_unit_slug() em inc/units-map.php), mostra o
+	// mapa individual daquela unidade (um pin só, bem mais "chegado") em
+	// vez do mapa combinado de sempre; outras páginas de campanha (sem
+	// slug de unidade) continuam com o combinado, como antes. Ambos vêm
+	// da Static Maps API e ficam cacheados em disco — ver inc/units-map.php.
+	// Só o cabeçalho vem do custom field (grupo "Página de Vendas —
+	// Unidades (cabeçalho)").
+	$proodonto_current_unit_slug = function_exists( 'proodonto_get_current_unit_slug' ) ? proodonto_get_current_unit_slug() : '';
+
+	if ( $proodonto_current_unit_slug ) {
+		$proodonto_units_map     = function_exists( 'proodonto_get_unit_map_url' ) ? proodonto_get_unit_map_url( $proodonto_current_unit_slug ) : '';
+		$proodonto_current_unit  = function_exists( 'proodonto_get_unit_by_slug' ) ? proodonto_get_unit_by_slug( $proodonto_current_unit_slug ) : null;
+		$proodonto_units_map_alt = sprintf( 'Mapa com o pin da unidade ProOdonto em %s', $proodonto_current_unit ? $proodonto_current_unit['name'] : get_the_title() );
+	} else {
+		$proodonto_units_map     = '';
+		$proodonto_units_map_alt = 'Mapa com os pins das unidades ProOdonto em Aracaju, Lagarto e Simão Dias';
+	}
+
+	// Sem mapa individual (unidade sem slug reconhecido, ou geração
+	// falhou), cai no combinado — nunca fica sem mapa nenhum à toa.
+	if ( ! $proodonto_units_map ) {
+		$proodonto_units_map = function_exists( 'proodonto_get_units_map_url' ) ? proodonto_get_units_map_url() : '';
+	}
 	?>
 	<section class="units" id="unidades">
 		<div class="units__inner">
@@ -562,7 +583,7 @@ get_header();
 				<div class="units__map">
 					<img
 						src="<?php echo esc_attr( $proodonto_units_map ? $proodonto_units_map : $proodonto_placeholder_img ); ?>"
-						alt="Mapa com os pins das unidades ProOdonto em Aracaju, Lagarto e Simão Dias"
+						alt="<?php echo esc_attr( $proodonto_units_map_alt ); ?>"
 						loading="lazy"
 					/>
 				</div>

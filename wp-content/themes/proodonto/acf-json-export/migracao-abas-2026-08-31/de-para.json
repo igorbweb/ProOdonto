@@ -1,0 +1,281 @@
+[
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_banner",
+    "grupo_antigo_title": "Home — Banner (Hero)",
+    "campos_no_grupo": 1,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Banner (Hero)",
+    "aba_nova_key": "field_home_tab_banner"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_about",
+    "grupo_antigo_title": "Home — Sobre",
+    "campos_no_grupo": 6,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Sobre",
+    "aba_nova_key": "field_home_tab_about"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_marquee",
+    "grupo_antigo_title": "Home — Letreiro de diferenciais",
+    "campos_no_grupo": 1,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Letreiro de diferenciais",
+    "aba_nova_key": "field_home_tab_marquee"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_results",
+    "grupo_antigo_title": "Home — Resultados (Antes e Depois)",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Resultados (Antes e Depois)",
+    "aba_nova_key": "field_home_tab_results"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_treatments",
+    "grupo_antigo_title": "Home — Tratamentos",
+    "campos_no_grupo": 4,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Tratamentos",
+    "aba_nova_key": "field_home_tab_treatments"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_shorts",
+    "grupo_antigo_title": "Home — Shorts (YouTube)",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Shorts (YouTube)",
+    "aba_nova_key": "field_home_tab_shorts"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_steps",
+    "grupo_antigo_title": "Home — Passo a passo",
+    "campos_no_grupo": 3,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Passo a passo",
+    "aba_nova_key": "field_home_tab_steps"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_reviews",
+    "grupo_antigo_title": "Home — Avaliações",
+    "campos_no_grupo": 3,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Avaliações",
+    "aba_nova_key": "field_home_tab_reviews"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_units",
+    "grupo_antigo_title": "Home — Unidades (cabeçalho)",
+    "campos_no_grupo": 4,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Unidades (cabeçalho)",
+    "aba_nova_key": "field_home_tab_units"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_blog",
+    "grupo_antigo_title": "Home — Blog",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "Blog",
+    "aba_nova_key": "field_home_tab_blog"
+  },
+  {
+    "pagina": "Home",
+    "grupo_antigo_key": "group_home_closing_cta",
+    "grupo_antigo_title": "Home — CTA final",
+    "campos_no_grupo": 3,
+    "grupo_novo_key": "group_home",
+    "aba_nova_label": "CTA final",
+    "aba_nova_key": "field_home_tab_closing_cta"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_hero",
+    "grupo_antigo_title": "Sobre — Hero (topo)",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Hero (topo)",
+    "aba_nova_key": "field_sobre_tab_hero"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_historia",
+    "grupo_antigo_title": "Sobre — Nossa História",
+    "campos_no_grupo": 4,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Nossa História",
+    "aba_nova_key": "field_sobre_tab_historia"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_valores",
+    "grupo_antigo_title": "Sobre — Missão, Visão e Valores",
+    "campos_no_grupo": 7,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Missão, Visão e Valores",
+    "aba_nova_key": "field_sobre_tab_valores"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_numeros",
+    "grupo_antigo_title": "Sobre — Números",
+    "campos_no_grupo": 3,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Números",
+    "aba_nova_key": "field_sobre_tab_numeros"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_equipe",
+    "grupo_antigo_title": "Sobre — Corpo Clínico / Equipe",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Corpo Clínico / Equipe",
+    "aba_nova_key": "field_sobre_tab_equipe"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_seguranca",
+    "grupo_antigo_title": "Sobre — Biossegurança",
+    "campos_no_grupo": 4,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Biossegurança",
+    "aba_nova_key": "field_sobre_tab_seguranca"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_units",
+    "grupo_antigo_title": "Sobre — Unidades (cabeçalho)",
+    "campos_no_grupo": 4,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Unidades (cabeçalho)",
+    "aba_nova_key": "field_sobre_tab_units"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_faq",
+    "grupo_antigo_title": "Sobre — Perguntas Frequentes",
+    "campos_no_grupo": 3,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "Perguntas Frequentes",
+    "aba_nova_key": "field_sobre_tab_faq"
+  },
+  {
+    "pagina": "Sobre / Quem Somos",
+    "grupo_antigo_key": "group_sobre_cta",
+    "grupo_antigo_title": "Sobre — CTA final",
+    "campos_no_grupo": 3,
+    "grupo_novo_key": "group_sobre",
+    "aba_nova_label": "CTA final",
+    "aba_nova_key": "field_sobre_tab_cta"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_cta",
+    "grupo_antigo_title": "Página de Vendas — CTA",
+    "campos_no_grupo": 1,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "CTA",
+    "aba_nova_key": "field_vendas_tab_cta"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_marquee",
+    "grupo_antigo_title": "Página de Vendas — Letreiro de diferenciais",
+    "campos_no_grupo": 1,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Letreiro de diferenciais",
+    "aba_nova_key": "field_vendas_tab_marquee"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_about",
+    "grupo_antigo_title": "Página de Vendas — Sobre (texto)",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Sobre (texto)",
+    "aba_nova_key": "field_vendas_tab_about"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_about_gallery",
+    "grupo_antigo_title": "Página de Vendas — Galeria \"Sobre\"",
+    "campos_no_grupo": 1,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Galeria \"Sobre\"",
+    "aba_nova_key": "field_vendas_tab_about_gallery"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_results",
+    "grupo_antigo_title": "Página de Vendas — Resultados (Antes e Depois)",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Resultados (Antes e Depois)",
+    "aba_nova_key": "field_vendas_tab_results"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_treatments",
+    "grupo_antigo_title": "Página de Vendas — Tratamentos",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Tratamentos",
+    "aba_nova_key": "field_vendas_tab_treatments"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_shorts",
+    "grupo_antigo_title": "Página de Vendas — Shorts (YouTube)",
+    "campos_no_grupo": 6,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Shorts (YouTube)",
+    "aba_nova_key": "field_vendas_tab_shorts"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_steps",
+    "grupo_antigo_title": "Página de Vendas — Passo a passo",
+    "campos_no_grupo": 4,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Passo a passo",
+    "aba_nova_key": "field_vendas_tab_steps"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_reviews",
+    "grupo_antigo_title": "Página de Vendas — Avaliações",
+    "campos_no_grupo": 4,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Avaliações",
+    "aba_nova_key": "field_vendas_tab_reviews"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_units",
+    "grupo_antigo_title": "Página de Vendas — Unidades (cabeçalho)",
+    "campos_no_grupo": 5,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "Unidades (cabeçalho)",
+    "aba_nova_key": "field_vendas_tab_units"
+  },
+  {
+    "pagina": "Página de Vendas",
+    "grupo_antigo_key": "group_vendas_closing_cta",
+    "grupo_antigo_title": "Página de Vendas — CTA final",
+    "campos_no_grupo": 3,
+    "grupo_novo_key": "group_vendas",
+    "aba_nova_label": "CTA final",
+    "aba_nova_key": "field_vendas_tab_closing_cta"
+  }
+]

@@ -1,0 +1,1553 @@
+{
+    "key": "group_home",
+    "title": "Home",
+    "fields": [
+        {
+            "key": "field_home_tab_banner",
+            "label": "Banner (Hero)",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_banner",
+            "label": "Banner",
+            "name": "banner",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Slides do banner principal (hero) da Home.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Adicionar slide",
+            "collapsed": "field_home_banner_texto",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_home_banner_desktop",
+                    "label": "Imagem (desktop)",
+                    "name": "desktop",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Usada em telas a partir de 1024px.",
+                    "required": 1,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_home_banner"
+                },
+                {
+                    "key": "field_home_banner_mobile",
+                    "label": "Imagem (mobile)",
+                    "name": "mobile",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Usada em telas até 1023px.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_home_banner"
+                },
+                {
+                    "key": "field_home_banner_texto",
+                    "label": "Texto do slide",
+                    "name": "texto",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "Conteúdo exibido sobre o banner (título\/chamada do slide).",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "default_value": "",
+                    "delay": 0,
+                    "parent_repeater": "field_home_banner"
+                },
+                {
+                    "key": "field_home_banner_link_externo",
+                    "label": "Tipo de link",
+                    "name": "link_externo",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "Define se o slide abre um link externo, um vídeo\/iframe, ou nenhum link.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "nenhum": "Nenhum",
+                        "externo": "Link externo",
+                        "iframe": "Vídeo \/ iframe embutido"
+                    },
+                    "default_value": "nenhum",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
+                    "parent_repeater": "field_home_banner"
+                },
+                {
+                    "key": "field_home_banner_url",
+                    "label": "URL do link externo",
+                    "name": "url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_home_banner_link_externo",
+                                "operator": "==",
+                                "value": "externo"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placeholder": "https:\/\/...",
+                    "default_value": "",
+                    "parent_repeater": "field_home_banner"
+                },
+                {
+                    "key": "field_home_banner_iframe",
+                    "label": "URL do vídeo \/ iframe",
+                    "name": "iframe",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "URL aberta dentro do fancybox (ex.: link do YouTube\/Vimeo).",
+                    "required": false,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_home_banner_link_externo",
+                                "operator": "==",
+                                "value": "iframe"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placeholder": "https:\/\/...",
+                    "default_value": "",
+                    "parent_repeater": "field_home_banner"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_about",
+            "label": "Sobre",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_about_imagem",
+            "label": "Imagem",
+            "name": "imagem",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Foto usada na seção \"Sobre\" (ex.: dentista atendendo) quando a galeria abaixo estiver vazia.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_home_about_galeria",
+            "label": "Galeria de fotos",
+            "name": "galeria_sobre",
+            "aria-label": "",
+            "type": "gallery",
+            "instructions": "Com 1 ou mais fotos aqui, a seção \"Sobre\" exibe um carrossel em vez da imagem única acima. Vazia, usa o campo \"Imagem\" (ou o espaço reservado padrão, se nenhum dos dois estiver definido).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "insert": "append",
+            "preview_size": "medium",
+            "library": "all",
+            "min": 0,
+            "max": 0,
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_home_about_eyebrow",
+            "label": "Texto acima do título",
+            "name": "eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Sobre a PRÓ-ODONTO",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_about_titulo",
+            "label": "Título",
+            "name": "titulo",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Use uma quebra de linha onde quiser que o título quebre visualmente.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Cuidado de verdade,\ndo primeiro sorriso ao último",
+            "default_value": "Cuidado de verdade,\ndo primeiro sorriso ao último",
+            "rows": 3,
+            "new_lines": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_home_about_texto",
+            "label": "Texto",
+            "name": "texto",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 4,
+            "default_value": "Há mais de 20 anos ajudamos famílias a recuperar a saúde e a confiança do sorriso. Cada tratamento começa por ouvir você — e segue com transparência, tecnologia e o carinho que você merece.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_home_about_estatisticas",
+            "label": "Estatísticas",
+            "name": "estatisticas",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Ex.: \"+15 mil\" \/ \"sorrisos transformados\".",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "button_label": "Adicionar estatística",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_home_about_stat_valor",
+                    "label": "Valor",
+                    "name": "valor",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placeholder": "+15 mil",
+                    "default_value": "",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_home_about_estatisticas"
+                },
+                {
+                    "key": "field_home_about_stat_legenda",
+                    "label": "Legenda",
+                    "name": "legenda",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "70",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placeholder": "sorrisos transformados",
+                    "default_value": "",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_home_about_estatisticas"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_marquee",
+            "label": "Letreiro de diferenciais",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_marquee_itens",
+            "label": "Itens",
+            "name": "marquee_itens",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Diferenciais exibidos em loop no letreiro (marquee) abaixo do banner.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "button_label": "Adicionar item",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_home_marquee_label",
+                    "label": "Texto",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placeholder": "Atendimento humanizado",
+                    "default_value": "",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_home_marquee_itens"
+                },
+                {
+                    "key": "field_home_marquee_icone",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt; (ex.: &lt;path d=\"...\"\/&gt;), sem a tag &lt;svg&gt; em volta. ViewBox fixo em 0 0 24 24.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 2,
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_home_marquee_itens"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_results",
+            "label": "Resultados (Antes e Depois)",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_results_eyebrow",
+            "label": "Texto acima do título",
+            "name": "results_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Resultados reais",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_results_titulo",
+            "label": "Título",
+            "name": "results_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Sorrisos transformados",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_results_cta_label",
+            "label": "Texto do botão (CTA)",
+            "name": "results_cta_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Quero um sorriso assim",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_results_texto",
+            "label": "Texto",
+            "name": "results_texto",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "default_value": "Veja alguns dos resultados que conquistamos com nossos pacientes.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_home_results_itens",
+            "label": "Pacientes",
+            "name": "results_itens",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Foto real do paciente (composição única antes\/depois). Sem informação de tratamento de propósito — ver comentário original em page-home.php.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "button_label": "Adicionar paciente",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_home_results_nome",
+                    "label": "Nome",
+                    "name": "nome",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_home_results_itens"
+                },
+                {
+                    "key": "field_home_results_foto",
+                    "label": "Foto",
+                    "name": "foto",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "70",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_home_results_itens"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_treatments",
+            "label": "Tratamentos",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_treatments_eyebrow",
+            "label": "Texto acima do título",
+            "name": "treatments_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Tratamentos",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_treatments_titulo",
+            "label": "Título",
+            "name": "treatments_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Como podemos ajudar você",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_treatments_texto",
+            "label": "Texto",
+            "name": "treatments_texto",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "default_value": "Todas as especialidades em um só lugar, com profissionais dedicados a cada tipo de cuidado.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_home_treatments_itens",
+            "label": "Tratamentos",
+            "name": "treatments_itens",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Adicionar tratamento",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_home_treatments_titulo_item",
+                    "label": "Título",
+                    "name": "titulo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_home_treatments_itens"
+                },
+                {
+                    "key": "field_home_treatments_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "45",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 2,
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_home_treatments_itens"
+                },
+                {
+                    "key": "field_home_treatments_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 2,
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_home_treatments_itens"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_shorts",
+            "label": "Shorts (YouTube)",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_shorts_aviso",
+            "label": "",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Adicione o link de cada vídeo do YouTube abaixo (Shorts, \"watch?v=\" ou \"youtu.be\" — qualquer um funciona). A miniatura e o player são gerados automaticamente a partir do link, sem precisar enviar nenhuma imagem. <strong>Sem nenhum vídeo cadastrado, esta seção não aparece no site.<\/strong>",
+            "esc_html": 0,
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_home_shorts_eyebrow",
+            "label": "Texto acima do título",
+            "name": "shorts_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Vídeos",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_shorts_titulo",
+            "label": "Título",
+            "name": "shorts_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Acompanhe nos nossos Shorts",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_shorts_texto",
+            "label": "Texto",
+            "name": "shorts_texto",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "default_value": "Bastidores, dicas rápidas e resultados reais — direto do nosso canal no YouTube.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_home_shorts_itens",
+            "label": "Vídeos",
+            "name": "shorts_itens",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Adicionar vídeo",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_home_shorts_url",
+                    "label": "Link do YouTube",
+                    "name": "url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "Aceita link de Shorts, vídeo normal (watch?v=) ou youtu.be — o ID é extraído automaticamente.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placeholder": "https:\/\/www.youtube.com\/shorts\/XXXXXXXXXXX",
+                    "default_value": "",
+                    "parent_repeater": "field_home_shorts_itens"
+                },
+                {
+                    "key": "field_home_shorts_titulo_item",
+                    "label": "Título \/ legenda (opcional)",
+                    "name": "titulo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Exibido como legenda sobre a miniatura, se preenchido.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_home_shorts_itens"
+                },
+                {
+                    "key": "field_home_shorts_capa",
+                    "label": "Capa personalizada (opcional)",
+                    "name": "capa_personalizada",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Sem capa própria, usamos a miniatura automática do vídeo no YouTube.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": "",
+                    "parent_repeater": "field_home_shorts_itens"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_steps",
+            "label": "Passo a passo",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_steps_eyebrow",
+            "label": "Texto acima do título",
+            "name": "steps_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Passo a passo",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_steps_titulo",
+            "label": "Título",
+            "name": "steps_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Como é o seu tratamento",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_steps_itens",
+            "label": "Etapas",
+            "name": "steps_itens",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "A numeração \"ETAPA 01, 02...\" é automática, na ordem das linhas abaixo.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Adicionar etapa",
+            "min": 0,
+            "max": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_home_steps_label_item",
+                    "label": "Nome da etapa",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_home_steps_itens"
+                },
+                {
+                    "key": "field_home_steps_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "45",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 2,
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_home_steps_itens"
+                },
+                {
+                    "key": "field_home_steps_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "15",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 2,
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_home_steps_itens"
+                },
+                {
+                    "key": "field_home_steps_sucesso_item",
+                    "label": "Etapa final (estilo de destaque)",
+                    "name": "sucesso",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "10",
+                        "class": "",
+                        "id": ""
+                    },
+                    "ui": 1,
+                    "default_value": 0,
+                    "message": "",
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "parent_repeater": "field_home_steps_itens"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_reviews",
+            "label": "Avaliações",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_reviews_eyebrow",
+            "label": "Texto acima do título",
+            "name": "reviews_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Avaliações",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_reviews_titulo",
+            "label": "Título",
+            "name": "reviews_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "O que dizem sobre nós",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_reviews_texto",
+            "label": "Texto",
+            "name": "reviews_texto",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Depoimentos reais de quem já passou pela PRÓ-ODONTO.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_tab_units",
+            "label": "Unidades (cabeçalho)",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_units_aviso",
+            "label": "",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "A lista de unidades (endereços, links do Maps\/WhatsApp) é editada em código, em <code>inc\/units-map.php<\/code> — é a mesma fonte usada para gerar o mapa estático da seção. Aqui você edita só os textos de cabeçalho abaixo.",
+            "esc_html": 0,
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_home_units_eyebrow",
+            "label": "Texto acima do título",
+            "name": "units_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Unidades",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_units_titulo",
+            "label": "Título",
+            "name": "units_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Uma PRÓ-ODONTO perto de você",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_units_texto",
+            "label": "Texto",
+            "name": "units_texto",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Escolha a unidade mais próxima e fale direto com a nossa equipe.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_tab_blog",
+            "label": "Blog",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_blog_eyebrow",
+            "label": "Texto acima do título",
+            "name": "blog_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Blog",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_blog_titulo",
+            "label": "Título",
+            "name": "blog_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Dicas para o seu sorriso",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_blog_quantidade",
+            "label": "Quantidade de posts",
+            "name": "blog_quantidade",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Quantos dos últimos posts publicados exibir no carrossel.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "15",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 6,
+            "min": 3,
+            "max": 12,
+            "step": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_blog_link_label",
+            "label": "Texto do link \"ver todos\"",
+            "name": "blog_link_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "17.5",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Ver todos os artigos →",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_blog_link_url",
+            "label": "URL do link \"ver todos\"",
+            "name": "blog_link_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Em branco, usa automaticamente a página de posts do site (Configurações → Leitura).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "17.5",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_home_tab_closing_cta",
+            "label": "CTA final",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_home_closing_titulo",
+            "label": "Título",
+            "name": "closing_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Vamos cuidar do seu sorriso?",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_home_closing_texto",
+            "label": "Texto",
+            "name": "closing_texto",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "default_value": "Fale agora com a nossa equipe pelo WhatsApp e agende sua avaliação — é rápido, gratuito e sem compromisso.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_home_closing_botao_label",
+            "label": "Texto do botão",
+            "name": "closing_botao_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Chamar no WhatsApp",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Todos os campos da página Home, organizados em abas (1 aba por seção antiga). Migrado a partir dos grupos separados group_home_*.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1788176593
+}
