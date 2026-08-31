@@ -27,6 +27,7 @@ $proodonto_includes = array(
 	'/inc/acf-fields.php',          // Todos os grupos de campos (ACF Pro) do tema, via acf_add_local_field_group() — sem depender do banco de dados.
 	'/inc/content-seed.php',        // Grava o conteúdo padrão como valor real dos campos ACF, uma vez por página (Home/Vendas/Sobre).
 	'/inc/page-sobre-schema.php',   // JSON-LD extra (AboutPage, equipe/Person, FAQPage) só na página Sobre / Quem Somos.
+	'/inc/local-business-schema.php', // JSON-LD extra (Organization enriquecida + Dentist por unidade) só na Home — telefone, redes sociais, endereço de cada clínica e catálogo de tratamentos.
 );
 
 foreach ( $proodonto_includes as $file ) {

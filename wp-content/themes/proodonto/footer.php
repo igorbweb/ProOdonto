@@ -157,7 +157,7 @@ if (
 					&copy; <?php echo esc_html( wp_date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>.
 					<?php esc_html_e( 'Todos os direitos reservados.', 'proodonto' ); ?>
 				</span>
-				<span>CRO responsável · <a href="#">Política de privacidade</a></span>
+				<span>CRO-SE 3147 · <a href="#">Política de privacidade</a></span>
 			</div>
 
 		</div>

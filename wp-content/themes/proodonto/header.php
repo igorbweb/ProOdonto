@@ -19,14 +19,23 @@ defined( 'ABSPATH' ) || exit;
 
 $proodonto_header_cta_label = function_exists( 'proodonto_get_header_cta_label' ) ? proodonto_get_header_cta_label() : 'Agendar avaliação';
 $proodonto_header_cta_url   = function_exists( 'proodonto_get_header_cta_url' ) ? proodonto_get_header_cta_url() : '#';
-$proodonto_nav_links  = array(
+
+// "Unidades" vira um dropdown com as 3 páginas de unidade (aracaju,
+// lagarto, simao-dias — ver proodonto_get_unit_nav_pages() em
+// inc/template-functions.php) em vez de um link direto pra
+// section#unidades. Sem nenhuma unidade publicada ainda, cai de volta pro
+// link antigo (fallback defensivo — não deixa o item do menu quebrado).
+$proodonto_unit_pages = function_exists( 'proodonto_get_unit_nav_pages' ) ? proodonto_get_unit_nav_pages() : array();
+
+$proodonto_nav_links = array(
 	array(
 		'label' => 'Tratamentos',
-		'url'   => '#',
+		'url'   => home_url( '/#tratamentos' ),
 	),
 	array(
-		'label' => 'Unidades',
-		'url'   => '#unidades',
+		'label'    => 'Unidades',
+		'url'      => home_url( '/#unidades' ),
+		'dropdown' => $proodonto_unit_pages,
 	),
 	array(
 		'label' => 'Sobre nós',
@@ -34,7 +43,7 @@ $proodonto_nav_links  = array(
 	),
 	array(
 		'label' => 'Blog',
-		'url'   => '#blog',
+		'url'   => home_url( '/blog/' ),
 	),
 );
 ?>
@@ -77,7 +86,23 @@ $proodonto_nav_links  = array(
 			aria-label="<?php esc_attr_e( 'Menu principal', 'proodonto' ); ?>"
 		>
 			<?php foreach ( $proodonto_nav_links as $proodonto_link ) : ?>
-				<a href="<?php echo esc_url( $proodonto_link['url'] ); ?>" class="hover:text-cta-dark"><?php echo esc_html( $proodonto_link['label'] ); ?></a>
+				<?php if ( ! empty( $proodonto_link['dropdown'] ) ) : ?>
+					<div class="nav-dropdown">
+						<button type="button" class="nav-dropdown__trigger hover:text-cta-dark" aria-haspopup="true" aria-expanded="false">
+							<?php echo esc_html( $proodonto_link['label'] ); ?>
+							<svg class="nav-dropdown__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+						</button>
+						<div class="nav-dropdown__panel">
+							<div class="nav-dropdown__panel-inner" role="menu" aria-label="<?php echo esc_attr( $proodonto_link['label'] ); ?>">
+								<?php foreach ( $proodonto_link['dropdown'] as $proodonto_unit ) : ?>
+									<a href="<?php echo esc_url( $proodonto_unit['url'] ); ?>" class="nav-dropdown__item" role="menuitem"><?php echo esc_html( $proodonto_unit['label'] ); ?></a>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					</div>
+				<?php else : ?>
+					<a href="<?php echo esc_url( $proodonto_link['url'] ); ?>" class="hover:text-cta-dark"><?php echo esc_html( $proodonto_link['label'] ); ?></a>
+				<?php endif; ?>
 			<?php endforeach; ?>
 		</nav>
 
@@ -124,7 +149,29 @@ $proodonto_nav_links  = array(
 			<div class="border-t border-[#e6eaf1] bg-white px-4 py-4">
 				<nav class="flex flex-col gap-1" aria-label="<?php esc_attr_e( 'Menu principal (mobile)', 'proodonto' ); ?>">
 					<?php foreach ( $proodonto_nav_links as $proodonto_link ) : ?>
-						<a href="<?php echo esc_url( $proodonto_link['url'] ); ?>" class="rounded-proodonto px-2 py-2.5 text-[15px] font-medium text-[#3a4a5e] hover:bg-bg-alt"><?php echo esc_html( $proodonto_link['label'] ); ?></a>
+						<?php if ( ! empty( $proodonto_link['dropdown'] ) ) : ?>
+							<div class="mobile-nav-accordion">
+								<button
+									type="button"
+									class="mobile-nav-accordion__trigger flex w-full items-center justify-between rounded-proodonto px-2 py-2.5 text-[15px] font-medium text-[#3a4a5e] hover:bg-bg-alt"
+									aria-expanded="false"
+								>
+									<?php echo esc_html( $proodonto_link['label'] ); ?>
+									<svg class="mobile-nav-accordion__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+								</button>
+								<div class="mobile-nav-accordion__panel grid grid-rows-[0fr] transition-all duration-300 ease-out">
+									<div class="min-h-0 overflow-hidden">
+										<div class="flex flex-col gap-1 py-1 pl-4">
+											<?php foreach ( $proodonto_link['dropdown'] as $proodonto_unit ) : ?>
+												<a href="<?php echo esc_url( $proodonto_unit['url'] ); ?>" class="rounded-proodonto px-2 py-2 text-[14px] text-[#3a4a5e] hover:bg-bg-alt"><?php echo esc_html( $proodonto_unit['label'] ); ?></a>
+											<?php endforeach; ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php else : ?>
+							<a href="<?php echo esc_url( $proodonto_link['url'] ); ?>" class="rounded-proodonto px-2 py-2.5 text-[15px] font-medium text-[#3a4a5e] hover:bg-bg-alt"><?php echo esc_html( $proodonto_link['label'] ); ?></a>
+						<?php endif; ?>
 					<?php endforeach; ?>
 				</nav>
 			</div>

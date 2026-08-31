@@ -35,6 +35,41 @@ function proodonto_is_vendas_page( $post_id = null ) {
 }
 
 /**
+ * Páginas das 3 unidades, puxadas manualmente pelo slug — usado pelo
+ * dropdown "Unidades" do header (ver header.php). Só entram as que
+ * realmente existem e estão publicadas, pra nunca gerar link morto no
+ * menu se alguma página ainda não tiver sido criada.
+ *
+ * O rótulo usa sempre o nome curto da cidade, não o título da página
+ * (ex.: "Implantes e reabilitação oral em Aracaju" — pensado pra
+ * SEO/aba do navegador, longo demais pra um item de menu).
+ */
+function proodonto_get_unit_nav_pages() {
+	$cities = array(
+		'aracaju'    => __( 'Aracaju', 'proodonto' ),
+		'lagarto'    => __( 'Lagarto', 'proodonto' ),
+		'simao-dias' => __( 'Simão Dias', 'proodonto' ),
+	);
+
+	$pages = array();
+
+	foreach ( $cities as $slug => $label ) {
+		$page = get_page_by_path( $slug );
+
+		if ( ! $page instanceof WP_Post || 'publish' !== $page->post_status ) {
+			continue;
+		}
+
+		$pages[] = array(
+			'label' => $label,
+			'url'   => get_permalink( $page ),
+		);
+	}
+
+	return $pages;
+}
+
+/**
  * Paginação simples, reaproveitada em archive.php / search.php / index.php.
  */
 function proodonto_pagination() {
@@ -43,6 +78,7 @@ function proodonto_pagination() {
 			'mid_size'  => 1,
 			'prev_text' => __( '&larr; Anterior', 'proodonto' ),
 			'next_text' => __( 'Próxima &rarr;', 'proodonto' ),
+			'type'      => 'list',
 		)
 	);
 }

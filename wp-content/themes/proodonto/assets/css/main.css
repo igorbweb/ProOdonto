@@ -138,6 +138,105 @@ a.cta.cta--whatsapp:hover {
 }
 
 /* ---------------------------------------------------------------------
+   Dropdown "Unidades" no menu desktop — abre no hover (CSS puro,
+   :hover/:focus-within) e também no clique/toque (classe .is-open via
+   JS, ver assets/js/main.js), pra cobrir touch/teclado além do mouse.
+
+   O espaçamento visual entre o botão e o painel fica no padding-top do
+   painel (não numa margem) de propósito: assim o painel — que já é
+   filho do mesmo .nav-dropdown — cobre toda a distância até o botão sem
+   deixar um vão sem elemento nenhum por baixo do cursor, o que faria o
+   :hover "cair" no meio do caminho ao mover o mouse até os itens.
+   ------------------------------------------------------------------ */
+.nav-dropdown {
+	position: relative;
+}
+
+.nav-dropdown__trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+}
+
+.nav-dropdown__chevron {
+	transition: transform var(--transition);
+}
+
+.nav-dropdown__panel {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	z-index: 60;
+	width: max-content;
+	padding-top: 12px;
+	transform: translateX(-50%) translateY(-6px);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+
+.nav-dropdown__panel-inner {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 180px;
+	padding: 8px;
+	background: #fff;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	box-shadow: 0 16px 32px rgba(4, 40, 45, 0.16);
+}
+
+.nav-dropdown__item {
+	padding: 8px 12px;
+	border-radius: 6px;
+	color: var(--color-text);
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.nav-dropdown__item:hover {
+	background: var(--color-bg-alt);
+	color: var(--color-cta-dark);
+	text-decoration: none;
+}
+
+.nav-dropdown:hover .nav-dropdown__panel,
+.nav-dropdown:focus-within .nav-dropdown__panel,
+.nav-dropdown.is-open .nav-dropdown__panel {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown:hover .nav-dropdown__chevron,
+.nav-dropdown:focus-within .nav-dropdown__chevron,
+.nav-dropdown.is-open .nav-dropdown__chevron {
+	transform: rotate(180deg);
+}
+
+/* ---------------------------------------------------------------------
+   Acordeão "Unidades" no menu mobile — mesma técnica de colapso suave
+   do painel #mobile-menu (grid-template-rows 0fr → 1fr), alternada via
+   JS (ver assets/js/main.js).
+   ------------------------------------------------------------------ */
+.mobile-nav-accordion__chevron {
+	transition: transform var(--transition);
+}
+
+.mobile-nav-accordion__trigger[aria-expanded="true"] .mobile-nav-accordion__chevron {
+	transform: rotate(180deg);
+}
+
+/* ---------------------------------------------------------------------
    Breadcrumbs
    ------------------------------------------------------------------ */
 .breadcrumbs ol {
@@ -185,6 +284,197 @@ a.cta.cta--whatsapp:hover {
 	.entry-card__thumb img {
 		margin-bottom: 0;
 	}
+}
+
+/*
+ * Índice com cards (blog index, arquivo de categoria) — hero + grade.
+ * Compartilhado entre home.php (índice do blog) e archive.php (arquivo de
+ * categoria), daí viver aqui em vez de num CSS por página.
+ */
+.blog-index {
+	padding-block: 40px;
+}
+
+.blog-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+
+.blog-card {
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	border: 1px solid #eceff4;
+	border-radius: 18px;
+	overflow: hidden;
+	transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.blog-card:hover {
+	text-decoration: none;
+	box-shadow: 0 12px 28px rgba(4, 110, 116, 0.12);
+	transform: translateY(-2px);
+}
+
+.blog-card__media {
+	aspect-ratio: 3 / 2;
+	overflow: hidden;
+}
+
+.blog-card__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.blog-card__body {
+	padding: 20px 22px 22px;
+}
+
+.blog-card__category {
+	font-size: 12.5px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: var(--color-cta);
+	margin: 0 0 10px;
+}
+
+.blog-card__title {
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: 19px;
+	line-height: 1.25;
+	color: #123436;
+	margin: 0 0 10px;
+}
+
+.blog-card__excerpt {
+	color: var(--color-text-light);
+	font-size: var(--fs-sm);
+	margin: 0 0 12px;
+}
+
+.blog-card__meta {
+	font-size: 13px;
+	color: #8a97a6;
+	margin: 0;
+}
+
+@media (min-width: 600px) {
+	.blog-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 900px) {
+	.blog-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/*
+ * Hero de arquivo (categoria) — eyebrow + H1 + descrição opcional. Mesma
+ * linguagem visual do hero do índice do blog (.blog-hero, em
+ * assets/css/pages/blog.css), promovida aqui por ser usada num template
+ * global (archive.php), não numa página específica.
+ */
+.archive-hero {
+	background: #faf7f2;
+	padding-block: 40px 32px;
+}
+
+.archive-hero__eyebrow {
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: var(--color-cta);
+	margin: var(--space-3) 0 12px;
+}
+
+.archive-hero__title {
+	font-family: var(--font-heading);
+	font-weight: 500;
+	font-size: var(--fs-h1);
+	line-height: var(--lh-heading);
+	letter-spacing: -0.4px;
+	color: #063e42;
+	margin: 0;
+}
+
+.archive-hero__text {
+	max-width: 640px;
+	color: var(--color-text-light);
+	font-size: var(--fs-base);
+	margin-top: 16px;
+}
+
+@media (min-width: 900px) {
+	.archive-hero {
+		padding-block: 56px 40px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.archive-hero__title {
+		font-size: 3rem;
+	}
+}
+
+/*
+ * Paginação (paginate_links()/the_posts_pagination(), type "list") —
+ * pílulas numeradas, usada em archive.php / search.php / home.php via
+ * proodonto_pagination().
+ */
+.pagination {
+	margin-top: 40px;
+}
+
+.pagination ul.page-numbers {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.pagination .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	height: 40px;
+	padding-inline: 10px;
+	border-radius: 10px;
+	background: #fff;
+	border: 1px solid #eceff4;
+	color: #123436;
+	font-size: 14px;
+	font-weight: 600;
+	transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.pagination a.page-numbers:hover {
+	background: var(--color-cta);
+	border-color: var(--color-cta);
+	color: #fff;
+	text-decoration: none;
+}
+
+.pagination .current {
+	background: var(--color-cta);
+	border-color: var(--color-cta);
+	color: #fff;
+}
+
+.pagination .dots {
+	border-color: transparent;
+	background: transparent;
 }
 
 /* ---------------------------------------------------------------------

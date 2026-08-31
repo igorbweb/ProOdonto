@@ -31,6 +31,7 @@ filemtime() e CSS específico por página (ver assets/css/pages/).
 html {
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
+	scroll-behavior: smooth;
 }
 
 body {

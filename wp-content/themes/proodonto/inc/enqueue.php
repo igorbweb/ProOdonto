@@ -182,6 +182,23 @@ function proodonto_enqueue_assets() {
 		}
 	}
 
+	// --- CSS do índice do blog (home.php) ----------------------------------
+	// is_home() (Página de posts) não passa pelo bloco is_page() acima, então
+	// o CSS de assets/css/pages/blog.css (mesmo arquivo usado por page-blog.php
+	// enquanto essa Page é acessada diretamente) é carregado aqui à parte.
+	if ( is_home() ) {
+		$blog_index_css_rel = 'assets/css/pages/blog.css';
+
+		if ( file_exists( PROODONTO_DIR . '/' . $blog_index_css_rel ) ) {
+			wp_enqueue_style(
+				'proodonto-page-blog',
+				PROODONTO_URI . '/' . $blog_index_css_rel,
+				array( 'proodonto-main' ),
+				proodonto_asset_version( $blog_index_css_rel )
+			);
+		}
+	}
+
 	// --- CSS dos blocos nativos (Gutenberg), só quando usados na página ----
 	if ( is_singular() ) {
 		$current_post = get_queried_object();

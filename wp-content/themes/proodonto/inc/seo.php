@@ -1,21 +1,43 @@
 <?php
 /**
- * SEO embutido, sem depender de plugin: meta description, robots, canonical,
- * Open Graph (+ tags article:* em posts), Twitter Card, JSON-LD
- * (Organization/WebSite/BreadcrumbList sempre, BlogPosting em posts) e
- * breadcrumbs.
+ * SEO do tema — funciona em dois modos:
  *
- * A seção 5 (BlogPosting) é o reforço específico para posts do blog —
- * SEO tradicional e GEO (rastreio/citação por IAs) dependem do mesmo tipo
- * de sinal: dados estruturados completos, datas de publicação/atualização
- * explícitas, autoria clara e HTML semântico — não de truques diferentes
- * para "robôs de busca" vs. "robôs de IA".
+ *   1. SEM Yoast/Rank Math ativo: o tema cuida de tudo sozinho (meta
+ *      description, robots, canonical, Open Graph, Twitter Card, JSON-LD
+ *      Organization/WebSite/BreadcrumbList + BlogPosting em posts, e
+ *      breadcrumbs) — comportamento original deste arquivo.
  *
- * Se o projeto instalar Yoast/Rank Math no futuro, basta remover o require
- * deste arquivo em functions.php — os plugins assumem as mesmas tags.
+ *   2. COM Yoast ativo (caso atual do site, plugin `wordpress-seo`
+ *      instalado em 2026-08): o Yoast já gera title, meta description,
+ *      canonical, robots, Open Graph, Twitter Card, sitemap e o grafo
+ *      base (WebPage/WebSite/BreadcrumbList/ImageObject) — então o tema
+ *      PARA de imprimir essas mesmas tags (evita duplicação, incluindo
+ *      nós JSON-LD com o mesmo @id declarados duas vezes) e passa a:
+ *        a) plugar os campos manuais do editor (description/canonical/
+ *           noindex, preenchidos no metabox "SEO" abaixo) nos filtros do
+ *           próprio Yoast — mesma UI de sempre pro editor, sem tag
+ *           duplicada no HTML;
+ *        b) acrescentar ao MESMO grafo JSON-LD do Yoast (via filtro
+ *           `wpseo_schema_graph`) só os nós exclusivos do tema, que o
+ *           Yoast (free) não gera sozinho: Organization enriquecida
+ *           (telefone/sameAs/catálogo de tratamentos), Dentist por
+ *           unidade, BlogPosting, AboutPage e FAQPage — ver
+ *           inc/local-business-schema.php, inc/page-sobre-schema.php e
+ *           inc/blocks.php, que continuam usando o mesmo filtro
+ *           `proodonto_json_ld_graphs` de sempre.
+ *
+ * Ver proodonto_yoast_active() e proodonto_bridge_yoast() logo abaixo.
  */
 
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * Yoast SEO está instalado e ativo? (define WPSEO_VERSION no boot do
+ * plugin). Usado para decidir entre os dois modos descritos acima.
+ */
+function proodonto_yoast_active() {
+	return defined( 'WPSEO_VERSION' );
+}
 
 /* -----------------------------------------------------------------------
  * 1. Meta box: Meta description, noindex, canonical override, imagem OG
@@ -81,9 +103,62 @@ add_action( 'save_post', function ( $post_id ) {
 } );
 
 /* -----------------------------------------------------------------------
- * 2. Output das tags no <head>
+ * 2. Output das tags no <head> — só roda sozinho se NÃO houver Yoast.
+ *    Com Yoast ativo, usamos proodonto_bridge_yoast() em vez disso (ver
+ *    comentário no topo do arquivo).
  * -------------------------------------------------------------------- */
-add_action( 'wp_head', 'proodonto_seo_meta_tags', 1 );
+if ( proodonto_yoast_active() ) {
+	proodonto_bridge_yoast();
+} else {
+	add_action( 'wp_head', 'proodonto_seo_meta_tags', 1 );
+}
+
+/**
+ * Modo "Yoast ativo": nada de tags/JSON-LD duplicados. Só plugamos os
+ * campos manuais do metabox "SEO" nos filtros do Yoast, e acrescentamos
+ * ao grafo JSON-LD que o Yoast já imprime os nós exclusivos do tema
+ * (Organization enriquecida, Dentist, BlogPosting, AboutPage, FAQPage —
+ * ver inc/local-business-schema.php, inc/page-sobre-schema.php,
+ * inc/blocks.php, que alimentam o filtro `proodonto_json_ld_graphs`).
+ */
+function proodonto_bridge_yoast() {
+	// Meta description manual (metabox) vence a do Yoast, se preenchida.
+	add_filter( 'wpseo_metadesc', function ( $desc ) {
+		if ( ! is_singular() ) {
+			return $desc;
+		}
+		$custom = get_post_meta( get_the_ID(), '_proodonto_meta_description', true );
+		return $custom ? $custom : $desc;
+	} );
+
+	// Canonical manual (metabox) vence o do Yoast, se preenchido.
+	add_filter( 'wpseo_canonical', function ( $canonical ) {
+		if ( ! is_singular() ) {
+			return $canonical;
+		}
+		$custom = get_post_meta( get_the_ID(), '_proodonto_canonical', true );
+		return $custom ? $custom : $canonical;
+	} );
+
+	// Noindex manual (metabox) força noindex mesmo que o Yoast não tenha
+	// marcado nada — nunca o contrário (não "reindexamos" nada aqui).
+	add_filter( 'wpseo_robots_array', function ( $robots ) {
+		if ( is_singular() && '1' === get_post_meta( get_the_ID(), '_proodonto_meta_noindex', true ) ) {
+			$robots['index'] = 'noindex';
+		}
+		return $robots;
+	} );
+
+	// Acrescenta os nós exclusivos do tema ao MESMO grafo do Yoast, em vez
+	// de imprimir um <script type="application/ld+json"> separado.
+	add_filter( 'wpseo_schema_graph', function ( $data ) {
+		$extra = apply_filters( 'proodonto_json_ld_graphs', array() );
+		foreach ( $extra as $node ) {
+			$data[] = $node;
+		}
+		return $data;
+	} );
+}
 
 function proodonto_seo_meta_tags() {
 	$description = proodonto_get_meta_description();
@@ -399,6 +474,8 @@ function proodonto_get_breadcrumb_items() {
 			$items[] = array( 'label' => $categories[0]->name, 'url' => get_category_link( $categories[0] ) );
 		}
 		$items[] = array( 'label' => get_the_title(), 'url' => get_permalink() );
+	} elseif ( is_home() && get_option( 'page_for_posts' ) ) {
+		$items[] = array( 'label' => get_the_title( get_option( 'page_for_posts' ) ), 'url' => '' );
 	} elseif ( is_category() ) {
 		$items[] = array( 'label' => single_cat_title( '', false ), 'url' => '' );
 	} elseif ( is_search() ) {

@@ -118,7 +118,7 @@ get_header();
                             <div class="hero-content">
                                 <div class="container h-full">
                                     <div class="h-full align-items-center content-center">
-                                        <div class="col-lg-6">
+                                        <div class="max-w-2xl">
                                             <div class="slide-text">
                                                 <?=
                                                 get_sub_field('texto')
@@ -327,7 +327,7 @@ get_header();
 		endwhile;
 	endif;
 	?>
-	<section class="treatments">
+	<section class="treatments" id="tratamentos">
 		<div class="treatments__inner">
 
 			<div class="treatments__header">
