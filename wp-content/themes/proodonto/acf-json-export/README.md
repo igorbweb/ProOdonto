@@ -1,3 +1,10 @@
+> **Em teste (2026-08-31):** ver `migracao-abas-2026-08-31/LEIA-ME.md` —
+> migração dos grupos por seção de Home/Sobre/Vendas para 1 grupo por
+> página, organizado em abas (mesmas keys/names de campo, só muda a
+> apresentação). Os grupos por seção abaixo continuam sendo os
+> registrados em produção (`inc/acf-fields.php`) até a migração ser
+> validada e adotada.
+
 # ACF JSON — exports de referência (não carregados automaticamente)
 
 Esta pasta contém um arquivo `.json` por grupo de campos ACF do tema, no

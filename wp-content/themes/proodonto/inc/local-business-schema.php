@@ -37,8 +37,19 @@ defined( 'ABSPATH' ) || exit;
 
 add_filter( 'proodonto_json_ld_graphs', 'proodonto_local_business_json_ld_graphs' );
 
+/**
+ * Roda na Home (page-home.php) E em cada página dedicada de unidade
+ * (/aracaju/, /lagarto/, /simao-dias/ — identificadas dinamicamente por
+ * slug, ver proodonto_get_current_unit_page()). A Organization enriquecida
+ * sai nas duas situações, pra cada página carregar sozinha o contexto
+ * completo do negócio (importante pra GEO/AEO: um resultado de busca pode
+ * levar direto numa página de unidade, sem passar pela Home antes).
+ */
 function proodonto_local_business_json_ld_graphs( $graphs ) {
-	if ( ! is_page_template( 'page-home.php' ) ) {
+	$is_home      = is_page_template( 'page-home.php' );
+	$current_unit = $is_home ? null : proodonto_get_current_unit_page();
+
+	if ( ! $is_home && ! $current_unit ) {
 		return $graphs;
 	}
 
@@ -76,6 +87,9 @@ function proodonto_local_business_json_ld_graphs( $graphs ) {
 		$organization['sameAs'] = $same_as;
 	}
 
+	// O catálogo de tratamentos (repeater ACF) só existe nos campos da
+	// Home — em página de unidade, have_rows() simplesmente não acha nada
+	// e $catalog fica null (nenhum dado inventado).
 	$catalog = proodonto_get_treatments_offer_catalog( $organization_id );
 	if ( $catalog ) {
 		$organization['hasOfferCatalog'] = $catalog;
@@ -83,40 +97,131 @@ function proodonto_local_business_json_ld_graphs( $graphs ) {
 
 	$graphs[] = $organization;
 
-	/* -------------------------------------------------------------
-	 * Dentist — uma entidade por unidade real (endereço, mapa),
-	 * vinculada à Organization acima.
-	 * ---------------------------------------------------------- */
-	foreach ( proodonto_get_units() as $unit ) {
-		if ( empty( $unit['name'] ) || empty( $unit['address'] ) ) {
-			continue;
+	if ( $is_home ) {
+		/* ---------------------------------------------------------
+		 * Home: uma entidade Dentist por unidade real, cada uma já
+		 * apontando pra sua própria página quando ela existir.
+		 * -------------------------------------------------------- */
+		foreach ( proodonto_get_units() as $unit ) {
+			$dentist = proodonto_build_dentist_schema( $unit, $organization_id, $telephone, $logo_url );
+			if ( $dentist ) {
+				$graphs[] = $dentist;
+			}
 		}
 
-		$dentist = array(
-			'@type'              => 'Dentist',
-			'@id'                => home_url( '/#unidade-' . sanitize_title( $unit['name'] ) ),
-			'name'               => get_bloginfo( 'name' ) . ' — ' . $unit['name'],
-			'url'                => home_url( '/#unidades' ),
-			'address'            => proodonto_parse_br_address( $unit['address'] ),
-			'parentOrganization' => array( '@id' => $organization_id ),
-		);
-
-		if ( $telephone ) {
-			$dentist['telephone'] = $telephone;
-		}
-
-		if ( $logo_url ) {
-			$dentist['image'] = $logo_url;
-		}
-
-		if ( ! empty( $unit['maps_url'] ) ) {
-			$dentist['hasMap'] = $unit['maps_url'];
-		}
-
-		$graphs[] = $dentist;
+		return $graphs;
 	}
 
+	/* -------------------------------------------------------------
+	 * Página de unidade: só a Dentist DESSA unidade — e a própria
+	 * página (o nó WebPage que o Yoast já gera, mesmo @id = URL da
+	 * página) é amarrada a ela como entidade principal (mainEntity/
+	 * about), o padrão recomendado pelo schema.org pra página de
+	 * negócio local.
+	 * ---------------------------------------------------------- */
+	$dentist = proodonto_build_dentist_schema( $current_unit, $organization_id, $telephone, $logo_url );
+	if ( ! $dentist ) {
+		return $graphs;
+	}
+
+	$graphs[] = $dentist;
+
+	$graphs[] = array(
+		'@type'      => 'WebPage',
+		'@id'        => get_permalink(),
+		'about'      => array( '@id' => $dentist['@id'] ),
+		'mainEntity' => array( '@id' => $dentist['@id'] ),
+	);
+
 	return $graphs;
+}
+
+/**
+ * Monta o schema.org "Dentist" de uma unidade. Se existir uma página
+ * publicada com o slug da unidade (mesmo sanitize_title($unit['name'])
+ * usado no @id abaixo e nas URLs reais /aracaju/, /lagarto/,
+ * /simao-dias/), "url"/"mainEntityOfPage" apontam pra ela; senão cai no
+ * fallback da âncora "#unidades" na Home, como antes de essas páginas
+ * existirem.
+ *
+ * @return array|null null se faltar nome/endereço (dado real ausente).
+ */
+function proodonto_build_dentist_schema( $unit, $organization_id, $telephone, $logo_url ) {
+	if ( empty( $unit['name'] ) || empty( $unit['address'] ) ) {
+		return null;
+	}
+
+	$page_url = proodonto_get_unit_page_url( $unit );
+
+	$dentist = array(
+		'@type'              => 'Dentist',
+		'@id'                => home_url( '/#unidade-' . sanitize_title( $unit['name'] ) ),
+		'name'               => get_bloginfo( 'name' ) . ' — ' . $unit['name'],
+		'url'                => $page_url ? $page_url : home_url( '/#unidades' ),
+		'address'            => proodonto_parse_br_address( $unit['address'] ),
+		'parentOrganization' => array( '@id' => $organization_id ),
+	);
+
+	if ( $page_url ) {
+		$dentist['mainEntityOfPage'] = array( '@id' => $page_url );
+	}
+
+	if ( $telephone ) {
+		$dentist['telephone'] = $telephone;
+	}
+
+	if ( $logo_url ) {
+		$dentist['image'] = $logo_url;
+	}
+
+	if ( ! empty( $unit['maps_url'] ) ) {
+		$dentist['hasMap'] = $unit['maps_url'];
+	}
+
+	return $dentist;
+}
+
+/**
+ * URL da página dedicada da unidade, se ela existir e estiver publicada
+ * (slug = sanitize_title($unit['name']), mesmo padrão do @id da Dentist).
+ * Nunca publica um "url" que não existe de verdade — retorna '' se a
+ * página não existir, e o chamador decide o fallback.
+ */
+function proodonto_get_unit_page_url( $unit ) {
+	static $cache = array();
+
+	$slug = sanitize_title( $unit['name'] );
+
+	if ( isset( $cache[ $slug ] ) ) {
+		return $cache[ $slug ];
+	}
+
+	$page = get_page_by_path( $slug );
+
+	$cache[ $slug ] = ( $page && 'publish' === $page->post_status ) ? get_permalink( $page ) : '';
+
+	return $cache[ $slug ];
+}
+
+/**
+ * Se a página atual é uma das páginas dedicadas de unidade (slug bate com
+ * sanitize_title do nome de alguma unidade real, ver proodonto_get_units()
+ * em inc/units-map.php), devolve os dados dessa unidade — senão null.
+ * Assim, se um dia houver uma 4ª cidade, ela é reconhecida automaticamente
+ * (bastando existir a página com o slug certo), sem precisar mexer aqui.
+ */
+function proodonto_get_current_unit_page() {
+	if ( ! is_singular( 'page' ) ) {
+		return null;
+	}
+
+	foreach ( proodonto_get_units() as $unit ) {
+		if ( is_page( sanitize_title( $unit['name'] ) ) ) {
+			return $unit;
+		}
+	}
+
+	return null;
 }
 
 /**

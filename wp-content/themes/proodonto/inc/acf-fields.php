@@ -352,6 +352,21 @@ function proodonto_register_acf_fields() {
 		)
 	);
 
+	/* =================================================================
+	 * MIGRAÇÃO PARA ABAS (2026-08-31) — grupos por seção DESATIVADOS aqui
+	 * de propósito, temporariamente, para testar via ACF Pro (Importar)
+	 * os novos grupos consolidados (1 grupo por página, campos organi-
+	 * zados em abas) sem duplicar/conflitar com estes grupos PHP.
+	 *
+	 * Nada foi apagado: mesmas keys/names de campo, só a apresentação
+	 * (grupos separados -> abas dentro de 1 grupo) muda. Ver o mapeamento
+	 * completo em acf-json-export/de-para.json e os grupos novos em
+	 * acf-json-export/group_home.json, group_sobre.json, group_vendas.json.
+	 *
+	 * Para reverter: apague as linhas "if ( false ) :" e "endif;" que
+	 * envolvem este bloco (mantendo tudo entre elas como estava).
+	 * ================================================================= */
+	if ( false ) :
 	/* ---------------------------------------------------------------
 	 * Home — Banner (Hero). Repeater de slides do carrossel principal.
 	 * Localização por TEMPLATE (não por ID de página): funciona em
@@ -2613,4 +2628,5 @@ function proodonto_register_acf_fields() {
 			'description' => 'Título, texto e botão do CTA final da página Sobre.',
 		)
 	);
+	endif;
 }

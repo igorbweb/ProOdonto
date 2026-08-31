@@ -1377,6 +1377,7 @@
 
   .units__map {
     min-height: 440px;
+    max-height: 450px;
   }
 
   .blog__inner {

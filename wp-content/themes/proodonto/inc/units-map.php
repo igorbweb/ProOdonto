@@ -51,6 +51,182 @@ function proodonto_get_units() {
 }
 
 /**
+ * Uma unidade de proodonto_get_units(), pelo mesmo slug das páginas
+ * /aracaju/, /lagarto/, /simao-dias/ (sanitize_title() do nome) — usado
+ * pelo mapa individual (proodonto_get_unit_map_url()) e por quem mais
+ * precisar dos dados (nome, endereço) de uma unidade a partir do slug da
+ * página atual, sem duplicar o laço de busca em cada lugar.
+ *
+ * @return array|null Item de proodonto_get_units(), ou null se o slug não
+ *                     corresponder a nenhuma unidade.
+ */
+function proodonto_get_unit_by_slug( $slug ) {
+	foreach ( proodonto_get_units() as $unit ) {
+		if ( sanitize_title( $unit['name'] ) === $slug ) {
+			return $unit;
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Mapa estático INDIVIDUAL de uma unidade (um pin só, zoom bem mais
+ * "chegado" que o mapa combinado de proodonto_get_units_map_url(), que
+ * precisa enquadrar os 3 pins espalhados pelo estado). Usado na Página de
+ * Vendas (page-vendas.php) quando ela está sendo usada como landing page
+ * de uma unidade específica — ver proodonto_get_unit_map_url_for_page().
+ *
+ * Mesmo princípio de cache em disco do mapa combinado (mesmo arquivo
+ * `inc/units-map.php`, mesma pasta wp-content/uploads/proodonto/, mesmo
+ * cache por HASH do endereço + "receita" visual, mesmo transient de 1h
+ * bloqueando novas tentativas se uma geração falhar) — só a chave da
+ * unidade entra no hash/nome do arquivo, pra cada unidade ter o seu.
+ *
+ * @param string $slug Slug da unidade (aracaju, lagarto, simao-dias —
+ *                      mesmo slug das respectivas páginas).
+ * @return string URL da imagem, ou '' se a unidade não existir, não
+ *                houver chave configurada, ou a geração falhar.
+ */
+function proodonto_get_unit_map_url( $slug ) {
+	$unit = proodonto_get_unit_by_slug( $slug );
+
+	if ( ! $unit ) {
+		return '';
+	}
+
+	$api_key = function_exists( 'get_field' ) ? get_field( 'google_maps_api_key', 'option' ) : '';
+
+	if ( ! $api_key ) {
+		return '';
+	}
+
+	$hash = md5( $unit['address'] . wp_json_encode( proodonto_unit_map_recipe() ) );
+
+	$all_cache  = get_option( 'proodonto_unit_maps_cache' );
+	$all_cache  = is_array( $all_cache ) ? $all_cache : array();
+	$cache      = isset( $all_cache[ $slug ] ) ? $all_cache[ $slug ] : null;
+	$upload_dir = wp_upload_dir();
+
+	if ( is_array( $cache ) && ! empty( $cache['hash'] ) && ! empty( $cache['file'] ) && $cache['hash'] === $hash ) {
+		$path = $upload_dir['basedir'] . '/proodonto/' . $cache['file'];
+		if ( file_exists( $path ) ) {
+			return $upload_dir['baseurl'] . '/proodonto/' . $cache['file'];
+		}
+	}
+
+	// Já falhou recentemente? Não tenta de novo a cada visita — só depois de 1h.
+	if ( get_transient( 'proodonto_unit_map_failed_' . $slug ) ) {
+		return '';
+	}
+
+	$result = proodonto_generate_unit_map( $unit, $slug, $api_key, $hash );
+
+	if ( ! $result ) {
+		set_transient( 'proodonto_unit_map_failed_' . $slug, 1, HOUR_IN_SECONDS );
+	}
+
+	return $result;
+}
+
+/**
+ * Slug da unidade correspondente à página atual (aracaju, lagarto,
+ * simao-dias), ou '' se a página atual não for nenhuma delas — usado pela
+ * Página de Vendas pra decidir entre o mapa individual da unidade e o
+ * mapa combinado de sempre (ver page-vendas.php).
+ */
+function proodonto_get_current_unit_slug() {
+	$unit_slugs = array( 'aracaju', 'lagarto', 'simao-dias' );
+	$slug       = get_post_field( 'post_name', get_queried_object_id() );
+
+	return in_array( $slug, $unit_slugs, true ) ? $slug : '';
+}
+
+/**
+ * Parâmetros visuais do mapa individual — zoom bem mais "chegado" que
+ * proodonto_units_map_recipe() (aquele precisa enquadrar 3 pins
+ * espalhados pelo estado; este é um pin só, no endereço exato).
+ */
+function proodonto_unit_map_recipe() {
+	return array(
+		'size'    => '640x400',
+		'scale'   => '2',
+		'maptype' => 'roadmap',
+		'zoom'    => 15,
+	);
+}
+
+/**
+ * Faz o request à Static Maps API pra UMA unidade, salva a imagem em
+ * wp-content/uploads/proodonto/ e atualiza o cache dela dentro da opção
+ * `proodonto_unit_maps_cache` (array indexado por slug — um cache por
+ * unidade, mesma opção pras 3). Só é chamado de dentro de
+ * proodonto_get_unit_map_url() quando o cache está ausente/desatualizado.
+ */
+function proodonto_generate_unit_map( $unit, $slug, $api_key, $hash ) {
+	$query        = proodonto_unit_map_recipe();
+	$query['key'] = $api_key;
+
+	$query_string = '';
+	foreach ( $query as $param => $value ) {
+		$query_string .= $param . '=' . rawurlencode( $value ) . '&';
+	}
+
+	$query_string .= 'markers=' . rawurlencode( 'color:0x049da5|' . $unit['address'] ) . '&';
+
+	$url = 'https://maps.googleapis.com/maps/api/staticmap?' . rtrim( $query_string, '&' );
+
+	$response = wp_remote_get( $url, array( 'timeout' => 15 ) );
+
+	if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+		return '';
+	}
+
+	$body         = wp_remote_retrieve_body( $response );
+	$content_type = (string) wp_remote_retrieve_header( $response, 'content-type' );
+
+	if ( ! $body || 0 !== strpos( $content_type, 'image' ) ) {
+		return '';
+	}
+
+	$upload_dir = wp_upload_dir();
+	$target_dir = $upload_dir['basedir'] . '/proodonto';
+
+	if ( ! file_exists( $target_dir ) ) {
+		wp_mkdir_p( $target_dir );
+	}
+
+	$filename = 'unit-map-' . $slug . '-' . substr( $hash, 0, 12 ) . '.png';
+
+	if ( false === file_put_contents( $target_dir . '/' . $filename, $body ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		return '';
+	}
+
+	// Remove o arquivo do hash anterior dessa unidade, se existir, pra não acumular lixo.
+	$all_cache = get_option( 'proodonto_unit_maps_cache' );
+	$all_cache = is_array( $all_cache ) ? $all_cache : array();
+	$previous  = isset( $all_cache[ $slug ] ) ? $all_cache[ $slug ] : null;
+
+	if ( is_array( $previous ) && ! empty( $previous['file'] ) && $previous['file'] !== $filename ) {
+		$old_path = $target_dir . '/' . $previous['file'];
+		if ( file_exists( $old_path ) ) {
+			wp_delete_file( $old_path );
+		}
+	}
+
+	$all_cache[ $slug ] = array(
+		'hash' => $hash,
+		'file' => $filename,
+	);
+
+	update_option( 'proodonto_unit_maps_cache', $all_cache, false ); // Não precisa autoload.
+
+	delete_transient( 'proodonto_unit_map_failed_' . $slug );
+
+	return $upload_dir['baseurl'] . '/proodonto/' . $filename;
+}
+
+/**
  * URL (local, já em cache) da imagem do mapa com os pins das unidades.
  * Só toca a API do Google quando realmente precisa gerar/regerar.
  *

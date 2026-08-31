@@ -1,0 +1,751 @@
+{
+    "key": "group_home",
+    "title": "Home",
+    "fields": [
+        {
+            "key": "field_home_tab_banner",
+            "label": "Banner (Hero)",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Campos do banner (hero) da página Home."
+        },
+        {
+            "key": "field_home_banner",
+            "label": "Banner",
+            "name": "banner",
+            "type": "repeater",
+            "instructions": "Slides do banner principal (hero) da Home.",
+            "layout": "block",
+            "button_label": "Adicionar slide",
+            "collapsed": "field_home_banner_texto",
+            "sub_fields": [
+                {
+                    "key": "field_home_banner_desktop",
+                    "label": "Imagem (desktop)",
+                    "name": "desktop",
+                    "type": "image",
+                    "instructions": "Usada em telas a partir de 1024px.",
+                    "required": 1,
+                    "wrapper": {
+                        "width": "50"
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_home_banner_mobile",
+                    "label": "Imagem (mobile)",
+                    "name": "mobile",
+                    "type": "image",
+                    "instructions": "Usada em telas até 1023px.",
+                    "wrapper": {
+                        "width": "50"
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_home_banner_texto",
+                    "label": "Texto do slide",
+                    "name": "texto",
+                    "type": "wysiwyg",
+                    "instructions": "Conteúdo exibido sobre o banner (título/chamada do slide).",
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0
+                },
+                {
+                    "key": "field_home_banner_link_externo",
+                    "label": "Tipo de link",
+                    "name": "link_externo",
+                    "type": "select",
+                    "instructions": "Define se o slide abre um link externo, um vídeo/iframe, ou nenhum link.",
+                    "choices": {
+                        "nenhum": "Nenhum",
+                        "externo": "Link externo",
+                        "iframe": "Vídeo / iframe embutido"
+                    },
+                    "default_value": "nenhum",
+                    "return_format": "value"
+                },
+                {
+                    "key": "field_home_banner_url",
+                    "label": "URL do link externo",
+                    "name": "url",
+                    "type": "url",
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_home_banner_link_externo",
+                                "operator": "==",
+                                "value": "externo"
+                            }
+                        ]
+                    ],
+                    "placeholder": "https://..."
+                },
+                {
+                    "key": "field_home_banner_iframe",
+                    "label": "URL do vídeo / iframe",
+                    "name": "iframe",
+                    "type": "url",
+                    "instructions": "URL aberta dentro do fancybox (ex.: link do YouTube/Vimeo).",
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_home_banner_link_externo",
+                                "operator": "==",
+                                "value": "iframe"
+                            }
+                        ]
+                    ],
+                    "placeholder": "https://..."
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_about",
+            "label": "Sobre",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Campos da seção \"Sobre\" da página Home."
+        },
+        {
+            "key": "field_home_about_imagem",
+            "label": "Imagem",
+            "name": "imagem",
+            "type": "image",
+            "instructions": "Foto usada na seção \"Sobre\" (ex.: dentista atendendo) quando a galeria abaixo estiver vazia.",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_home_about_galeria",
+            "label": "Galeria de fotos",
+            "name": "galeria_sobre",
+            "type": "gallery",
+            "instructions": "Com 1 ou mais fotos aqui, a seção \"Sobre\" exibe um carrossel em vez da imagem única acima. Vazia, usa o campo \"Imagem\" (ou o espaço reservado padrão, se nenhum dos dois estiver definido).",
+            "return_format": "array",
+            "insert": "append",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_home_about_eyebrow",
+            "label": "Texto acima do título",
+            "name": "eyebrow",
+            "type": "text",
+            "default_value": "Sobre a PRÓ-ODONTO"
+        },
+        {
+            "key": "field_home_about_titulo",
+            "label": "Título",
+            "name": "titulo",
+            "type": "textarea",
+            "instructions": "Use uma quebra de linha onde quiser que o título quebre visualmente.",
+            "placeholder": "Cuidado de verdade,\ndo primeiro sorriso ao último",
+            "default_value": "Cuidado de verdade,\ndo primeiro sorriso ao último",
+            "rows": 3
+        },
+        {
+            "key": "field_home_about_texto",
+            "label": "Texto",
+            "name": "texto",
+            "type": "textarea",
+            "rows": 4,
+            "default_value": "Há mais de 20 anos ajudamos famílias a recuperar a saúde e a confiança do sorriso. Cada tratamento começa por ouvir você — e segue com transparência, tecnologia e o carinho que você merece."
+        },
+        {
+            "key": "field_home_about_estatisticas",
+            "label": "Estatísticas",
+            "name": "estatisticas",
+            "type": "repeater",
+            "instructions": "Ex.: \"+15 mil\" / \"sorrisos transformados\".",
+            "layout": "table",
+            "button_label": "Adicionar estatística",
+            "sub_fields": [
+                {
+                    "key": "field_home_about_stat_valor",
+                    "label": "Valor",
+                    "name": "valor",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    },
+                    "placeholder": "+15 mil"
+                },
+                {
+                    "key": "field_home_about_stat_legenda",
+                    "label": "Legenda",
+                    "name": "legenda",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "70"
+                    },
+                    "placeholder": "sorrisos transformados"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_marquee",
+            "label": "Letreiro de diferenciais",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Itens do letreiro de diferenciais da Home."
+        },
+        {
+            "key": "field_home_marquee_itens",
+            "label": "Itens",
+            "name": "marquee_itens",
+            "type": "repeater",
+            "instructions": "Diferenciais exibidos em loop no letreiro (marquee) abaixo do banner.",
+            "layout": "table",
+            "button_label": "Adicionar item",
+            "sub_fields": [
+                {
+                    "key": "field_home_marquee_label",
+                    "label": "Texto",
+                    "name": "label",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "60"
+                    },
+                    "placeholder": "Atendimento humanizado"
+                },
+                {
+                    "key": "field_home_marquee_icone",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt; (ex.: &lt;path d=\"...\"/&gt;), sem a tag &lt;svg&gt; em volta. ViewBox fixo em 0 0 24 24.",
+                    "wrapper": {
+                        "width": "40"
+                    },
+                    "rows": 2
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_results",
+            "label": "Resultados (Antes e Depois)",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Cabeçalho e pacientes da seção \"Resultados\" (antes e depois) da Home."
+        },
+        {
+            "key": "field_home_results_eyebrow",
+            "label": "Texto acima do título",
+            "name": "results_eyebrow",
+            "type": "text",
+            "default_value": "Resultados reais",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_results_titulo",
+            "label": "Título",
+            "name": "results_titulo",
+            "type": "text",
+            "default_value": "Sorrisos transformados",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_results_cta_label",
+            "label": "Texto do botão (CTA)",
+            "name": "results_cta_label",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "default_value": "Quero um sorriso assim",
+            "wrapper": {
+                "width": "34"
+            }
+        },
+        {
+            "key": "field_home_results_texto",
+            "label": "Texto",
+            "name": "results_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Veja alguns dos resultados que conquistamos com nossos pacientes."
+        },
+        {
+            "key": "field_home_results_itens",
+            "label": "Pacientes",
+            "name": "results_itens",
+            "type": "repeater",
+            "instructions": "Foto real do paciente (composição única antes/depois). Sem informação de tratamento de propósito — ver comentário original em page-home.php.",
+            "layout": "table",
+            "button_label": "Adicionar paciente",
+            "sub_fields": [
+                {
+                    "key": "field_home_results_nome",
+                    "label": "Nome",
+                    "name": "nome",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_home_results_foto",
+                    "label": "Foto",
+                    "name": "foto",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "wrapper": {
+                        "width": "70"
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_treatments",
+            "label": "Tratamentos",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Cabeçalho e cards da seção \"Tratamentos\" da Home."
+        },
+        {
+            "key": "field_home_treatments_eyebrow",
+            "label": "Texto acima do título",
+            "name": "treatments_eyebrow",
+            "type": "text",
+            "default_value": "Tratamentos",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_treatments_titulo",
+            "label": "Título",
+            "name": "treatments_titulo",
+            "type": "text",
+            "default_value": "Como podemos ajudar você",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_treatments_texto",
+            "label": "Texto",
+            "name": "treatments_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Todas as especialidades em um só lugar, com profissionais dedicados a cada tipo de cuidado."
+        },
+        {
+            "key": "field_home_treatments_itens",
+            "label": "Tratamentos",
+            "name": "treatments_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar tratamento",
+            "sub_fields": [
+                {
+                    "key": "field_home_treatments_titulo_item",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_home_treatments_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "textarea",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "45"
+                    }
+                },
+                {
+                    "key": "field_home_treatments_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "25"
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_shorts",
+            "label": "Shorts (YouTube)",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Carrossel de vídeos (YouTube Shorts) entre \"Tratamentos\" e \"Passo a passo\"."
+        },
+        {
+            "key": "field_home_shorts_aviso",
+            "label": "",
+            "name": "shorts_aviso",
+            "type": "message",
+            "message": "Adicione o link de cada vídeo do YouTube abaixo (Shorts, \"watch?v=\" ou \"youtu.be\" — qualquer um funciona). A miniatura e o player são gerados automaticamente a partir do link, sem precisar enviar nenhuma imagem. <strong>Sem nenhum vídeo cadastrado, esta seção não aparece no site.</strong>"
+        },
+        {
+            "key": "field_home_shorts_eyebrow",
+            "label": "Texto acima do título",
+            "name": "shorts_eyebrow",
+            "type": "text",
+            "default_value": "Vídeos",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_shorts_titulo",
+            "label": "Título",
+            "name": "shorts_titulo",
+            "type": "text",
+            "default_value": "Acompanhe nos nossos Shorts",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_shorts_texto",
+            "label": "Texto",
+            "name": "shorts_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Bastidores, dicas rápidas e resultados reais — direto do nosso canal no YouTube.",
+            "wrapper": {
+                "width": "34"
+            }
+        },
+        {
+            "key": "field_home_shorts_itens",
+            "label": "Vídeos",
+            "name": "shorts_itens",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Adicionar vídeo",
+            "sub_fields": [
+                {
+                    "key": "field_home_shorts_url",
+                    "label": "Link do YouTube",
+                    "name": "url",
+                    "type": "url",
+                    "instructions": "Aceita link de Shorts, vídeo normal (watch?v=) ou youtu.be — o ID é extraído automaticamente.",
+                    "placeholder": "https://www.youtube.com/shorts/XXXXXXXXXXX"
+                },
+                {
+                    "key": "field_home_shorts_titulo_item",
+                    "label": "Título / legenda (opcional)",
+                    "name": "titulo",
+                    "type": "text",
+                    "instructions": "Exibido como legenda sobre a miniatura, se preenchido."
+                },
+                {
+                    "key": "field_home_shorts_capa",
+                    "label": "Capa personalizada (opcional)",
+                    "name": "capa_personalizada",
+                    "type": "image",
+                    "instructions": "Sem capa própria, usamos a miniatura automática do vídeo no YouTube.",
+                    "return_format": "array",
+                    "preview_size": "medium"
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_steps",
+            "label": "Passo a passo",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Cabeçalho e etapas da seção \"Passo a passo\" da Home."
+        },
+        {
+            "key": "field_home_steps_eyebrow",
+            "label": "Texto acima do título",
+            "name": "steps_eyebrow",
+            "type": "text",
+            "default_value": "Passo a passo",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_steps_titulo",
+            "label": "Título",
+            "name": "steps_titulo",
+            "type": "text",
+            "default_value": "Como é o seu tratamento",
+            "wrapper": {
+                "width": "50"
+            }
+        },
+        {
+            "key": "field_home_steps_itens",
+            "label": "Etapas",
+            "name": "steps_itens",
+            "type": "repeater",
+            "instructions": "A numeração \"ETAPA 01, 02...\" é automática, na ordem das linhas abaixo.",
+            "layout": "block",
+            "button_label": "Adicionar etapa",
+            "sub_fields": [
+                {
+                    "key": "field_home_steps_label_item",
+                    "label": "Nome da etapa",
+                    "name": "label",
+                    "type": "text",
+                    "wrapper": {
+                        "width": "30"
+                    }
+                },
+                {
+                    "key": "field_home_steps_texto_item",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "textarea",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "45"
+                    }
+                },
+                {
+                    "key": "field_home_steps_icone_item",
+                    "label": "Ícone (SVG)",
+                    "name": "icone_svg",
+                    "type": "textarea",
+                    "instructions": "Conteúdo interno do &lt;svg&gt;, viewBox 0 0 24 24.",
+                    "rows": 2,
+                    "wrapper": {
+                        "width": "15"
+                    }
+                },
+                {
+                    "key": "field_home_steps_sucesso_item",
+                    "label": "Etapa final (estilo de destaque)",
+                    "name": "sucesso",
+                    "type": "true_false",
+                    "ui": 1,
+                    "default_value": 0,
+                    "wrapper": {
+                        "width": "10"
+                    }
+                }
+            ]
+        },
+        {
+            "key": "field_home_tab_reviews",
+            "label": "Avaliações",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Cabeçalho da seção \"Avaliações\" da Home (o widget de avaliações em si vem do plugin, via shortcode)."
+        },
+        {
+            "key": "field_home_reviews_eyebrow",
+            "label": "Texto acima do título",
+            "name": "reviews_eyebrow",
+            "type": "text",
+            "default_value": "Avaliações",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_reviews_titulo",
+            "label": "Título",
+            "name": "reviews_titulo",
+            "type": "text",
+            "default_value": "O que dizem sobre nós",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_reviews_texto",
+            "label": "Texto",
+            "name": "reviews_texto",
+            "type": "text",
+            "default_value": "Depoimentos reais de quem já passou pela PRÓ-ODONTO.",
+            "wrapper": {
+                "width": "34"
+            }
+        },
+        {
+            "key": "field_home_tab_units",
+            "label": "Unidades (cabeçalho)",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Cabeçalho da seção \"Unidades\" da Home."
+        },
+        {
+            "key": "field_home_units_aviso",
+            "label": "",
+            "name": "aviso_unidades",
+            "type": "message",
+            "message": "A lista de unidades (endereços, links do Maps/WhatsApp) é editada em código, em <code>inc/units-map.php</code> — é a mesma fonte usada para gerar o mapa estático da seção. Aqui você edita só os textos de cabeçalho abaixo."
+        },
+        {
+            "key": "field_home_units_eyebrow",
+            "label": "Texto acima do título",
+            "name": "units_eyebrow",
+            "type": "text",
+            "default_value": "Unidades",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_units_titulo",
+            "label": "Título",
+            "name": "units_titulo",
+            "type": "text",
+            "default_value": "Uma PRÓ-ODONTO perto de você",
+            "wrapper": {
+                "width": "33"
+            }
+        },
+        {
+            "key": "field_home_units_texto",
+            "label": "Texto",
+            "name": "units_texto",
+            "type": "text",
+            "default_value": "Escolha a unidade mais próxima e fale direto com a nossa equipe.",
+            "wrapper": {
+                "width": "34"
+            }
+        },
+        {
+            "key": "field_home_tab_blog",
+            "label": "Blog",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Cabeçalho e posts em destaque da seção \"Blog\" da Home."
+        },
+        {
+            "key": "field_home_blog_eyebrow",
+            "label": "Texto acima do título",
+            "name": "blog_eyebrow",
+            "type": "text",
+            "default_value": "Blog",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_home_blog_titulo",
+            "label": "Título",
+            "name": "blog_titulo",
+            "type": "text",
+            "default_value": "Dicas para o seu sorriso",
+            "wrapper": {
+                "width": "25"
+            }
+        },
+        {
+            "key": "field_home_blog_quantidade",
+            "label": "Quantidade de posts",
+            "name": "blog_quantidade",
+            "type": "number",
+            "instructions": "Quantos dos últimos posts publicados exibir no carrossel.",
+            "default_value": 6,
+            "min": 3,
+            "max": 12,
+            "step": 1,
+            "wrapper": {
+                "width": "15"
+            }
+        },
+        {
+            "key": "field_home_blog_link_label",
+            "label": "Texto do link \"ver todos\"",
+            "name": "blog_link_label",
+            "type": "text",
+            "default_value": "Ver todos os artigos →",
+            "wrapper": {
+                "width": "17.5"
+            }
+        },
+        {
+            "key": "field_home_blog_link_url",
+            "label": "URL do link \"ver todos\"",
+            "name": "blog_link_url",
+            "type": "url",
+            "instructions": "Em branco, usa automaticamente a página de posts do site (Configurações → Leitura).",
+            "wrapper": {
+                "width": "17.5"
+            }
+        },
+        {
+            "key": "field_home_tab_closing_cta",
+            "label": "CTA final",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0,
+            "instructions": "Título, texto e botão do CTA final da Home."
+        },
+        {
+            "key": "field_home_closing_titulo",
+            "label": "Título",
+            "name": "closing_titulo",
+            "type": "text",
+            "default_value": "Vamos cuidar do seu sorriso?"
+        },
+        {
+            "key": "field_home_closing_texto",
+            "label": "Texto",
+            "name": "closing_texto",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Fale agora com a nossa equipe pelo WhatsApp e agende sua avaliação — é rápido, gratuito e sem compromisso."
+        },
+        {
+            "key": "field_home_closing_botao_label",
+            "label": "Texto do botão",
+            "name": "closing_botao_label",
+            "type": "text",
+            "instructions": "O link usa sempre o WhatsApp padrão do tema (Opções do Tema).",
+            "default_value": "Chamar no WhatsApp"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-home.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Todos os campos da página Home, organizados em abas (1 aba por seção antiga). Migrado a partir dos grupos separados group_home_*.",
+    "show_in_rest": 0,
+    "modified": 1754251200
+}
