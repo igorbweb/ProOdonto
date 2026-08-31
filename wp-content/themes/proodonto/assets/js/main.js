@@ -35,6 +35,13 @@
 		}
 
 		toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+
+		// Fechar o menu mobile também recolhe qualquer acordeão ("Unidades")
+		// que tenha ficado aberto — reabrir o menu depois sempre começa do
+		// mesmo estado inicial (tudo fechado).
+		if ( ! open ) {
+			setMobileAccordionOpen( null );
+		}
 	}
 
 	toggle.addEventListener( 'click', function () {
@@ -54,6 +61,99 @@
 			setMenuOpen( false );
 		} );
 	}
+
+	// Acordeão "Unidades" dentro do menu mobile — mesma técnica de colapso
+	// suave do painel #mobile-menu (grid-template-rows 0fr → 1fr), só que
+	// aninhada. Toque alterna aberto/fechado; só um fica aberto por vez.
+	var accordions = menu.querySelectorAll( '.mobile-nav-accordion' );
+
+	function setMobileAccordionOpen( accordionToOpen ) {
+		for ( var a = 0; a < accordions.length; a++ ) {
+			var accordion = accordions[ a ];
+			var open = accordion === accordionToOpen;
+			var accordionTrigger = accordion.querySelector( '.mobile-nav-accordion__trigger' );
+			var accordionPanel = accordion.querySelector( '.mobile-nav-accordion__panel' );
+
+			if ( accordionPanel ) {
+				accordionPanel.classList.toggle( 'grid-rows-[1fr]', open );
+				accordionPanel.classList.toggle( 'grid-rows-[0fr]', ! open );
+			}
+
+			if ( accordionTrigger ) {
+				accordionTrigger.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+			}
+		}
+	}
+
+	for ( var m = 0; m < accordions.length; m++ ) {
+		( function ( accordion ) {
+			var accordionTrigger = accordion.querySelector( '.mobile-nav-accordion__trigger' );
+
+			if ( ! accordionTrigger ) {
+				return;
+			}
+
+			accordionTrigger.addEventListener( 'click', function () {
+				var isCurrentlyOpen = 'true' === accordionTrigger.getAttribute( 'aria-expanded' );
+				setMobileAccordionOpen( isCurrentlyOpen ? null : accordion );
+			} );
+		} )( accordions[ m ] );
+	}
+} )();
+
+/**
+ * Dropdown "Unidades" no menu desktop — abre no hover via CSS puro
+ * (:hover/:focus-within, ver .nav-dropdown em assets/css/main.css) e
+ * também no clique/toque (classe .is-open), pra cobrir touch e teclado
+ * além do mouse. Clicar fora ou apertar Esc fecha.
+ */
+( function () {
+	'use strict';
+
+	var dropdowns = document.querySelectorAll( '.nav-dropdown' );
+
+	if ( ! dropdowns.length ) {
+		return;
+	}
+
+	function closeAllDropdowns() {
+		for ( var d = 0; d < dropdowns.length; d++ ) {
+			dropdowns[ d ].classList.remove( 'is-open' );
+
+			var trigger = dropdowns[ d ].querySelector( '.nav-dropdown__trigger' );
+			if ( trigger ) {
+				trigger.setAttribute( 'aria-expanded', 'false' );
+			}
+		}
+	}
+
+	for ( var i = 0; i < dropdowns.length; i++ ) {
+		( function ( dropdown ) {
+			var trigger = dropdown.querySelector( '.nav-dropdown__trigger' );
+
+			if ( ! trigger ) {
+				return;
+			}
+
+			trigger.addEventListener( 'click', function ( event ) {
+				var wasOpen = dropdown.classList.contains( 'is-open' );
+				event.stopPropagation();
+				closeAllDropdowns();
+				if ( ! wasOpen ) {
+					dropdown.classList.add( 'is-open' );
+					trigger.setAttribute( 'aria-expanded', 'true' );
+				}
+			} );
+		} )( dropdowns[ i ] );
+	}
+
+	document.addEventListener( 'click', closeAllDropdowns );
+
+	document.addEventListener( 'keydown', function ( event ) {
+		if ( 'Escape' === event.key ) {
+			closeAllDropdowns();
+		}
+	} );
 } )();
 
 /**

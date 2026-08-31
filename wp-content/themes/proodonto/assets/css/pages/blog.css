@@ -1,26 +1,176 @@
 /*
- * CSS da página "Blog" (slug: blog).
- * Gerado automaticamente em 2026-08-12 18:14 — mobile-first, edite à vontade.
- * Carregado apenas nesta página via inc/enqueue.php.
+ * CSS da página "Blog" (slug: blog) — índice do blog.
+ * Gerado automaticamente em 2026-08-12 18:14, redesenhado em 2026-08-28.
+ * Mobile-first. Carregado apenas nesta rota via inc/enqueue.php (is_home()).
+ *
+ * O card/grid/paginação (.blog-card, .blog-grid, .blog-index, .pagination)
+ * viraram componentes globais em assets/css/main.css — também usados pelo
+ * arquivo de categoria (archive.php). Este arquivo só tem o que é
+ * específico do hero do índice do blog: eyebrow, H1, texto editável da
+ * página, chips de categoria e o post em destaque.
  */
 
-.page-blog {
+/* ---------------------------------------------------------------------
+   Hero — eyebrow, H1, texto editável da página, chips de categoria.
+   ------------------------------------------------------------------ */
+.blog-hero {
+	background: #faf7f2;
+	padding-block: 40px 32px;
 }
 
-/* Tablet */
-@media (min-width: 600px) {
-	.page-blog {
-	}
+.blog-hero__eyebrow {
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: var(--color-cta);
+	margin: var(--space-3) 0 12px;
+}
+
+.blog-hero__title {
+	font-family: var(--font-heading);
+	font-weight: 500;
+	font-size: var(--fs-h1);
+	line-height: var(--lh-heading);
+	letter-spacing: -0.4px;
+	color: #063e42;
+	margin: 0 0 16px;
+}
+
+.blog-hero__text {
+	max-width: 640px;
+	color: var(--color-text-light);
+	font-size: var(--fs-base);
+}
+
+.blog-hero__text p {
+	margin: 0 0 var(--space-2);
+}
+
+.blog-cats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: var(--space-4);
+}
+
+.blog-cats__pill {
+	display: inline-block;
+	padding: 8px 16px;
+	border: 1px solid #e0d9cd;
+	border-radius: 999px;
+	background: #fff;
+	color: #063e42;
+	font-size: 13.5px;
+	font-weight: 600;
+	transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.blog-cats__pill:hover {
+	background: var(--color-cta);
+	border-color: var(--color-cta);
+	color: #fff;
+	text-decoration: none;
+}
+
+/* ---------------------------------------------------------------------
+   Estado vazio + post em destaque (só na 1ª página do índice).
+   ------------------------------------------------------------------ */
+.blog-empty {
+	text-align: center;
+	color: var(--color-text-light);
+	padding-block: var(--space-6);
+}
+
+.blog-featured {
+	display: block;
+	background: #fff;
+	border: 1px solid #eceff4;
+	border-radius: 18px;
+	overflow: hidden;
+	margin-bottom: 32px;
+}
+
+.blog-featured:hover {
+	text-decoration: none;
+}
+
+.blog-featured__media {
+	aspect-ratio: 3 / 2;
+	overflow: hidden;
+}
+
+.blog-featured__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.blog-featured__body {
+	padding: 24px 22px 26px;
+}
+
+.blog-featured__category {
+	font-size: 12.5px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: var(--color-cta);
+	margin: 0 0 10px;
+}
+
+.blog-featured__title {
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: var(--fs-h3);
+	line-height: 1.25;
+	color: #123436;
+	margin: 0 0 12px;
+}
+
+.blog-featured__excerpt {
+	color: var(--color-text-light);
+	margin: 0 0 14px;
+}
+
+.blog-featured__meta {
+	font-size: 13.5px;
+	color: #8a97a6;
+	margin: 0;
 }
 
 /* Desktop */
 @media (min-width: 900px) {
-	.page-blog {
+	.blog-hero {
+		padding-block: 56px 40px;
+	}
+
+	.blog-featured {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: stretch;
+	}
+
+	.blog-featured__media {
+		aspect-ratio: auto;
+		height: 100%;
+	}
+
+	.blog-featured__body {
+		padding: 32px 36px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.blog-featured__title {
+		font-size: 26px;
 	}
 }
 
 /* Desktop grande */
 @media (min-width: 1200px) {
-	.page-blog {
+	.blog-hero__title {
+		font-size: 3rem;
 	}
 }

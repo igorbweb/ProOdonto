@@ -6,6 +6,14 @@
  * Este arquivo NÃO é sobrescrito em publicações futuras — edite à vontade.
  * O CSS correspondente fica em assets/css/pages/blog.css e é carregado
  * automaticamente apenas nesta página (ver inc/enqueue.php).
+ *
+ * NOTA (2026-08-28): "Blog" é a Página de posts do site (Configurações →
+ * Leitura → "Página de posts"), então o WordPress nunca chega a usar este
+ * arquivo — para essa rota, is_home() tem prioridade sobre page-{slug}.php
+ * na Template Hierarchy, e o WordPress usa home.php em vez deste template.
+ * O índice do blog (hero, categorias, destaque, grade, paginação) fica em
+ * home.php; este arquivo só entraria em cena se "Página de posts" fosse
+ * desmarcada nas Configurações de Leitura.
  */
 
 get_header();
