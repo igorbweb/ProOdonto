@@ -250,6 +250,13 @@ get_header();
 	// no card de propósito: não é conhecido qual procedimento cada paciente
 	// fez de verdade, e inventar isso seria afirmar algo factual sobre uma
 	// pessoa real e identificável — diferente de um placeholder genérico.
+	//
+	// Legenda de credencial (nome + CRO) hardcoded de propósito: é o mesmo
+	// responsável técnico já exibido no rodapé (footer.php), exigido nas
+	// normas de publicidade do CFO para fotos de resultado de tratamento.
+	$proodonto_results_credencial_nome = 'Dr. Alisson M. Santana dos Santos';
+	$proodonto_results_credencial_cro  = 'CRO-SE 3147';
+
 	$proodonto_results = array();
 	if ( have_rows( 'results_itens' ) ) :
 		while ( have_rows( 'results_itens' ) ) : the_row();
@@ -281,6 +288,10 @@ get_header();
 											alt="<?php echo esc_attr( sprintf( '%s, paciente PRÓ-ODONTO — antes e depois do tratamento', $proodonto_result['nome'] ) ); ?>"
 											loading="lazy"
 										/>
+										<p class="result-card__credential">
+											<span class="result-card__credential-nome"><?php echo esc_html( $proodonto_results_credencial_nome ); ?></span>
+											<span class="result-card__credential-cro"><?php echo esc_html( $proodonto_results_credencial_cro ); ?></span>
+										</p>
 									</div>
 								</div>
 							</div>
