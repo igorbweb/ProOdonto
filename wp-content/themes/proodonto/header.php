@@ -9,16 +9,35 @@
  * altura do header, porque sticky já reserva seu próprio espaço no
  * fluxo normal do documento.
  *
- * O CTA (texto + URL) é cadastrável nas Opções do Tema — ver
- * proodonto_get_header_cta_label()/proodonto_get_header_cta_url() em
- * inc/options-page.php. Sem URL própria cadastrada, cai no WhatsApp
- * padrão do tema. Nav hardcoded por enquanto — sem menu dinâmico ainda.
+ * O texto do CTA é cadastrável nas Opções do Tema — ver
+ * proodonto_get_header_cta_label() em inc/options-page.php. Nav
+ * hardcoded por enquanto — sem menu dinâmico ainda.
+ *
+ * A URL do CTA depende da página: na Página de Vendas (ver
+ * proodonto_is_vendas_page() em inc/template-functions.php) usa o
+ * custom field "cta_url" daquela página específica, pra cada campanha
+ * poder ter seu próprio destino (mesma regra do footer.php). Nas
+ * demais páginas, abre o modal do Agregador de Links de Contato
+ * (href="#agregador-links", interceptado por assets/js/main.js — ver
+ * proodonto_link_aggregator_is_enabled() em inc/options-page.php)
+ * quando ativo; sem agregador ativo, cai no WhatsApp padrão do tema via
+ * proodonto_get_header_cta_url().
  */
 
 defined( 'ABSPATH' ) || exit;
 
 $proodonto_header_cta_label = function_exists( 'proodonto_get_header_cta_label' ) ? proodonto_get_header_cta_label() : 'Agendar avaliação';
 $proodonto_header_cta_url   = function_exists( 'proodonto_get_header_cta_url' ) ? proodonto_get_header_cta_url() : '#';
+
+if ( function_exists( 'proodonto_is_vendas_page' ) && proodonto_is_vendas_page() && function_exists( 'get_field' ) ) {
+	$proodonto_header_vendas_cta_url = get_field( 'cta_url' );
+
+	if ( $proodonto_header_vendas_cta_url ) {
+		$proodonto_header_cta_url = $proodonto_header_vendas_cta_url;
+	}
+} elseif ( function_exists( 'proodonto_link_aggregator_is_enabled' ) && proodonto_link_aggregator_is_enabled() ) {
+	$proodonto_header_cta_url = '#agregador-links';
+}
 
 // "Unidades" vira um dropdown com as 3 páginas de unidade (aracaju,
 // lagarto, simao-dias — ver proodonto_get_unit_nav_pages() em
