@@ -198,49 +198,51 @@ get_header();
 	endif;
 	?>
 	<section class="about">
-		<div class="about__grid">
+		<div class="about__inner">
+			<div class="about__grid">
 
-			<div class="about__media">
-				<?php if ( $proodonto_about_gallery ) : ?>
-					<div class="about-swiper swiper">
-						<div class="swiper-wrapper">
-							<?php foreach ( $proodonto_about_gallery as $proodonto_about_photo ) : ?>
-								<div class="swiper-slide">
-									<img
-										src="<?php echo esc_url( $proodonto_about_photo['url'] ); ?>"
-										alt="<?php echo esc_attr( $proodonto_about_photo['alt'] ?: 'Foto — dentista atendendo com cuidado' ); ?>"
-										loading="lazy"
-									/>
-								</div>
-							<?php endforeach; ?>
+				<div class="about__media">
+					<?php if ( $proodonto_about_gallery ) : ?>
+						<div class="about-swiper swiper">
+							<div class="swiper-wrapper">
+								<?php foreach ( $proodonto_about_gallery as $proodonto_about_photo ) : ?>
+									<div class="swiper-slide">
+										<img
+											src="<?php echo esc_url( $proodonto_about_photo['url'] ); ?>"
+											alt="<?php echo esc_attr( $proodonto_about_photo['alt'] ?: 'Foto — dentista atendendo com cuidado' ); ?>"
+											loading="lazy"
+										/>
+									</div>
+								<?php endforeach; ?>
+							</div>
+							<?php if ( count( $proodonto_about_gallery ) > 1 ) : ?>
+								<div class="swiper-pagination"></div>
+							<?php endif; ?>
 						</div>
-						<?php if ( count( $proodonto_about_gallery ) > 1 ) : ?>
-							<div class="swiper-pagination"></div>
-						<?php endif; ?>
-					</div>
-				<?php else : ?>
-					<img
-						src="<?php echo $proodonto_about_image ? esc_url( $proodonto_about_image['url'] ) : esc_attr( $proodonto_placeholder_img ); ?>"
-						alt="<?php echo esc_attr( $proodonto_about_image['alt'] ?? 'Foto — dentista atendendo com cuidado' ); ?>"
-						loading="lazy"
-					/>
-				<?php endif; ?>
-			</div>
-
-			<div class="about__content">
-				<p class="about__eyebrow"><?php echo esc_html( get_field( 'eyebrow' ) ); ?></p>
-				<h2 class="about__title"><?php echo nl2br( esc_html( get_field( 'titulo' ) ) ); ?></h2>
-				<p class="about__text"><?php echo esc_html( get_field( 'texto' ) ); ?></p>
-				<div class="about__stats">
-					<?php foreach ( $proodonto_about_stats as $proodonto_stat ) : ?>
-						<div class="about__stat">
-							<div class="about__stat-value"><?php echo esc_html( $proodonto_stat['valor'] ); ?></div>
-							<div class="about__stat-label"><?php echo esc_html( $proodonto_stat['legenda'] ); ?></div>
-						</div>
-					<?php endforeach; ?>
+					<?php else : ?>
+						<img
+							src="<?php echo $proodonto_about_image ? esc_url( $proodonto_about_image['url'] ) : esc_attr( $proodonto_placeholder_img ); ?>"
+							alt="<?php echo esc_attr( $proodonto_about_image['alt'] ?? 'Foto — dentista atendendo com cuidado' ); ?>"
+							loading="lazy"
+						/>
+					<?php endif; ?>
 				</div>
-			</div>
 
+				<div class="about__content">
+					<p class="about__eyebrow"><?php echo esc_html( get_field( 'eyebrow' ) ); ?></p>
+					<h2 class="about__title"><?php echo nl2br( esc_html( get_field( 'titulo' ) ) ); ?></h2>
+					<p class="about__text"><?php echo esc_html( get_field( 'texto' ) ); ?></p>
+					<div class="about__stats">
+						<?php foreach ( $proodonto_about_stats as $proodonto_stat ) : ?>
+							<div class="about__stat">
+								<div class="about__stat-value"><?php echo esc_html( $proodonto_stat['valor'] ); ?></div>
+								<div class="about__stat-label"><?php echo esc_html( $proodonto_stat['legenda'] ); ?></div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</section>
 

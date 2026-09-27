@@ -3,6 +3,194 @@
     "title": "Página de Vendas",
     "fields": [
         {
+            "key": "field_vendas_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_vendas_hero_eyebrow",
+            "label": "Linha de contexto",
+            "name": "hero_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Texto curto acima do título (ex.: nome da campanha ou do tratamento em destaque).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_vendas_hero_titulo",
+            "label": "Título principal (H1)",
+            "name": "hero_titulo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "É o único &lt;h1&gt; da página.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_vendas_hero_texto",
+            "label": "Texto de apoio",
+            "name": "hero_texto",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Aceita &lt;strong&gt; para destacar um trecho.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_vendas_hero_imagem",
+            "label": "Imagem (desktop)",
+            "name": "hero_imagem",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "A partir de 900px de largura. Sem imagem, o hero vira coluna única centralizada.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_vendas_hero_imagem_mobile",
+            "label": "Imagem (mobile)",
+            "name": "hero_imagem_mobile",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Usada abaixo de 900px. Vazia, usa a imagem de desktop.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_vendas_hero_depoimento_texto",
+            "label": "Depoimento do Google",
+            "name": "hero_depoimento_texto",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Sem valor, o card de depoimento não aparece.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_vendas_hero_depoimento_autor",
+            "label": "Nome de quem avaliou",
+            "name": "hero_depoimento_autor",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_vendas_hero_depoimento_data",
+            "label": "Mês e ano",
+            "name": "hero_depoimento_data",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "ex.: março de 2026",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_vendas_tab_cta",
             "label": "CTA",
             "name": "",
@@ -26,7 +214,7 @@
             "name": "cta_url",
             "aria-label": "",
             "type": "url",
-            "instructions": "Usada em todos os botões de CTA da página (Resultados, Sobre, Tratamentos, Passo a passo, Avaliações, Unidades e o CTA final) — pode ser um link wa.me\/, um link de rastreio (ex.: api.upviewcrm.com) ou qualquer outra URL de destino da campanha. O banner (hero) tem seus próprios links, definidos slide a slide, e não é afetado por este campo. Se deixado em branco, usa o WhatsApp padrão do tema.",
+            "instructions": "Usada em todos os botões de CTA da página (Hero, Resultados, Sobre, Tratamentos, Passo a passo, Avaliações, Unidades e o CTA final) — pode ser um link wa.me\/, um link de rastreio (ex.: api.upviewcrm.com) ou qualquer outra URL de destino da campanha. Se deixado em branco, usa o WhatsApp padrão do tema.",
             "required": false,
             "conditional_logic": false,
             "wrapper": {
@@ -1384,5 +1572,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1788176605
+    "modified": 1789833600
 }

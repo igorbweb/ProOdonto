@@ -108,10 +108,13 @@
   background: #fff;
 }
 
-.about__grid {
+.about__inner {
   max-width: 1180px;
   margin-inline: auto;
   padding: 48px 20px;
+}
+
+.about__grid {
   display: grid;
   gap: 40px;
   align-items: center;
@@ -756,6 +759,7 @@
 .steps {
   background: var(--color-cta-dark);
   color: #fff;
+  overflow: hidden;
 }
 
 .steps__inner {
@@ -789,13 +793,23 @@
 }
 
 .steps__grid {
-  display: grid;
+  display: flex;
+  flex-wrap: nowrap;
   gap: 40px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scroll-snap-type: x mandatory;
+  /* centraliza o primeiro/último step permitindo rolar até o centro deles */
+  padding-inline: calc(50% - 160px);
 }
 
 .step {
   text-align: center;
   position: relative;
+  flex: 0 0 320px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .step__badge {
@@ -1304,8 +1318,16 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .steps {
+    overflow: visible;
+  }
+
   .steps__grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    overflow: visible;
+    scroll-snap-type: none;
+    padding-inline: 0;
   }
 
   .units__map {
@@ -1343,10 +1365,13 @@
   .page-home {
   }
 
+  .about__inner {
+    padding: 84px 24px;
+  }
+
   .about__grid {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 60px;
-    padding: 84px 24px;
   }
 
   .about__media {
