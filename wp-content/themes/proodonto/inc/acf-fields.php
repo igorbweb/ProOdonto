@@ -1218,7 +1218,7 @@ function proodonto_register_acf_fields() {
 					'label'        => 'URL dos CTAs da página',
 					'name'         => 'cta_url',
 					'type'         => 'url',
-					'instructions' => 'Usada em todos os botões de CTA da página (Resultados, Sobre, Tratamentos, Passo a passo, Avaliações, Unidades e o CTA final) — pode ser um link wa.me/, um link de rastreio (ex.: api.upviewcrm.com) ou qualquer outra URL de destino da campanha. O banner (hero) tem seus próprios links, definidos slide a slide, e não é afetado por este campo. Se deixado em branco, usa o WhatsApp padrão do tema.',
+					'instructions' => 'Usada em todos os botões de CTA da página (Hero, Resultados, Sobre, Tratamentos, Passo a passo, Avaliações, Unidades e o CTA final) — pode ser um link wa.me/, um link de rastreio (ex.: api.upviewcrm.com) ou qualquer outra URL de destino da campanha. Se deixado em branco, usa o WhatsApp padrão do tema.',
 					'placeholder'  => 'https://wa.me/5511999999999?text=...',
 				),
 			),

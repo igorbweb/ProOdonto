@@ -180,6 +180,40 @@ function proodonto_enqueue_assets() {
 				);
 			}
 		}
+
+		// --- Hero da Página de Vendas (componente próprio, fora do padrão
+		// assets/css/pages/{slug}.css — ver assets/css/hero-vendas.css e
+		// preview/hero-vendas.html) + JS da barra fixa de CTA. Só aqui: o
+		// hero das páginas de unidade usa seu próprio arquivo irmão
+		// (assets/css/hero-unidade.css), carregado à parte quando essas
+		// páginas existirem. ---------------------------------------------
+		if ( $is_vendas ) {
+			$hero_vendas_css_rel = 'assets/css/hero-vendas.css';
+
+			if ( file_exists( PROODONTO_DIR . '/' . $hero_vendas_css_rel ) ) {
+				wp_enqueue_style(
+					'proodonto-hero-vendas',
+					PROODONTO_URI . '/' . $hero_vendas_css_rel,
+					array( 'proodonto-main' ),
+					proodonto_asset_version( $hero_vendas_css_rel )
+				);
+			}
+
+			$vendas_js_rel = 'assets/js/pages/vendas.js';
+
+			if ( file_exists( PROODONTO_DIR . '/' . $vendas_js_rel ) ) {
+				wp_enqueue_script(
+					'proodonto-page-vendas',
+					PROODONTO_URI . '/' . $vendas_js_rel,
+					array(),
+					proodonto_asset_version( $vendas_js_rel ),
+					array(
+						'strategy'  => 'defer',
+						'in_footer' => true,
+					)
+				);
+			}
+		}
 	}
 
 	// --- CSS do índice do blog (home.php) ----------------------------------

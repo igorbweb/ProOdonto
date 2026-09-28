@@ -1,0 +1,533 @@
+/*
+ * Hero da Página de Vendas (Direção A) — mobile-first, breakpoints do
+ * tema (README.md → Convenções): min-width 600px / 900px / 1200px.
+ *
+ * Diferenças em relação ao hero das páginas de unidade
+ * (assets/css/hero-unidade.css, ver HERO-UNIDADES-HTML-CSS.md):
+ *   - Escopo próprio (.hero-vendas) e nome de bloco próprio, mesmo com
+ *     tokens e medidas idênticos — são componentes irmãos, não o mesmo
+ *     arquivo, porque a página de vendas é um funil único por campanha
+ *     (ACF por página, sem repetir por unidade).
+ *   - Modificador extra `.hero-vendas--sem-unidade`: a página de vendas
+ *     é reaproveitada tanto como landing genérica (sem endereço fixo)
+ *     quanto como landing de uma unidade específica (quando o slug da
+ *     página bate com uma unidade real — ver
+ *     proodonto_get_current_unit_slug() em inc/units-map.php). Sem
+ *     unidade, o CTA secundário "Como chegar" não faz sentido (não há
+ *     endereço único pra apontar) e some — o CTA principal ocupa a
+ *     linha inteira. É a mesma filosofia já usada no resto de
+ *     page-vendas.php: um funil só, sem fragmentar a decisão.
+ *
+ * Placeholders (.is-placeholder) somem sozinhos quando o conteúdo real
+ * entrar — ver bloco no fim do arquivo.
+ */
+
+.hero-vendas {
+  --hv-teal: #049DA5;
+  --hv-teal-escuro: #037880;
+  --hv-petrol: #063E42;
+  --hv-creme: #FAF7F2;
+  --hv-tinta: #1A1A1A;
+  --hv-texto: #45605E;
+  --hv-texto-2: #33514F;
+  --hv-texto-3: #8C9D9B;
+  --hv-borda: #ECEFEE;
+  --hv-borda-btn: #CFE0DF;
+  --hv-chip: #F4F8F7;
+  --hv-estrela: #F2B705;
+  --hv-branco: #FFFFFF;
+  --hv-raio: 8px;
+}
+
+/* ---------------------------------------------------------------------
+   Base (mobile, até 599px)
+   ------------------------------------------------------------------ */
+
+.hero-vendas {
+  display: block;
+}
+
+.hero-vendas__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 20px 40px;
+}
+
+.hero-vendas__conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-vendas__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--hv-teal);
+}
+
+.hero-vendas__eyebrow svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.hero-vendas__titulo {
+  margin: 0;
+  font-family: var(--font-heading, var(--font-base));
+  font-size: 31px;
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  color: var(--hv-petrol);
+  text-wrap: balance;
+}
+
+.hero-vendas__texto {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--hv-texto);
+}
+
+.hero-vendas__texto strong {
+  color: var(--hv-tinta);
+  font-weight: 600;
+}
+
+.hero-vendas__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* CTA principal: classe padrão .cta (main.css) — mesmo botão usado no
+   resto do site, sem ícone.
+   CTA secundário: oculto no mobile (a rota fica na barra fixa), sem ícone. */
+.hero-vendas__cta-secundario {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  text-decoration: none;
+  font-family: var(--font-base);
+}
+
+.hero-vendas__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-vendas__chips li {
+  flex: 1 1 auto;
+  text-align: center;
+  background: var(--hv-chip);
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--hv-texto-2);
+}
+
+.hero-vendas__prova,
+.hero-vendas__divisor {
+  display: none;
+}
+
+.hero-vendas__midia {
+  display: block;
+}
+
+.hero-vendas__imagem {
+  height: 246px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+.hero-vendas__depoimento {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------
+   Barra fixa — base mobile (oculta a partir de 900px, ver aquele bloco)
+   ------------------------------------------------------------------ */
+
+body {
+  padding-bottom: 82px;
+}
+
+.hero-vendas-barra {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 40;
+  height: 82px;
+  background: var(--hv-branco, #FFFFFF);
+  border-top: 1px solid #E7ECEB;
+  box-shadow: 0 -8px 24px -14px rgba(6, 62, 66, .3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  transform: translateY(100%);
+  transition: transform .2s ease;
+}
+
+.hero-vendas-barra.is-visivel {
+  transform: translateY(0);
+}
+
+/* Barra fixa oculta temporariamente (2026-09-27) — remova este bloco pra
+   reativar (markup e JS continuam intactos, só o CSS esconde). */
+.hero-vendas-barra {
+  display: none;
+}
+
+body {
+  padding-bottom: 0;
+}
+
+.hero-vendas-barra__rota {
+  flex: 0 0 56px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #CFE0DF;
+  border-radius: 8px;
+  background: var(--hv-branco, #FFFFFF);
+}
+
+.hero-vendas-barra__rota svg {
+  width: 24px;
+  height: 24px;
+}
+
+.hero-vendas-barra__cta {
+  flex: 1;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #049DA5;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.hero-vendas-barra__cta svg {
+  width: 19px;
+  height: 19px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-vendas-barra {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   ≥600px (tablet) — ainda coluna única, só respiro e tipografia
+   ------------------------------------------------------------------ */
+
+@media (min-width: 600px) {
+  .hero-vendas__inner {
+    padding: 32px 32px 40px;
+    gap: 18px;
+  }
+
+  .hero-vendas__titulo {
+    font-size: 38px;
+  }
+
+  .hero-vendas__texto {
+    font-size: 17px;
+    max-width: 56ch;
+  }
+
+  .hero-vendas__acoes {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-vendas__imagem {
+    height: 320px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   ≥900px (desktop) — duas colunas
+   ------------------------------------------------------------------ */
+
+@media (min-width: 900px) {
+  .hero-vendas__inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+    padding: 44px 40px 40px;
+    align-items: start;
+  }
+
+  .hero-vendas__conteudo {
+    gap: 20px;
+  }
+
+  .hero-vendas__eyebrow {
+    font-size: 12.5px;
+    letter-spacing: .14em;
+  }
+
+  .hero-vendas__eyebrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero-vendas__titulo {
+    font-size: 44px;
+    line-height: 1.05;
+  }
+
+  .hero-vendas__texto {
+    font-size: 18px;
+    max-width: 46ch;
+  }
+
+  .hero-vendas__cta-secundario {
+    display: inline-flex;
+    border: 1.5px solid var(--hv-borda-btn);
+    color: var(--hv-petrol);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--hv-raio);
+    font-size: 15px;
+    font-weight: 600;
+    transition: border-color .15s ease, color .15s ease;
+  }
+
+  .hero-vendas__cta-secundario:hover,
+  .hero-vendas__cta-secundario:focus-visible {
+    border-color: var(--hv-teal);
+    color: var(--hv-teal);
+  }
+
+  .hero-vendas__chips {
+    display: none;
+  }
+
+  .hero-vendas__divisor {
+    display: block;
+    height: 1px;
+    background: var(--hv-borda);
+    border: 0;
+    margin: 12px 0 0;
+  }
+
+  .hero-vendas__prova {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-vendas__prova li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    color: var(--hv-texto-2);
+  }
+
+  .hero-vendas__prova svg {
+    flex: none;
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero-vendas__prova strong {
+    color: var(--hv-tinta);
+    font-weight: 600;
+  }
+
+  .hero-vendas__midia {
+    position: relative;
+  }
+
+  .hero-vendas__imagem {
+    height: 480px;
+    border-radius: 18px;
+  }
+
+  .hero-vendas__depoimento {
+    display: block;
+    position: absolute;
+    left: -24px;
+    bottom: 28px;
+    width: 300px;
+    background: var(--hv-branco);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 18px 40px -18px rgba(6, 62, 66, .38), 0 2px 6px rgba(6, 62, 66, .06);
+    margin: 0;
+  }
+
+  .hero-vendas__estrelas {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .hero-vendas__estrelas svg {
+    width: 16px;
+    height: 16px;
+    color: var(--hv-estrela);
+  }
+
+  .hero-vendas__depoimento .hero-vendas__no-google {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hv-texto-2);
+  }
+
+  .hero-vendas__depoimento blockquote {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--hv-texto);
+    margin: 10px 0 0;
+  }
+
+  .hero-vendas__depoimento figcaption {
+    font-size: 12.5px;
+    color: var(--hv-texto-3);
+    margin-top: 8px;
+  }
+
+  .hero-vendas-barra {
+    display: none;
+  }
+
+  /* Barra oculta a partir daqui — não precisa mais reservar o espaço
+     no rodapé (ver padding-bottom do body, na base mobile). */
+  body {
+    padding-bottom: 0;
+  }
+
+  /* Sem unidade reconhecida: sem endereço único pra "Como chegar" —
+     o CTA principal ocupa a linha inteira sozinho. */
+  .hero-vendas--sem-unidade .hero-vendas__cta-secundario {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   ≥1200px (desktop grande)
+   ------------------------------------------------------------------ */
+
+@media (min-width: 1200px) {
+  .hero-vendas__inner {
+    gap: 56px;
+    padding: 54px 64px 40px;
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+
+  .hero-vendas__titulo {
+    font-size: 52px;
+    line-height: 1.04;
+  }
+
+  .hero-vendas__texto {
+    font-size: 18.5px;
+  }
+
+  .hero-vendas__imagem {
+    height: 566px;
+  }
+
+  .hero-vendas__depoimento {
+    left: -34px;
+    bottom: 34px;
+    width: 330px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Modificadores de degradação
+   ------------------------------------------------------------------ */
+
+.hero-vendas--sem-imagem {
+  max-width: 70ch;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero-vendas--sem-imagem .hero-vendas__eyebrow,
+.hero-vendas--sem-imagem .hero-vendas__prova li {
+  justify-content: center;
+}
+
+.hero-vendas--sem-imagem .hero-vendas__acoes {
+  justify-content: center;
+}
+
+@media (min-width: 900px) {
+  .hero-vendas--sem-imagem .hero-vendas__inner {
+    display: block;
+  }
+}
+
+/* Sem unidade reconhecida: barra fixa perde o botão de rota e o CTA
+   principal ocupa o espaço inteiro. Como só existe UMA seção
+   .hero-vendas por página real (isto aqui é um preview com 4 estados
+   lado a lado, ver nota junto à barra no HTML), este seletor de irmão
+   funciona corretamente em produção: reflete sempre o estado da única
+   seção existente. */
+.hero-vendas--sem-unidade ~ .hero-vendas-barra .hero-vendas-barra__rota {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------
+   Acessibilidade
+   ------------------------------------------------------------------ */
+
+.hero-vendas a:focus-visible,
+.hero-vendas button:focus-visible,
+.hero-vendas-barra a:focus-visible {
+  outline: 2px solid var(--hv-teal, #049DA5);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------------------------------------------------------------------
+   Placeholders — remover quando o conteúdo real entrar
+   ------------------------------------------------------------------ */
+
+.is-placeholder {
+  color: var(--hv-texto-3);
+  font-style: italic;
+}
+
+.hero-vendas__imagem.is-placeholder,
+picture.is-placeholder img {
+  background: var(--hv-creme);
+  border: 1.5px dashed #D6CFC2;
+  object-fit: contain;
+}
