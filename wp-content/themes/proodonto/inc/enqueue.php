@@ -14,9 +14,10 @@
  *  - assets/js/pages/{slug}.js carrega SOMENTE na página correspondente, se
  *    o arquivo existir (nada gera isso automaticamente — crie à mão quando
  *    a página precisar de JS próprio, ex.: inicializar um carrossel).
- *  - Swiper (self-hosted, assets/vendor/swiper) só carrega nas páginas que
- *    têm um assets/js/pages/{slug}.js — nenhuma outra página paga o custo
- *    da biblioteca.
+ *  - Swiper (self-hosted, assets/vendor/swiper) e GLightbox (self-hosted,
+ *    assets/vendor/glightbox — lightbox de imagens, MIT) só carregam nas
+ *    páginas que têm um assets/js/pages/{slug}.js — nenhuma outra página
+ *    paga o custo das bibliotecas.
  *  - assets/css/blocks/{slug}.css carrega SOMENTE quando o bloco
  *    proodonto/{slug} (ver inc/blocks.php) está presente no conteúdo,
  *    detectado via has_block() — não importa em qual página o editor usou
@@ -144,6 +145,35 @@ function proodonto_enqueue_assets() {
 						)
 					);
 					$page_js_deps[] = 'swiper';
+				}
+
+				// GLightbox: expande imagens de galeria (Sobre, Antes e Depois)
+				// em lightbox — mesmo raciocínio do Swiper acima, só entra em
+				// cena se a página realmente tiver JS próprio.
+				$glightbox_css_rel = 'assets/vendor/glightbox/glightbox.min.css';
+				$glightbox_js_rel  = 'assets/vendor/glightbox/glightbox.min.js';
+
+				if ( file_exists( PROODONTO_DIR . '/' . $glightbox_css_rel ) ) {
+					wp_enqueue_style(
+						'glightbox',
+						PROODONTO_URI . '/' . $glightbox_css_rel,
+						array(),
+						proodonto_asset_version( $glightbox_css_rel )
+					);
+				}
+
+				if ( file_exists( PROODONTO_DIR . '/' . $glightbox_js_rel ) ) {
+					wp_enqueue_script(
+						'glightbox',
+						PROODONTO_URI . '/' . $glightbox_js_rel,
+						array(),
+						proodonto_asset_version( $glightbox_js_rel ),
+						array(
+							'strategy'  => 'defer',
+							'in_footer' => true,
+						)
+					);
+					$page_js_deps[] = 'glightbox';
 				}
 
 				wp_enqueue_script(
