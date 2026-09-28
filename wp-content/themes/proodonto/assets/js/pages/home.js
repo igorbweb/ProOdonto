@@ -9,6 +9,10 @@
  * carrossel de "Tratamentos" no mobile. O carrossel do hero
  * (.swiper.hero) já existe no HTML mas não é inicializado por este
  * arquivo de propósito, para não mexer no hero sem pedido explícito.
+ *
+ * Também inicializa o GLightbox (assets/vendor/glightbox) sobre todo
+ * `a.glightbox` da página — hoje só as fotos das galerias "Sobre" e
+ * "Antes e Depois" usam essa classe (ver page-home.php/page-vendas.php).
  */
 ( function () {
 	'use strict';
@@ -69,6 +73,21 @@
 
 				videoModal.showModal();
 			} );
+		} );
+	}
+
+	/*
+	 * Lightbox de imagens (galerias "Sobre" e "Antes e Depois") — GLightbox,
+	 * fica ANTES do guard de Swiper (mesmo raciocínio do modal de vídeo
+	 * acima): não depende do carrossel, então continua funcionando mesmo
+	 * se o Swiper falhar. Uma única instância cobre as duas galerias —
+	 * `data-gallery` (no HTML) já separa a navegação de cada uma.
+	 */
+	if ( typeof window.GLightbox !== 'undefined' && document.querySelector( '.glightbox' ) ) {
+		window.GLightbox( {
+			selector: '.glightbox',
+			touchNavigation: true,
+			loop: false,
 		} );
 	}
 

@@ -207,11 +207,13 @@ get_header();
 							<div class="swiper-wrapper">
 								<?php foreach ( $proodonto_about_gallery as $proodonto_about_photo ) : ?>
 									<div class="swiper-slide">
-										<img
-											src="<?php echo esc_url( $proodonto_about_photo['url'] ); ?>"
-											alt="<?php echo esc_attr( $proodonto_about_photo['alt'] ?: 'Foto — dentista atendendo com cuidado' ); ?>"
-											loading="lazy"
-										/>
+										<a class="glightbox" href="<?php echo esc_url( $proodonto_about_photo['url'] ); ?>" data-gallery="about-gallery">
+											<img
+												src="<?php echo esc_url( $proodonto_about_photo['url'] ); ?>"
+												alt="<?php echo esc_attr( $proodonto_about_photo['alt'] ?: 'Foto — dentista atendendo com cuidado' ); ?>"
+												loading="lazy"
+											/>
+										</a>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -285,11 +287,21 @@ get_header();
 							<div class="swiper-slide">
 								<div class="result-card">
 									<div class="result-card__photo">
+										<?php if ( $proodonto_result['foto'] ) : ?>
+										<a class="glightbox" href="<?php echo esc_url( $proodonto_result['foto']['url'] ); ?>" data-gallery="results-gallery" data-title="<?php echo esc_attr( $proodonto_results_credencial_nome . ' — ' . $proodonto_results_credencial_cro ); ?>">
+											<img
+												src="<?php echo esc_url( $proodonto_result['foto']['url'] ); ?>"
+												alt="<?php echo esc_attr( sprintf( '%s, paciente PRÓ-ODONTO — antes e depois do tratamento', $proodonto_result['nome'] ) ); ?>"
+												loading="lazy"
+											/>
+										</a>
+										<?php else : ?>
 										<img
-											src="<?php echo $proodonto_result['foto'] ? esc_url( $proodonto_result['foto']['url'] ) : esc_attr( $proodonto_placeholder_img ); ?>"
+											src="<?php echo esc_attr( $proodonto_placeholder_img ); ?>"
 											alt="<?php echo esc_attr( sprintf( '%s, paciente PRÓ-ODONTO — antes e depois do tratamento', $proodonto_result['nome'] ) ); ?>"
 											loading="lazy"
 										/>
+										<?php endif; ?>
 										<p class="result-card__credential">
 											<span class="result-card__credential-nome"><?php echo esc_html( $proodonto_results_credencial_nome ); ?></span>
 											<span class="result-card__credential-cro"><?php echo esc_html( $proodonto_results_credencial_cro ); ?></span>
