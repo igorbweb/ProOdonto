@@ -134,7 +134,7 @@ get_header();
 				</div>
 				<ul class="hero-vendas__chips">
 					<li>5,0 no Google</li>
-					<li>+22 mil atendimentos</li>
+					<li>+25 mil sorrisos</li>
 					<li>13 profissionais</li>
 					<li>Parcelado</li>
 				</ul>
@@ -153,7 +153,7 @@ get_header();
 							stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 							<path d="M20 6 9 17l-5-5" />
 						</svg>
-						<span><strong>+22 mil</strong> atendimentos</span>
+						<span><strong>+25 mil</strong> sorrisos transformados</span>
 					</li>
 					<li>
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
