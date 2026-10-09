@@ -46,10 +46,14 @@ if ( function_exists( 'proodonto_is_vendas_page' ) && proodonto_is_vendas_page()
 // link antigo (fallback defensivo — não deixa o item do menu quebrado).
 $proodonto_unit_pages = function_exists( 'proodonto_get_unit_nav_pages' ) ? proodonto_get_unit_nav_pages() : array();
 
+// "Tratamentos" aponta pro hub /servicos/ assim que ele estiver publicado
+// (link de menu real — SEO-07); até lá, mantém a âncora da Home.
+$proodonto_servicos_hub = function_exists( 'proodonto_servicos_hub_page' ) ? proodonto_servicos_hub_page() : null;
+
 $proodonto_nav_links = array(
 	array(
 		'label' => 'Tratamentos',
-		'url'   => home_url( '/#tratamentos' ),
+		'url'   => $proodonto_servicos_hub ? get_permalink( $proodonto_servicos_hub ) : home_url( '/#tratamentos' ),
 	),
 	array(
 		'label'    => 'Unidades',

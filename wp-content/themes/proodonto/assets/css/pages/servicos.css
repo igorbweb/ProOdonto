@@ -1,0 +1,26 @@
+/*
+ * CSS da página "Serviços" (slug: servicos).
+ * Gerado automaticamente em 2026-10-08 17:10 — mobile-first, edite à vontade.
+ * Carregado apenas nesta página via inc/enqueue.php.
+ */
+
+.page-servicos {
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+	.page-servicos {
+	}
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+	.page-servicos {
+	}
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+	.page-servicos {
+	}
+}
