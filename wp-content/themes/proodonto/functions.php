@@ -28,6 +28,7 @@ $proodonto_includes = array(
 	'/inc/content-seed.php',        // Grava o conteúdo padrão como valor real dos campos ACF, uma vez por página (Home/Vendas/Sobre).
 	'/inc/page-sobre-schema.php',   // JSON-LD extra (AboutPage, equipe/Person, FAQPage) só na página Sobre / Quem Somos.
 	'/inc/local-business-schema.php', // JSON-LD extra (Organization enriquecida + Dentist por unidade) só na Home — telefone, redes sociais, endereço de cada clínica e catálogo de tratamentos.
+	'/inc/servicos.php',            // CPT "servico" (/servicos/<tratamento>/) + hub page-servicos.php: campos ACF, schema, trilha, CSS/JS próprios e bootstrap dos rascunhos.
 );
 
 foreach ( $proodonto_includes as $file ) {
