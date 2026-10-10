@@ -1,0 +1,35 @@
+---
+# Deploy PróOdonto — cPanel Git Version Control (HostGator)
+#
+# Copia do clone do cPanel para o site SÓ o que é código versionado:
+#   - wp-content/themes/proodonto/
+#   - wp-content/mu-plugins/
+# Não apaga nada no servidor (sem --delete) e não toca em uploads,
+# plugins, wp-config.php, core ou banco.
+#
+# DEPLOYPATH = raiz do WordPress no servidor (document root do domínio).
+# O clone do cPanel deve ficar FORA dela, ex.: /home1/proodo70/repositories/ProOdonto
+# THEME_DIR = nome da pasta do tema em produção.
+
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home1/proodo70/proodontosergipe.com.br
+    - export THEME_DIR=proodonto
+    - /bin/mkdir -p $DEPLOYPATH/wp-content/themes/$THEME_DIR $DEPLOYPATH/wp-content/mu-plugins
+    - >-
+      /usr/bin/rsync -rlt
+      --exclude='.git*'
+      --exclude='node_modules/'
+      --exclude='*.md'
+      --exclude='/*.html'
+      --exclude='/preview/'
+      --exclude='/assets/agentic/'
+      --exclude='/assets/tailwind/'
+      --exclude='/package.json'
+      --exclude='/package-lock.json'
+      wp-content/themes/proodonto/ $DEPLOYPATH/wp-content/themes/$THEME_DIR/
+    - >-
+      /usr/bin/rsync -rlt
+      --exclude='.git*'
+      --exclude='*.md'
+      wp-content/mu-plugins/ $DEPLOYPATH/wp-content/mu-plugins/
