@@ -24,8 +24,15 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Lista única das unidades — fonte de verdade reaproveitada tanto pelo
- * gerador do mapa quanto pelos cards de unidade em page-home.php.
+ * Lista única das unidades — fonte de verdade reaproveitada pelo gerador
+ * do mapa, pelos cards de unidade (home e páginas de unidade), pelo destino
+ * dos CTAs (inc/cta.php) e pelo schema Dentist (inc/local-business-schema.php).
+ *
+ * 'hours': uma linha por faixa; dias com intervalo (ex.: almoço) = duas
+ * linhas com o mesmo 'label' ('short' = rótulo curto do rodapé) — a página
+ * junta as faixas numa linha só (proodonto_get_unit_hours_lines()) e o
+ * schema publica uma OpeningHoursSpecification por faixa. 'days' usa
+ * Mo Tu We Th Fr Sa Su. 'phone' vazio = não aparece (nada inventado).
  */
 function proodonto_get_units() {
 	return array(
@@ -34,20 +41,64 @@ function proodonto_get_units() {
 			'address'      => 'Av. Pres. Tancredo Neves, 1028 - Jardins, Aracaju - SE, 49025-620',
 			'maps_url'     => 'https://maps.app.goo.gl/wvRKAiDYqjFTaJbd9',
 			'whatsapp_url' => 'https://api.upviewcrm.com/go/proodonto-aracaju/lp-aracaju',
+			'hours'        => array( // Confirmado pela clínica em 10/10/2026.
+				array( 'label' => 'Segunda a sexta', 'short' => 'Seg. a sex.', 'days' => array( 'Mo', 'Tu', 'We', 'Th', 'Fr' ), 'opens' => '09:00', 'closes' => '19:00' ),
+				array( 'label' => 'Sábado', 'short' => 'Sáb.', 'days' => array( 'Sa' ), 'opens' => '08:00', 'closes' => '12:00' ),
+			),
+			'phone'        => '',      // Telefone da unidade como deve aparecer, ex.: '(79) 3000-0000'. Vazio = não aparece.
 		),
 		array(
 			'name'         => 'Lagarto',
 			'address'      => 'Av. Contorno, 477 - Centro, Lagarto - SE, 49400-000',
 			'maps_url'     => 'https://maps.app.goo.gl/ZuvT3qpFaKa67z5P8',
 			'whatsapp_url' => 'https://api.upviewcrm.com/go/proodonto-lagarto/lp-lagarto',
+			'hours'        => array( // Confirmado pela clínica em 10/10/2026.
+				array( 'label' => 'Segunda a sexta', 'short' => 'Seg. a sex.', 'days' => array( 'Mo', 'Tu', 'We', 'Th', 'Fr' ), 'opens' => '08:00', 'closes' => '18:00' ),
+				array( 'label' => 'Sábado', 'short' => 'Sáb.', 'days' => array( 'Sa' ), 'opens' => '08:00', 'closes' => '12:00' ),
+			),
+			'phone'        => '',      // Telefone da unidade como deve aparecer, ex.: '(79) 3000-0000'. Vazio = não aparece.
 		),
 		array(
 			'name'         => 'Simão Dias',
 			'address'      => 'Av. Construtor João Antônio de Santana, 330 - Centro, Simão Dias - SE, 49480-000',
 			'maps_url'     => 'https://maps.app.goo.gl/JvfkXnriGvccPRaY8',
 			'whatsapp_url' => 'https://api.upviewcrm.com/go/proodonto-simao-dias/lp-simao-dias',
+			'hours'        => array( // Confirmado pela clínica em 10/10/2026.
+				array( 'label' => 'Segunda a sexta', 'short' => 'Seg. a sex.', 'days' => array( 'Mo', 'Tu', 'We', 'Th', 'Fr' ), 'opens' => '08:00', 'closes' => '13:00' ),
+				array( 'label' => 'Segunda a sexta', 'short' => 'Seg. a sex.', 'days' => array( 'Mo', 'Tu', 'We', 'Th', 'Fr' ), 'opens' => '14:00', 'closes' => '19:00' ),
+				array( 'label' => 'Sábado', 'short' => 'Sáb.', 'days' => array( 'Sa' ), 'opens' => '08:00', 'closes' => '12:00' ),
+			),
+			'phone'        => '',      // Telefone da unidade como deve aparecer, ex.: '(79) 3000-0000'. Vazio = não aparece.
 		),
 	);
+}
+
+/**
+ * Horário de uma unidade em linhas prontas para exibir — faixas com o
+ * mesmo rótulo viram uma linha só ("Segunda a sexta: 08:00–13:00 e
+ * 14:00–19:00"). Usado no cartão das páginas de unidade e no rodapé.
+ *
+ * @param array $unit  Item de proodonto_get_units().
+ * @param bool  $short true = rótulo curto ('short', ex.: "Seg. a sex.").
+ * @return string[]
+ */
+function proodonto_get_unit_hours_lines( $unit, $short = false ) {
+	$groups = array();
+
+	foreach ( ( isset( $unit['hours'] ) ? (array) $unit['hours'] : array() ) as $hours ) {
+		if ( empty( $hours['label'] ) || empty( $hours['opens'] ) || empty( $hours['closes'] ) ) {
+			continue;
+		}
+		$label = ( $short && ! empty( $hours['short'] ) ) ? $hours['short'] : $hours['label'];
+		$groups[ $label ][] = $hours['opens'] . '–' . $hours['closes'];
+	}
+
+	$lines = array();
+	foreach ( $groups as $label => $ranges ) {
+		$lines[] = $label . ( $short ? ' ' : ': ' ) . implode( ' e ', $ranges );
+	}
+
+	return $lines;
 }
 
 /**

@@ -224,3 +224,107 @@
 		} );
 	}
 } )();
+
+/**
+ * Atribuição no UpView — quando a visita chega com utm_*, fbclid, gclid,
+ * gbraid ou wbraid na URL, esses parâmetros vão junto em todo link do
+ * UpView (e ficam lembrados durante a visita, se a pessoa navegar para
+ * outra página do site). O UpView só gera o código de rastreio da
+ * conversa quando recebe parâmetro; sem isso, lead de anúncio e de Perfil
+ * da Empresa chega ao CRM como "orgânico". Sem parâmetro na URL, nada muda.
+ *
+ * Também corrige, no navegador, links antigos que não vêm do tema (ex.:
+ * botão flutuante "Agendamento" do plugin Float Button apontando para
+ * proodonto.com.br/#agregador-links) — o certo é ajustar no plugin; isto só
+ * evita link quebrado enquanto isso. Destino: o mesmo UpView do botão
+ * principal do cabeçalho.
+ */
+( function () {
+	'use strict';
+
+	var KEYS = [ 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid', 'gbraid', 'wbraid' ];
+	var STORE = 'proodonto_attr';
+	var LEGACY = /(^|\/\/)(www\.)?wa\.me\/|(^|\/\/)(api|web)\.whatsapp\.com\/|5511300000000|proodonto\.com\.br\/#agregador-links/i;
+
+	function readParams() {
+		var found = {};
+		var has = false;
+
+		try {
+			var query = new URLSearchParams( window.location.search );
+			KEYS.forEach( function ( key ) {
+				var value = query.get( key );
+				if ( value ) {
+					found[ key ] = value;
+					has = true;
+				}
+			} );
+		} catch ( e ) {
+			return {};
+		}
+
+		try {
+			if ( has ) {
+				window.sessionStorage.setItem( STORE, JSON.stringify( found ) );
+			} else {
+				found = JSON.parse( window.sessionStorage.getItem( STORE ) || '{}' ) || {};
+			}
+		} catch ( e ) {}
+
+		return found;
+	}
+
+	var params = readParams();
+	var hasParams = Object.keys( params ).length > 0;
+
+	function withParams( link ) {
+		if ( ! hasParams ) {
+			return;
+		}
+		try {
+			var url = new URL( link.href );
+			if ( -1 === url.hostname.indexOf( 'upviewcrm.com' ) ) {
+				return;
+			}
+			var changed = false;
+			Object.keys( params ).forEach( function ( key ) {
+				if ( ! url.searchParams.has( key ) ) {
+					url.searchParams.set( key, params[ key ] );
+					changed = true;
+				}
+			} );
+			if ( changed ) {
+				link.href = url.toString();
+			}
+		} catch ( e ) {}
+	}
+
+	function run() {
+		var headerCta = document.querySelector( 'header a.cta[href*="upviewcrm.com"]' );
+		var fallback = headerCta ? headerCta.getAttribute( 'href' ) : '';
+
+		if ( fallback ) {
+			document.querySelectorAll( 'a[href]' ).forEach( function ( link ) {
+				if ( LEGACY.test( link.getAttribute( 'href' ) ) ) {
+					link.setAttribute( 'href', fallback );
+				}
+			} );
+		}
+
+		document.querySelectorAll( 'a[href*="upviewcrm.com"]' ).forEach( withParams );
+	}
+
+	if ( 'loading' === document.readyState ) {
+		document.addEventListener( 'DOMContentLoaded', run );
+	} else {
+		run();
+	}
+
+	// Links criados depois (widgets, modal): aplica no momento do clique.
+	document.addEventListener( 'click', function ( event ) {
+		var link = event.target && event.target.closest ? event.target.closest( 'a[href*="upviewcrm.com"]' ) : null;
+		if ( link ) {
+			withParams( link );
+		}
+	}, true );
+} )();

@@ -28,6 +28,11 @@ deployment:
       --exclude='/package.json'
       --exclude='/package-lock.json'
       wp-content/themes/proodonto/ $DEPLOYPATH/wp-content/themes/$THEME_DIR/
+    # Os ajustes das Semanas 1 e 2 (10/2026) passaram para o tema
+    # (inc/cta.php, inc/indexacao.php, inc/unit-faq.php). Como o rsync não
+    # usa --delete, os mu-plugins antigos precisam ser removidos aqui;
+    # depois de um deploy com sucesso, esta linha pode sair.
+    - /bin/rm -f $DEPLOYPATH/wp-content/mu-plugins/proodonto-semana1.php $DEPLOYPATH/wp-content/mu-plugins/proodonto-semana2.php
     - >-
       /usr/bin/rsync -rlt
       --exclude='.git*'

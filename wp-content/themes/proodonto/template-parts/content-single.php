@@ -104,9 +104,10 @@ $proodonto_credentials    = proodonto_get_author_credentials( $proodonto_author_
 		<h2 class="entry-cta__title"><?php esc_html_e( 'Ficou com alguma dúvida?', 'proodonto' ); ?></h2>
 		<p class="entry-cta__text"><?php esc_html_e( 'Fale com a nossa equipe pelo WhatsApp e agende uma avaliação gratuita.', 'proodonto' ); ?></p>
 		<a
-			href="https://wa.me/<?php echo esc_attr( function_exists( 'proodonto_get_whatsapp' ) ? proodonto_get_whatsapp() : '' ); ?>?text=<?php echo esc_attr( rawurlencode( sprintf( __( 'Olá! Vim do blog e gostaria de agendar uma avaliação na %s.', 'proodonto' ), wp_strip_all_tags( get_bloginfo( 'name' ) ) ) ) ); ?>"
+			href="<?php echo esc_url( function_exists( 'proodonto_get_default_cta_url' ) ? proodonto_get_default_cta_url() : '#' ); ?>"
 			target="_blank"
-			rel="noopener noreferrer"
+			rel="noopener"
+			data-link-aggregator-trigger
 			class="cta cta--whatsapp"
 		>
 			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">

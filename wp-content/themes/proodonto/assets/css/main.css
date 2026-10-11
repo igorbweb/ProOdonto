@@ -957,6 +957,28 @@ a.cta.cta--whatsapp:hover {
 	cursor: default;
 }
 
+/* Coluna "Unidades": nome da unidade + horário (inc/units-map.php). */
+.site-footer__unit {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.site-footer__unit + .site-footer__unit {
+	margin-top: 4px;
+}
+
+.site-footer__links .site-footer__unit-name {
+	color: #fff;
+	font-weight: 600;
+}
+
+.site-footer__unit-hours {
+	font-size: 13px;
+	line-height: 1.45;
+	color: #93a2b5;
+}
+
 .site-footer__bottom {
 	padding-block: var(--space-4);
 	display: flex;
