@@ -370,8 +370,12 @@ add_filter( 'proodonto_json_ld_graphs', function ( $graphs ) {
 		'@type'            => 'BlogPosting',
 		'@id'              => $permalink . '#article',
 		'mainEntityOfPage' => array(
-			'@type' => 'WebPage',
-			'@id'   => $permalink,
+			'@type'        => 'WebPage',
+			'@id'          => $permalink,
+			// Revisor técnico (inc/author-credentials.php): reviewedBy é
+			// propriedade da página, não do artigo — mesmo @id da WebPage do Yoast.
+			'reviewedBy'   => function_exists( 'proodonto_get_reviewer_schema' ) ? proodonto_get_reviewer_schema( $post_id ) : null,
+			'lastReviewed' => get_the_modified_date( 'Y-m-d', $post_id ),
 		),
 		'headline'         => wp_strip_all_tags( get_the_title( $post_id ) ),
 		'datePublished'    => get_the_date( 'c', $post_id ),
@@ -386,6 +390,10 @@ add_filter( 'proodonto_json_ld_graphs', function ( $graphs ) {
 		'wordCount'        => str_word_count( wp_strip_all_tags( strip_shortcodes( get_post_field( 'post_content', $post_id ) ) ) ),
 		'timeRequired'     => 'PT' . proodonto_reading_time( $post_id ) . 'M',
 	);
+
+	if ( empty( $article['mainEntityOfPage']['reviewedBy'] ) ) {
+		unset( $article['mainEntityOfPage']['reviewedBy'] );
+	}
 
 	if ( $description ) {
 		$article['description'] = $description;

@@ -1,0 +1,788 @@
+[
+    {
+        "key": "group_po_opcoes",
+        "title": "Conteúdo global",
+        "style": "seamless",
+        "label_placement": "top",
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "proodonto-opcoes"
+                }
+            ]
+        ],
+        "fields": [
+            {
+                "key": "field_po_opt_tab_marca",
+                "label": "Marca",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_logo",
+                "name": "logo",
+                "label": "Logo (fundo claro)",
+                "type": "image",
+                "return_format": "id",
+                "preview_size": "medium",
+                "wrapper": {
+                    "width": 50
+                },
+                "instructions": "SVG ou PNG transparente. Sem logo aqui, o cabeçalho usa o Logo do Personalizar."
+            },
+            {
+                "key": "field_po_opt_logo_claro",
+                "name": "logo_claro",
+                "label": "Logo (fundo marinho, rodapé)",
+                "type": "image",
+                "return_format": "id",
+                "preview_size": "medium",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_nota_resumo",
+                "name": "nota_resumo",
+                "label": "Nota no Google (resumo)",
+                "type": "text",
+                "placeholder": "4,9 a 5,0",
+                "wrapper": {
+                    "width": 33
+                }
+            },
+            {
+                "key": "field_po_opt_total_avaliacoes",
+                "name": "total_avaliacoes",
+                "label": "Total de avaliações",
+                "type": "text",
+                "placeholder": "+1.190",
+                "wrapper": {
+                    "width": 33
+                }
+            },
+            {
+                "key": "field_po_opt_google_reviews_url",
+                "name": "google_reviews_url",
+                "label": "Link \"Ler todas no Google\"",
+                "type": "url",
+                "wrapper": {
+                    "width": 34
+                }
+            },
+            {
+                "key": "field_po_opt_header_cta_label",
+                "name": "header_cta_label",
+                "label": "Botão do cabeçalho",
+                "type": "text",
+                "placeholder": "Agendar avaliação",
+                "instructions": "Leva à seção de unidades. Nas páginas de unidade o botão vira \"WhatsApp <cidade>\" automaticamente."
+            },
+            {
+                "key": "field_po_opt_tab_unidades",
+                "label": "Unidades",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_unidades_eyebrow",
+                "name": "unidades_eyebrow",
+                "label": "Sobretítulo da seção de unidades",
+                "type": "text",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_unidades_titulo",
+                "name": "unidades_titulo",
+                "label": "Título da seção de unidades",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_msg_unidades",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Fonte única: cartões, seletor do topo, rodapé, schema e todos os botões de WhatsApp leem daqui. Os links de WhatsApp precisam ser do UpView (nunca wa.me)."
+            },
+            {
+                "key": "field_po_opt_unidades",
+                "name": "unidades",
+                "label": "Unidades",
+                "type": "repeater",
+                "layout": "block",
+                "collapsed": "field_po_opt_unidades_nome",
+                "button_label": "Adicionar unidade",
+                "sub_fields": [
+                    {
+                        "key": "field_po_opt_unidades_nome",
+                        "name": "nome",
+                        "label": "Cidade",
+                        "type": "text",
+                        "required": 1,
+                        "wrapper": {
+                            "width": 25
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_slug",
+                        "name": "slug",
+                        "label": "Slug",
+                        "type": "text",
+                        "instructions": "Igual ao endereço da página: aracaju, lagarto, simao-dias.",
+                        "wrapper": {
+                            "width": 25
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_bairro",
+                        "name": "bairro",
+                        "label": "Bairro",
+                        "type": "text",
+                        "wrapper": {
+                            "width": 25
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_uf",
+                        "name": "uf",
+                        "label": "UF",
+                        "type": "text",
+                        "wrapper": {
+                            "width": 10
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_cep",
+                        "name": "cep",
+                        "label": "CEP",
+                        "type": "text",
+                        "wrapper": {
+                            "width": 15
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_endereco",
+                        "name": "endereco",
+                        "label": "Rua e número",
+                        "type": "text",
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_telefone",
+                        "name": "telefone",
+                        "label": "Telefone",
+                        "type": "text",
+                        "instructions": "Vazio = não aparece.",
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_whatsapp_url",
+                        "name": "whatsapp_url",
+                        "label": "Link do WhatsApp (UpView)",
+                        "type": "url",
+                        "required": 1,
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_maps_url",
+                        "name": "maps_url",
+                        "label": "Link \"Como chegar\" (Google Maps)",
+                        "type": "url",
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_nota",
+                        "name": "nota",
+                        "label": "Nota no Google",
+                        "type": "text",
+                        "placeholder": "5,0",
+                        "wrapper": {
+                            "width": 20
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_total",
+                        "name": "total",
+                        "label": "Nº de avaliações",
+                        "type": "text",
+                        "placeholder": "301",
+                        "wrapper": {
+                            "width": 20
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_google_url",
+                        "name": "google_url",
+                        "label": "Perfil no Google",
+                        "type": "url",
+                        "wrapper": {
+                            "width": 60
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_foto",
+                        "name": "foto",
+                        "label": "Foto da fachada",
+                        "type": "image",
+                        "return_format": "id",
+                        "preview_size": "thumbnail",
+                        "wrapper": {
+                            "width": 50
+                        },
+                        "instructions": "Cartões de unidade e \"Outras unidades\". Sem foto = bloco marinho."
+                    },
+                    {
+                        "key": "field_po_opt_unidades_pagina",
+                        "name": "pagina",
+                        "label": "Página da unidade",
+                        "type": "post_object",
+                        "post_type": [
+                            "page"
+                        ],
+                        "return_format": "id",
+                        "allow_null": 1,
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_unidades_horarios",
+                        "name": "horarios",
+                        "label": "Horários",
+                        "type": "repeater",
+                        "layout": "table",
+                        "button_label": "Adicionar faixa",
+                        "instructions": "Dia com intervalo de almoço = duas faixas com o mesmo rótulo (a página junta: \"Seg a sex 8h–13h e 14h–19h\").",
+                        "sub_fields": [
+                            {
+                                "key": "field_po_opt_unidades_horarios_rotulo",
+                                "name": "rotulo",
+                                "label": "Rótulo",
+                                "type": "text",
+                                "placeholder": "Segunda a sexta"
+                            },
+                            {
+                                "key": "field_po_opt_unidades_horarios_rotulo_curto",
+                                "name": "rotulo_curto",
+                                "label": "Rótulo curto",
+                                "type": "text",
+                                "placeholder": "Seg a sex"
+                            },
+                            {
+                                "key": "field_po_opt_unidades_horarios_dias",
+                                "name": "dias",
+                                "label": "Dias (schema)",
+                                "type": "checkbox",
+                                "choices": {
+                                    "Mo": "Seg",
+                                    "Tu": "Ter",
+                                    "We": "Qua",
+                                    "Th": "Qui",
+                                    "Fr": "Sex",
+                                    "Sa": "Sáb",
+                                    "Su": "Dom"
+                                },
+                                "layout": "horizontal",
+                                "return_format": "value"
+                            },
+                            {
+                                "key": "field_po_opt_unidades_horarios_abre",
+                                "name": "abre",
+                                "label": "Abre",
+                                "type": "time_picker",
+                                "display_format": "H:i",
+                                "return_format": "H:i"
+                            },
+                            {
+                                "key": "field_po_opt_unidades_horarios_fecha",
+                                "name": "fecha",
+                                "label": "Fecha",
+                                "type": "time_picker",
+                                "display_format": "H:i",
+                                "return_format": "H:i"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "field_po_opt_tab_numeros",
+                "label": "Números",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_numeros",
+                "name": "numeros",
+                "label": "Números da rede",
+                "type": "repeater",
+                "layout": "table",
+                "max": 4,
+                "button_label": "Adicionar número",
+                "instructions": "Só fatos aprovados. Aparecem na Home e no hub. No celular saem os 3 primeiros não marcados como \"só desktop\".",
+                "sub_fields": [
+                    {
+                        "key": "field_po_opt_numeros_valor",
+                        "name": "valor",
+                        "label": "Valor",
+                        "type": "text",
+                        "placeholder": "+22 mil"
+                    },
+                    {
+                        "key": "field_po_opt_numeros_rotulo",
+                        "name": "rotulo",
+                        "label": "Rótulo",
+                        "type": "text",
+                        "placeholder": "atendimentos desde 2019"
+                    },
+                    {
+                        "key": "field_po_opt_numeros_rotulo_curto",
+                        "name": "rotulo_curto",
+                        "label": "Rótulo no celular",
+                        "type": "text",
+                        "placeholder": "atendimentos"
+                    },
+                    {
+                        "key": "field_po_opt_numeros_so_desktop",
+                        "name": "so_desktop",
+                        "label": "Só desktop",
+                        "type": "true_false",
+                        "ui": 1
+                    }
+                ]
+            },
+            {
+                "key": "field_po_opt_tab_primeira-avaliacao",
+                "label": "Primeira avaliação",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_msg_passos",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Bloco marinho \"Uma visita. Tudo resolvido.\" — Home, páginas de unidade e hub (o hub pode trocar o título)."
+            },
+            {
+                "key": "field_po_opt_passos_eyebrow",
+                "name": "passos_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_passos_titulo",
+                "name": "passos_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_passos_texto",
+                "name": "passos_texto",
+                "label": "Texto (desktop)",
+                "type": "textarea",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_po_opt_passos_botao",
+                "name": "passos_botao",
+                "label": "Botão",
+                "type": "text",
+                "placeholder": "Agendar minha avaliação",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_passos_botao_unidade",
+                "name": "passos_botao_unidade",
+                "label": "Botão nas páginas de unidade",
+                "type": "text",
+                "placeholder": "Agendar em {cidade}",
+                "wrapper": {
+                    "width": 50
+                },
+                "instructions": "{cidade} vira o nome da unidade."
+            },
+            {
+                "key": "field_po_opt_passos",
+                "name": "passos",
+                "label": "Passos",
+                "type": "repeater",
+                "layout": "table",
+                "max": 4,
+                "button_label": "Adicionar passo",
+                "sub_fields": [
+                    {
+                        "key": "field_po_opt_passos_titulo",
+                        "name": "titulo",
+                        "label": "Passo",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_opt_passos_descricao",
+                        "name": "descricao",
+                        "label": "Descrição",
+                        "type": "textarea",
+                        "rows": 2,
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_po_opt_tab_resultados",
+                "label": "Resultados",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_msg_resultados",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Antes e depois reais, com autorização por escrito do paciente. Imagem 4:5 (600×750), WebP. As páginas de unidade mostram primeiro os casos daquela unidade."
+            },
+            {
+                "key": "field_po_opt_resultados_eyebrow",
+                "name": "resultados_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_resultados_titulo",
+                "name": "resultados_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_resultados",
+                "name": "resultados",
+                "label": "Casos",
+                "type": "repeater",
+                "layout": "table",
+                "button_label": "Adicionar caso",
+                "sub_fields": [
+                    {
+                        "key": "field_po_opt_resultados_imagem",
+                        "name": "imagem",
+                        "label": "Imagem",
+                        "type": "image",
+                        "return_format": "id",
+                        "preview_size": "thumbnail",
+                        "required": 1
+                    },
+                    {
+                        "key": "field_po_opt_resultados_tratamento",
+                        "name": "tratamento",
+                        "label": "Tratamento",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_opt_resultados_unidade",
+                        "name": "unidade",
+                        "label": "Unidade",
+                        "type": "select",
+                        "choices": [],
+                        "allow_null": 1,
+                        "ui": 0,
+                        "return_format": "value",
+                        "proodonto_units": 1
+                    },
+                    {
+                        "key": "field_po_opt_resultados_alt",
+                        "name": "alt",
+                        "label": "Descrição da imagem (alt)",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_po_opt_resultados_nota",
+                "name": "resultados_nota",
+                "label": "Nota legal",
+                "type": "textarea",
+                "rows": 2,
+                "new_lines": "",
+                "instructions": "Autorização + resultados variam + responsável técnico com CRO."
+            },
+            {
+                "key": "field_po_opt_resultados_link_label",
+                "name": "resultados_link_label",
+                "label": "Botão \"Ver mais resultados\"",
+                "type": "text",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_resultados_link",
+                "name": "resultados_link",
+                "label": "Destino do botão",
+                "type": "url",
+                "wrapper": {
+                    "width": 50
+                },
+                "instructions": "Vazio = botão não aparece."
+            },
+            {
+                "key": "field_po_opt_tab_avaliacoes",
+                "label": "Avaliações",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_msg_avaliacoes",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Só trechos reais do Perfil da Empresa no Google. Não publicamos aggregateRating no schema (avaliações de terceiros)."
+            },
+            {
+                "key": "field_po_opt_avaliacoes_eyebrow",
+                "name": "avaliacoes_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "wrapper": {
+                    "width": 50
+                },
+                "instructions": "Nas unidades: \"Avaliações · {cidade}\"."
+            },
+            {
+                "key": "field_po_opt_avaliacoes_titulo",
+                "name": "avaliacoes_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_opt_avaliacoes_link_label",
+                "name": "avaliacoes_link_label",
+                "label": "Texto do link para o Google",
+                "type": "text"
+            },
+            {
+                "key": "field_po_opt_avaliacoes",
+                "name": "avaliacoes",
+                "label": "Avaliações",
+                "type": "repeater",
+                "layout": "block",
+                "collapsed": "field_po_opt_avaliacoes_nome",
+                "button_label": "Adicionar avaliação",
+                "sub_fields": [
+                    {
+                        "key": "field_po_opt_avaliacoes_texto",
+                        "name": "texto",
+                        "label": "Trecho",
+                        "type": "textarea",
+                        "rows": 3,
+                        "new_lines": "",
+                        "required": 1
+                    },
+                    {
+                        "key": "field_po_opt_avaliacoes_nome",
+                        "name": "nome",
+                        "label": "Nome",
+                        "type": "text",
+                        "wrapper": {
+                            "width": 34
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_avaliacoes_unidade",
+                        "name": "unidade",
+                        "label": "Unidade",
+                        "type": "select",
+                        "choices": [],
+                        "allow_null": 1,
+                        "ui": 0,
+                        "return_format": "value",
+                        "proodonto_units": 1,
+                        "wrapper": {
+                            "width": 33
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_avaliacoes_tratamento",
+                        "name": "tratamento",
+                        "label": "Tratamento citado",
+                        "type": "text",
+                        "wrapper": {
+                            "width": 33
+                        }
+                    }
+                ]
+            },
+            {
+                "key": "field_po_opt_tab_fechamento",
+                "label": "Fechamento",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_msg_fechamento",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Faixa teal antes do rodapé. Cada página pode trocar o título."
+            },
+            {
+                "key": "field_po_opt_fechamento_titulo",
+                "name": "fechamento_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_opt_fechamento_texto",
+                "name": "fechamento_texto",
+                "label": "Texto",
+                "type": "text"
+            },
+            {
+                "key": "field_po_opt_fechamento_botao",
+                "name": "fechamento_botao",
+                "label": "Botão",
+                "type": "text"
+            },
+            {
+                "key": "field_po_opt_tab_rodape",
+                "label": "Rodapé",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_rodape_texto",
+                "name": "rodape_texto",
+                "label": "Texto institucional",
+                "type": "textarea",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_po_opt_rodape_botao",
+                "name": "rodape_botao",
+                "label": "Botão",
+                "type": "text",
+                "placeholder": "Agendar avaliação"
+            },
+            {
+                "key": "field_po_opt_redes",
+                "name": "redes",
+                "label": "Redes sociais",
+                "type": "repeater",
+                "layout": "table",
+                "button_label": "Adicionar rede",
+                "sub_fields": [
+                    {
+                        "key": "field_po_opt_redes_rede",
+                        "name": "rede",
+                        "label": "Rede",
+                        "type": "select",
+                        "choices": {
+                            "instagram": "Instagram",
+                            "facebook": "Facebook",
+                            "youtube": "YouTube",
+                            "tiktok": "TikTok"
+                        }
+                    },
+                    {
+                        "key": "field_po_opt_redes_url",
+                        "name": "url",
+                        "label": "Link",
+                        "type": "url"
+                    }
+                ]
+            },
+            {
+                "key": "field_po_opt_responsavel_nome",
+                "name": "responsavel_nome",
+                "label": "Responsável técnico",
+                "type": "text",
+                "wrapper": {
+                    "width": 40
+                }
+            },
+            {
+                "key": "field_po_opt_responsavel_cargo",
+                "name": "responsavel_cargo",
+                "label": "Cargo",
+                "type": "text",
+                "wrapper": {
+                    "width": 30
+                }
+            },
+            {
+                "key": "field_po_opt_responsavel_cro",
+                "name": "responsavel_cro",
+                "label": "CRO",
+                "type": "text",
+                "wrapper": {
+                    "width": 30
+                }
+            },
+            {
+                "key": "field_po_opt_rodape_legal",
+                "name": "rodape_legal",
+                "label": "Linha final (© e CNPJ)",
+                "type": "text",
+                "instructions": "{ano} vira o ano atual."
+            },
+            {
+                "key": "field_po_opt_tab_rastreamento",
+                "label": "Rastreamento",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_opt_meta_pixel_id",
+                "name": "meta_pixel_id",
+                "label": "ID do Pixel da Meta",
+                "type": "text",
+                "instructions": "Só números. Carrega depois que a página fica ociosa (não pesa no LCP/INP). Deixe vazio se o Pixel já entra pelo GTM."
+            },
+            {
+                "key": "field_po_opt_repassar_utm",
+                "name": "repassar_utm",
+                "label": "Repassar utm_*, fbclid e gclid para o UpView",
+                "type": "true_false",
+                "ui": 1,
+                "default_value": 1
+            }
+        ],
+        "active": true
+    }
+]

@@ -1,0 +1,240 @@
+[
+    {
+        "key": "group_po_hub",
+        "title": "Hub de tratamentos",
+        "position": "acf_after_title",
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-servicos.php"
+                }
+            ]
+        ],
+        "fields": [
+            {
+                "key": "field_po_hub_tab_topo",
+                "label": "Topo",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_hub_hub_eyebrow",
+                "name": "hub_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text"
+            },
+            {
+                "key": "field_servicos_hub_titulo",
+                "label": "H1",
+                "name": "hub_titulo",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico. Vazio = título da página."
+            },
+            {
+                "key": "field_servicos_hub_lead",
+                "label": "Lead",
+                "name": "hub_lead",
+                "type": "textarea",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_po_hub_hub_seletor_titulo",
+                "name": "hub_seletor_titulo",
+                "label": "Título do cartão de atalhos",
+                "type": "text",
+                "placeholder": "O que você quer resolver?"
+            },
+            {
+                "key": "field_po_hub_tab_grupos",
+                "label": "Grupos",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_hub_msg_grupos",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Cada grupo vira uma seção numerada (01, 02, 03) e um atalho no cartão do topo. O primeiro tratamento do grupo marcado como destaque ganha o card marinho grande."
+            },
+            {
+                "key": "field_po_hub_hub_grupos",
+                "name": "hub_grupos",
+                "label": "Grupos",
+                "type": "repeater",
+                "layout": "block",
+                "collapsed": "field_po_hub_grupos_atalho",
+                "button_label": "Adicionar grupo",
+                "sub_fields": [
+                    {
+                        "key": "field_po_hub_grupos_atalho",
+                        "name": "atalho",
+                        "label": "Atalho (cartão do topo)",
+                        "type": "text",
+                        "placeholder": "Repor dentes",
+                        "wrapper": {
+                            "width": 34
+                        }
+                    },
+                    {
+                        "key": "field_po_hub_grupos_atalho_sub",
+                        "name": "atalho_sub",
+                        "label": "Linha de apoio do atalho",
+                        "type": "text",
+                        "placeholder": "Prótese · implante · protocolo",
+                        "wrapper": {
+                            "width": 33
+                        }
+                    },
+                    {
+                        "key": "field_po_hub_grupos_icone",
+                        "name": "icone",
+                        "label": "Ícone",
+                        "type": "select",
+                        "choices": {
+                            "tooth": "Dente (prótese)",
+                            "implant": "Implante",
+                            "protocol": "Arcada (protocolo)",
+                            "ortho": "Aparelho (ortodontia)",
+                            "aesthetic": "Brilho (estética)",
+                            "spark": "Raios",
+                            "adjust": "Ajuste",
+                            "info": "Informação",
+                            "check": "Confirmado",
+                            "clock": "Relógio",
+                            "pin": "Local"
+                        },
+                        "allow_null": 1,
+                        "return_format": "value",
+                        "wrapper": {
+                            "width": 33
+                        }
+                    },
+                    {
+                        "key": "field_po_hub_grupos_titulo",
+                        "name": "titulo",
+                        "label": "Título da seção",
+                        "type": "text",
+                        "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_hub_grupos_subtitulo",
+                        "name": "subtitulo",
+                        "label": "Subtítulo",
+                        "type": "text",
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_hub_grupos_destaque",
+                        "name": "destaque",
+                        "label": "Card em destaque",
+                        "type": "post_object",
+                        "post_type": [
+                            "servico"
+                        ],
+                        "return_format": "id",
+                        "allow_null": 1,
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_hub_grupos_servicos",
+                        "name": "servicos",
+                        "label": "Demais tratamentos",
+                        "type": "relationship",
+                        "post_type": [
+                            "servico"
+                        ],
+                        "return_format": "id",
+                        "wrapper": {
+                            "width": 50
+                        }
+                    },
+                    {
+                        "key": "field_po_hub_grupos_botao",
+                        "name": "botao",
+                        "label": "Botão ao lado do título",
+                        "type": "text",
+                        "instructions": "Ex.: \"Agendar avaliação\" (leva às unidades). Vazio = sem botão."
+                    }
+                ]
+            },
+            {
+                "key": "field_po_hub_tab_avaliacao-e-faq",
+                "label": "Avaliação e FAQ",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_hub_hub_passos_eyebrow",
+                "name": "hub_passos_eyebrow",
+                "label": "\"Primeira avaliação\" — sobretítulo",
+                "type": "text",
+                "placeholder": "Não sabe por onde começar?",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_hub_hub_passos_titulo",
+                "name": "hub_passos_titulo",
+                "label": "\"Primeira avaliação\" — título",
+                "type": "text",
+                "placeholder": "Comece pela *avaliação.*",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_hub_hub_faq_titulo",
+                "name": "hub_faq_titulo",
+                "label": "Título das perguntas",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_hub_hub_faq",
+                "name": "hub_faq",
+                "label": "Perguntas frequentes",
+                "type": "repeater",
+                "layout": "block",
+                "collapsed": "field_po_hub_hub_faq_pergunta",
+                "button_label": "Adicionar pergunta",
+                "instructions": "Saem na página e no schema FAQPage. Resposta curta, que faça sentido lida sozinha. Use {cidade} para o nome da unidade.",
+                "sub_fields": [
+                    {
+                        "key": "field_po_hub_hub_faq_pergunta",
+                        "name": "pergunta",
+                        "label": "Pergunta",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_hub_hub_faq_resposta",
+                        "name": "resposta",
+                        "label": "Resposta",
+                        "type": "textarea",
+                        "rows": 3,
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_po_hub_msg_editor",
+                "label": "Texto do editor",
+                "name": "",
+                "type": "message",
+                "message": "O editor abaixo continua valendo: o texto próprio do hub (\"como escolher o tratamento\", 120–180 palavras) aparece depois dos grupos."
+            }
+        ],
+        "active": true
+    }
+]

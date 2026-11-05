@@ -1,0 +1,352 @@
+[
+    {
+        "key": "group_po_unidade",
+        "title": "Página de unidade",
+        "position": "acf_after_title",
+        "hide_on_screen": [
+            "the_content"
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-vendas.php"
+                }
+            ]
+        ],
+        "fields": [
+            {
+                "key": "field_po_uni_tab_unidade-e-teste",
+                "label": "Unidade e teste",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_uni_uni_unidade",
+                "name": "uni_unidade",
+                "label": "Unidade desta página",
+                "type": "select",
+                "choices": [],
+                "allow_null": 1,
+                "ui": 0,
+                "return_format": "value",
+                "proodonto_units": 1,
+                "instructions": "Endereço, horário, nota, WhatsApp e avaliações saem da unidade escolhida."
+            },
+            {
+                "key": "field_po_uni_uni_versao",
+                "name": "uni_versao",
+                "label": "Versão do topo",
+                "type": "button_group",
+                "choices": {
+                    "a": "A · dor + 1 botão",
+                    "b": "B · pergunta + 2 caminhos",
+                    "ab": "Teste A/B 50/50"
+                },
+                "default_value": "a",
+                "instructions": "No teste, cada visitante vê sempre a mesma versão (cookie de 30 dias) e o GTM recebe o evento ab_view com a variante. Os cliques no WhatsApp levam data-ab."
+            },
+            {
+                "key": "field_po_uni_tab_topo",
+                "label": "Topo",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_uni_uni_hero_h1",
+                "name": "uni_hero_h1",
+                "label": "H1 (SEO, pequeno)",
+                "type": "text",
+                "placeholder": "Dentista em {cidade} · {bairro}",
+                "required": 1,
+                "instructions": "Com cidade e bairro. A frase de dor abaixo é o título visual."
+            },
+            {
+                "key": "field_po_uni_uni_hero_titulo_a",
+                "name": "uni_hero_titulo_a",
+                "label": "Versão A — frase de dor",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_uni_uni_hero_botao_a",
+                "name": "uni_hero_botao_a",
+                "label": "Versão A — botão",
+                "type": "text",
+                "placeholder": "Agendar avaliação pelo WhatsApp"
+            },
+            {
+                "key": "field_po_uni_uni_hero_titulo_b",
+                "name": "uni_hero_titulo_b",
+                "label": "Versão B — pergunta",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_uni_uni_hero_caminhos",
+                "name": "uni_hero_caminhos",
+                "label": "Versão B — caminhos",
+                "type": "repeater",
+                "layout": "table",
+                "max": 3,
+                "button_label": "Adicionar caminho",
+                "instructions": "Cada caminho pode ter um link do UpView com mensagem própria. Vazio = WhatsApp da unidade.",
+                "sub_fields": [
+                    {
+                        "key": "field_po_uni_caminhos_titulo",
+                        "name": "titulo",
+                        "label": "Título",
+                        "type": "text",
+                        "placeholder": "Faltam dentes"
+                    },
+                    {
+                        "key": "field_po_uni_caminhos_subtitulo",
+                        "name": "subtitulo",
+                        "label": "Subtítulo",
+                        "type": "text",
+                        "placeholder": "Implante ou prótese"
+                    },
+                    {
+                        "key": "field_po_uni_caminhos_link",
+                        "name": "link",
+                        "label": "Link (UpView)",
+                        "type": "url"
+                    }
+                ]
+            },
+            {
+                "key": "field_po_uni_uni_hero_lead",
+                "name": "uni_hero_lead",
+                "label": "Lead",
+                "type": "textarea",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_po_uni_uni_hero_extra",
+                "name": "uni_hero_extra",
+                "label": "Frase extra",
+                "type": "text",
+                "placeholder": "Sem precisar viajar até Aracaju.",
+                "instructions": "Só em Lagarto e Simão Dias."
+            },
+            {
+                "key": "field_po_uni_uni_hero_foto",
+                "name": "uni_hero_foto",
+                "label": "Foto da unidade (desktop)",
+                "type": "image",
+                "return_format": "id",
+                "preview_size": "medium",
+                "instructions": "1000×1000, WebP ≤ 70 KB. Ganha preload."
+            },
+            {
+                "key": "field_po_uni_tab_tratamentos",
+                "label": "Tratamentos",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_uni_uni_trat_eyebrow",
+                "name": "uni_trat_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "placeholder": "Tratamentos em {cidade}",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_uni_uni_trat_titulo",
+                "name": "uni_trat_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_uni_uni_trat_lista",
+                "name": "uni_trat_lista",
+                "label": "Tratamentos",
+                "type": "relationship",
+                "post_type": [
+                    "servico"
+                ],
+                "return_format": "id",
+                "max": 5,
+                "instructions": "Vazio = todos os tratamentos publicados, na ordem do painel. Os links levam a /servicos/<x>/ (sem cidade na URL)."
+            },
+            {
+                "key": "field_po_uni_tab_a-clinica",
+                "label": "A clínica",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_uni_msg_clinica",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Conteúdo exclusivo desta cidade — é o que impede as 3 páginas de virarem a mesma página trocando o nome."
+            },
+            {
+                "key": "field_po_uni_uni_clinica_eyebrow",
+                "name": "uni_clinica_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "placeholder": "A clínica em {cidade}",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_uni_uni_clinica_titulo",
+                "name": "uni_clinica_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_uni_uni_clinica_texto",
+                "name": "uni_clinica_texto",
+                "label": "Texto",
+                "type": "textarea",
+                "rows": 4,
+                "new_lines": "wpautop",
+                "instructions": "2–3 frases só desta unidade: desde quando atende, estrutura, ponto de referência, estacionamento."
+            },
+            {
+                "key": "field_po_uni_uni_clinica_fotos",
+                "name": "uni_clinica_fotos",
+                "label": "Fotos (recepção, consultório, fachada)",
+                "type": "gallery",
+                "return_format": "id",
+                "max": 3,
+                "preview_size": "thumbnail"
+            },
+            {
+                "key": "field_po_uni_uni_equipe_titulo",
+                "name": "uni_equipe_titulo",
+                "label": "Título da equipe",
+                "type": "text",
+                "placeholder": "Equipe em {cidade}"
+            },
+            {
+                "key": "field_po_uni_uni_equipe",
+                "name": "uni_equipe",
+                "label": "Equipe",
+                "type": "repeater",
+                "layout": "table",
+                "button_label": "Adicionar profissional",
+                "sub_fields": [
+                    {
+                        "key": "field_po_uni_equipe_nome",
+                        "name": "nome",
+                        "label": "Nome",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_uni_equipe_especialidade",
+                        "name": "especialidade",
+                        "label": "Especialidade",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_uni_equipe_cro",
+                        "name": "cro",
+                        "label": "CRO",
+                        "type": "text",
+                        "placeholder": "CRO-SE 0000"
+                    },
+                    {
+                        "key": "field_po_uni_equipe_foto",
+                        "name": "foto",
+                        "label": "Foto",
+                        "type": "image",
+                        "return_format": "id",
+                        "preview_size": "thumbnail"
+                    }
+                ]
+            },
+            {
+                "key": "field_po_uni_tab_perguntas",
+                "label": "Perguntas",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_uni_uni_faq_titulo",
+                "name": "uni_faq_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_uni_uni_faq",
+                "name": "uni_faq",
+                "label": "Perguntas frequentes",
+                "type": "repeater",
+                "layout": "block",
+                "collapsed": "field_po_uni_uni_faq_pergunta",
+                "button_label": "Adicionar pergunta",
+                "instructions": "Saem na página e no schema FAQPage. Resposta curta, que faça sentido lida sozinha. Use {cidade} para o nome da unidade.",
+                "sub_fields": [
+                    {
+                        "key": "field_po_uni_uni_faq_pergunta",
+                        "name": "pergunta",
+                        "label": "Pergunta",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_uni_uni_faq_resposta",
+                        "name": "resposta",
+                        "label": "Resposta",
+                        "type": "textarea",
+                        "rows": 3,
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_po_uni_tab_final",
+                "label": "Final",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_uni_uni_outras_titulo",
+                "name": "uni_outras_titulo",
+                "label": "Título \"Outras unidades\"",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_uni_uni_fechamento_titulo",
+                "name": "uni_fechamento_titulo",
+                "label": "Fechamento — título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_uni_uni_fechamento_texto",
+                "name": "uni_fechamento_texto",
+                "label": "Fechamento — texto (celular)",
+                "type": "text",
+                "placeholder": "Fale com a equipe de {cidade} pelo WhatsApp."
+            },
+            {
+                "key": "field_po_uni_uni_fechamento_botao",
+                "name": "uni_fechamento_botao",
+                "label": "Fechamento — botão",
+                "type": "text",
+                "placeholder": "Falar com {cidade}"
+            }
+        ],
+        "active": true
+    }
+]

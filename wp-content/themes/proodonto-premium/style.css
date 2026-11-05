@@ -1,0 +1,15 @@
+/*
+Theme Name: PróOdonto Premium
+Theme URI: https://proodontosergipe.com.br/
+Author: Alfama Web
+Author URI: https://alfamaweb.com.br/
+Description: Tema clássico (PHP + ACF PRO) da reformulação "Proposta 2 · atendimento premium" — Home, páginas de unidade com teste A/B, hub /servicos/, página de tratamento e post do blog. Conteúdo 100% pelo painel; nenhum texto de fallback no PHP.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.8
+Requires PHP: 8.0
+Text Domain: proodonto
+License: Proprietária — uso exclusivo PróOdonto Sergipe
+*/
+
+/* O CSS real está em assets/css/main.css (enfileirado com versão por filemtime). */

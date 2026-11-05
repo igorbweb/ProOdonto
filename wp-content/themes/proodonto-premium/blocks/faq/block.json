@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "proodonto/faq",
+	"title": "Perguntas Frequentes",
+	"category": "proodonto",
+	"icon": "editor-help",
+	"description": "Lista de perguntas e respostas (accordion nativo, sem JS) com marcação Schema.org FAQPage automática.",
+	"textdomain": "proodonto",
+	"attributes": {
+		"heading": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false }
+}

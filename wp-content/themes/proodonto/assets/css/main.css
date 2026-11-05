@@ -697,6 +697,61 @@ a.cta.cta--whatsapp:hover {
 	overflow-x: auto;
 }
 
+/*
+ * Botões do bloco core/buttons (CTAs UpView no fim dos posts) com o mesmo
+ * visual do `a.cta` acima: teal, caixa alta, raio 8px, peso 600.
+ * Sem isso, o estilo padrão do WP (pílula cinza #32373c) somado à regra
+ * `.single-post .entry-content a` (texto teal sublinhado) deixava o botão
+ * com texto teal sobre fundo cinza. O seletor tem especificidade 0,3,1
+ * de propósito, para vencer `.single-post .entry-content a` (0,2,1).
+ */
+.wp-block-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	margin-block: var(--space-4);
+}
+
+.wp-block-buttons .wp-block-button a.wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	width: 100%;
+	padding: 0.75rem 1.5rem;
+	background: var(--color-cta);
+	color: #fff;
+	border: none;
+	border-radius: var(--radius);
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: 600;
+	line-height: inherit;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background var(--transition);
+}
+
+.wp-block-buttons .wp-block-button a.wp-block-button__link:hover,
+.wp-block-buttons .wp-block-button a.wp-block-button__link:focus-visible {
+	background: var(--color-cta-dark);
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Mesmo comportamento do a.cta: 100% da largura no mobile, tamanho do
+   conteúdo a partir do tablet. */
+.wp-block-buttons .wp-block-button {
+	width: 100%;
+}
+
+@media (min-width: 600px) {
+	.wp-block-buttons .wp-block-button {
+		width: auto;
+	}
+}
+
 .page-links {
 	display: flex;
 	align-items: center;

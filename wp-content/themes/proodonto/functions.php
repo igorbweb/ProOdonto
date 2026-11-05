@@ -25,6 +25,7 @@ $proodonto_includes = array(
 	'/inc/options-page.php',        // Opções do Tema (ACF Pro): telefone/WhatsApp globais usados no header.
 	'/inc/units-map.php',           // Lista real das unidades + mapa estático (Google) com cache permanente.
 	'/inc/cta.php',                 // Destino dos CTAs: sempre o UpView (unidade da página ou Aracaju) + correção de botões antigos no conteúdo.
+	'/inc/dia-pro.php',             // Dia Pró: landing page do evento (page-dia-pro.php) — campos ACF, assets próprios e noindex.
 	'/inc/unit-faq.php',            // FAQ das páginas de unidade (texto aprovado em /sobre/) + FAQPage no grafo do Yoast.
 	'/inc/page-content-defaults.php', // Copy/ícones/nomes de imagem padrão das seções ACF da Home, Vendas e Sobre (usado por acf-fields.php e content-seed.php).
 	'/inc/acf-fields.php',          // Todos os grupos de campos (ACF Pro) do tema, via acf_add_local_field_group() — sem depender do banco de dados.

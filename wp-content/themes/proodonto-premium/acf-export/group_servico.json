@@ -1,0 +1,515 @@
+[
+    {
+        "key": "group_servico",
+        "title": "Tratamento — conteúdo da página",
+        "position": "acf_after_title",
+        "instruction_placement": "label",
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "servico"
+                }
+            ]
+        ],
+        "fields": [
+            {
+                "key": "field_po_srv_tab_topo",
+                "label": "Topo",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_servico_hero_titulo",
+                "label": "H1",
+                "name": "hero_titulo",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico. Vazio = título do tratamento. Nunca o nome de uma cidade só."
+            },
+            {
+                "key": "field_servico_hero_lead",
+                "label": "Lead",
+                "name": "hero_lead",
+                "type": "textarea",
+                "rows": 2,
+                "instructions": "Uma frase, lida em 10 segundos."
+            },
+            {
+                "key": "field_po_srv_srv_selo",
+                "name": "srv_selo",
+                "label": "Selo",
+                "type": "text",
+                "placeholder": "Mais procurado · Repor dentes",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_hero_cor",
+                "name": "srv_hero_cor",
+                "label": "Cor do topo",
+                "type": "button_group",
+                "choices": {
+                    "marinho": "Marinho",
+                    "teal": "Teal"
+                },
+                "default_value": "marinho",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_botao",
+                "name": "srv_botao",
+                "label": "Botão principal",
+                "type": "text",
+                "placeholder": "Agendar avaliação de prótese",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_botao_etapas",
+                "name": "srv_botao_etapas",
+                "label": "Botão secundário (vai às etapas)",
+                "type": "text",
+                "placeholder": "Como funciona",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_provas",
+                "name": "srv_provas",
+                "label": "Provas com ✓",
+                "type": "repeater",
+                "layout": "table",
+                "max": 4,
+                "button_label": "Adicionar prova",
+                "sub_fields": [
+                    {
+                        "key": "field_po_srv_provas_texto",
+                        "name": "texto",
+                        "label": "Texto",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_po_srv_srv_hero_foto",
+                "name": "srv_hero_foto",
+                "label": "Foto do topo",
+                "type": "image",
+                "return_format": "id",
+                "preview_size": "medium",
+                "instructions": "Paciente sorrindo ou consultório. WebP ≤ 70 KB. Sem foto = bloco marinho.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_stat_valor",
+                "name": "srv_stat_valor",
+                "label": "Número sobre a foto",
+                "type": "text",
+                "placeholder": "+22 mil",
+                "wrapper": {
+                    "width": 25
+                }
+            },
+            {
+                "key": "field_po_srv_srv_stat_rotulo",
+                "name": "srv_stat_rotulo",
+                "label": "Rótulo do número",
+                "type": "text",
+                "placeholder": "atendimentos desde 2019",
+                "wrapper": {
+                    "width": 25
+                }
+            },
+            {
+                "key": "field_po_srv_tab_card",
+                "label": "Card",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_servico_card_para_quem",
+                "label": "Resumo no card",
+                "name": "card_para_quem",
+                "type": "text",
+                "maxlength": 80,
+                "instructions": "Uma linha nos cards da Home, unidades e hub (ex.: \"Dentes alinhados e mordida certa\")."
+            },
+            {
+                "key": "field_po_srv_srv_icone",
+                "name": "srv_icone",
+                "label": "Ícone",
+                "type": "select",
+                "choices": {
+                    "tooth": "Dente (prótese)",
+                    "implant": "Implante",
+                    "protocol": "Arcada (protocolo)",
+                    "ortho": "Aparelho (ortodontia)",
+                    "aesthetic": "Brilho (estética)",
+                    "spark": "Raios",
+                    "adjust": "Ajuste",
+                    "info": "Informação",
+                    "check": "Confirmado",
+                    "clock": "Relógio",
+                    "pin": "Local"
+                },
+                "allow_null": 1,
+                "return_format": "value"
+            },
+            {
+                "key": "field_po_srv_msg_card_foto",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "A foto do card é a Imagem destacada do tratamento."
+            },
+            {
+                "key": "field_po_srv_tab_o-que-e",
+                "label": "O que é",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_servico_resposta_direta",
+                "label": "O que é — resposta direta",
+                "name": "resposta_direta",
+                "type": "textarea",
+                "rows": 4,
+                "instructions": "40–60 palavras começando pelo nome do tratamento (\"Prótese dentária é…\"). É o trecho que Google e IAs recortam; vira a descrição do schema. Revisão do Dr. Alisson."
+            },
+            {
+                "key": "field_po_srv_srv_oque_foto",
+                "name": "srv_oque_foto",
+                "label": "Foto ao lado",
+                "type": "image",
+                "return_format": "id",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_po_srv_tab_para-quem-e",
+                "label": "Para quem é",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_srv_srv_para_quem_eyebrow",
+                "name": "srv_para_quem_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "placeholder": "Para quem é",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_para_quem_titulo",
+                "name": "srv_para_quem_titulo",
+                "label": "Título",
+                "type": "text",
+                "placeholder": "É para *você* se…",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_servico_para_quem_itens",
+                "label": "Itens",
+                "name": "para_quem_itens",
+                "type": "repeater",
+                "layout": "table",
+                "button_label": "Adicionar item",
+                "sub_fields": [
+                    {
+                        "key": "field_servico_para_quem_texto",
+                        "label": "Item",
+                        "name": "texto",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_srv_para_quem_icone",
+                        "name": "icone",
+                        "label": "Ícone",
+                        "type": "select",
+                        "choices": {
+                            "tooth": "Dente (prótese)",
+                            "implant": "Implante",
+                            "protocol": "Arcada (protocolo)",
+                            "ortho": "Aparelho (ortodontia)",
+                            "aesthetic": "Brilho (estética)",
+                            "spark": "Raios",
+                            "adjust": "Ajuste",
+                            "info": "Informação",
+                            "check": "Confirmado",
+                            "clock": "Relógio",
+                            "pin": "Local"
+                        },
+                        "allow_null": 1,
+                        "return_format": "value"
+                    }
+                ]
+            },
+            {
+                "key": "field_servico_pre_requisitos",
+                "label": "O que pode vir antes",
+                "name": "pre_requisitos",
+                "type": "textarea",
+                "rows": 3,
+                "instructions": "Bloqueado até revisão do Dr. Alisson."
+            },
+            {
+                "key": "field_po_srv_tab_etapas",
+                "label": "Etapas",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_srv_srv_etapas_eyebrow",
+                "name": "srv_etapas_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "placeholder": "Etapa por etapa",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_etapas_titulo",
+                "name": "srv_etapas_titulo",
+                "label": "Título",
+                "type": "text",
+                "placeholder": "Como funciona *o tratamento*",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_srv_srv_etapas_botao",
+                "name": "srv_etapas_botao",
+                "label": "Botão",
+                "type": "text",
+                "placeholder": "Começar pela avaliação"
+            },
+            {
+                "key": "field_servico_etapas",
+                "label": "Etapas",
+                "name": "etapas",
+                "type": "repeater",
+                "layout": "block",
+                "button_label": "Adicionar etapa",
+                "instructions": "Revisadas pelo Dr. Alisson. Também entram no schema (howPerformed).",
+                "sub_fields": [
+                    {
+                        "key": "field_servico_etapa_titulo",
+                        "label": "Etapa",
+                        "name": "titulo",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_servico_etapa_descricao",
+                        "label": "Descrição",
+                        "name": "descricao",
+                        "type": "textarea",
+                        "rows": 2
+                    },
+                    {
+                        "key": "field_servico_etapa_duracao",
+                        "label": "Tempo",
+                        "name": "duracao",
+                        "type": "text",
+                        "instructions": "Ex.: \"Na mesma visita\"."
+                    }
+                ]
+            },
+            {
+                "key": "field_po_srv_tab_avaliacoes",
+                "label": "Avaliações",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_servico_avaliacoes",
+                "label": "Avaliação em destaque",
+                "name": "avaliacoes",
+                "type": "repeater",
+                "layout": "block",
+                "max": 3,
+                "button_label": "Adicionar avaliação",
+                "instructions": "Trechos reais que citem este tratamento. Vazio = a primeira avaliação global.",
+                "sub_fields": [
+                    {
+                        "key": "field_servico_avaliacao_texto",
+                        "label": "Trecho",
+                        "name": "texto",
+                        "type": "textarea",
+                        "rows": 3
+                    },
+                    {
+                        "key": "field_servico_avaliacao_nome",
+                        "label": "Nome",
+                        "name": "nome",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "50"
+                        }
+                    },
+                    {
+                        "key": "field_servico_avaliacao_unidade",
+                        "label": "Unidade",
+                        "name": "unidade",
+                        "type": "text",
+                        "wrapper": {
+                            "width": "50"
+                        }
+                    }
+                ]
+            },
+            {
+                "key": "field_servico_avaliacoes_link",
+                "label": "Link \"Ver todas no Google\"",
+                "name": "avaliacoes_link",
+                "type": "url"
+            },
+            {
+                "key": "field_po_srv_tab_unidades-e-whatsapp",
+                "label": "Unidades e WhatsApp",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_srv_srv_unidades_titulo",
+                "name": "srv_unidades_titulo",
+                "label": "Título do bloco de unidades",
+                "type": "text",
+                "placeholder": "Avaliação de prótese *perto de você*"
+            },
+            {
+                "key": "field_po_srv_srv_unidades_texto",
+                "name": "srv_unidades_texto",
+                "label": "Texto",
+                "type": "text",
+                "placeholder": "O WhatsApp abre com a mensagem sobre prótese."
+            },
+            {
+                "key": "field_po_srv_msg_cta",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Links do UpView próprios deste tratamento (mensagem pré-preenchida). Vazio = link padrão da unidade. Nunca wa.me."
+            },
+            {
+                "key": "field_servico_cta_url_aracaju",
+                "label": "Aracaju",
+                "name": "cta_url_aracaju",
+                "type": "url",
+                "wrapper": {
+                    "width": "33"
+                }
+            },
+            {
+                "key": "field_servico_cta_url_lagarto",
+                "label": "Lagarto",
+                "name": "cta_url_lagarto",
+                "type": "url",
+                "wrapper": {
+                    "width": "33"
+                }
+            },
+            {
+                "key": "field_servico_cta_url_simao_dias",
+                "label": "Simão Dias",
+                "name": "cta_url_simao_dias",
+                "type": "url",
+                "wrapper": {
+                    "width": "34"
+                }
+            },
+            {
+                "key": "field_po_srv_tab_perguntas",
+                "label": "Perguntas",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_srv_srv_faq_titulo",
+                "name": "srv_faq_titulo",
+                "label": "Título",
+                "type": "text",
+                "placeholder": "Perguntas *frequentes*"
+            },
+            {
+                "key": "field_po_srv_srv_faq",
+                "name": "srv_faq",
+                "label": "Perguntas frequentes",
+                "type": "repeater",
+                "layout": "block",
+                "collapsed": "field_po_srv_srv_faq_pergunta",
+                "button_label": "Adicionar pergunta",
+                "instructions": "Saem na página e no schema FAQPage. Resposta curta, que faça sentido lida sozinha. Use {cidade} para o nome da unidade.",
+                "sub_fields": [
+                    {
+                        "key": "field_po_srv_srv_faq_pergunta",
+                        "name": "pergunta",
+                        "label": "Pergunta",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_srv_srv_faq_resposta",
+                        "name": "resposta",
+                        "label": "Resposta",
+                        "type": "textarea",
+                        "rows": 3,
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_po_srv_msg_faq_editor",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "Se este tratamento já tem FAQ no editor (bloco \"Perguntas Frequentes\"), ele continua valendo e aparece neste lugar."
+            },
+            {
+                "key": "field_po_srv_tab_veja-tambem",
+                "label": "Veja também",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_servico_posts_relacionados",
+                "label": "Posts do blog relacionados",
+                "name": "posts_relacionados",
+                "type": "relationship",
+                "post_type": [
+                    "post"
+                ],
+                "filters": [
+                    "search"
+                ],
+                "return_format": "id",
+                "max": 3,
+                "instructions": "Pelo menos um (SEO-07) — e o post deve linkar de volta."
+            },
+            {
+                "key": "field_po_srv_srv_relacionados",
+                "name": "srv_relacionados",
+                "label": "Outros tratamentos",
+                "type": "relationship",
+                "post_type": [
+                    "servico"
+                ],
+                "return_format": "id",
+                "max": 3,
+                "instructions": "Vazio = os próximos tratamentos da lista."
+            }
+        ],
+        "active": true
+    }
+]

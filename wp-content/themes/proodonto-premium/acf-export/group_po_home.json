@@ -1,0 +1,236 @@
+[
+    {
+        "key": "group_po_home",
+        "title": "Home",
+        "position": "acf_after_title",
+        "hide_on_screen": [
+            "the_content"
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "page-home.php"
+                }
+            ]
+        ],
+        "fields": [
+            {
+                "key": "field_po_home_tab_topo",
+                "label": "Topo",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_home_msg_topo",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "message": "No celular o topo é só texto (o H1 é o LCP). A foto entra a partir do tablet. Unidades, nota e números vêm de PróOdonto → conteúdo global."
+            },
+            {
+                "key": "field_po_home_home_hero_eyebrow",
+                "name": "home_hero_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text"
+            },
+            {
+                "key": "field_po_home_home_hero_titulo",
+                "name": "home_hero_titulo",
+                "label": "H1",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "required": 1
+            },
+            {
+                "key": "field_po_home_home_hero_lead",
+                "name": "home_hero_lead",
+                "label": "Lead",
+                "type": "textarea",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_po_home_home_hero_imagem",
+                "name": "home_hero_imagem",
+                "label": "Foto full-bleed (tablet/desktop)",
+                "type": "image",
+                "return_format": "id",
+                "preview_size": "medium",
+                "instructions": "Equipe ou recepção. 1600×900, WebP/AVIF ≤ 120 KB. Ganha preload e fica fora do lazy-load."
+            },
+            {
+                "key": "field_po_home_home_seletor_titulo",
+                "name": "home_seletor_titulo",
+                "label": "Título do seletor de unidade",
+                "type": "text",
+                "placeholder": "Agende na unidade mais perto"
+            },
+            {
+                "key": "field_po_home_tab_tratamentos",
+                "label": "Tratamentos",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_home_home_trat_eyebrow",
+                "name": "home_trat_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_home_home_trat_titulo",
+                "name": "home_trat_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_home_home_trat_destaque",
+                "name": "home_trat_destaque",
+                "label": "Tratamento em destaque (card marinho)",
+                "type": "post_object",
+                "post_type": [
+                    "servico"
+                ],
+                "return_format": "id",
+                "allow_null": 1
+            },
+            {
+                "key": "field_po_home_home_trat_lista",
+                "name": "home_trat_lista",
+                "label": "Demais cards",
+                "type": "relationship",
+                "post_type": [
+                    "servico"
+                ],
+                "return_format": "id",
+                "max": 4,
+                "filters": [
+                    "search"
+                ],
+                "instructions": "Até 4. Ícone e resumo vêm de cada Tratamento."
+            },
+            {
+                "key": "field_po_home_home_trat_botao",
+                "name": "home_trat_botao",
+                "label": "Botão para o hub",
+                "type": "text",
+                "placeholder": "Ver todos os tratamentos"
+            },
+            {
+                "key": "field_po_home_tab_unidades",
+                "label": "Unidades",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_home_home_unid_eyebrow",
+                "name": "home_unid_eyebrow",
+                "label": "Sobretítulo",
+                "type": "text",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_home_home_unid_titulo",
+                "name": "home_unid_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico.",
+                "wrapper": {
+                    "width": 50
+                }
+            },
+            {
+                "key": "field_po_home_tab_sobre",
+                "label": "Sobre",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_home_home_sobre_titulo",
+                "name": "home_sobre_titulo",
+                "label": "Título",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_home_home_sobre_texto",
+                "name": "home_sobre_texto",
+                "label": "Texto",
+                "type": "textarea",
+                "rows": 4,
+                "new_lines": "wpautop"
+            },
+            {
+                "key": "field_po_home_home_sobre_link",
+                "name": "home_sobre_link",
+                "label": "Botão",
+                "type": "link",
+                "return_format": "array"
+            },
+            {
+                "key": "field_po_home_tab_perguntas",
+                "label": "Perguntas",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_home_home_faq_titulo",
+                "name": "home_faq_titulo",
+                "label": "Título (celular)",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            },
+            {
+                "key": "field_po_home_home_faq",
+                "name": "home_faq",
+                "label": "Perguntas frequentes",
+                "type": "repeater",
+                "layout": "block",
+                "collapsed": "field_po_home_home_faq_pergunta",
+                "button_label": "Adicionar pergunta",
+                "instructions": "Saem na página e no schema FAQPage. Resposta curta, que faça sentido lida sozinha. Use {cidade} para o nome da unidade.",
+                "sub_fields": [
+                    {
+                        "key": "field_po_home_home_faq_pergunta",
+                        "name": "pergunta",
+                        "label": "Pergunta",
+                        "type": "text"
+                    },
+                    {
+                        "key": "field_po_home_home_faq_resposta",
+                        "name": "resposta",
+                        "label": "Resposta",
+                        "type": "textarea",
+                        "rows": 3,
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_po_home_tab_fechamento",
+                "label": "Fechamento",
+                "type": "tab",
+                "placement": "top"
+            },
+            {
+                "key": "field_po_home_home_fechamento_titulo",
+                "name": "home_fechamento_titulo",
+                "label": "Título (vazio = o global)",
+                "type": "text",
+                "instructions": "Envolva a palavra de destaque com asteriscos: O que você quer *resolver*? Ela sai em teal, sem itálico."
+            }
+        ],
+        "active": true
+    }
+]
