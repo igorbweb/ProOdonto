@@ -21,12 +21,11 @@ defined( 'ABSPATH' ) || exit;
 
 $proodonto_placeholder_img = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'%3E%3Crect width='100%25' height='100%25' fill='%23e2e4e8'/%3E%3C/svg%3E";
 
-// Reaproveitado em várias seções (Antes e Depois, Unidades, CTA final) —
-// centralizado aqui pra não duplicar a mesma URL em cada uma. Número vem
-// das Opções do Tema (ver proodonto_get_whatsapp() em inc/options-page.php).
-$proodonto_whatsapp     = function_exists( 'proodonto_get_whatsapp' ) ? proodonto_get_whatsapp() : '';
-$proodonto_whatsapp     = $proodonto_whatsapp ? $proodonto_whatsapp : '5511300000000';
-$proodonto_whatsapp_url = 'https://wa.me/' . $proodonto_whatsapp . '?text=' . rawurlencode( 'Olá! Gostaria de agendar uma avaliação na PRÓ-ODONTO.' );
+// Reaproveitado em várias seções (Hero, Antes e Depois, CTA final) —
+// UpView padrão (Aracaju, ver inc/cta.php). Os botões têm a classe `cta`,
+// então com o agregador ativo o clique abre o seletor de unidade
+// (assets/js/main.js); sem agregador ou sem JS, vai direto ao UpView.
+$proodonto_whatsapp_url = function_exists( 'proodonto_get_default_cta_url' ) ? proodonto_get_default_cta_url() : '#';
 
 get_header();
 ?>
@@ -65,6 +64,13 @@ get_header();
                                         $href = get_sub_field('url');
                                         $target = '_blank';
                                         $play = '';
+                                        // Banner apontando para WhatsApp/agregador antigo
+                                        // (ex.: proodonto.com.br/#agregador-links) → UpView
+                                        // + seletor de unidade.
+                                        if (function_exists('proodonto_is_legacy_cta_url') && proodonto_is_legacy_cta_url($href)) {
+                                            $href = proodonto_resolve_cta_url('');
+                                            $fancybox = 'data-link-aggregator-trigger rel="noopener"';
+                                        }
                                         break;
                                     case 'iframe':
                                         $href = get_sub_field('iframe');
@@ -84,7 +90,7 @@ get_header();
                                         break;
                                 }
                                 ?>
-                                href="<?= $href ?? ''; ?>"
+                                href="<?= esc_url($href ?? ''); ?>"
                                 target="<?= $target ?? ''; ?>"
                                 <?= $fancybox ?? ''; ?>
                                 class="relative w-full h-full"
@@ -124,7 +130,7 @@ get_header();
                                                 get_sub_field('texto')
                                                 ?>
                                             </div>
-                                            <a href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>" target="_blank" rel="noopener noreferrer" class="cta mt-10">AGENDE AGORA</a>
+                                            <a href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>" target="_blank" rel="noopener" class="cta mt-10">AGENDE AGORA</a>
                                         </div>
                                     </div>
                                 </div>
@@ -326,7 +332,7 @@ get_header();
 				<a
 					href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>"
 					target="_blank"
-					rel="noopener noreferrer"
+					rel="noopener"
 					class="cta"
 				>
 					<?php echo esc_html( get_field( 'results_cta_label' ) ); ?>
@@ -459,7 +465,7 @@ get_header();
                     <a
                         href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener"
                         class="cta"
                     >
                         AGENDAR AVALIAÇÃO
@@ -541,7 +547,7 @@ get_header();
                     <a
                         href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener"
                         class="cta"
                     >
                         QUERO O MEU SORRISO
@@ -594,10 +600,22 @@ get_header();
 									<?php echo esc_html( $proodonto_unit['address'] ); ?>
 								</div>
 
+								<?php $proodonto_unit_hours_lines = function_exists( 'proodonto_get_unit_hours_lines' ) ? proodonto_get_unit_hours_lines( $proodonto_unit ) : array(); ?>
+								<?php if ( $proodonto_unit_hours_lines ) : ?>
+									<div class="unit-card__detail unit-card__detail--hours">
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+										<span>
+											<?php foreach ( $proodonto_unit_hours_lines as $proodonto_hours_line ) : ?>
+												<span class="unit-card__hours-line"><?php echo esc_html( $proodonto_hours_line ); ?></span>
+											<?php endforeach; ?>
+										</span>
+									</div>
+								<?php endif; ?>
+
 								<a
 									href="<?php echo esc_url( $proodonto_unit['maps_url'] ); ?>"
 									target="_blank"
-									rel="noopener noreferrer"
+									rel="noopener"
 									class="unit-card__detail unit-card__detail--link"
 								>
 									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -611,7 +629,7 @@ get_header();
 							<a
 								href="<?php echo esc_url( $proodonto_unit['whatsapp_url'] ); ?>"
 								target="_blank"
-								rel="noopener noreferrer"
+								rel="noopener"
 								class="unit-card__whatsapp"
 								aria-label="<?php echo esc_attr( sprintf( __( 'Falar no WhatsApp com a unidade %s', 'proodonto' ), $proodonto_unit['name'] ) ); ?>"
 							>
@@ -623,7 +641,7 @@ get_header();
 							<a
 								href="<?php echo esc_url( $proodonto_unit['whatsapp_url'] ); ?>"
 								target="_blank"
-								rel="noopener noreferrer"
+								rel="noopener"
 								class="unit-card__whatsapp-cta cta"
 								aria-label="<?php echo esc_attr( sprintf( __( 'Falar no WhatsApp com a unidade %s', 'proodonto' ), $proodonto_unit['name'] ) ); ?>"
 							>
@@ -727,7 +745,15 @@ get_header();
 		</section>
 	<?php endif; ?>
 
-	<?php // CTA final — custom fields do grupo "Home — CTA final". Reaproveita o mesmo link de WhatsApp montado no topo do arquivo. ?>
+	<?php
+	// Perguntas frequentes da rede (inc/unit-faq.php): pagamento, convênio,
+	// horário e endereço das 3 unidades. FAQPage sai no grafo do Yoast.
+	if ( function_exists( 'proodonto_render_faq_section' ) ) {
+		proodonto_render_faq_section( 'Dúvidas sobre as clínicas PróOdonto', proodonto_get_network_faq() );
+	}
+	?>
+
+	<?php // CTA final — custom fields do grupo "Home — CTA final". Reaproveita o mesmo link de UpView montado no topo do arquivo. ?>
 	<section class="closing-cta">
 		<div class="closing-cta__inner">
 			<h2 class="closing-cta__title"><?php echo esc_html( get_field( 'closing_titulo' ) ); ?></h2>
@@ -735,7 +761,7 @@ get_header();
 			<a
 				href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>"
 				target="_blank"
-				rel="noopener noreferrer"
+				rel="noopener"
 				class="closing-cta__button cta"
 			>
 				<?php echo esc_html( get_field( 'closing_botao_label' ) ); ?>

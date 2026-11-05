@@ -1,0 +1,75 @@
+[
+    {
+        "key": "group_po_post",
+        "title": "Post — conversão e busca",
+        "position": "side",
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "post"
+                }
+            ]
+        ],
+        "fields": [
+            {
+                "key": "field_po_post_post_resposta_rapida",
+                "name": "post_resposta_rapida",
+                "label": "Resposta rápida",
+                "type": "textarea",
+                "rows": 5,
+                "new_lines": "",
+                "instructions": "2–3 frases que respondem à busca, logo abaixo do título. **trecho** vira negrito."
+            },
+            {
+                "key": "field_po_post_post_tratamento",
+                "name": "post_tratamento",
+                "label": "Tratamento relacionado",
+                "type": "post_object",
+                "post_type": [
+                    "servico"
+                ],
+                "return_format": "id",
+                "allow_null": 1
+            },
+            {
+                "key": "field_po_post_post_cta_titulo",
+                "name": "post_cta_titulo",
+                "label": "CTA — título",
+                "type": "text",
+                "placeholder": "Sua prótese quebrou?"
+            },
+            {
+                "key": "field_po_post_post_cta_texto",
+                "name": "post_cta_texto",
+                "label": "CTA — texto",
+                "type": "text",
+                "placeholder": "A equipe avalia se compensa consertar ou refazer."
+            },
+            {
+                "key": "field_po_post_post_cta_posicao",
+                "name": "post_cta_posicao",
+                "label": "CTA no meio do texto antes do H2 nº",
+                "type": "number",
+                "default_value": 3,
+                "min": 0,
+                "instructions": "0 = sem CTA no meio."
+            },
+            {
+                "key": "field_po_post_post_final_titulo",
+                "name": "post_final_titulo",
+                "label": "Faixa final — título",
+                "type": "text",
+                "placeholder": "Prótese quebrou? *A gente avalia.*"
+            },
+            {
+                "key": "field_po_post_post_final_texto",
+                "name": "post_final_texto",
+                "label": "Faixa final — texto",
+                "type": "text"
+            }
+        ],
+        "active": true
+    }
+]

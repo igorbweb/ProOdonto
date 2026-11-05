@@ -55,18 +55,13 @@ function proodonto_get_header_cta_label() {
 
 /**
  * Helper: URL do único botão de CTA do header. Sem valor próprio
- * cadastrado, cai no WhatsApp padrão do tema (mesmo campo usado no
- * rodapé e nas páginas).
+ * cadastrado (ou com um link antigo de WhatsApp/agregador), cai no
+ * UpView padrão — ver proodonto_resolve_cta_url() em inc/cta.php.
  */
 function proodonto_get_header_cta_url() {
 	$url = function_exists( 'get_field' ) ? (string) get_field( 'header_cta_url', 'option' ) : '';
-	if ( $url ) {
-		return $url;
-	}
 
-	$whatsapp = proodonto_get_whatsapp();
-	$whatsapp = $whatsapp ? $whatsapp : '5511300000000';
-	return 'https://wa.me/' . $whatsapp . '?text=' . rawurlencode( 'Olá! Gostaria de agendar uma avaliação.' );
+	return function_exists( 'proodonto_resolve_cta_url' ) ? proodonto_resolve_cta_url( $url ) : $url;
 }
 
 /* -----------------------------------------------------------------------
@@ -105,10 +100,9 @@ function proodonto_get_footer_social_items() {
 
 		$url = get_sub_field( 'url' );
 
-		if ( get_sub_field( 'usar_whatsapp_padrao' ) ) {
-			$whatsapp = proodonto_get_whatsapp();
-			$whatsapp = $whatsapp ? $whatsapp : '5511300000000';
-			$url      = 'https://wa.me/' . $whatsapp . '?text=' . rawurlencode( 'Olá! Gostaria de agendar uma avaliação na PRÓ-ODONTO.' );
+		// "Usar WhatsApp do tema" ou link antigo (wa.me, agregador...) → UpView padrão.
+		if ( get_sub_field( 'usar_whatsapp_padrao' ) || ( function_exists( 'proodonto_is_legacy_cta_url' ) && proodonto_is_legacy_cta_url( $url ) ) ) {
+			$url = function_exists( 'proodonto_resolve_cta_url' ) ? proodonto_resolve_cta_url( '' ) : $url;
 		}
 
 		$items[] = array(
@@ -143,9 +137,11 @@ function proodonto_get_footer_link_columns() {
 			while ( have_rows( 'links' ) ) {
 				the_row();
 
+				$link_url = (string) get_sub_field( 'url' );
+
 				$links[] = array(
 					'label' => get_sub_field( 'label' ),
-					'url'   => get_sub_field( 'url' ),
+					'url'   => ( function_exists( 'proodonto_is_legacy_cta_url' ) && proodonto_is_legacy_cta_url( $link_url ) ) ? proodonto_resolve_cta_url( '' ) : $link_url,
 				);
 			}
 		}
@@ -214,6 +210,20 @@ function proodonto_get_link_aggregator_items() {
 
 		if ( ! $label || ! $url ) {
 			continue;
+		}
+
+		// Item com link antigo (wa.me, número de exemplo...) → UpView da
+		// unidade citada no nome do item.
+		if ( function_exists( 'proodonto_is_legacy_cta_url' ) && proodonto_is_legacy_cta_url( $url ) ) {
+			$label_slug = sanitize_title( $label );
+			$unit_slug  = '';
+			foreach ( array( 'simao-dias', 'lagarto', 'aracaju' ) as $candidate ) {
+				if ( false !== strpos( $label_slug, $candidate ) ) {
+					$unit_slug = $candidate;
+					break;
+				}
+			}
+			$url = proodonto_resolve_cta_url( '', $unit_slug );
 		}
 
 		$items[] = array(

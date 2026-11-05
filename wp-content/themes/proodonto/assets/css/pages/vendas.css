@@ -19,7 +19,9 @@
  *     não só via JS.
  *   - .about-swiper: carrossel da galeria "Sobre" (custom field
  *     "galeria_sobre") — só existe nesta página; sem foto cadastrada, o
- *     template cai no <img> de placeholder e este bloco não se aplica.
+ *     template cai no <img> de placeholder e este bloco não se aplica. *   - .unit-card--unidade: nas páginas de unidade, o cartão com endereço,
+ *     rota (e horário/telefone, quando cadastrados) volta a ocupar a
+ *     coluna ao lado do mapa — reaproveita o .unit-card de home.css.
  */
 
 .section-cta {
@@ -49,6 +51,19 @@
 @media (min-width: 900px) {
   .units__grid {
     grid-template-columns: 1fr;
+  }
+
+  .units__grid:has(.unit-card--unidade) {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .unit-card--unidade {
+    flex-direction: column;
+  }
+
+  .unit-card--unidade .unit-card__whatsapp-cta.cta {
+    display: inline-flex;
+    align-self: flex-start;
   }
 }
 

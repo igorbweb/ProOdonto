@@ -42,14 +42,14 @@ $proodonto_placeholder_img = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org
 
 // URL de todos os CTAs da página (custom field "cta_url", grupo
 // "group_vendas_cta" em inc/acf-fields.php) — permite apontar cada página
-// de vendas (campanha) pra um destino diferente (wa.me, link de rastreio,
-// etc.) sem mexer em código. Sem valor preenchido, cai no WhatsApp padrão
-// do tema. Inclui o CTA principal do hero (ver grupo "Página de Vendas —
-// Hero" logo abaixo).
-$proodonto_vendas_cta_url = function_exists('get_field') ? get_field('cta_url') : '';
-$proodonto_vendas_whatsapp = function_exists('proodonto_get_whatsapp') ? proodonto_get_whatsapp() : '';
-$proodonto_vendas_whatsapp = $proodonto_vendas_whatsapp ? $proodonto_vendas_whatsapp : '5511300000000';
-$proodonto_whatsapp_url = $proodonto_vendas_cta_url ? $proodonto_vendas_cta_url : 'https://wa.me/' . $proodonto_vendas_whatsapp . '?text=' . rawurlencode('Olá! Gostaria de agendar uma avaliação na ProOdonto.');
+// de vendas (campanha) pra um link do UpView diferente sem mexer em código.
+// Sem valor (ou com link antigo de WhatsApp), cai no UpView da unidade da
+// página ou no padrão — ver proodonto_resolve_cta_url() em inc/cta.php.
+// Inclui o CTA principal do hero.
+$proodonto_vendas_cta_url = function_exists('get_field') ? (string) get_field('cta_url') : '';
+$proodonto_whatsapp_url = function_exists('proodonto_resolve_cta_url')
+	? proodonto_resolve_cta_url($proodonto_vendas_cta_url, function_exists('proodonto_get_current_unit_slug') ? proodonto_get_current_unit_slug() : '')
+	: $proodonto_vendas_cta_url;
 
 // Galeria da seção "Sobre" (custom field "galeria_sobre", grupo
 // "group_vendas_about_gallery" em inc/acf-fields.php) — sem nenhuma foto
@@ -100,7 +100,7 @@ if (!$proodonto_hero_unit) {
 function proodonto_vendas_section_cta($label, $url)
 {
 	printf(
-		'<div class="section-cta"><a href="%1$s" target="_blank" rel="noopener noreferrer" class="cta">%2$s</a></div>',
+		'<div class="section-cta"><a href="%1$s" target="_blank" rel="noopener" class="cta">%2$s</a></div>',
 		esc_url($url),
 		esc_html($label)
 	);
@@ -414,7 +414,7 @@ get_header();
 			</div>
 
 			<div class="results__cta">
-				<a href="<?php echo esc_url($proodonto_whatsapp_url); ?>" target="_blank" rel="noopener noreferrer"
+				<a href="<?php echo esc_url($proodonto_whatsapp_url); ?>" target="_blank" rel="noopener"
 					class="cta">
 					<?php echo esc_html(get_field('results_cta_label')); ?>
 				</a>
@@ -671,18 +671,76 @@ get_header();
 						alt="<?php echo esc_attr($proodonto_units_map_alt); ?>" loading="lazy" />
 				</div>
 
+				<?php
+				// Cartão da unidade ao lado do mapa (mesmas classes .unit-card
+				// da home): endereço em texto, rota, e horário/telefone quando
+				// preenchidos em inc/units-map.php. Só nas páginas de unidade.
+				if (!empty($proodonto_current_unit)) :
+					$proodonto_unit_phone = !empty($proodonto_current_unit['phone']) ? (string) $proodonto_current_unit['phone'] : '';
+					$proodonto_unit_tel = preg_replace('/\D+/', '', $proodonto_unit_phone);
+					$proodonto_unit_tel = ($proodonto_unit_tel && 0 !== strpos($proodonto_unit_tel, '55')) ? '55' . $proodonto_unit_tel : $proodonto_unit_tel;
+				?>
+					<div class="units__list">
+						<div class="unit-card unit-card--unidade">
+							<div class="unit-card__info">
+								<div class="unit-card__heading">
+									<h3 class="unit-card__name"><?php echo esc_html('PróOdonto ' . $proodonto_current_unit['name']); ?></h3>
+								</div>
+								<div class="unit-card__detail">
+									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+									<span><?php echo esc_html($proodonto_current_unit['address']); ?></span>
+								</div>
+								<?php $proodonto_unit_hours_lines = function_exists('proodonto_get_unit_hours_lines') ? proodonto_get_unit_hours_lines($proodonto_current_unit) : array(); ?>
+								<?php if ($proodonto_unit_hours_lines) : ?>
+									<div class="unit-card__detail unit-card__detail--hours">
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+										<span>
+											<?php foreach ($proodonto_unit_hours_lines as $proodonto_hours_line) : ?>
+												<span class="unit-card__hours-line"><?php echo esc_html($proodonto_hours_line); ?></span>
+											<?php endforeach; ?>
+										</span>
+									</div>
+								<?php endif; ?>
+								<?php if ($proodonto_unit_tel) : ?>
+									<a class="unit-card__detail unit-card__detail--link" href="<?php echo esc_attr('tel:+' . $proodonto_unit_tel); ?>">
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+										<span><?php echo esc_html($proodonto_unit_phone); ?></span>
+									</a>
+								<?php endif; ?>
+								<?php if (!empty($proodonto_current_unit['maps_url'])) : ?>
+									<a class="unit-card__detail unit-card__detail--link" href="<?php echo esc_url($proodonto_current_unit['maps_url']); ?>" target="_blank" rel="noopener">
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+										<span>Ver rota no Google Maps</span>
+									</a>
+								<?php endif; ?>
+							</div>
+							<a href="<?php echo esc_url($proodonto_whatsapp_url); ?>" target="_blank" rel="noopener"
+								class="unit-card__whatsapp-cta cta"
+								aria-label="<?php echo esc_attr('Falar no WhatsApp com a unidade ' . $proodonto_current_unit['name']); ?>">Falar no WhatsApp</a>
+						</div>
+					</div>
+				<?php endif; ?>
+
 			</div>
 
-			<?php proodonto_vendas_section_cta(get_field('units_cta_label'), $proodonto_whatsapp_url); ?>
+			<?php // CTA da seção ("units_cta_label") oculto: o cartão da unidade já tem o botão de WhatsApp e o CTA final vem logo abaixo. ?>
 		</div>
 	</section>
 
-	<?php // CTA final — custom fields do grupo "Página de Vendas — CTA final". Reaproveita o mesmo link de WhatsApp montado acima. ?>
+	<?php
+	// FAQ da unidade (inc/unit-faq.php) — texto aprovado em /sobre/, adaptado
+	// à cidade, + horário e endereço. FAQPage sai no grafo do Yoast pelo mesmo arquivo.
+	if (!empty($proodonto_current_unit) && function_exists('proodonto_render_faq_section')) {
+		proodonto_render_faq_section(sprintf('Dúvidas sobre a PróOdonto em %s', $proodonto_current_unit['name']), proodonto_get_unit_faq($proodonto_current_unit));
+	}
+	?>
+
+	<?php // CTA final — custom fields do grupo "Página de Vendas — CTA final". Reaproveita o mesmo link de UpView montado acima. ?>
 	<section class="closing-cta">
 		<div class="closing-cta__inner">
 			<h2 class="closing-cta__title"><?php echo esc_html(get_field('closing_titulo')); ?></h2>
 			<p class="closing-cta__text"><?php echo esc_html(get_field('closing_texto')); ?></p>
-			<a href="<?php echo esc_url($proodonto_whatsapp_url); ?>" target="_blank" rel="noopener noreferrer"
+			<a href="<?php echo esc_url($proodonto_whatsapp_url); ?>" target="_blank" rel="noopener"
 				class="closing-cta__button cta">
 
 				<?php echo esc_html(get_field('closing_botao_label')); ?>

@@ -166,8 +166,43 @@ function proodonto_build_dentist_schema( $unit, $organization_id, $telephone, $l
 		$dentist['mainEntityOfPage'] = array( '@id' => $page_url );
 	}
 
-	if ( $telephone ) {
+	// Telefone próprio da unidade (inc/units-map.php) tem prioridade sobre
+	// o telefone global das Opções do Tema.
+	$unit_phone = ! empty( $unit['phone'] ) ? preg_replace( '/\D+/', '', (string) $unit['phone'] ) : '';
+	if ( $unit_phone ) {
+		$dentist['telephone'] = '+' . ( 0 === strpos( $unit_phone, '55' ) ? $unit_phone : '55' . $unit_phone );
+	} elseif ( $telephone ) {
 		$dentist['telephone'] = $telephone;
+	}
+
+	// Horário da unidade, só quando cadastrado (nada inventado).
+	if ( ! empty( $unit['hours'] ) && is_array( $unit['hours'] ) ) {
+		$days_map = array(
+			'Mo' => 'Monday',
+			'Tu' => 'Tuesday',
+			'We' => 'Wednesday',
+			'Th' => 'Thursday',
+			'Fr' => 'Friday',
+			'Sa' => 'Saturday',
+			'Su' => 'Sunday',
+		);
+		$spec     = array();
+
+		foreach ( $unit['hours'] as $hours ) {
+			if ( empty( $hours['days'] ) || empty( $hours['opens'] ) || empty( $hours['closes'] ) ) {
+				continue;
+			}
+			$spec[] = array(
+				'@type'     => 'OpeningHoursSpecification',
+				'dayOfWeek' => array_values( array_intersect_key( $days_map, array_flip( (array) $hours['days'] ) ) ),
+				'opens'     => $hours['opens'],
+				'closes'    => $hours['closes'],
+			);
+		}
+
+		if ( $spec ) {
+			$dentist['openingHoursSpecification'] = $spec;
+		}
 	}
 
 	if ( $logo_url ) {

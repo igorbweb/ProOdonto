@@ -1,0 +1,25 @@
+/* Editor de blocos: mesma leitura do post no site (fontes, cores e caixas). */
+@font-face{font-family:"Poppins";src:url("../fonts/poppins/poppins-100.woff2") format("woff2");font-weight:100;font-style:normal;font-display:swap}
+@font-face{font-family:"Poppins";src:url("../fonts/poppins/poppins-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Poppins";src:url("../fonts/poppins/poppins-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+.editor-styles-wrapper {
+	font-family: "Poppins", system-ui, sans-serif;
+	font-size: 18px;
+	line-height: 1.8;
+	color: #2b2f40;
+	background: #f7f4ee;
+}
+.editor-styles-wrapper h1, .editor-styles-wrapper h2, .editor-styles-wrapper h3 {
+	font-family: "Coolvetica", "Coolvetica Rg", "Poppins", system-ui, sans-serif;
+	font-weight: 400;
+	letter-spacing: -.015em;
+	color: #2e324b;
+	line-height: 1.05;
+}
+.editor-styles-wrapper h2 { font-size: 32px; }
+.editor-styles-wrapper a { color: #037880; }
+.editor-styles-wrapper li::marker { color: #037880; }
+.editor-styles-wrapper .is-style-alerta { background: #fff4e8; padding: 20px 22px; border-radius: 20px; }
+.editor-styles-wrapper .is-style-dica { background: #e3f5f6; padding: 20px 22px; border-radius: 20px; }
+.editor-styles-wrapper .is-style-alerta > :first-child { color: #8a4b0f; font-weight: 700; }
+.editor-styles-wrapper .is-style-dica > :first-child { color: #025d63; font-weight: 700; }

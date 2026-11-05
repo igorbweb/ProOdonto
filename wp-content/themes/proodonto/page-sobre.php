@@ -41,9 +41,9 @@ $proodonto_avatar_placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.
 
 // Número de WhatsApp cadastrado nas Opções do Tema — mesmo padrão de
 // page-home.php/page-vendas.php, reaproveitado no hero e no CTA final.
-$proodonto_whatsapp     = function_exists( 'proodonto_get_whatsapp' ) ? proodonto_get_whatsapp() : '';
-$proodonto_whatsapp     = $proodonto_whatsapp ? $proodonto_whatsapp : '5511300000000';
-$proodonto_whatsapp_url = 'https://wa.me/' . $proodonto_whatsapp . '?text=' . rawurlencode( 'Olá! Gostaria de saber mais sobre a PRÓ-ODONTO.' );
+// UpView padrão (inc/cta.php); com o agregador ativo, os botões `cta`
+// abrem o seletor de unidade.
+$proodonto_whatsapp_url = function_exists( 'proodonto_get_default_cta_url' ) ? proodonto_get_default_cta_url() : '#';
 
 get_header();
 ?>
@@ -70,7 +70,7 @@ get_header();
 					<a
 						href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>"
 						target="_blank"
-						rel="noopener noreferrer"
+						rel="noopener"
 						class="cta cta--whatsapp"
 					>
 						<?php echo esc_html( get_field( 'hero_cta_label' ) ); ?>
@@ -348,7 +348,7 @@ get_header();
 								<a
 									href="<?php echo esc_url( $proodonto_unit['maps_url'] ); ?>"
 									target="_blank"
-									rel="noopener noreferrer"
+									rel="noopener"
 									class="unit-card__detail unit-card__detail--link"
 								>
 									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -362,7 +362,7 @@ get_header();
 							<a
 								href="<?php echo esc_url( $proodonto_unit['whatsapp_url'] ); ?>"
 								target="_blank"
-								rel="noopener noreferrer"
+								rel="noopener"
 								class="unit-card__whatsapp"
 								aria-label="<?php echo esc_attr( sprintf( __( 'Falar no WhatsApp com a unidade %s', 'proodonto' ), $proodonto_unit['name'] ) ); ?>"
 							>
@@ -374,7 +374,7 @@ get_header();
 							<a
 								href="<?php echo esc_url( $proodonto_unit['whatsapp_url'] ); ?>"
 								target="_blank"
-								rel="noopener noreferrer"
+								rel="noopener"
 								class="unit-card__whatsapp-cta cta"
 								aria-label="<?php echo esc_attr( sprintf( __( 'Falar no WhatsApp com a unidade %s', 'proodonto' ), $proodonto_unit['name'] ) ); ?>"
 							>
@@ -435,7 +435,7 @@ get_header();
 			<a
 				href="<?php echo esc_url( $proodonto_whatsapp_url ); ?>"
 				target="_blank"
-				rel="noopener noreferrer"
+				rel="noopener"
 				class="closing-cta__button cta"
 			>
 				<?php echo esc_html( get_field( 'cta_botao_label' ) ); ?>

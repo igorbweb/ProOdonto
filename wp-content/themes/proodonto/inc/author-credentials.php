@@ -95,3 +95,69 @@ function proodonto_get_author_schema( $user_id ) {
 
 	return $person;
 }
+
+/* -----------------------------------------------------------------------
+ * 3. Revisor técnico dos posts (responsável técnico exigido pelo CFO)
+ *
+ * O autor do post (usuário do WordPress) segue sendo quem publicou; o
+ * revisor técnico é o cirurgião-dentista que responde pelo conteúdo. Ele
+ * aparece no topo do post ("Revisão técnica: …"), no aviso de
+ * responsabilidade técnica do rodapé e no schema (reviewedBy na WebPage).
+ *
+ * Padrão para todos os posts. Para um post com outro revisor, preencha os
+ * campos personalizados proodonto_revisor_nome / proodonto_revisor_cargo /
+ * proodonto_revisor_cro no post (wp-admin → Campos personalizados).
+ * -------------------------------------------------------------------- */
+
+const PROODONTO_DEFAULT_REVIEWER = array(
+	'name'      => 'Alisson Matheus Santana dos Santos',
+	'job_title' => 'Cirurgião-Dentista',
+	'cro'       => 'CRO-SE 3147',
+);
+
+/**
+ * Revisor técnico de um post.
+ *
+ * @return array{name:string, job_title:string, cro:string, url:string}
+ */
+function proodonto_get_post_reviewer( $post_id = null ) {
+	$post_id  = $post_id ? $post_id : get_the_ID();
+	$reviewer = PROODONTO_DEFAULT_REVIEWER;
+
+	foreach ( array( 'name' => 'proodonto_revisor_nome', 'job_title' => 'proodonto_revisor_cargo', 'cro' => 'proodonto_revisor_cro' ) as $key => $meta ) {
+		$value = $post_id ? trim( (string) get_post_meta( $post_id, $meta, true ) ) : '';
+		if ( '' !== $value ) {
+			$reviewer[ $key ] = $value;
+		}
+	}
+
+	// A página Sobre lista a equipe com nome e CRO.
+	$about            = get_page_by_path( 'sobre' );
+	$reviewer['url'] = ( $about instanceof WP_Post && 'publish' === $about->post_status ) ? get_permalink( $about ) : '';
+
+	return apply_filters( 'proodonto_post_reviewer', $reviewer, $post_id );
+}
+
+/**
+ * Person do schema para o revisor técnico.
+ */
+function proodonto_get_reviewer_schema( $post_id = null ) {
+	$reviewer = proodonto_get_post_reviewer( $post_id );
+	$person   = array(
+		'@type' => 'Person',
+		'name'  => $reviewer['name'],
+	);
+
+	if ( $reviewer['job_title'] ) {
+		$person['jobTitle'] = $reviewer['job_title'];
+	}
+	if ( $reviewer['cro'] ) {
+		$person['identifier'] = $reviewer['cro'];
+	}
+	if ( $reviewer['url'] ) {
+		$person['url'] = $reviewer['url'];
+	}
+
+	return $person;
+}
+

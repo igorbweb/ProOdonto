@@ -20,22 +20,17 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// WhatsApp padrão do tema — vem das Opções do Tema (mesmo campo usado no
-// header, ver proodonto_get_whatsapp() em inc/options-page.php). Na Página
-// de Vendas, vira o custom field "cta_url" daquela página específica (ver
-// page-vendas.php e proodonto_is_vendas_page() em inc/template-functions.php),
-// pra cada campanha poder ter seu próprio destino também no footer. Sem
-// valor preenchido em nenhum dos dois, cai no placeholder do tema.
-$proodonto_footer_whatsapp     = function_exists( 'proodonto_get_whatsapp' ) ? proodonto_get_whatsapp() : '';
-$proodonto_footer_whatsapp     = $proodonto_footer_whatsapp ? $proodonto_footer_whatsapp : '5511300000000';
-$proodonto_footer_whatsapp_url = 'https://wa.me/' . $proodonto_footer_whatsapp . '?text=' . rawurlencode( 'Olá! Gostaria de agendar uma avaliação na PRÓ-ODONTO.' );
+// Link de contato do rodapé — sempre UpView (inc/cta.php). Na Página de
+// Vendas (unidades/campanhas), o custom field "cta_url" da página ou, sem
+// ele, o UpView da unidade; no resto do site, o UpView padrão (Aracaju),
+// que abre o seletor de unidade quando o agregador está ativo.
+$proodonto_footer_whatsapp_url = function_exists( 'proodonto_resolve_cta_url' ) ? proodonto_resolve_cta_url( '' ) : '#';
 
-if ( function_exists( 'proodonto_is_vendas_page' ) && proodonto_is_vendas_page() && function_exists( 'get_field' ) ) {
-	$proodonto_footer_vendas_cta_url = get_field( 'cta_url' );
-
-	if ( $proodonto_footer_vendas_cta_url ) {
-		$proodonto_footer_whatsapp_url = $proodonto_footer_vendas_cta_url;
-	}
+if ( function_exists( 'proodonto_is_vendas_page' ) && proodonto_is_vendas_page() && function_exists( 'get_field' ) && function_exists( 'proodonto_resolve_cta_url' ) ) {
+	$proodonto_footer_whatsapp_url = proodonto_resolve_cta_url(
+		(string) get_field( 'cta_url' ),
+		function_exists( 'proodonto_get_current_unit_slug' ) ? proodonto_get_current_unit_slug() : ''
+	);
 }
 
 // Unidades reais — mesma fonte usada na seção "Unidades" da Home (ver
@@ -45,6 +40,8 @@ foreach ( ( function_exists( 'proodonto_get_units' ) ? proodonto_get_units() : a
 	$proodonto_footer_units_links[] = array(
 		'label' => $proodonto_footer_unit['name'],
 		'url'   => $proodonto_footer_unit['maps_url'],
+		// Horário da unidade (inc/units-map.php), em rótulo curto.
+		'lines' => function_exists( 'proodonto_get_unit_hours_lines' ) ? proodonto_get_unit_hours_lines( $proodonto_footer_unit, true ) : array(),
 	);
 }
 
@@ -137,7 +134,18 @@ if (
 						<p class="site-footer__heading"><?php echo esc_html( $proodonto_column['heading'] ); ?></p>
 						<div class="site-footer__links">
 							<?php foreach ( $proodonto_column['links'] as $proodonto_link ) : ?>
-								<?php if ( ! empty( $proodonto_link['url'] ) && '#' !== $proodonto_link['url'] ) : ?>
+								<?php if ( ! empty( $proodonto_link['lines'] ) ) : ?>
+									<div class="site-footer__unit">
+										<?php if ( ! empty( $proodonto_link['url'] ) && '#' !== $proodonto_link['url'] ) : ?>
+											<a href="<?php echo esc_url( $proodonto_link['url'] ); ?>" class="site-footer__unit-name" target="_blank" rel="noopener"><?php echo esc_html( $proodonto_link['label'] ); ?></a>
+										<?php else : ?>
+											<span class="site-footer__unit-name"><?php echo esc_html( $proodonto_link['label'] ); ?></span>
+										<?php endif; ?>
+										<?php foreach ( $proodonto_link['lines'] as $proodonto_link_line ) : ?>
+											<span class="site-footer__unit-hours"><?php echo esc_html( $proodonto_link_line ); ?></span>
+										<?php endforeach; ?>
+									</div>
+								<?php elseif ( ! empty( $proodonto_link['url'] ) && '#' !== $proodonto_link['url'] ) : ?>
 									<a
 										href="<?php echo esc_url( $proodonto_link['url'] ); ?>"
 										<?php echo ! empty( $proodonto_link['trigger_aggregator'] ) ? 'data-link-aggregator-trigger' : ''; ?>
@@ -191,7 +199,7 @@ if (
 						<a
 							href="<?php echo esc_url( $proodonto_link_item['url'] ); ?>"
 							target="_blank"
-							rel="noopener noreferrer"
+							rel="noopener"
 							class="link-aggregator-item"
 						>
 							<span class="link-aggregator-item__text">

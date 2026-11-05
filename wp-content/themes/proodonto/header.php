@@ -13,30 +13,25 @@
  * proodonto_get_header_cta_label() em inc/options-page.php. Nav
  * hardcoded por enquanto — sem menu dinâmico ainda.
  *
- * A URL do CTA depende da página: na Página de Vendas (ver
- * proodonto_is_vendas_page() em inc/template-functions.php) usa o
- * custom field "cta_url" daquela página específica, pra cada campanha
- * poder ter seu próprio destino (mesma regra do footer.php). Nas
- * demais páginas, abre o modal do Agregador de Links de Contato
- * (href="#agregador-links", interceptado por assets/js/main.js — ver
- * proodonto_link_aggregator_is_enabled() em inc/options-page.php)
- * quando ativo; sem agregador ativo, cai no WhatsApp padrão do tema via
- * proodonto_get_header_cta_url().
+ * A URL do CTA é sempre um link do UpView (inc/cta.php): na Página de
+ * Vendas (unidades/campanhas) usa o custom field "cta_url" da página ou,
+ * sem ele, o UpView da unidade; nas demais páginas, o UpView padrão
+ * (Aracaju) com `data-link-aggregator-trigger` — com o agregador ativo, o
+ * clique abre o seletor de unidade (assets/js/main.js); sem agregador ou
+ * sem JS, o link leva direto ao UpView.
  */
 
 defined( 'ABSPATH' ) || exit;
 
 $proodonto_header_cta_label = function_exists( 'proodonto_get_header_cta_label' ) ? proodonto_get_header_cta_label() : 'Agendar avaliação';
 $proodonto_header_cta_url   = function_exists( 'proodonto_get_header_cta_url' ) ? proodonto_get_header_cta_url() : '#';
+$proodonto_header_cta_attr  = '';
 
 if ( function_exists( 'proodonto_is_vendas_page' ) && proodonto_is_vendas_page() && function_exists( 'get_field' ) ) {
-	$proodonto_header_vendas_cta_url = get_field( 'cta_url' );
-
-	if ( $proodonto_header_vendas_cta_url ) {
-		$proodonto_header_cta_url = $proodonto_header_vendas_cta_url;
-	}
-} elseif ( function_exists( 'proodonto_link_aggregator_is_enabled' ) && proodonto_link_aggregator_is_enabled() ) {
-	$proodonto_header_cta_url = '#agregador-links';
+	$proodonto_header_unit_slug = function_exists( 'proodonto_get_current_unit_slug' ) ? proodonto_get_current_unit_slug() : '';
+	$proodonto_header_cta_url   = function_exists( 'proodonto_resolve_cta_url' ) ? proodonto_resolve_cta_url( (string) get_field( 'cta_url' ), $proodonto_header_unit_slug ) : (string) get_field( 'cta_url' );
+} else {
+	$proodonto_header_cta_attr = 'data-link-aggregator-trigger';
 }
 
 // "Unidades" vira um dropdown com as 3 páginas de unidade (aracaju,
@@ -134,7 +129,8 @@ $proodonto_nav_links = array(
 			<a
 				href="<?php echo esc_url( $proodonto_header_cta_url ); ?>"
 				target="_blank"
-				rel="noopener noreferrer"
+				rel="noopener"
+				<?php echo $proodonto_header_cta_attr ? esc_attr( $proodonto_header_cta_attr ) : ''; ?>
 				class="cta inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-[15px] font-semibold text-white hover:opacity-90 hover:no-underline"
 			>
 				<?php echo esc_html( $proodonto_header_cta_label ); ?>

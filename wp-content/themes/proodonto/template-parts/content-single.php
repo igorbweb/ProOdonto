@@ -24,6 +24,7 @@ $proodonto_modified_date  = get_the_modified_date();
 $proodonto_author_id      = (int) get_the_author_meta( 'ID' );
 $proodonto_author_url     = get_author_posts_url( $proodonto_author_id );
 $proodonto_credentials    = proodonto_get_author_credentials( $proodonto_author_id );
+$proodonto_reviewer       = function_exists( 'proodonto_get_post_reviewer' ) ? proodonto_get_post_reviewer() : null;
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'entry' ); ?>>
 
@@ -52,6 +53,18 @@ $proodonto_credentials    = proodonto_get_author_credentials( $proodonto_author_
 					<?php the_author(); ?>
 				<?php endif; ?>
 			</span>
+			<?php if ( $proodonto_reviewer && $proodonto_reviewer['name'] ) : ?>
+				<span class="entry-meta__dot" aria-hidden="true">·</span>
+				<span class="entry-meta__reviewer">
+					<?php esc_html_e( 'Revisão técnica:', 'proodonto' ); ?>
+					<?php if ( $proodonto_reviewer['url'] ) : ?>
+						<a href="<?php echo esc_url( $proodonto_reviewer['url'] ); ?>"><?php echo esc_html( $proodonto_reviewer['name'] ); ?></a>
+					<?php else : ?>
+						<?php echo esc_html( $proodonto_reviewer['name'] ); ?>
+					<?php endif; ?>
+					<?php echo $proodonto_reviewer['cro'] ? esc_html( '(' . $proodonto_reviewer['cro'] . ')' ) : ''; ?>
+				</span>
+			<?php endif; ?>
 			<span class="entry-meta__dot" aria-hidden="true">·</span>
 			<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( $proodonto_published_date ); ?></time>
 			<?php if ( $proodonto_modified_date !== $proodonto_published_date ) : ?>
@@ -104,9 +117,10 @@ $proodonto_credentials    = proodonto_get_author_credentials( $proodonto_author_
 		<h2 class="entry-cta__title"><?php esc_html_e( 'Ficou com alguma dúvida?', 'proodonto' ); ?></h2>
 		<p class="entry-cta__text"><?php esc_html_e( 'Fale com a nossa equipe pelo WhatsApp e agende uma avaliação gratuita.', 'proodonto' ); ?></p>
 		<a
-			href="https://wa.me/<?php echo esc_attr( function_exists( 'proodonto_get_whatsapp' ) ? proodonto_get_whatsapp() : '' ); ?>?text=<?php echo esc_attr( rawurlencode( sprintf( __( 'Olá! Vim do blog e gostaria de agendar uma avaliação na %s.', 'proodonto' ), wp_strip_all_tags( get_bloginfo( 'name' ) ) ) ) ); ?>"
+			href="<?php echo esc_url( function_exists( 'proodonto_get_default_cta_url' ) ? proodonto_get_default_cta_url() : '#' ); ?>"
 			target="_blank"
-			rel="noopener noreferrer"
+			rel="noopener"
+			data-link-aggregator-trigger
 			class="cta cta--whatsapp"
 		>
 			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
@@ -157,11 +171,15 @@ $proodonto_credentials    = proodonto_get_author_credentials( $proodonto_author_
 	<?php if ( is_singular( 'post' ) ) : ?>
 		<p class="entry-disclaimer">
 			<?php
+			// Responsável técnico = revisor técnico (cirurgião-dentista com CRO),
+			// não o usuário que publicou o post — ver inc/author-credentials.php.
+			$proodonto_tech_name = $proodonto_reviewer && $proodonto_reviewer['name'] ? $proodonto_reviewer['name'] : get_the_author();
+			$proodonto_tech_cro  = $proodonto_reviewer && $proodonto_reviewer['cro'] ? $proodonto_reviewer['cro'] : ( $proodonto_credentials['cro'] ? 'CRO ' . $proodonto_credentials['cro'] : '' );
 			printf(
 				/* translators: 1: nome do responsável técnico, 2: CRO, 3: data da última revisão */
 				esc_html__( 'Responsável técnico: %1$s%2$s. Este conteúdo é informativo e não substitui uma consulta odontológica. Última revisão em %3$s.', 'proodonto' ),
-				esc_html( get_the_author() ),
-				$proodonto_credentials['cro'] ? esc_html( sprintf( ' (CRO %s)', $proodonto_credentials['cro'] ) ) : '',
+				esc_html( $proodonto_tech_name ),
+				$proodonto_tech_cro ? esc_html( sprintf( ' (%s)', $proodonto_tech_cro ) ) : '',
 				esc_html( $proodonto_modified_date )
 			);
 			?>

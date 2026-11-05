@@ -1,0 +1,1481 @@
+/*
+ * Dia Pró — landing page (page-dia-pro.php).
+ *
+ * Mobile-first: as regras sem media query são o celular (360–430 px, ~90%
+ * das visitas, quase todas no navegador do Instagram/Facebook). Breakpoints
+ * só adicionam: 600 px (celular deitado / tablet pequeno), 900 px (tablet
+ * deitado / desktop), 1200 px (desktop largo).
+ *
+ * Esta página não carrega o CSS do site (Tailwind, style.css, main.css):
+ * o reset mínimo necessário está aqui. Fontes: Poppins 100/400/700 — 400 e
+ * 700 já vêm de assets/css/fonts.css; o 100 (numerais) é declarado abaixo.
+ */
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-100.woff2") format("woff2");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* ---------- 01 Tokens ---------- */
+
+.dp-page {
+	--dp-bg: #0a0a0a;
+	--dp-bg-alt: #111010;
+	--dp-surface: #161513;
+	--dp-line: #2e2a22;
+	--dp-line-strong: #3a3426;
+	--dp-text: #f4f1ea;
+	--dp-text-2: #cfc9bc;
+	--dp-muted: #a8a296;
+	--dp-gold: #e3b341;
+	--dp-gold-hi: #f4d27a;
+	--dp-gold-lo: #c99430;
+	--dp-gold-grad: linear-gradient(180deg, #f4d27a 0%, #e3b341 55%, #c99430 100%);
+	--dp-gold-text: linear-gradient(90deg, #f6d776 0%, #e3b341 45%, #c98a2b 100%);
+	--dp-radius: 16px;
+	--dp-radius-lg: 20px;
+	--dp-gutter: 16px;
+	--dp-section: 56px;
+	--dp-bar-h: 76px;
+	--dp-safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- 02 Reset mínimo ---------- */
+
+.dp-page,
+.dp-page *,
+.dp-page *::before,
+.dp-page *::after {
+	box-sizing: border-box;
+}
+
+html:has(.dp-page) {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	scroll-padding-bottom: calc(var(--dp-bar-h) + var(--dp-safe-b) + 16px);
+}
+
+body.dp-page {
+	margin: 0;
+	min-width: 320px;
+	background: var(--dp-bg);
+	color: var(--dp-text);
+	font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.55;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
+	/* Espaço para a barra fixa do celular não cobrir o rodapé. */
+	padding-bottom: calc(var(--dp-bar-h) + var(--dp-safe-b));
+}
+
+:where(.dp-page) img,
+:where(.dp-page) video {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+:where(.dp-page) :where(h1, h2, h3, p, figure, blockquote, dl, dd, ol, ul) {
+	margin: 0;
+}
+
+:where(.dp-page) :where(ol, ul) {
+	padding: 0;
+	list-style: none;
+}
+
+:where(.dp-page) a {
+	color: var(--dp-gold);
+}
+
+:where(.dp-page) a:hover {
+	color: var(--dp-gold-hi);
+}
+
+:where(.dp-page) button {
+	font: inherit;
+	color: inherit;
+}
+
+.dp-page :focus-visible {
+	outline: 3px solid var(--dp-gold-hi);
+	outline-offset: 3px;
+	border-radius: 6px;
+}
+
+:where(.dp-page) address {
+	font-style: normal;
+}
+
+/* Botões flutuantes de plugins (Float Button, Joinchat): a página tem barra própria. */
+.dp-page .fb-float-button,
+.dp-page .joinchat {
+	display: none !important;
+}
+
+.dp-skip {
+	position: absolute;
+	left: 12px;
+	top: -60px;
+	z-index: 100;
+	padding: 10px 16px;
+	border-radius: 8px;
+	background: var(--dp-gold);
+	color: #0a0a0a;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.dp-skip:focus {
+	top: 12px;
+}
+
+/* ---------- 03 Layout e tipografia ---------- */
+
+.dp {
+	overflow-x: clip;
+}
+
+.dp-wrap {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-left: max(var(--dp-gutter), env(safe-area-inset-left, 0px));
+	padding-right: max(var(--dp-gutter), env(safe-area-inset-right, 0px));
+}
+
+.dp-wrap--narrow {
+	max-width: 880px;
+}
+
+.dp-section {
+	padding: var(--dp-section) 0;
+}
+
+.dp-section--alt {
+	background: var(--dp-bg-alt);
+	border-top: 1px solid var(--dp-line);
+	border-bottom: 1px solid var(--dp-line);
+}
+
+.dp-section--tight {
+	padding-top: calc(var(--dp-section) * 0.75);
+	padding-bottom: calc(var(--dp-section) * 0.75);
+}
+
+.dp-head {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	max-width: 760px;
+	margin-bottom: 28px;
+}
+
+.dp-eyebrow {
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--dp-gold);
+}
+
+.dp-h2 {
+	font-size: clamp(26px, 6.4vw, 40px);
+	line-height: 1.15;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	text-wrap: balance;
+}
+
+.dp-h3 {
+	font-size: clamp(22px, 5.4vw, 34px);
+	line-height: 1.18;
+	font-weight: 700;
+	text-wrap: balance;
+}
+
+.dp-lead {
+	color: var(--dp-text-2);
+	font-size: clamp(15px, 3.9vw, 18px);
+	text-wrap: pretty;
+}
+
+.dp-gold {
+	color: var(--dp-gold);
+	background: var(--dp-gold-text);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.dp-micro {
+	font-size: 13px;
+	color: var(--dp-muted);
+}
+
+.dp-note {
+	margin-top: 16px;
+	font-size: 13px;
+	color: var(--dp-muted);
+}
+
+.dp-tag {
+	align-self: flex-start;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.3;
+	padding: 5px 10px;
+	border-radius: 999px;
+	background: #2a2312;
+	color: var(--dp-gold);
+}
+
+/* ---------- 04 Botões ---------- */
+
+.dp-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	min-height: 56px;
+	padding: 0 24px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 1.2;
+	text-align: center;
+	text-decoration: none;
+	-webkit-tap-highlight-color: transparent;
+	touch-action: manipulation;
+	transition: transform 0.15s ease, filter 0.15s ease, background-color 0.15s ease;
+}
+
+.dp-btn > span {
+	text-wrap: balance;
+}
+
+.dp-btn:active {
+	transform: scale(0.98);
+}
+
+.dp-btn--gold {
+	width: 100%;
+	background: var(--dp-gold-grad);
+	color: #0a0a0a;
+	box-shadow: 0 10px 30px -12px rgba(227, 179, 65, 0.55);
+}
+
+.dp-btn--gold:hover {
+	filter: brightness(1.06);
+}
+
+.dp-btn--outline {
+	border: 1px solid var(--dp-gold);
+	color: var(--dp-gold);
+	background: transparent;
+	width: 100%;
+}
+
+.dp-btn--outline:hover {
+	background: rgba(227, 179, 65, 0.08);
+}
+
+.dp-btn--ghost {
+	border: 1px solid #5a5140;
+	color: var(--dp-text);
+	width: 100%;
+}
+
+.dp-btn--sm {
+	width: auto;
+	min-height: 44px;
+	padding: 0 16px;
+	font-size: 14px;
+}
+
+.dp-icon {
+	flex-shrink: 0;
+}
+
+/* ---------- 05 Faixa + topo ---------- */
+
+.dp-strip {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2px 16px;
+	padding: 8px var(--dp-gutter);
+	background: var(--dp-gold-grad);
+	color: #0a0a0a;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.35;
+	text-align: center;
+}
+
+.dp-top {
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+}
+
+.dp-deco {
+	position: absolute;
+	z-index: -1;
+	pointer-events: none;
+	user-select: none;
+}
+
+.dp-deco--tl {
+	top: 0;
+	left: 0;
+	width: min(78vw, 620px);
+	opacity: 0.7;
+}
+
+.dp-deco--br {
+	right: 0;
+	bottom: 0;
+	width: min(60vw, 520px);
+	opacity: 0.55;
+}
+
+.dp-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding-top: 14px;
+	padding-bottom: 6px;
+}
+
+.dp-header__logo {
+	width: auto;
+	height: 24px;
+}
+
+.dp-hero {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas:
+		"copy"
+		"countdown"
+		"media"
+		"proof";
+	gap: 20px;
+	padding-top: 10px;
+	padding-bottom: 40px;
+}
+
+.dp-hero__copy {
+	grid-area: copy;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	min-width: 0;
+}
+
+.dp-hero__logo {
+	width: min(64vw, 260px);
+	margin: 0 0 2px;
+}
+
+.dp-hero__title {
+	font-size: clamp(30px, 8.6vw, 56px);
+	line-height: 1.06;
+	font-weight: 700;
+	letter-spacing: -0.015em;
+	text-wrap: balance;
+}
+
+.dp-hero__sub {
+	font-size: clamp(15px, 4.1vw, 19px);
+	color: var(--dp-text-2);
+	max-width: 560px;
+	text-wrap: pretty;
+}
+
+.dp-hero__sub strong {
+	color: var(--dp-text);
+}
+
+.dp-hero__cta {
+	margin-top: 4px;
+}
+
+/* No celular o botão principal cabe numa linha só (até 360 px). */
+.dp-hero__cta .dp-btn,
+.dp-final .dp-btn,
+.dp-steps-wrap__copy .dp-btn,
+.dp-urgency .dp-btn {
+	gap: 8px;
+	padding: 0 14px;
+	font-size: 15px;
+}
+
+.dp-hero__media {
+	grid-area: media;
+	min-width: 0;
+}
+
+.dp-hero__photo {
+	width: 100%;
+	height: 260px;
+	object-fit: cover;
+	object-position: center 6%;
+	border-radius: var(--dp-radius-lg);
+	border: 1px solid var(--dp-line);
+}
+
+.dp-hero__proof {
+	grid-area: proof;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 20px;
+	padding-top: 14px;
+	border-top: 1px solid var(--dp-line);
+	font-size: 14px;
+	color: var(--dp-text-2);
+}
+
+.dp-hero__proof strong {
+	color: var(--dp-text);
+}
+
+/* Contagem regressiva */
+
+.dp-countdown {
+	grid-area: countdown;
+	align-self: end;
+	position: relative;
+	z-index: 1;
+	padding: 14px 16px;
+	border: 1px solid var(--dp-line-strong);
+	border-radius: var(--dp-radius);
+	background: rgba(22, 21, 19, 0.92);
+}
+
+.dp-countdown__label {
+	margin-bottom: 6px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--dp-gold);
+}
+
+.dp-countdown__units {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 6px;
+	text-align: center;
+}
+
+.dp-countdown__num {
+	display: block;
+	font-size: clamp(30px, 9vw, 40px);
+	line-height: 1.1;
+	font-weight: 100;
+	font-variant-numeric: tabular-nums;
+	color: var(--dp-text);
+}
+
+.dp-countdown__txt {
+	display: block;
+	font-size: 12px;
+	color: var(--dp-muted);
+}
+
+.dp-countdown--depois .dp-countdown__units {
+	display: none;
+}
+
+/* ---------- 06 Datas ---------- */
+
+.dp-dates {
+	background: var(--dp-bg-alt);
+	border-top: 1px solid var(--dp-line);
+	border-bottom: 1px solid var(--dp-line);
+}
+
+.dp-dates__inner {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-top: 28px;
+	padding-bottom: 28px;
+}
+
+.dp-dates__title {
+	font-size: clamp(20px, 5.4vw, 28px);
+	line-height: 1.25;
+	font-weight: 700;
+	text-wrap: balance;
+}
+
+.dp-dates__list {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.dp-date {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: 12px 14px;
+	border: 1px solid var(--dp-gold);
+	border-radius: 12px;
+	min-width: 0;
+}
+
+.dp-date__weekday {
+	font-size: 12px;
+	color: var(--dp-muted);
+}
+
+.dp-date__day {
+	font-size: clamp(17px, 4.6vw, 26px);
+	line-height: 1.2;
+	font-weight: 700;
+	color: var(--dp-gold);
+}
+
+.dp-date__hours {
+	font-size: 13px;
+	color: var(--dp-text-2);
+}
+
+/* ---------- 07 Casos (tratamentos) ---------- */
+
+.dp-cases {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 16px;
+}
+
+.dp-case {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: var(--dp-surface);
+	border: 1px solid var(--dp-line);
+	border-radius: var(--dp-radius);
+}
+
+.dp-case--featured {
+	border-color: var(--dp-gold);
+}
+
+.dp-case__img {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	height: auto;
+	object-fit: cover;
+}
+
+.dp-case__body {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	flex-grow: 1;
+	padding: 18px 18px 20px;
+}
+
+.dp-case__title {
+	font-size: 21px;
+	line-height: 1.25;
+	font-weight: 700;
+	text-wrap: balance;
+}
+
+.dp-case__text {
+	font-size: 15px;
+	color: var(--dp-text-2);
+}
+
+.dp-case__cond {
+	text-wrap: balance;
+	margin-top: 2px;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--dp-gold);
+}
+
+.dp-case .dp-btn {
+	margin-top: auto;
+	min-height: 52px;
+}
+
+.dp-case__cond + .dp-btn {
+	margin-top: 8px;
+}
+
+.dp-help {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-top: 16px;
+	padding: 18px;
+	border: 1px solid var(--dp-line);
+	border-radius: var(--dp-radius);
+	color: var(--dp-text-2);
+}
+
+.dp-help strong {
+	color: var(--dp-text);
+}
+
+/* ---------- 08 Resultado real (carrossel no celular) ---------- */
+
+.dp-scroller {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 82%;
+	gap: 12px;
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scroll-snap-type: x mandatory;
+	scroll-padding-left: var(--dp-gutter);
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+	/* Sangra até a borda da tela, mantendo o 1º item alinhado ao texto. */
+	margin-left: calc(var(--dp-gutter) * -1);
+	margin-right: calc(var(--dp-gutter) * -1);
+	padding: 0 var(--dp-gutter) 4px;
+}
+
+.dp-scroller::-webkit-scrollbar {
+	display: none;
+}
+
+.dp-scroller > * {
+	scroll-snap-align: start;
+	min-width: 0;
+}
+
+.dp-media {
+	position: relative;
+}
+
+.dp-media__el {
+	width: 100%;
+	height: 420px;
+	object-fit: cover;
+	border-radius: var(--dp-radius);
+	background: #000;
+}
+
+.dp-media__caption {
+	position: absolute;
+	left: 12px;
+	top: 12px;
+	padding: 5px 10px;
+	border-radius: 999px;
+	background: rgba(12, 11, 9, 0.85);
+	color: var(--dp-gold);
+	font-size: 12px;
+	font-weight: 700;
+	pointer-events: none;
+}
+
+/* ---------- 09 Passos ---------- */
+
+.dp-steps-wrap {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 28px;
+}
+
+.dp-steps-wrap__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	min-width: 0;
+}
+
+.dp-steps {
+	display: flex;
+	flex-direction: column;
+}
+
+.dp-step {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	padding: 18px 0;
+	border-bottom: 1px solid var(--dp-line);
+}
+
+.dp-step:first-child {
+	padding-top: 0;
+}
+
+.dp-step__num {
+	min-width: 52px;
+	font-size: 40px;
+	line-height: 1;
+	font-weight: 100;
+	color: var(--dp-gold);
+	font-variant-numeric: tabular-nums;
+}
+
+.dp-step__title {
+	margin-bottom: 4px;
+	font-size: 18px;
+	line-height: 1.3;
+	font-weight: 700;
+}
+
+.dp-step__text {
+	font-size: 15px;
+	color: var(--dp-text-2);
+}
+
+.dp-steps-wrap__photo {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	border-radius: var(--dp-radius-lg);
+}
+
+/* ---------- 10 Pacientes ---------- */
+
+.dp-stats {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.dp-stat {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 16px;
+	border: 1px solid var(--dp-line);
+	border-radius: var(--dp-radius);
+	min-width: 0;
+}
+
+.dp-stat__value {
+	font-size: clamp(28px, 8vw, 44px);
+	line-height: 1.1;
+	font-weight: 700;
+	color: var(--dp-gold);
+}
+
+.dp-stat__label {
+	font-size: 13px;
+	color: var(--dp-text-2);
+}
+
+.dp-scroller--quotes {
+	margin-top: 16px;
+	grid-auto-columns: 86%;
+}
+
+.dp-quote {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 20px;
+	background: var(--dp-surface);
+	border: 1px solid var(--dp-line);
+	border-radius: var(--dp-radius);
+}
+
+.dp-quote__stars {
+	display: inline-flex;
+	gap: 2px;
+	color: var(--dp-gold);
+}
+
+.dp-quote__stars .dp-icon {
+	fill: currentColor;
+}
+
+.dp-quote__text {
+	color: var(--dp-text-2);
+}
+
+.dp-quote__who {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+/* ---------- 11 Reserva (escassez) ---------- */
+
+.dp-urgency {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 24px 20px;
+	background: var(--dp-surface);
+	border: 1px solid var(--dp-gold);
+	border-radius: 24px;
+}
+
+.dp-urgency__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.dp-urgency__text {
+	font-size: 15px;
+	color: var(--dp-text-2);
+}
+
+.dp-meter {
+	height: 12px;
+	overflow: hidden;
+	border-radius: 999px;
+	background: var(--dp-line);
+}
+
+.dp-meter__bar {
+	display: block;
+	height: 100%;
+	border-radius: inherit;
+	background: linear-gradient(90deg, var(--dp-gold-lo), var(--dp-gold-hi));
+}
+
+/* ---------- 12 Pagamento ---------- */
+
+.dp-split {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 24px;
+}
+
+.dp-split .dp-head {
+	margin-bottom: 0;
+}
+
+.dp-pay {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 12px;
+}
+
+.dp-pay__item {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	grid-template-rows: auto auto;
+	column-gap: 14px;
+	row-gap: 2px;
+	align-items: center;
+	padding: 18px;
+	border: 1px solid var(--dp-gold);
+	border-radius: var(--dp-radius-lg);
+	background: var(--dp-surface);
+}
+
+.dp-pay__item .dp-icon {
+	grid-row: span 2;
+	width: 36px;
+	height: 36px;
+	color: var(--dp-gold);
+}
+
+.dp-pay__title {
+	font-size: 18px;
+	line-height: 1.25;
+}
+
+.dp-pay__text {
+	font-size: 14px;
+	color: var(--dp-text-2);
+}
+
+/* ---------- 13 Local + mapa ---------- */
+
+.dp-local {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	min-width: 0;
+}
+
+.dp-local__address {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	color: var(--dp-text-2);
+}
+
+.dp-local__hours {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 14px 0;
+	border-top: 1px solid var(--dp-line);
+	border-bottom: 1px solid var(--dp-line);
+}
+
+.dp-local__hours div {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 8px;
+}
+
+.dp-local__hours dt {
+	font-weight: 700;
+}
+
+.dp-local__hours dd {
+	color: var(--dp-text-2);
+}
+
+.dp-local__actions {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 10px;
+}
+
+.dp-map {
+	position: relative;
+	min-height: 320px;
+	overflow: hidden;
+	border: 1px solid var(--dp-line);
+	border-radius: var(--dp-radius);
+	background: #12110e;
+}
+
+.dp-map iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+/* ---------- 14 Perguntas ---------- */
+
+.dp-faq {
+	margin-top: 24px;
+	border-top: 1px solid var(--dp-line);
+}
+
+.dp-faq__item {
+	border-bottom: 1px solid var(--dp-line);
+}
+
+.dp-faq__q {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	min-height: 64px;
+	padding: 16px 0;
+	font-size: 17px;
+	line-height: 1.35;
+	font-weight: 700;
+	cursor: pointer;
+	list-style: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.dp-faq__q::-webkit-details-marker {
+	display: none;
+}
+
+.dp-faq__q .dp-icon {
+	color: var(--dp-gold);
+	transition: transform 0.2s ease;
+}
+
+.dp-faq__item[open] .dp-faq__q .dp-icon {
+	transform: rotate(45deg);
+}
+
+.dp-faq__a {
+	padding-bottom: 18px;
+	color: var(--dp-text-2);
+}
+
+/* ---------- 15 Fechamento + rodapé ---------- */
+
+.dp-final {
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+	border-top: 1px solid var(--dp-line);
+}
+
+.dp-deco--final {
+	right: 0;
+	bottom: 0;
+	width: min(70vw, 460px);
+	opacity: 0.5;
+}
+
+.dp-final__inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding-top: 64px;
+	padding-bottom: 64px;
+	text-align: center;
+}
+
+.dp-final__logo {
+	width: min(62vw, 300px);
+}
+
+.dp-final__title {
+	font-size: clamp(28px, 7.4vw, 46px);
+	line-height: 1.12;
+}
+
+.dp-footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 32px var(--dp-gutter) 32px;
+	border-top: 1px solid var(--dp-line);
+	color: var(--dp-muted);
+	font-size: 13px;
+	text-align: center;
+}
+
+.dp-footer__icon {
+	width: auto;
+	height: 36px;
+	margin-bottom: 6px;
+}
+
+/* ---------- 16 Barra fixa do celular ---------- */
+
+.dp-bar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 60;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	min-height: var(--dp-bar-h);
+	padding: 10px max(var(--dp-gutter), env(safe-area-inset-right, 0px)) calc(10px + var(--dp-safe-b)) max(var(--dp-gutter), env(safe-area-inset-left, 0px));
+	background: rgba(10, 10, 10, 0.96);
+	border-top: 1px solid var(--dp-line);
+	transform: translateY(110%);
+	transition: transform 0.25s ease;
+}
+
+@supports (backdrop-filter: blur(8px)) {
+	.dp-bar {
+		background: rgba(10, 10, 10, 0.86);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+	}
+}
+
+.dp-bar.is-visible {
+	transform: translateY(0);
+}
+
+/* Sem JS a barra fica sempre visível (o botão do topo pode estar longe). */
+.no-js .dp-bar,
+.dp-bar:not([data-dp-ready]) {
+	transform: translateY(0);
+}
+
+.dp-bar__info {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	min-width: 0;
+	line-height: 1.3;
+}
+
+.dp-bar__info strong {
+	font-size: 14px;
+}
+
+.dp-bar__info span {
+	font-size: 12px;
+	color: var(--dp-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.dp-btn--bar {
+	flex: 0 0 auto;
+	width: auto;
+	min-height: 52px;
+	padding: 0 20px;
+	font-size: 15px;
+	box-shadow: none;
+}
+
+/* Telas muito estreitas (320–359 px). */
+@media (max-width: 359px) {
+	.dp-page {
+		--dp-gutter: 14px;
+	}
+
+	.dp-bar__info span {
+		display: none;
+	}
+
+	.dp-btn {
+		padding: 0 18px;
+	}
+
+	.dp-dates__list {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* ---------- 17 ≥ 600 px ---------- */
+
+@media (min-width: 600px) {
+	.dp-page {
+		--dp-gutter: 24px;
+		--dp-section: 72px;
+	}
+
+	.dp-strip {
+		font-size: 13px;
+	}
+
+	.dp-header__logo {
+		height: 30px;
+	}
+
+	.dp-btn--gold,
+	.dp-btn--outline,
+	.dp-btn--ghost {
+		width: auto;
+	}
+
+	.dp-hero__cta .dp-btn {
+		min-height: 60px;
+		padding: 0 32px;
+		font-size: 18px;
+	}
+
+	.dp-steps-wrap__copy .dp-btn,
+	.dp-urgency .dp-btn,
+	.dp-final .dp-btn {
+		padding: 0 28px;
+		font-size: 16px;
+	}
+
+	.dp-hero__photo {
+		height: 380px;
+	}
+
+	.dp-cases {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.dp-case .dp-btn {
+		width: 100%;
+	}
+
+	.dp-help {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.dp-help .dp-btn {
+		flex-shrink: 0;
+	}
+
+	.dp-scroller {
+		grid-auto-columns: calc((100% - 24px) / 2.2);
+	}
+
+	.dp-stats {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
+
+	.dp-pay {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.dp-pay__item {
+		grid-template-columns: minmax(0, 1fr);
+		align-items: start;
+		row-gap: 10px;
+		padding: 24px;
+	}
+
+	.dp-pay__item .dp-icon {
+		grid-row: auto;
+		width: 44px;
+		height: 44px;
+	}
+
+	.dp-local__actions {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.dp-urgency {
+		padding: 36px;
+	}
+}
+
+/* ---------- 18 ≥ 900 px (desktop) ---------- */
+
+@media (min-width: 900px) {
+	.dp-page {
+		--dp-section: 88px;
+	}
+
+	body.dp-page {
+		padding-bottom: 0;
+	}
+
+	html:has(.dp-page) {
+		scroll-padding-bottom: 0;
+	}
+
+	/* No desktop o botão do cabeçalho e os do corpo bastam. */
+	.dp-bar {
+		display: none;
+	}
+
+	.dp-strip {
+		gap: 8px 24px;
+		font-size: 14px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.dp-deco--tl,
+	.dp-deco--br {
+		opacity: 1;
+	}
+
+	.dp-header {
+		padding-top: 24px;
+		padding-bottom: 8px;
+	}
+
+	.dp-header__logo {
+		height: 34px;
+	}
+
+	.dp-hero {
+		grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+		grid-template-areas:
+			"copy media"
+			"proof media";
+		grid-template-rows: 1fr auto;
+		column-gap: 48px;
+		row-gap: 24px;
+		align-items: center;
+		padding-top: 32px;
+		padding-bottom: 80px;
+	}
+
+	.dp-hero__copy {
+		gap: 20px;
+	}
+
+	.dp-hero__logo {
+		width: 440px;
+	}
+
+	.dp-hero__proof {
+		align-self: start;
+	}
+
+	.dp-hero__photo {
+		height: 580px;
+	}
+
+	/* A contagem sobe para cima da foto, no rodapé dela. */
+	.dp-countdown {
+		grid-area: media;
+		margin: 0 16px 16px;
+		background: rgba(12, 11, 9, 0.88);
+	}
+
+	.dp-countdown__num {
+		font-size: 38px;
+	}
+
+	.dp-dates__inner {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		padding-top: 32px;
+		padding-bottom: 32px;
+	}
+
+	.dp-dates__list {
+		display: flex;
+		gap: 16px;
+	}
+
+	.dp-date {
+		min-width: 210px;
+		padding: 16px 20px;
+	}
+
+	.dp-date__day {
+		white-space: nowrap;
+	}
+
+	.dp-head {
+		margin-bottom: 40px;
+	}
+
+	.dp-cases {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 20px;
+	}
+
+	.dp-case__body {
+		padding: 24px;
+	}
+
+	.dp-case__title {
+		font-size: 22px;
+	}
+
+	.dp-help {
+		margin-top: 20px;
+		padding: 20px 24px;
+	}
+
+	.dp-scroller {
+		grid-auto-flow: row;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-auto-columns: auto;
+		gap: 20px;
+		overflow: visible;
+		margin: 0;
+		padding: 0;
+	}
+
+	.dp-media__el {
+		height: 500px;
+	}
+
+	.dp-steps-wrap {
+		grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+		gap: 56px;
+		align-items: center;
+	}
+
+	.dp-steps-wrap__copy .dp-btn {
+		align-self: flex-start;
+	}
+
+	.dp-steps-wrap__photo {
+		height: 540px;
+	}
+
+	.dp-step__num {
+		min-width: 64px;
+		font-size: 48px;
+	}
+
+	.dp-step__title {
+		font-size: 20px;
+	}
+
+	.dp-stats {
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 20px;
+	}
+
+	.dp-stat {
+		padding: 24px;
+	}
+
+	.dp-scroller--quotes {
+		margin-top: 20px;
+	}
+
+	.dp-urgency {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: 32px;
+		padding: 48px;
+	}
+
+	.dp-urgency__copy {
+		flex: 1 1 auto;
+		max-width: 640px;
+	}
+
+	.dp-urgency .dp-btn {
+		flex-shrink: 0;
+		min-height: 60px;
+		padding: 0 32px;
+		font-size: 18px;
+	}
+
+	.dp-split {
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+		gap: 48px;
+		align-items: center;
+	}
+
+	.dp-split--map {
+		align-items: stretch;
+	}
+
+	.dp-map {
+		min-height: 420px;
+	}
+
+	.dp-final__inner {
+		gap: 20px;
+		padding-top: 96px;
+		padding-bottom: 96px;
+	}
+
+	.dp-final .dp-btn {
+		min-height: 60px;
+		padding: 0 36px;
+		font-size: 18px;
+	}
+
+	.dp-footer {
+		padding-bottom: 40px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.dp-hero__title {
+		font-size: 58px;
+	}
+}
+
+/* Hover só onde existe mouse. */
+@media (hover: none) {
+	.dp-btn--gold:hover {
+		filter: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.dp-page *,
+	.dp-page *::before,
+	.dp-page *::after {
+		transition: none !important;
+		animation: none !important;
+		scroll-behavior: auto !important;
+	}
+}
