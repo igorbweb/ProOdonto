@@ -5,8 +5,7 @@
  *    depois → aviso de encerrado). Os números iniciais já vêm do servidor.
  * 2. Barra fixa do celular: aparece quando o botão do topo sai da tela e
  *    some enquanto o fechamento (que tem o mesmo botão) está visível.
- * 3. Mapa: o iframe do Google Maps (~1 MB) só carrega no toque.
- * 4. Clique em botão → evento "dia_pro_cta" no dataLayer (GTM), com a
+ * 3. Clique em botão → evento "dia_pro_cta" no dataLayer (GTM), com a
  *    posição do botão. O repasse de UTM para o UpView é do main.js do tema.
  */
 ( function () {
@@ -140,29 +139,7 @@
 		}
 	}
 
-	/* 3. Mapa sob demanda --------------------------------------------------- */
-
-	var map = doc.querySelector( '[data-dp-map]' );
-	var mapButton = map ? map.querySelector( '[data-dp-map-load]' ) : null;
-
-	if ( map && mapButton ) {
-		mapButton.addEventListener( 'click', function () {
-			var src = map.getAttribute( 'data-dp-map' );
-			if ( ! src ) {
-				return;
-			}
-			var frame = doc.createElement( 'iframe' );
-			frame.src = src;
-			frame.title = 'Mapa da PróOdonto Aracaju';
-			frame.loading = 'lazy';
-			frame.referrerPolicy = 'strict-origin-when-cross-origin';
-			frame.allowFullscreen = true;
-			mapButton.replaceWith( frame );
-			pushEvent( 'dia_pro_mapa', { dp_position: 'mapa' } );
-		} );
-	}
-
-	/* 4. Eventos de clique ---------------------------------------------------- */
+	/* 3. Eventos de clique ---------------------------------------------------- */
 
 	function pushEvent( name, data ) {
 		window.dataLayer = window.dataLayer || [];

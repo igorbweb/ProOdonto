@@ -331,7 +331,7 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 
 	<?php
 	$dp_maps_url   = (string) proodonto_dp( 'dp_maps_url' );
-	$dp_maps_embed = (string) proodonto_dp( 'dp_maps_embed' );
+	$dp_maps_embed = proodonto_dp_map_embed_url();
 	$dp_end_1      = (string) proodonto_dp( 'dp_endereco_1' );
 	$dp_end_2      = (string) proodonto_dp( 'dp_endereco_2' );
 	$dp_estac      = (string) proodonto_dp( 'dp_estacionamento' );
@@ -367,20 +367,15 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 				</div>
 			</div>
 
-			<?php if ( $dp_maps_embed || $dp_maps_url ) : ?>
-				<div class="dp-map" data-dp-map="<?php echo esc_url( $dp_maps_embed ); ?>">
-					<?php if ( $dp_maps_embed ) : ?>
-						<button type="button" class="dp-map__facade" data-dp-map-load aria-label="Carregar o mapa da <?php echo esc_attr( proodonto_dp( 'dp_local_titulo' ) ); ?>">
-					<?php else : ?>
-						<a class="dp-map__facade" href="<?php echo esc_url( $dp_maps_url ); ?>" rel="noopener" aria-label="Abrir a localização no Google Maps">
-					<?php endif; ?>
-						<span class="dp-map__pin"><?php echo proodonto_dp_icon( 'pin', 44 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
-						<span class="dp-map__card">
-							<strong><?php echo esc_html( proodonto_dp( 'dp_local_titulo' ) ); ?></strong>
-							<?php if ( $dp_end_1 ) : ?><span><?php echo esc_html( $dp_end_1 ); ?></span><?php endif; ?>
-						</span>
-						<span class="dp-map__cta"><?php echo $dp_maps_embed ? 'Ver o mapa' : 'Abrir no Google Maps'; ?></span>
-					<?php echo $dp_maps_embed ? '</button>' : '</a>'; ?>
+			<?php if ( $dp_maps_embed ) : ?>
+				<div class="dp-map">
+					<iframe
+						src="<?php echo esc_url( $dp_maps_embed ); ?>"
+						title="<?php echo esc_attr( 'Mapa: ' . proodonto_dp( 'dp_local_titulo' ) ); ?>"
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						allowfullscreen
+					></iframe>
 				</div>
 			<?php endif; ?>
 		</div>

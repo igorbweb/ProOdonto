@@ -156,7 +156,7 @@ function proodonto_dp_defaults() {
 		'dp_endereco_2'          => 'Aracaju – SE · CEP 49025-620',
 		'dp_estacionamento'      => '',
 		'dp_maps_url'            => 'https://maps.app.goo.gl/wvRKAiDYqjFTaJbd9',
-		'dp_maps_embed'          => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.1554070487023!2d-37.0617939!3d-10.951631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71ab30027172715%3A0x12204ec58f950147!2sPr%C3%B3Odonto%20Aracaju!5e0!3m2!1spt-BR!2sbr!4v1793830924503!5m2!1spt-BR!2sbr',
+		'dp_maps_endereco'       => 'PróOdonto Aracaju, Av. Pres. Tancredo Neves, 1028 - Jardins, Aracaju - SE, 49025-620',
 
 		// FAQ.
 		'dp_faq_titulo'          => 'Perguntas frequentes',
@@ -490,6 +490,30 @@ function proodonto_dp_countdown_state() {
 	);
 }
 
+/**
+ * URL do mapa incorporado do Google, gerada a partir do endereço (sem
+ * chave de API: formato maps?q=...&output=embed).
+ */
+function proodonto_dp_map_embed_url() {
+	$address = trim( (string) proodonto_dp( 'dp_maps_endereco' ) );
+
+	if ( '' === $address ) {
+		return '';
+	}
+
+	return 'https://www.google.com/maps?' . http_build_query(
+		array(
+			'q'      => $address,
+			'hl'     => 'pt-BR',
+			'z'      => 16,
+			'output' => 'embed',
+		),
+		'',
+		'&',
+		PHP_QUERY_RFC3986
+	);
+}
+
 /** É a landing page do Dia Pró? */
 function proodonto_is_dia_pro_page() {
 	return is_page() && is_page_template( PROODONTO_DP_TEMPLATE );
@@ -766,7 +790,7 @@ function proodonto_dp_register_fields() {
 		$f( 'dp_endereco_2', 'Endereço — linha 2', 'text' ),
 		$f( 'dp_estacionamento', 'Estacionamento', 'text', array( 'instructions' => 'Vazio = não aparece.' ) ),
 		$f( 'dp_maps_url', 'Link "Como chegar"', 'url' ),
-		$f( 'dp_maps_embed', 'URL do mapa incorporado (src do iframe)', 'url', array( 'instructions' => 'O mapa só carrega quando a pessoa toca nele (página mais leve no celular).' ) ),
+		$f( 'dp_maps_endereco', 'Endereço do mapa', 'text', array( 'instructions' => 'O mapa do Google é gerado a partir deste endereço (comece pelo nome da clínica para o pino cair na ficha certa). Vazio = sem mapa.' ) ),
 
 		$tab( 'faq', 'Perguntas' ),
 		$f( 'dp_faq_titulo', 'Título', 'text' ),
