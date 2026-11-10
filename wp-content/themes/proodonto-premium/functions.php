@@ -25,6 +25,7 @@ $proodonto_includes = array(
 	'/inc/acf-options.php',        // Página "PróOdonto" (Opções do Tema) e seus campos.
 	'/inc/acf-fields.php',         // Grupos de campos por template (Home, Unidade, Hub, Tratamento, Post).
 	'/inc/servicos.php',           // CPT `servico` (/servicos/<tratamento>/), sem arquivo — o hub é uma página.
+	'/inc/content-pages.php',      // Páginas que o tema usa, 5 tratamentos e 4 posts de marcação (chamado pelo seed v3).
 	'/inc/content-seed.php',       // Grava UMA vez o conteúdo aprovado nas Opções e páginas (idempotente, por versão).
 	'/inc/enqueue.php',            // CSS/JS com versão por filemtime, fontes, preload do LCP, Pixel adiado.
 	'/inc/performance.php',        // Limpeza de <head>, emojis, embeds, jQuery fora do front.
