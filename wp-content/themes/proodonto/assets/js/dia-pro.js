@@ -97,6 +97,54 @@
 		}
 	}
 
+	/* 1b. Barra de prazo ------------------------------------------------- */
+
+	var dl = doc.querySelector( '[data-dp-deadline]' );
+
+	if ( dl ) {
+		var dlFrom = Date.parse( dl.getAttribute( 'data-from' ) );
+		var dlTo = Date.parse( dl.getAttribute( 'data-to' ) );
+		var dlEvent = Date.parse( dl.getAttribute( 'data-event' ) );
+		var dlEnd = Date.parse( dl.getAttribute( 'data-end' ) );
+		var dlBar = dl.querySelector( '[data-dp-deadline-bar]' );
+		var dlMeter = dl.querySelector( '[role="progressbar"]' );
+		var dlLabel = dl.querySelector( '[data-dp-deadline-label]' );
+
+		var midnight = function ( t ) {
+			var d = new Date( t );
+			d.setHours( 0, 0, 0, 0 );
+			return d.getTime();
+		};
+
+		var dlTick = function () {
+			var now = Date.now();
+			var pct = Math.max( 0, Math.min( 100, ( now - dlFrom ) * 100 / ( dlTo - dlFrom ) ) );
+			if ( dlBar ) {
+				dlBar.style.width = pct.toFixed( 1 ) + '%';
+			}
+			if ( dlMeter ) {
+				dlMeter.setAttribute( 'aria-valuenow', String( Math.round( pct ) ) );
+			}
+			if ( dlLabel && ! isNaN( dlEvent ) ) {
+				var text;
+				if ( ! isNaN( dlEnd ) && now >= dlEnd ) {
+					text = 'O Dia Pró deste ano terminou.';
+				} else {
+					var days = Math.round( ( midnight( dlEvent ) - midnight( now ) ) / 86400000 );
+					text = ( now >= dlEvent || days <= 0 ) ? 'É hoje! Último dia para garantir a condição.' : ( 1 === days ? 'Falta 1 dia para o Dia Pró.' : 'Faltam ' + days + ' dias para o Dia Pró.' );
+				}
+				if ( dlLabel.textContent !== text ) {
+					dlLabel.textContent = text;
+				}
+			}
+		};
+
+		if ( ! isNaN( dlFrom ) && ! isNaN( dlTo ) && dlTo > dlFrom ) {
+			dlTick();
+			window.setInterval( dlTick, 60000 );
+		}
+	}
+
 	/* 2. Barra fixa do celular --------------------------------------------- */
 
 	var bar = doc.querySelector( '[data-dp-bar]' );

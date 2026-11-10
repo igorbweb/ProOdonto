@@ -78,7 +78,22 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 				<?php $dp_eyebrow = (string) proodonto_dp( 'dp_eyebrow' ); ?>
 				<?php if ( $dp_eyebrow ) : ?><p class="dp-eyebrow"><?php echo esc_html( $dp_eyebrow ); ?></p><?php endif; ?>
 
-				<img class="dp-hero__logo" src="<?php echo esc_url( $dp_img . 'logo-dia-pro-sm.webp' ); ?>" srcset="<?php echo esc_attr( $dp_img . 'logo-dia-pro-sm.webp 640w, ' . $dp_img . 'logo-dia-pro.webp 1200w' ); ?>" sizes="(min-width: 900px) 440px, 260px" width="1200" height="497" alt="Dia Pró" fetchpriority="high" decoding="async">
+				<?php
+				$dp_first_day = $dp_dias ? $dp_dias[0] : array();
+				$dp_cidade    = (string) proodonto_dp( 'dp_cidade' );
+				$dp_when      = 1 === count( $dp_dias ) ? (string) $dp_first_day['data'] : implode( ' e ', array_map( static function ( $row ) { return preg_replace( '/\D.*$/u', '', (string) $row['data'] ); }, $dp_dias ) ) . ( $dp_dias ? ' ' . preg_replace( '/^\d+\s*/u', '', (string) end( $dp_dias )['data'] ) : '' );
+				?>
+				<div class="dp-hero__brand">
+				<img class="dp-hero__logo" src="<?php echo esc_url( $dp_img . 'logo-dia-pro-sm.webp' ); ?>" srcset="<?php echo esc_attr( $dp_img . 'logo-dia-pro-sm.webp 640w, ' . $dp_img . 'logo-dia-pro.webp 1200w' ); ?>" sizes="(min-width: 900px) 320px, 190px" width="1200" height="497" alt="Dia Pró" fetchpriority="high" decoding="async">
+
+					<?php if ( $dp_cidade || $dp_dias ) : ?>
+						<p class="dp-lockup">
+							<?php if ( $dp_cidade ) : ?><span class="dp-lockup__city"><?php echo esc_html( $dp_cidade ); ?></span><?php endif; ?>
+							<?php if ( $dp_dias ) : ?><span class="dp-lockup__date"><?php echo esc_html( trim( $dp_when ) ); ?></span><?php endif; ?>
+							<?php if ( 1 === count( $dp_dias ) && ! empty( $dp_first_day['dia_semana'] ) ) : ?><span class="dp-lockup__week"><?php echo esc_html( $dp_first_day['dia_semana'] . ( ! empty( $dp_first_day['horario'] ) ? ' · ' . $dp_first_day['horario'] : '' ) ); ?></span><?php endif; ?>
+						</p>
+					<?php endif; ?>
+				</div>
 
 				<h1 id="dp-titulo" class="dp-hero__title"><?php echo proodonto_dp_title( proodonto_dp( 'dp_titulo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h1>
 
@@ -133,18 +148,58 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 	</div><!-- /.dp-top -->
 
 	<?php if ( $dp_dias ) : ?>
-		<section class="dp-dates" aria-label="Datas do evento">
+		<section class="dp-dates<?php echo 1 === count( $dp_dias ) ? ' dp-dates--single' : ''; ?>" aria-labelledby="dp-datas-titulo">
 			<div class="dp-wrap dp-dates__inner">
-				<p class="dp-dates__title"><?php echo proodonto_dp_title( proodonto_dp( 'dp_datas_titulo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></p>
+				<div class="dp-dates__copy">
+					<?php if ( proodonto_dp( 'dp_datas_eyebrow' ) ) : ?><p class="dp-eyebrow"><?php echo esc_html( proodonto_dp( 'dp_datas_eyebrow' ) ); ?></p><?php endif; ?>
+					<h2 id="dp-datas-titulo" class="dp-dates__title"><?php echo proodonto_dp_title( proodonto_dp( 'dp_datas_titulo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h2>
+					<?php
+					$dp_onde = trim( proodonto_dp( 'dp_local_titulo' ) . ( proodonto_dp( 'dp_endereco_1' ) ? ' · ' . proodonto_dp( 'dp_endereco_1' ) : '' ), ' ·' );
+					?>
+					<?php if ( $dp_onde ) : ?><p class="dp-dates__where"><?php echo proodonto_dp_icon( 'pin', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $dp_onde ); ?></span></p><?php endif; ?>
+				</div>
 				<ul class="dp-dates__list" role="list">
 					<?php foreach ( $dp_dias as $dp_dia ) : ?>
-						<li class="dp-date">
-							<span class="dp-date__weekday"><?php echo esc_html( $dp_dia['dia_semana'] ); ?></span>
-							<span class="dp-date__day"><?php echo esc_html( $dp_dia['data'] ); ?></span>
-							<?php if ( ! empty( $dp_dia['horario'] ) ) : ?><span class="dp-date__hours"><?php echo esc_html( $dp_dia['horario'] ); ?></span><?php endif; ?>
+						<?php $dp_split = proodonto_dp_split_date( $dp_dia['data'] ); ?>
+						<li class="dp-day">
+							<?php if ( $dp_split['dia'] ) : ?><span class="dp-day__num" aria-hidden="true"><?php echo esc_html( $dp_split['dia'] ); ?></span><?php endif; ?>
+							<span class="dp-day__info">
+								<span class="dp-day__month"><span class="dp-sr"><?php echo esc_html( $dp_split['dia'] ); ?> de </span><?php echo esc_html( $dp_split['mes'] ); ?></span>
+								<?php if ( ! empty( $dp_dia['dia_semana'] ) ) : ?><span class="dp-day__week"><?php echo esc_html( $dp_dia['dia_semana'] ); ?></span><?php endif; ?>
+								<?php if ( ! empty( $dp_dia['horario'] ) ) : ?><span class="dp-day__hours"><?php echo esc_html( $dp_dia['horario'] ); ?></span><?php endif; ?>
+							</span>
 						</li>
 					<?php endforeach; ?>
 				</ul>
+			</div>
+		</section>
+	<?php endif; ?>
+
+	<?php $dp_antes = proodonto_dp_rows( 'dp_antes_depois' ); ?>
+	<?php if ( $dp_antes ) : ?>
+		<section class="dp-section dp-section--alt dp-before-after" aria-labelledby="dp-res-titulo">
+			<div class="dp-wrap">
+				<div class="dp-head">
+					<?php if ( proodonto_dp( 'dp_res_eyebrow' ) ) : ?><p class="dp-eyebrow"><?php echo esc_html( proodonto_dp( 'dp_res_eyebrow' ) ); ?></p><?php endif; ?>
+					<h2 id="dp-res-titulo" class="dp-h2"><?php echo proodonto_dp_title( proodonto_dp( 'dp_res_titulo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h2>
+				</div>
+
+				<div class="dp-scroller dp-scroller--ba" tabindex="0" aria-label="Fotos de antes e depois — deslize para o lado">
+					<?php foreach ( $dp_antes as $dp_ba ) : ?>
+						<?php $dp_ba_img = proodonto_dp_image( $dp_ba['imagem'] ?? null, '(min-width: 900px) 360px, 78vw' ); ?>
+						<?php if ( ! $dp_ba_img ) { continue; } ?>
+						<figure class="dp-media dp-media--ba">
+							<?php proodonto_dp_img_tag( $dp_ba_img, 'dp-media__el' ); ?>
+							<?php if ( ! empty( $dp_ba['legenda'] ) ) : ?><figcaption class="dp-media__caption"><?php echo esc_html( $dp_ba['legenda'] ); ?></figcaption><?php endif; ?>
+						</figure>
+					<?php endforeach; ?>
+				</div>
+
+				<?php if ( proodonto_dp( 'dp_res_aviso' ) ) : ?><p class="dp-note"><?php echo esc_html( proodonto_dp( 'dp_res_aviso' ) ); ?></p><?php endif; ?>
+
+				<?php if ( proodonto_dp( 'dp_res_botao' ) ) : ?>
+					<div class="dp-before-after__cta"><?php $dp_button( (string) proodonto_dp( 'dp_res_botao' ), 'antes-depois' ); ?></div>
+				<?php endif; ?>
 			</div>
 		</section>
 	<?php endif; ?>
@@ -168,7 +223,7 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 								<?php if ( ! empty( $dp_caso['tag'] ) ) : ?><span class="dp-tag"><?php echo esc_html( $dp_caso['tag'] ); ?></span><?php endif; ?>
 								<h3 class="dp-case__title"><?php echo esc_html( $dp_caso['titulo'] ); ?></h3>
 								<?php if ( ! empty( $dp_caso['texto'] ) ) : ?><p class="dp-case__text"><?php echo esc_html( $dp_caso['texto'] ); ?></p><?php endif; ?>
-								<?php if ( $dp_condicao ) : ?><p class="dp-case__cond"><?php echo esc_html( $dp_condicao ); ?></p><?php endif; ?>
+								<?php if ( $dp_condicao ) : ?><p class="dp-case__cond"><?php echo proodonto_dp_icon( 'agenda', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $dp_condicao ); ?></span></p><?php endif; ?>
 								<?php $dp_button( $dp_caso['botao'] ? $dp_caso['botao'] : $dp_cta_short, 'caso-' . ( $dp_i + 1 ), (string) ( $dp_caso['link'] ?? '' ), 'gold', false ); ?>
 							</div>
 						</article>
@@ -181,39 +236,6 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 						<?php $dp_button( (string) proodonto_dp( 'dp_ajuda_botao' ), 'nao-sei', '', 'outline', false ); ?>
 					</div>
 				<?php endif; ?>
-			</div>
-		</section>
-	<?php endif; ?>
-
-	<?php
-	$dp_res_1      = proodonto_dp_image( proodonto_dp( 'dp_res_foto_1' ), '(min-width: 900px) 33vw, 82vw' );
-	$dp_res_2      = proodonto_dp_image( proodonto_dp( 'dp_res_foto_2' ), '(min-width: 900px) 33vw, 82vw' );
-	$dp_video      = proodonto_dp_video_url( proodonto_dp( 'dp_res_video' ) );
-	$dp_poster     = proodonto_dp_image( proodonto_dp( 'dp_res_video_poster' ) );
-	$dp_vid_legend = (string) proodonto_dp( 'dp_res_video_legenda' );
-	?>
-	<?php if ( $dp_res_1 || $dp_res_2 || $dp_video ) : ?>
-		<section class="dp-section dp-section--alt" aria-labelledby="dp-res-titulo">
-			<div class="dp-wrap">
-				<div class="dp-head">
-					<?php if ( proodonto_dp( 'dp_res_eyebrow' ) ) : ?><p class="dp-eyebrow"><?php echo esc_html( proodonto_dp( 'dp_res_eyebrow' ) ); ?></p><?php endif; ?>
-					<h2 id="dp-res-titulo" class="dp-h2"><?php echo proodonto_dp_title( proodonto_dp( 'dp_res_titulo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h2>
-				</div>
-
-				<div class="dp-scroller" tabindex="0" aria-label="Fotos e vídeo de resultado — deslize para o lado">
-					<?php if ( $dp_res_1 ) : ?><figure class="dp-media"><?php proodonto_dp_img_tag( $dp_res_1, 'dp-media__el' ); ?></figure><?php endif; ?>
-					<?php if ( $dp_res_2 ) : ?><figure class="dp-media"><?php proodonto_dp_img_tag( $dp_res_2, 'dp-media__el' ); ?></figure><?php endif; ?>
-					<?php if ( $dp_video ) : ?>
-						<figure class="dp-media dp-media--video">
-							<video class="dp-media__el" controls muted playsinline preload="none"<?php echo $dp_poster ? ' poster="' . esc_url( $dp_poster['src'] ) . '"' : ''; ?> width="720" height="1280" aria-label="<?php echo esc_attr( $dp_vid_legend ? $dp_vid_legend : 'Vídeo de bastidores' ); ?>">
-								<source src="<?php echo esc_url( $dp_video ); ?>" type="video/mp4">
-							</video>
-							<?php if ( $dp_vid_legend ) : ?><figcaption class="dp-media__caption"><?php echo esc_html( $dp_vid_legend ); ?></figcaption><?php endif; ?>
-						</figure>
-					<?php endif; ?>
-				</div>
-
-				<?php if ( proodonto_dp( 'dp_res_aviso' ) ) : ?><p class="dp-note"><?php echo esc_html( proodonto_dp( 'dp_res_aviso' ) ); ?></p><?php endif; ?>
 			</div>
 		</section>
 	<?php endif; ?>
@@ -297,7 +319,15 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 						<div class="dp-meter" role="meter" aria-valuemin="0" aria-valuemax="<?php echo esc_attr( $dp_total_n ); ?>" aria-valuenow="<?php echo esc_attr( $dp_res_n ); ?>" aria-label="Horários reservados">
 							<span class="dp-meter__bar" style="width: <?php echo esc_attr( $dp_pct ); ?>%"></span>
 						</div>
-						<p class="dp-urgency__text"><?php echo esc_html( sprintf( '%1$d de %2$d horários já reservados para os dois dias', $dp_res_n, $dp_total_n ) . ( $dp_upd ? ' · atualizado ' . $dp_upd : '' ) ); ?></p>
+						<p class="dp-urgency__text"><?php echo esc_html( sprintf( '%1$d de %2$d horários já reservados', $dp_res_n, $dp_total_n ) . ( $dp_upd ? ' · atualizado ' . $dp_upd : '' ) ); ?></p>
+					<?php elseif ( $dp_deadline = proodonto_dp_deadline_state() ) : // phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition ?>
+						<div class="dp-deadline" data-dp-deadline data-from="<?php echo esc_attr( $dp_deadline['from'] ); ?>" data-to="<?php echo esc_attr( $dp_deadline['to'] ); ?>" data-event="<?php echo esc_attr( $dp_deadline['event'] ); ?>" data-end="<?php echo esc_attr( $dp_deadline['end'] ); ?>">
+							<div class="dp-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="<?php echo esc_attr( (int) round( $dp_deadline['pct'] ) ); ?>" aria-label="Prazo até o Dia Pró">
+								<span class="dp-meter__bar" data-dp-deadline-bar style="width: <?php echo esc_attr( $dp_deadline['pct'] ); ?>%"></span>
+							</div>
+							<?php if ( $dp_deadline['label'] ) : ?><p class="dp-deadline__label" data-dp-deadline-label><?php echo esc_html( $dp_deadline['label'] ); ?></p><?php endif; ?>
+						</div>
+						<p class="dp-urgency__text"><?php echo esc_html( trim( ( $dp_vagas_txt ? $dp_vagas_txt . '. ' : '' ) . proodonto_dp( 'dp_escassez_texto' ) ) ); ?></p>
 					<?php else : ?>
 						<p class="dp-urgency__text"><?php echo esc_html( trim( ( $dp_vagas_txt ? $dp_vagas_txt . '. ' : '' ) . proodonto_dp( 'dp_escassez_texto' ) ) ); ?></p>
 					<?php endif; ?>
@@ -443,8 +473,9 @@ $dp_button = static function ( $label, $where, $url = '', $variant = 'gold', $ic
 			)
 		);
 		?>
-		<strong>Dia Pró<?php echo $dp_bar_days ? ' · ' . esc_html( implode( ' e ', $dp_bar_days ) ) . '/11' : ''; ?></strong>
-		<span><?php echo esc_html( $dp_vagas_txt ? $dp_vagas_txt : 'Vagas limitadas por dia' ); ?></span>
+		<?php $dp_bar_when = ( 1 === count( $dp_dias ) && ! empty( $dp_dias[0]['data_curta'] ) ) ? $dp_dias[0]['data_curta'] : ( $dp_bar_days ? implode( ' e ', $dp_bar_days ) . '/11' : '' ); ?>
+		<strong>Dia Pró<?php echo $dp_bar_when ? ' · ' . esc_html( $dp_bar_when ) : ''; ?></strong>
+		<span><?php echo esc_html( $dp_vagas_txt ? $dp_vagas_txt : 'Vagas limitadas' ); ?></span>
 	</div>
 	<a class="dp-btn dp-btn--gold dp-btn--bar" href="<?php echo esc_url( $dp_cta_url ); ?>" data-dp-cta="barra-fixa" tabindex="-1"><?php echo proodonto_dp_icon( 'whatsapp', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $dp_cta_short ); ?></span></a>
 </div>

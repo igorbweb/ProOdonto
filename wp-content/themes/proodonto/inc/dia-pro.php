@@ -43,7 +43,7 @@ function proodonto_dp_defaults() {
 		'dp_cta_label'           => 'Reservar meu horário no WhatsApp',
 		'dp_cta_label_curto'     => 'Reservar horário',
 		'dp_inicio'              => '2026-11-19 08:00:00',
-		'dp_fim'                 => '2026-11-20 18:00:00',
+		'dp_fim'                 => '2026-11-19 19:00:00',
 		'dp_vagas'               => '',
 		'dp_reservados'          => '',
 		'dp_total'               => '',
@@ -51,10 +51,10 @@ function proodonto_dp_defaults() {
 		'dp_noindex'             => 1,
 
 		// Faixa + topo.
-		'dp_faixa'               => 'Plantão de implantes e próteses · 19 e 20 de novembro · PróOdonto Aracaju',
+		'dp_faixa'               => 'Plantão de implantes e próteses · 19 de novembro · PróOdonto Aracaju',
 		'dp_eyebrow'             => 'Condições jamais vistas',
 		'dp_titulo'              => 'A maior oportunidade *do ano.*',
-		'dp_subtitulo'           => 'Dois dias de atendimento especial na PróOdonto Aracaju para quem quer voltar a ter dentes fixos. Faça a avaliação de <strong>implante ou prótese</strong> no evento e conheça condições que só valem nesses dias. As vagas por dia são limitadas.',
+		'dp_subtitulo'           => 'Um dia de atendimento especial na PróOdonto Aracaju para quem quer voltar a ter dentes fixos. Faça a avaliação de <strong>implante ou prótese</strong> no evento e conheça condições que só valem nesse dia. As vagas são limitadas.',
 		'dp_microcopy'           => 'Resposta em minutos · sem compromisso · parcelamento no cartão ou no boleto',
 		'dp_foto_topo'           => array( 'file' => $img . 'hero-dentista-coroa.webp', 'sm' => $img . 'hero-dentista-coroa-sm.webp', 'w' => 880, 'h' => 1100, 'alt' => 'Dentista da PróOdonto segurando uma coroa sobre implante, pronta para ser instalada no paciente' ),
 		'dp_provas'              => array(
@@ -63,17 +63,18 @@ function proodonto_dp_defaults() {
 		),
 
 		// Datas.
-		'dp_datas_titulo'        => 'Só dois dias. *Depois, as condições acabam.*',
+		'dp_cidade'              => 'Aracaju',
+		'dp_datas_eyebrow'       => 'Data única',
+		'dp_datas_titulo'        => 'Só um dia. *Depois, as condições acabam.*',
 		'dp_dias'                => array(
 			array( 'dia_semana' => 'Quinta-feira', 'data' => '19 de novembro', 'data_curta' => 'Qui, 19/11', 'horario' => '' ),
-			array( 'dia_semana' => 'Sexta-feira · feriado', 'data' => '20 de novembro', 'data_curta' => 'Sex, 20/11 (feriado)', 'horario' => '' ),
 		),
 
 		// Casos.
 		'dp_casos_eyebrow'       => 'Implantes e próteses',
 		'dp_casos_titulo'        => 'Qual destes é o seu caso?',
 		'dp_casos_texto'         => 'Escolha o que mais parece com a sua situação e reserve a sua avaliação.',
-		'dp_casos_condicao'      => 'Condição especial no atendimento de 19 ou 20/11',
+		'dp_casos_condicao'      => 'Condição especial no atendimento do dia 19/11',
 		'dp_casos'               => array(
 			array(
 				'tag'      => 'Implante dentário',
@@ -108,21 +109,25 @@ function proodonto_dp_defaults() {
 		'dp_ajuda_botao'         => 'Quero uma avaliação',
 
 		// Resultado real.
-		'dp_res_eyebrow'         => 'Resultado real',
-		'dp_res_titulo'          => 'Sorriso fixo, feito aqui em Aracaju',
-		'dp_res_foto_1'          => array( 'file' => $img . 'resultado-sorriso.webp', 'sm' => $img . 'resultado-sorriso-sm.webp', 'w' => 1000, 'h' => 750, 'alt' => 'Paciente sorrindo com a prótese fixa sobre implantes já instalada' ),
-		'dp_res_foto_2'          => array( 'file' => $img . 'resultado-protese.webp', 'w' => 800, 'h' => 600, 'alt' => 'Detalhe da prótese fixa superior e inferior instalada' ),
-		'dp_res_video'           => $img . 'bastidores-escolha-cor.mp4',
-		'dp_res_video_poster'    => array( 'file' => $img . 'video-poster.webp', 'w' => 720, 'h' => 1280, 'alt' => '' ),
-		'dp_res_video_legenda'   => 'Bastidores · escolha da cor',
-		'dp_res_aviso'           => 'Paciente da PróOdonto com prótese fixa sobre implantes, imagem publicada com autorização. Cada caso tem planejamento próprio e o resultado varia de pessoa para pessoa.',
+		'dp_res_eyebrow'         => 'Antes e depois',
+		'dp_res_titulo'          => 'Sorrisos transformados *aqui na PróOdonto*',
+		'dp_antes_depois'        => array(
+			array( 'imagem' => array( 'file' => $img . 'antes-depois-1.webp', 'w' => 720, 'h' => 900, 'alt' => 'Paciente da PróOdonto sorrindo, com o detalhe dos dentes antes e depois do tratamento' ), 'legenda' => '' ),
+			array( 'imagem' => array( 'file' => $img . 'antes-depois-2.webp', 'w' => 720, 'h' => 900, 'alt' => 'Paciente da PróOdonto sorrindo, com o detalhe dos dentes antes e depois do tratamento' ), 'legenda' => '' ),
+			array( 'imagem' => array( 'file' => $img . 'antes-depois-3.webp', 'w' => 720, 'h' => 900, 'alt' => 'Paciente da PróOdonto sorrindo, com o detalhe dos dentes antes e depois do tratamento' ), 'legenda' => '' ),
+			array( 'imagem' => array( 'file' => $img . 'antes-depois-4.webp', 'w' => 720, 'h' => 900, 'alt' => 'Paciente da PróOdonto sorrindo, com o detalhe dos dentes antes e depois do tratamento' ), 'legenda' => '' ),
+			array( 'imagem' => array( 'file' => $img . 'antes-depois-5.webp', 'w' => 720, 'h' => 900, 'alt' => 'Paciente da PróOdonto sorrindo, com o detalhe dos dentes antes e depois do tratamento' ), 'legenda' => '' ),
+			array( 'imagem' => array( 'file' => $img . 'antes-depois-6.webp', 'w' => 720, 'h' => 900, 'alt' => 'Paciente da PróOdonto sorrindo, com o detalhe dos dentes antes e depois do tratamento' ), 'legenda' => '' ),
+		),
+		'dp_res_botao'           => 'Quero avaliar meu caso',
+		'dp_res_aviso'           => 'Pacientes da PróOdonto, imagens publicadas com autorização. Cada caso tem planejamento próprio e o resultado varia de pessoa para pessoa.',
 
 		// Passos.
 		'dp_passos_titulo'       => 'Como garantir a sua condição em 3 passos',
 		'dp_passos'              => array(
 			array( 'titulo' => 'Reserve pelo WhatsApp', 'texto' => 'Escolha o dia e o horário. Leva menos de 2 minutos.' ),
-			array( 'titulo' => 'Faça a avaliação no dia 19 ou 20', 'texto' => 'Exame com o implantodontista e plano de tratamento na hora.' ),
-			array( 'titulo' => 'Conheça as condições do Dia Pró', 'texto' => 'Depois da avaliação, a equipe apresenta as condições especiais do evento. Elas valem só para quem fechar nos dias 19 e 20.' ),
+			array( 'titulo' => 'Faça a avaliação no dia 19', 'texto' => 'Exame com o implantodontista e plano de tratamento na hora.' ),
+			array( 'titulo' => 'Conheça as condições do Dia Pró', 'texto' => 'Depois da avaliação, a equipe apresenta as condições especiais do evento. Elas valem só para quem fechar no dia 19.' ),
 		),
 		'dp_passos_foto'         => array( 'file' => $img . 'bastidores-consultorio.webp', 'sm' => $img . 'bastidores-consultorio-sm.webp', 'w' => 800, 'h' => 1000, 'alt' => 'Consultório da PróOdonto Aracaju com escala de cores de dentes em primeiro plano' ),
 
@@ -136,8 +141,10 @@ function proodonto_dp_defaults() {
 		'dp_depoimentos'         => array(),
 
 		// Escassez / CTA do meio.
-		'dp_escassez_titulo'     => 'Os horários estão sendo preenchidos',
-		'dp_escassez_texto'      => 'As vagas de avaliação são limitadas por dia. Garanta a sua antes que o plantão encha.',
+		'dp_escassez_titulo'     => 'O prazo para garantir a sua vaga está acabando',
+		'dp_barra_inicio'        => '2026-11-04 00:00:00',
+		'dp_barra_fim'           => '2026-11-20 00:00:00',
+		'dp_escassez_texto'      => 'As vagas de avaliação são limitadas. Garanta a sua antes que o plantão encha.',
 		'dp_escassez_botao'      => 'Garantir o meu horário',
 
 		// Pagamento.
@@ -162,7 +169,7 @@ function proodonto_dp_defaults() {
 		'dp_faq_titulo'          => 'Perguntas frequentes',
 		'dp_faq'                 => array(
 			array( 'pergunta' => 'Preciso agendar ou posso ir direto?', 'resposta' => 'Quem reserva pelo WhatsApp tem horário garantido no dia escolhido. Sem reserva, o atendimento depende dos horários livres no dia.' ),
-			array( 'pergunta' => 'As condições valem depois do dia 20?', 'resposta' => 'Não. As condições especiais valem para quem fechar o tratamento durante o Dia Pró, nos dias 19 e 20 de novembro.' ),
+			array( 'pergunta' => 'As condições valem depois do dia 19?', 'resposta' => 'Não. As condições especiais valem para quem fechar o tratamento durante o Dia Pró, no dia 19 de novembro.' ),
 			array( 'pergunta' => 'Quais formas de pagamento são aceitas?', 'resposta' => 'Você pode parcelar no cartão de crédito ou no boleto bancário. As condições de cada forma são apresentadas no atendimento, no dia do evento.' ),
 			array( 'pergunta' => 'A PróOdonto aceita convênio?', 'resposta' => 'Não. O atendimento é particular, com parcelamento no cartão de crédito ou no boleto bancário.' ),
 			array( 'pergunta' => 'Onde acontece o Dia Pró?', 'resposta' => 'Na PróOdonto Aracaju, Av. Pres. Tancredo Neves, 1028, no bairro Jardins.' ),
@@ -177,7 +184,7 @@ function proodonto_dp_defaults() {
 		'dp_rodape_empresa'      => 'PróOdonto Aracaju',
 		'dp_cnpj'                => '',
 		'dp_rt'                  => '',
-		'dp_aviso'               => 'Condições especiais apresentadas no atendimento e válidas para tratamentos fechados em 19 e 20/11/2026, mediante avaliação clínica.',
+		'dp_aviso'               => 'Condições especiais apresentadas no atendimento e válidas para tratamentos fechados em 19/11/2026, mediante avaliação clínica.',
 	);
 
 	return $d;
@@ -192,7 +199,7 @@ function proodonto_dp_defaults() {
  * arquivos do tema, não da Biblioteca de Mídia, então não dá para gravá-las
  * no campo).
  */
-const PROODONTO_DP_MEDIA_FIELDS = array( 'dp_foto_topo', 'dp_res_foto_1', 'dp_res_foto_2', 'dp_res_video', 'dp_res_video_poster', 'dp_passos_foto' );
+const PROODONTO_DP_MEDIA_FIELDS = array( 'dp_foto_topo', 'dp_passos_foto' );
 
 /**
  * Valor de um campo: o salvo no wp-admin (mesmo vazio — apagar o texto
@@ -282,7 +289,69 @@ function proodonto_dp_seed( $post_id ) {
 		update_field( 'field_' . $name, $value, $post_id );
 	}
 
-	update_post_meta( $post_id, '_dp_seeded', 1 );
+	update_post_meta( $post_id, '_dp_seeded', 3 ); // Semeado já com o conteúdo atual (v3).
+}
+
+/**
+ * Versão 2 do conteúdo (10/11/2026): o evento passou a ser só no dia 19/11.
+ * Páginas semeadas com a v1 têm os textos de "19 e 20" gravados no banco;
+ * aqui eles são trocados pelos novos — só o que ainda está IGUAL ao texto
+ * antigo (o que foi editado no wp-admin fica como está). O dia 20 sai da
+ * lista de dias se ainda for o padrão.
+ */
+function proodonto_dp_migrate( $post_id ) {
+	$version = (int) get_post_meta( $post_id, '_dp_seeded', true );
+
+	// v2 → v3 (10/11/2026): título da reserva fala de prazo (a barra agora é de tempo).
+	if ( 2 === $version ) {
+		if ( 'Os horários estão sendo preenchidos' === (string) get_post_meta( $post_id, 'dp_escassez_titulo', true ) ) {
+			update_post_meta( $post_id, 'dp_escassez_titulo', 'O prazo para garantir a sua vaga está acabando' );
+		}
+		update_post_meta( $post_id, '_dp_seeded', 3 );
+		return;
+	}
+
+	if ( 1 !== $version ) {
+		return;
+	}
+
+	$swap = array(
+		'dp_fim'            => array( '2026-11-20 18:00:00', '2026-11-19 19:00:00' ),
+		'dp_faixa'          => array( 'Plantão de implantes e próteses · 19 e 20 de novembro · PróOdonto Aracaju', null ),
+		'dp_subtitulo'      => array( 'Dois dias de atendimento especial na PróOdonto Aracaju para quem quer voltar a ter dentes fixos. Faça a avaliação de <strong>implante ou prótese</strong> no evento e conheça condições que só valem nesses dias. As vagas por dia são limitadas.', null ),
+		'dp_datas_titulo'   => array( 'Só dois dias. *Depois, as condições acabam.*', null ),
+		'dp_casos_condicao' => array( 'Condição especial no atendimento de 19 ou 20/11', null ),
+		'dp_res_eyebrow'    => array( 'Resultado real', null ),
+		'dp_res_titulo'     => array( 'Sorriso fixo, feito aqui em Aracaju', null ),
+		'dp_res_aviso'      => array( 'Paciente da PróOdonto com prótese fixa sobre implantes, imagem publicada com autorização. Cada caso tem planejamento próprio e o resultado varia de pessoa para pessoa.', null ),
+		'dp_escassez_texto' => array( 'As vagas de avaliação são limitadas por dia. Garanta a sua antes que o plantão encha.', null ),
+		'dp_escassez_titulo' => array( 'Os horários estão sendo preenchidos', null ),
+		'dp_aviso'          => array( 'Condições especiais apresentadas no atendimento e válidas para tratamentos fechados em 19 e 20/11/2026, mediante avaliação clínica.', null ),
+		'dp_passos_1_titulo' => array( 'Faça a avaliação no dia 19 ou 20', 'Faça a avaliação no dia 19' ),
+		'dp_passos_2_texto'  => array( 'Depois da avaliação, a equipe apresenta as condições especiais do evento. Elas valem só para quem fechar nos dias 19 e 20.', 'Depois da avaliação, a equipe apresenta as condições especiais do evento. Elas valem só para quem fechar no dia 19.' ),
+		'dp_faq_1_pergunta'  => array( 'As condições valem depois do dia 20?', 'As condições valem depois do dia 19?' ),
+		'dp_faq_1_resposta'  => array( 'Não. As condições especiais valem para quem fechar o tratamento durante o Dia Pró, nos dias 19 e 20 de novembro.', 'Não. As condições especiais valem para quem fechar o tratamento durante o Dia Pró, no dia 19 de novembro.' ),
+	);
+
+	$defaults = proodonto_dp_defaults();
+
+	foreach ( $swap as $key => $pair ) {
+		$new = null !== $pair[1] ? $pair[1] : ( isset( $defaults[ $key ] ) ? $defaults[ $key ] : null );
+		if ( null !== $new && (string) get_post_meta( $post_id, $key, true ) === $pair[0] ) {
+			update_post_meta( $post_id, $key, $new );
+		}
+	}
+
+	// Dia 20 padrão: tira a 2ª linha do repeater de dias.
+	if ( 2 === (int) get_post_meta( $post_id, 'dp_dias', true ) && '20 de novembro' === get_post_meta( $post_id, 'dp_dias_1_data', true ) ) {
+		foreach ( array( 'dia_semana', 'data', 'data_curta', 'horario' ) as $sub ) {
+			delete_post_meta( $post_id, 'dp_dias_1_' . $sub );
+			delete_post_meta( $post_id, '_dp_dias_1_' . $sub );
+		}
+		update_post_meta( $post_id, 'dp_dias', 1 );
+	}
+
+	update_post_meta( $post_id, '_dp_seeded', 3 );
 }
 
 // Ao abrir a página no editor e depois do primeiro salvamento com o template.
@@ -292,6 +361,7 @@ add_action(
 		$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification
 		if ( $post_id && 'page' === get_post_type( $post_id ) ) {
 			proodonto_dp_seed( $post_id );
+			proodonto_dp_migrate( $post_id );
 		}
 	}
 );
@@ -301,6 +371,7 @@ add_action(
 	static function ( $post_id ) {
 		if ( is_numeric( $post_id ) && 'page' === get_post_type( (int) $post_id ) ) {
 			proodonto_dp_seed( (int) $post_id );
+			proodonto_dp_migrate( (int) $post_id );
 		}
 	},
 	20
@@ -412,17 +483,6 @@ function proodonto_dp_img_tag( $img, $class = '', $attrs = array() ) {
 	);
 }
 
-/** URL de vídeo: campo de arquivo do ACF (array/URL) ou caminho do tema. */
-function proodonto_dp_video_url( $value ) {
-	if ( is_array( $value ) && ! empty( $value['url'] ) ) {
-		return $value['url'];
-	}
-	if ( is_string( $value ) && '' !== $value ) {
-		return preg_match( '~^https?://~', $value ) ? $value : PROODONTO_URI . '/' . ltrim( $value, '/' );
-	}
-	return '';
-}
-
 /** Link dos CTAs: o do campo (se válido) ou o UpView de Aracaju. */
 function proodonto_dp_cta_url( $override = '' ) {
 	$url = '' !== trim( (string) $override ) ? $override : (string) proodonto_dp( 'dp_cta_url' );
@@ -514,6 +574,65 @@ function proodonto_dp_map_embed_url() {
 	);
 }
 
+/**
+ * Separa "19 de novembro" em dia (19) e mês (novembro) para o card grande
+ * da data. Sem número no começo, devolve o texto inteiro como mês.
+ */
+function proodonto_dp_split_date( $text ) {
+	$text = trim( (string) $text );
+	if ( preg_match( '/^(\d{1,2})\s*(?:de\s+)?(.*)$/iu', $text, $m ) ) {
+		return array( 'dia' => $m[1], 'mes' => trim( $m[2] ) );
+	}
+	return array( 'dia' => '', 'mes' => $text );
+}
+
+/**
+ * Barra de prazo: % do tempo já passado entre o início e o fim configurados
+ * (cresce sozinha; o JS atualiza a cada minuto). Também devolve quantos
+ * dias faltam para o evento, para o texto ao lado da barra.
+ */
+function proodonto_dp_deadline_state() {
+	$from  = proodonto_dp_time( 'dp_barra_inicio' );
+	$to    = proodonto_dp_time( 'dp_barra_fim' );
+	$event = proodonto_dp_time( 'dp_inicio' );
+	$end   = proodonto_dp_time( 'dp_fim' );
+
+	if ( ! $from || ! $to || $to <= $from ) {
+		return null;
+	}
+
+	$now   = new DateTimeImmutable( 'now', wp_timezone() );
+	$span  = $to->getTimestamp() - $from->getTimestamp();
+	$pct   = max( 0, min( 100, ( $now->getTimestamp() - $from->getTimestamp() ) * 100 / $span ) );
+
+	return array(
+		'from'  => $from->format( DATE_ATOM ),
+		'to'    => $to->format( DATE_ATOM ),
+		'event' => $event ? $event->format( DATE_ATOM ) : '',
+		'end'   => $end ? $end->format( DATE_ATOM ) : '',
+		'pct'   => round( $pct, 1 ),
+		'label' => proodonto_dp_deadline_label( $now, $event, $end ),
+	);
+}
+
+/** "Faltam 9 dias para o Dia Pró" / "É hoje" / "terminou". Mesma regra no JS. */
+function proodonto_dp_deadline_label( $now, $event, $end ) {
+	if ( ! $event ) {
+		return '';
+	}
+	if ( $end && $now >= $end ) {
+		return 'O Dia Pró deste ano terminou.';
+	}
+	if ( $now >= $event ) {
+		return 'É hoje! Último dia para garantir a condição.';
+	}
+	$days = (int) $now->setTime( 0, 0 )->diff( $event->setTime( 0, 0 ) )->days;
+	if ( 0 === $days ) {
+		return 'É hoje! Último dia para garantir a condição.';
+	}
+	return 1 === $days ? 'Falta 1 dia para o Dia Pró.' : sprintf( 'Faltam %d dias para o Dia Pró.', $days );
+}
+
 /** É a landing page do Dia Pró? */
 function proodonto_is_dia_pro_page() {
 	return is_page() && is_page_template( PROODONTO_DP_TEMPLATE );
@@ -528,6 +647,7 @@ function proodonto_dp_icon( $name, $size = 24 ) {
 		'pix'      => '<path d="M12 3l9 9-9 9-9-9z"/><path d="M8 12h8"/>',
 		'pin'      => '<path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/>',
 		'mais'     => '<path d="M12 5v14M5 12h14"/>',
+		'agenda'   => '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
 		'estrela'  => '<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/>',
 	);
 
@@ -636,6 +756,8 @@ function proodonto_dp_register_fields() {
 		),
 
 		$tab( 'datas', 'Datas' ),
+		$f( 'dp_cidade', 'Cidade (selo ao lado da logo)', 'text', array( 'instructions' => 'Aparece no selo "CIDADE | DATA" ao lado da logo do Dia Pró, como no banner.' ) ),
+		$f( 'dp_datas_eyebrow', 'Chamada da faixa de datas', 'text' ),
 		$f( 'dp_datas_titulo', 'Frase da faixa de datas', 'text', array( 'instructions' => 'Entre *asteriscos* fica dourado.' ) ),
 		$f(
 			'dp_dias',
@@ -682,14 +804,25 @@ function proodonto_dp_register_fields() {
 		$f( 'dp_ajuda_texto', '"Não sabe qual é o seu caso?" — texto', 'textarea', array( 'rows' => 2, 'new_lines' => '' ) ),
 		$f( 'dp_ajuda_botao', '"Não sabe qual é o seu caso?" — botão', 'text' ),
 
-		$tab( 'resultado', 'Resultado real' ),
+		$tab( 'resultado', 'Antes e depois' ),
 		$f( 'dp_res_eyebrow', 'Chamada', 'text' ),
 		$f( 'dp_res_titulo', 'Título', 'text' ),
-		$f( 'dp_res_foto_1', 'Foto 1', 'image', $image ),
-		$f( 'dp_res_foto_2', 'Foto 2', 'image', $image ),
-		$f( 'dp_res_video', 'Vídeo (MP4 vertical)', 'file', array( 'return_format' => 'array', 'mime_types' => 'mp4', 'instructions' => 'Vazio = vídeo padrão do tema. Até 3 MB, sem som.' ) ),
-		$f( 'dp_res_video_poster', 'Capa do vídeo', 'image', $image ),
-		$f( 'dp_res_video_legenda', 'Legenda do vídeo', 'text' ),
+		$f(
+			'dp_antes_depois',
+			'Fotos de antes e depois',
+			'repeater',
+			array(
+				'layout'       => 'table',
+				'max'          => 9,
+				'button_label' => 'Adicionar foto',
+				'instructions' => 'Foto vertical (4:5) com o antes e o depois na mesma imagem. Só de pacientes que assinaram a autorização de uso de imagem. Foto vazia = a padrão da mesma posição.',
+				'sub_fields'   => array(
+					$sub( 'dp_antes_depois', 'imagem', 'Foto (4:5)', 'image', $image ),
+					$sub( 'dp_antes_depois', 'legenda', 'Legenda (opcional)', 'text', array( 'placeholder' => 'Prótese protocolo' ) ),
+				),
+			)
+		),
+		$f( 'dp_res_botao', 'Botão abaixo das fotos', 'text' ),
 		$f( 'dp_res_aviso', 'Aviso abaixo das fotos', 'textarea', array( 'rows' => 2, 'new_lines' => '', 'instructions' => 'Mantenha a menção à autorização de uso de imagem (CFO).' ) ),
 
 		$tab( 'passos', 'Passos' ),
@@ -747,7 +880,9 @@ function proodonto_dp_register_fields() {
 
 		$tab( 'escassez', 'Reserva' ),
 		$f( 'dp_escassez_titulo', 'Título', 'text' ),
-		$f( 'dp_escassez_texto', 'Texto (quando não há barra de ocupação)', 'textarea', array( 'rows' => 2, 'new_lines' => '' ) ),
+		$f( 'dp_escassez_texto', 'Texto abaixo da barra', 'textarea', array( 'rows' => 2, 'new_lines' => '' ) ),
+		$f( 'dp_barra_inicio', 'Barra de prazo — começa vazia em', 'date_time_picker', array( 'display_format' => 'd/m/Y H:i', 'return_format' => 'Y-m-d H:i:s', 'first_day' => 0, 'wrapper' => array( 'width' => 50 ), 'instructions' => 'A barra cresce sozinha, proporcional ao tempo entre estas duas datas. Ela mostra o PRAZO, não reservas: com "Horários já reservados" e "Total" preenchidos (aba Geral), mostra a ocupação real no lugar.' ) ),
+		$f( 'dp_barra_fim', 'Barra de prazo — fica completa em', 'date_time_picker', array( 'display_format' => 'd/m/Y H:i', 'return_format' => 'Y-m-d H:i:s', 'first_day' => 0, 'wrapper' => array( 'width' => 50 ) ) ),
 		$f( 'dp_escassez_botao', 'Botão', 'text' ),
 
 		$tab( 'pagamento', 'Pagamento' ),
@@ -897,6 +1032,9 @@ add_action(
 			return;
 		}
 
+		// Página semeada antes de 10/11/2026: atualiza os textos de "19 e 20".
+		proodonto_dp_migrate( get_queried_object_id() );
+
 		remove_action( 'wp_head', 'proodonto_inline_critical_css', 0 );
 		remove_action( 'wp_head', 'proodonto_preload_lcp_image', 1 );
 
@@ -906,7 +1044,7 @@ add_action(
 				$logo_sm = PROODONTO_URI . '/assets/images/dia-pro/logo-dia-pro-sm.webp';
 				$logo    = PROODONTO_URI . '/assets/images/dia-pro/logo-dia-pro.webp';
 				printf(
-					'<link rel="preload" as="image" href="%1$s" imagesrcset="%1$s 640w, %2$s 1200w" imagesizes="(min-width: 900px) 440px, 260px" fetchpriority="high">' . "\n",
+					'<link rel="preload" as="image" href="%1$s" imagesrcset="%1$s 640w, %2$s 1200w" imagesizes="(min-width: 900px) 320px, 190px" fetchpriority="high">' . "\n",
 					esc_url( $logo_sm ),
 					esc_url( $logo )
 				);

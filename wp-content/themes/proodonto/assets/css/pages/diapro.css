@@ -1,0 +1,26 @@
+/*
+ * CSS da página "Dia Pró" (slug: diapro).
+ * Gerado automaticamente em 2026-11-10 20:03 — mobile-first, edite à vontade.
+ * Carregado apenas nesta página via inc/enqueue.php.
+ */
+
+.page-diapro {
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+	.page-diapro {
+	}
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+	.page-diapro {
+	}
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+	.page-diapro {
+	}
+}
