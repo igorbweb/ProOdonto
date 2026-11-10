@@ -10,6 +10,8 @@ PHP clássico + ACF PRO, sem page builder, sem jQuery, sem framework CSS.
 2. Com o ACF PRO ativo, ative o tema em Aparência → Temas.
 3. Abra qualquer tela do painel uma vez (como administrador): o `inc/content-seed.php` grava o conteúdo aprovado **só nos campos vazios** (unidades, números, passos, textos da Home, das 3 unidades e do hub).
 4. Configurações → Links permanentes → Salvar (por garantia).
+
+   Desde o seed v3 (`inc/content-pages.php`), antes de preencher os campos o tema também **cria o que faltar**: Início (vira a página inicial se nenhuma estiver definida), Aracaju, Lagarto e Simão Dias, Tratamentos (/servicos/), Sobre, Blog (vira a página de posts), Política de privacidade (sempre rascunho) e os 5 tratamentos. Procura pelo slug e pelo template antes — nada é duplicado. Também cria **4 posts de marcação** (meta `_proodonto_marcacao`, noindex e fora do sitemap) para testar blog, sumário, CTA do meio, dica/alerta e FAQ; apague quando houver posts reais. Isso roda **sem depender do ACF** — ao ativar o tema e na primeira tela do painel (opção `proodonto_premium_pages`). No domínio proodontosergipe.com.br tudo nasce como rascunho; em qualquer outro endereço, publicado (filtro `proodonto_pages_status`). O preenchimento dos campos (seed) continua exigindo o ACF PRO: se ele for ativado depois, o seed roda na próxima tela do painel.
 5. Opcional: Aparência → Menus → atribua menus a "Menu principal", "Rodapé — Tratamentos" e "Rodapé — A clínica". Sem menu, o tema monta os links com as páginas que existem.
 
 Voltar ao tema antigo = reativar `proodonto`. Nada do tema antigo é apagado; os campos novos têm nomes próprios.

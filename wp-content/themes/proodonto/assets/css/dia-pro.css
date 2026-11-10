@@ -293,6 +293,7 @@ body.dp-page {
 }
 
 .dp-btn--sm {
+	white-space: nowrap;
 	width: auto;
 	min-height: 44px;
 	padding: 0 16px;
@@ -382,8 +383,8 @@ body.dp-page {
 }
 
 .dp-hero__logo {
-	width: min(64vw, 260px);
-	margin: 0 0 2px;
+	width: min(44vw, 190px);
+	margin: 0;
 }
 
 .dp-hero__title {
@@ -496,60 +497,160 @@ body.dp-page {
 	display: none;
 }
 
-/* ---------- 06 Datas ---------- */
+/* ---------- 06 Data (card grande — evento de um dia) ---------- */
+
+.dp-sr {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
 
 .dp-dates {
-	background: var(--dp-bg-alt);
-	border-top: 1px solid var(--dp-line);
-	border-bottom: 1px solid var(--dp-line);
+	position: relative;
+	background:
+		radial-gradient(120% 140% at 85% 50%, rgba(227, 179, 65, 0.14) 0%, rgba(227, 179, 65, 0) 60%),
+		var(--dp-bg-alt);
+	border-top: 1px solid var(--dp-line-strong);
+	border-bottom: 1px solid var(--dp-line-strong);
 }
 
 .dp-dates__inner {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
-	padding-top: 28px;
-	padding-bottom: 28px;
+	gap: 22px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.dp-dates__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .dp-dates__title {
-	font-size: clamp(20px, 5.4vw, 28px);
-	line-height: 1.25;
+	font-size: clamp(26px, 7vw, 40px);
+	line-height: 1.12;
 	font-weight: 700;
+	letter-spacing: -0.01em;
 	text-wrap: balance;
+}
+
+.dp-dates__where {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	font-size: 14px;
+	color: var(--dp-text-2);
+}
+
+.dp-dates__where .dp-icon {
+	margin-top: 2px;
+	color: var(--dp-gold);
 }
 
 .dp-dates__list {
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 10px;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 12px;
 }
 
-.dp-date {
+.dp-day {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	min-width: 0;
+	padding: 18px 22px;
+	border: 1.5px solid var(--dp-gold);
+	border-radius: 24px;
+	background: linear-gradient(160deg, #1d1912 0%, #121110 70%);
+	box-shadow: 0 18px 50px -24px rgba(227, 179, 65, 0.55), inset 0 1px 0 rgba(244, 210, 122, 0.25);
+}
+
+.dp-day__num {
+	flex: 0 0 auto;
+	font-size: clamp(76px, 24vw, 120px);
+	line-height: 0.85;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	font-variant-numeric: tabular-nums;
+	color: var(--dp-gold);
+	background: var(--dp-gold-text);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.dp-day__info {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
-	padding: 12px 14px;
-	border: 1px solid var(--dp-gold);
-	border-radius: 12px;
+	gap: 4px;
 	min-width: 0;
+	padding-left: 18px;
+	border-left: 1px solid var(--dp-line-strong);
 }
 
-.dp-date__weekday {
-	font-size: 12px;
-	color: var(--dp-muted);
+.dp-day__month {
+	font-size: clamp(20px, 5.6vw, 28px);
+	line-height: 1.1;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--dp-text);
 }
 
-.dp-date__day {
-	font-size: clamp(17px, 4.6vw, 26px);
-	line-height: 1.2;
+.dp-day__week {
+	font-size: 15px;
+	color: var(--dp-text-2);
+}
+
+.dp-day__hours {
+	font-size: 15px;
 	font-weight: 700;
 	color: var(--dp-gold);
 }
 
-.dp-date__hours {
-	font-size: 13px;
-	color: var(--dp-text-2);
+/* Selo "CIDADE | DATA" ao lado da logo, como no banner. */
+.dp-hero__brand {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px 12px;
+}
+
+.dp-lockup {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding-left: 12px;
+	border-left: 2px solid var(--dp-gold);
+	line-height: 1.1;
+}
+
+.dp-lockup__city {
+	font-size: clamp(18px, 5.2vw, 40px);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--dp-text);
+}
+
+.dp-lockup__date {
+	font-size: clamp(13px, 3.9vw, 24px);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: var(--dp-gold);
+	white-space: nowrap;
+}
+
+.dp-lockup__week {
+	margin-top: 2px;
+	font-size: 12px;
+	color: var(--dp-muted);
 }
 
 /* ---------- 07 Casos (tratamentos) ---------- */
@@ -601,11 +702,24 @@ body.dp-page {
 }
 
 .dp-case__cond {
-	text-wrap: balance;
-	margin-top: 2px;
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	margin-top: 4px;
+	padding: 10px 12px;
+	border: 1px solid rgba(227, 179, 65, 0.4);
+	border-radius: 12px;
+	background: rgba(227, 179, 65, 0.1);
 	font-size: 14px;
+	line-height: 1.35;
 	font-weight: 700;
 	color: var(--dp-gold);
+	text-wrap: balance;
+}
+
+.dp-case__cond .dp-icon {
+	flex-shrink: 0;
+	margin-top: 1px;
 }
 
 .dp-case .dp-btn {
@@ -683,6 +797,20 @@ body.dp-page {
 	font-size: 12px;
 	font-weight: 700;
 	pointer-events: none;
+}
+
+/* Antes e depois: fotos 4:5, carrossel no celular, grade no desktop. */
+.dp-scroller--ba {
+	grid-auto-columns: 78%;
+}
+
+.dp-media--ba .dp-media__el {
+	height: auto;
+	aspect-ratio: 4 / 5;
+}
+
+.dp-before-after__cta {
+	margin-top: 20px;
 }
 
 /* ---------- 09 Passos ---------- */
@@ -839,7 +967,20 @@ body.dp-page {
 	background: var(--dp-line);
 }
 
+.dp-deadline {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.dp-deadline__label {
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--dp-gold);
+}
+
 .dp-meter__bar {
+	transition: width 0.6s ease;
 	display: block;
 	height: 100%;
 	border-radius: inherit;
@@ -1129,6 +1270,14 @@ body.dp-page {
 		display: none;
 	}
 
+	.dp-header__logo {
+		height: 20px;
+	}
+
+	.dp-hero__cta .dp-icon {
+		display: none;
+	}
+
 	.dp-btn {
 		padding: 0 18px;
 	}
@@ -1197,6 +1346,10 @@ body.dp-page {
 
 	.dp-scroller {
 		grid-auto-columns: calc((100% - 24px) / 2.2);
+	}
+
+	.dp-scroller--ba {
+		grid-auto-columns: calc((100% - 24px) / 2.4);
 	}
 
 	.dp-stats {
@@ -1289,7 +1442,27 @@ body.dp-page {
 	}
 
 	.dp-hero__logo {
-		width: 440px;
+		width: 320px;
+	}
+
+	.dp-hero__brand {
+		gap: 12px 24px;
+	}
+
+	.dp-lockup {
+		padding-left: 22px;
+	}
+
+	.dp-lockup__city {
+		font-size: 40px;
+	}
+
+	.dp-lockup__date {
+		font-size: 22px;
+	}
+
+	.dp-lockup__week {
+		font-size: 14px;
 	}
 
 	.dp-hero__proof {
@@ -1315,23 +1488,33 @@ body.dp-page {
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-		gap: 24px;
-		padding-top: 32px;
-		padding-bottom: 32px;
+		gap: 48px;
+		padding-top: 56px;
+		padding-bottom: 56px;
+	}
+
+	.dp-dates__copy {
+		flex: 1 1 auto;
+		max-width: 560px;
 	}
 
 	.dp-dates__list {
+		flex: 0 1 auto;
 		display: flex;
 		gap: 16px;
 	}
 
-	.dp-date {
-		min-width: 210px;
-		padding: 16px 20px;
+	.dp-day {
+		gap: 24px;
+		padding: 22px 32px 22px 28px;
 	}
 
-	.dp-date__day {
-		white-space: nowrap;
+	.dp-day__num {
+		font-size: 128px;
+	}
+
+	.dp-day__month {
+		font-size: 30px;
 	}
 
 	.dp-head {
@@ -1368,6 +1551,10 @@ body.dp-page {
 
 	.dp-media__el {
 		height: 500px;
+	}
+
+	.dp-media--ba .dp-media__el {
+		height: auto;
 	}
 
 	.dp-steps-wrap {
