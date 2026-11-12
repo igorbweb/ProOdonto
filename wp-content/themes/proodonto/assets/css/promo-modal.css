@@ -1,0 +1,107 @@
+/*
+ * Modal promocional — ver inc/promo-modal.php.
+ * Independente de style.css (valores próprios), porque a LP do Dia Pró
+ * tira o CSS do site e o modal também pode aparecer lá.
+ */
+.promo-modal {
+	/* inset 0 + margin auto + fit-content: centra sem limitar a largura
+	   disponível (com left: 50% a imagem só teria meia tela para crescer). */
+	position: fixed;
+	inset: 0;
+	margin: auto;
+	padding: 0;
+	border: none;
+	border-radius: 12px;
+	background: transparent;
+	width: fit-content;
+	height: fit-content;
+	max-width: min(92vw, 760px);
+	max-height: 90vh;
+	max-height: 90dvh;
+	overflow: visible;
+}
+
+.promo-modal[open] {
+	animation: promo-modal-in 0.28s ease-out;
+}
+
+.promo-modal::backdrop {
+	background: rgba(6, 20, 22, 0.78);
+}
+
+.promo-modal__link {
+	display: block;
+	line-height: 0;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.promo-modal__link:focus-visible {
+	outline: 3px solid #049da5;
+	outline-offset: 3px;
+}
+
+.promo-modal__img {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: min(92vw, 760px);
+	max-height: 90vh;
+	max-height: 90dvh;
+}
+
+.promo-modal__close {
+	position: absolute;
+	top: -14px;
+	right: -14px;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: #fff;
+	color: #1a1a1a;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.promo-modal__close:hover {
+	background: #f6f7f9;
+	transform: scale(1.06);
+}
+
+.promo-modal__close:focus-visible {
+	outline: 3px solid #049da5;
+	outline-offset: 2px;
+}
+
+/* No celular o botão fica dentro da imagem, para não sair da tela. */
+@media (max-width: 767px) {
+	.promo-modal__close {
+		top: 8px;
+		right: 8px;
+	}
+}
+
+@keyframes promo-modal-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.promo-modal[open] {
+		animation: none;
+	}
+}
